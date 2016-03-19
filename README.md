@@ -21,17 +21,17 @@ var shell = new Shell(awesomeShell);
 
 ## Options
 
-For any **Shell** instance you can sets the following options:
+For any **Shell** instance you can set the following options:
 
 | Options             | Values              | Description                                                                                                                           |
 | ------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------|
-| `user`              | `string`                                    | The name of the user. **(default: `user`)**                                                                   |
-| `host`              | `string`                                    | The host name. **(default: `host`)**                                                                          |
-| `path`              | `string`                                    | The local directory. **(default: `~`)**                                                                       |
-| `style`             | `custom` \| `ubuntu` \| `osx` \| `windows`  | The operating system. **(default: `custom`)**                                                                 |
-| `theme`             | `dark`  \| `light`                          | The theme of the shell. **(default: `dark`)**                                                                 |
-| `responsive`        | `false` \| `true`                           | `true` sets width and height to 100%, `false` leaves unchanged the inherited size. **(default: `false`)**     |
-| `commands`          | `array`                                     | Array that contains the shell's commands                                              |
+| `user`              | `string`                                    | The name of the user. (default: `user`)                                                                   |
+| `host`              | `string`                                    | The host name. (default: `host`)                                                                          |
+| `path`              | `string`                                    | The local directory. (default: `~`)                                                                       |
+| `style`             | `custom` \| `ubuntu` \| `osx` \| `windows`  | The operating system. (default: `custom`)                                                                 |
+| `theme`             | `dark`  \| `light`                          | The theme of the shell. (default: `dark`)                                                                 |
+| `responsive`        | `false` \| `true`                           | `true` sets width and height to 100%, `false` leaves unchanged the inherited size. (default: `false`)     |
+| `commands`          | `array`                                     | Array that contains the shell's commands                                                                  |
 
 ### Constructor Object Example
 
