@@ -1,0 +1,29 @@
+{
+  "name": "Shell.js",
+  "description": "A JavaScript and CSS library to create terminals",
+  "main": "dist/js/shell.min.js",
+  "authors": [
+    "Davide Caruso  <davide.caruso93@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "shell",
+    "terminal",
+    "javascript",
+    "jquery",
+    "library",
+    "plugin"
+  ],
+  "moduleType": [],
+  "homepage": "https://github.com/davidecaruso/shell.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.5.0"
+  }
+}

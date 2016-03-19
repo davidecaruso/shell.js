@@ -1,0 +1,7 @@
+# Development files and cache
+.sass-cache/
+node_modules/
+bower_components/
+
+# Temp files
+.DS_Store

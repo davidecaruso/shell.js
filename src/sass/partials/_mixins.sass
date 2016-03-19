@@ -1,0 +1,47 @@
+/*
+ * Mixin to create a triangle element
+ * @param $direction: The direction of the arrow.
+ * @param $color: The color of the arrow @default #000000.
+ * @param $size: The size of the arrow @default 1em.
+=triangle($direction, $color: #000000, $size: 1em)
+
+  @if not index(top right bottom left, $direction)
+    @warn "Direction must be one of top, right, bottom or left."
+  @else
+    content: ''
+    z-index: 2
+
+    border-#{opposite-position($direction)}: $size * 1.5 solid $color
+    $perpendicular-borders: $size solid transparent
+
+    @if $direction == top or $direction == bottom
+      border-left: $perpendicular-borders
+      border-right: $perpendicular-borders
+
+    @else if $direction == right or $direction == left
+      border-bottom: $perpendicular-borders
+      border-top: $perpendicular-borders
+
+/*
+ * Mixin for setting both width and height of an element
+ * @param $width: The width size.
+ * @param $height: The height size @default same of $width.
+=size($width, $height: $width)
+  width: $width
+  height: $height
+
+/*
+ * Mixin for setting both max-width and max-height of an element
+ * @param $width: The max-width size.
+ * @param $height: The max-height size @default same of $width.
+=max-size($width, $height: $width)
+  max-width: $width
+  max-height: $height
+
+/*
+ * Mixin for setting both min-width and hmin-eight of an element
+ * @param $width: The min-width size.
+ * @param $height: The min-height size @default same of $width.
+=min-size($width, $height: $width)
+  min-width: $width
+  min-height: $height
