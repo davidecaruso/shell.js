@@ -1,5 +1,5 @@
 {
-  "name": "Shell.js",
+  "name": "shell.js",
   "description": "A JavaScript and CSS library to create terminals",
   "main": "dist/js/shell.min.js",
   "authors": [
