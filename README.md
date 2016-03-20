@@ -81,7 +81,7 @@ grunt
 
 ## Install
 
-> Also for installing, you will need [grunt][grunt] installed: `npm install -g grunt`
+> For installing, you will need [bower][bower] installed: `npm install -g bower`
 
 ```
 bower install shell.js
@@ -100,3 +100,4 @@ Licensed under [MIT][mit].
 [mit]: http://www.opensource.org/licenses/mit-license.php
 [jquery]: http://jquery.com/
 [grunt]: http://gruntjs.com/
+[bower]: http://bower.io/
