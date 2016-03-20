@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Davide Caruso  <davide.caruso93@gmail.com>"
+  "author": "Davide Caruso  <davide.caruso93@gmail.com>",
   "license": "MIT",
   "keywords": [
     "shell",
