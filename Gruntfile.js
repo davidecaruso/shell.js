@@ -21,10 +21,14 @@ module.exports = function (grunt) {
         },
 
         compass: {
+            options: { config: 'config.rb' },
+            dev: {
+                environment: 'development',
+                force: true
+            },
             dist: {
-                options: {
-                    config: "config.rb"
-                }
+                environment: 'production',
+                force: true
             }
         },
 
