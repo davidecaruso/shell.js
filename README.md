@@ -21,7 +21,7 @@ var shell = new Shell(awesomeShell);
 
 ## Options
 
-For any **Shell** instance you can set the following options:
+For each **Shell** instance you can set the following options:
 
 | Options             | Values              | Description                                                                                                                           |
 | ------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------|
