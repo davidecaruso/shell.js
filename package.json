@@ -1,4 +1,5 @@
 {
+  "title": "Shell.js",
   "name": "shell.js",
   "version": "1.0.0",
   "description": "A JavaScript and CSS library to create terminals",

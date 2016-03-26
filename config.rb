@@ -2,7 +2,7 @@ css_dir = "dist/css"
 sass_dir = "src/sass"
 
 # Choose between production or development environment
-environment = :production
+# environment = :production
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 relative_assets = true

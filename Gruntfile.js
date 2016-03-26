@@ -23,12 +23,10 @@ module.exports = function (grunt) {
         compass: {
             options: { config: 'config.rb' },
             dev: {
-                environment: 'development',
-                force: true
+                environment: 'development'
             },
             dist: {
-                environment: 'production',
-                force: true
+                environment: 'production'
             }
         },
 
@@ -41,7 +39,7 @@ module.exports = function (grunt) {
             },
             css: {
                 files: ['src/sass/**/*.sass'],
-                tasks: ['compass']
+                tasks: ['compass:dist']
             },
             ds_store: {
                 files: [".DS_Store", "**/.DS_Store"],
@@ -55,6 +53,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-compass");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.registerTask("default", ["uglify", "compass", "clean", "watch"]);
+    grunt.registerTask("default", ["uglify", "compass:dist", "clean", "watch"]);
 
 };
