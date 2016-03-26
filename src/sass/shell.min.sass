@@ -31,6 +31,23 @@
             &.active
                 display: block
 
+    .typed-cursor
+        opacity: 1
+        width: 10px
+        background: #F1F1F1
+        +animation(cursor-blink .8s infinite)
+        +keyframes(cursor-blink)
+            0%
+                opacity: 1
+            50%
+                opacity: 0
+            100%
+                opacity: 1
+
+    &.light
+        .typed-cursor
+            background: #292929
+
     .status-bar
         position: relative
         background: lighten(#292929, 4%)

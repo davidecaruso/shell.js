@@ -214,7 +214,7 @@
                             PREFIX = THIS.buildPrefix();
                             STATUSBAR = THIS.buildStatusBar();
                             CONTENT += '' +
-                                '<div class="line line-' + c + ' root">' +
+                                '<div class="line line-' + c + ' sudo">' +
                                     '[sudo] password for ' + THIS.user + ':<span class="command"></span>' +
                                 '</div>';
 
@@ -249,21 +249,23 @@
             if(THIS.typed && typeof $.fn.typed !== 'undefined') {
 
                 var nCommands = $(THIS.element).find(".line").length,
-                    line, command, commandText,
+                    line, command, commandText, speed,
                     initCommands = function (i) {
 
                         line = $(THIS.element).find(".line-" + i);
                         command = line.find(".command");
                         commandText = line.find(".command").html();
+                        speed = line.hasClass("sudo") ? "2500" : "800"; /// Time for password
 
                         command.html(null);
                         line.addClass("active");
 
                         command.typed({
-                            strings: ["^800" + commandText],
+                            strings: ["^" + speed + commandText],
                             typeSpeed: 50,
                             cursorChar: "&nbsp;",
                             callback: function () {
+                                line.find(".typed-cursor").remove();
                                 if (i < nCommands) initCommands(i + 1);
                             }
                         });
