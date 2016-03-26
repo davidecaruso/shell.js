@@ -22,10 +22,10 @@
 
 ;(function (window, document, undefined) {
 
-    // Strict Mode
+    /// Strict Mode
     'use strict';
 
-    // Constants
+    /// Constants
     var NAME = 'Shell',
         DEFAULTS = {
             user: "user", /// The user of the shell
@@ -43,28 +43,13 @@
 
     function Shell(element, options) {
 
-        // DOM Context
+        /// DOM Context
         this.element = element;
 
-        // Data Extraction
-        var data = {
-            user: this.data(this.element, 'user'),
-            host: this.data(this.element, 'host'),
-            path: this.data(this.element, 'path'),
-            style: this.data(this.element, 'style'),
-            theme: parseFloat(this.data(this.element, 'theme')),
-            responsive: parseFloat(this.data(this.element, 'responsive'))
-        };
-
-        // Delete Null Data Values
-        for (var key in data) {
-            if (data[key] === null) delete data[key];
-        }
-
-        // Compose Settings Object
+        /// Compose Settings Object
         this.extend(this, DEFAULTS, options);
 
-        // Initialise
+        /// Initialize
         this.initialize();
     }
 
@@ -196,26 +181,28 @@
 
     Shell.prototype.initialize = function () {
 
-        if (this.element) {
+        var THIS = this;
+
+        if (THIS.element) {
 
             /// Commands list
-            COMMANDS = this.commands;
+            COMMANDS = THIS.commands;
 
             /// Classes for HTML element
             CLASSES = (
-                "shell " + this.style + " " + this.theme + " " +
-                (this.responsive ? "responsive " : "").toString() + " " +
-                (this.shadow ? "shadow " : "")
+                "shell " + THIS.style + " " + THIS.theme + " " +
+                (THIS.responsive ? "responsive " : "").toString() + " " +
+                (THIS.shadow ? "shadow " : "")
             ).toString();
 
             /// Build the status bar with title and buttons
-            STATUSBAR = this.buildStatusBar();
+            STATUSBAR = THIS.buildStatusBar();
 
             /// Open the content of the shell
             CONTENT = '<div class="content">';
 
             /// If style is OSX add a new line with last login
-            if (this.style === "osx") {
+            if (THIS.style === "osx") {
 
                 CONTENT += '' +
                     '<div class="line">' +
@@ -229,14 +216,14 @@
             /// If have some commands...
             if (typeof COMMANDS === "object" && COMMANDS[0]) {
 
-                this.root = false;
-                var THIS = this;
-                PREFIX = this.buildPrefix();
+                var c = 0;
+                THIS.root = false;
+                PREFIX = THIS.buildPrefix();
 
                 COMMANDS.forEach(function(command) {
 
                     CONTENT += '' +
-                        '<div class="line' + (THIS.root ? ' root' : '') + '">' + PREFIX +
+                        '<div class="line line-' + c + (THIS.root ? ' root' : '') + '">' + PREFIX +
                             '<span class="command">' + command + '</span>' +
                         '</div>';
 
@@ -246,23 +233,25 @@
                         /// If command contains "sudo" become root user
                         if (/sudo/.test(command)) {
 
+                            c = c + 1;
                             THIS.root = true;
                             PREFIX = THIS.buildPrefix();
                             STATUSBAR = THIS.buildStatusBar();
                             CONTENT += '' +
-                                '<div class="line root">' +
-                                '[sudo] password for ' + THIS.user + ':<span class="command"></span>' +
-                                '</div>'
+                                '<div class="line line-' + c + ' root">' +
+                                    '[sudo] password for ' + THIS.user + ':<span class="command"></span>' +
+                                '</div>';
 
                         }
 
                         /// If command contains "exit" logout from root
                         if (/exit/.test(command)) {
 
+                            c = c + 1;
                             THIS.root = false;
                             PREFIX = THIS.buildPrefix();
                             STATUSBAR = THIS.buildStatusBar();
-                            CONTENT += '<div class="line logout">logout</div>'
+                            CONTENT += '<div class="line line-' + c + ' logout">logout</div>';
 
                         }
 
@@ -276,10 +265,10 @@
             CONTENT += '</div>';
 
             /// Fill the HTML element with status bar and content
-            this.element.className += CLASSES;
-            this.element.innerHTML = STATUSBAR + CONTENT;
-        }
+            THIS.element.className += CLASSES;
+            THIS.element.innerHTML = STATUSBAR + CONTENT;
 
+        }
 
     };
 

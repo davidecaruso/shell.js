@@ -22,10 +22,10 @@
 
 ;(function ($, window, document, undefined) {
 
-    // Strict Mode
+    /// Strict Mode
     'use strict';
 
-    // Constants
+    /// Constants
     var NAME = 'shell',
         DEFAULTS = {
             user: "user", /// The user of the shell
@@ -35,6 +35,7 @@
             theme: "dark", /// The theme (dark, light)
             responsive: false, /// If is responsive
             shadow: true, /// Display the shadow
+            typed: false, /// Use the Typed.js integration
             commands: [] /// The commands list
         },
         DATE = new Date(),
@@ -44,31 +45,16 @@
 
     function Plugin (element, options) {
 
-        // DOM Context
+        /// DOM Context
         this.element = element;
 
-        // Selections
+        /// Selections
         this.$context = $(element).data('api', this);
 
-        // Data Extraction
-        //var data = {
-        //    user: this.$context.data('user') || null,
-        //    host: this.$context.data('host') || null,
-        //    path: this.$context.data('path') || null,
-        //    style: this.$context.data('style') || null,
-        //    theme: parseFloat(this.$context.data('theme')) || null,
-        //    responsive: parseFloat(this.$context.data('responsive')) || null
-        //};
-
-        // Delete Null Data Values
-        //for (var key in data) {
-        //    if (data[key] === null) delete data[key];
-        //}
-
-        // Compose Settings Object
+        /// Compose Settings Object
         $.extend(this, DEFAULTS, options);
 
-        // Initialise
+        /// Initialize
         this.initialize();
     }
 
@@ -170,26 +156,29 @@
 
     Plugin.prototype.initialize = function () {
 
-        if ($(this.element).length) {
+        var THIS = this;
+        
+        if ($(THIS.element).length) {
 
             /// Commands list
-            COMMANDS = this.commands;
+            COMMANDS = THIS.commands;
 
             /// Classes for HTML element
             CLASSES = (
-                "shell " + this.style + " " + this.theme + " " +
-                (this.responsive ? "responsive " : "").toString() + " " +
-                (this.shadow ? "shadow " : "")
+                "shell " + THIS.style + " " + THIS.theme + " " +
+                (THIS.responsive ? "responsive " : "").toString() + " " +
+                (THIS.shadow ? "shadow " : "") +
+                (THIS.typed ? "typed " : "")
             ).toString();
 
             /// Build the status bar with title and buttons
-            STATUSBAR = this.buildStatusBar();
+            STATUSBAR = THIS.buildStatusBar();
 
             /// Open the content of the shell
             CONTENT = '<div class="content">';
 
             /// If style is OSX add a new line with last login
-            if (this.style === "osx") {
+            if (THIS.style === "osx") {
 
                 CONTENT += '' +
                     '<div class="line">' +
@@ -203,15 +192,15 @@
             /// If have some commands...
             if (typeof COMMANDS === "object" && COMMANDS[0]) {
 
-                this.root = false;
-                var THIS = this;
-                PREFIX = this.buildPrefix();
+                var c = 0;
+                THIS.root = false;
+                PREFIX = THIS.buildPrefix();
 
                 /// Print each command
                 $.each(COMMANDS, function( index, value ) {
 
                     CONTENT += '' +
-                        '<div class="line line-' + index + (THIS.root ? ' root' : '') + '">' + PREFIX +
+                        '<div class="line line-' + c + (THIS.root ? ' root' : '') + '">' + PREFIX +
                             '<span class="command">' + value + '</span>' +
                         '</div>';
 
@@ -220,28 +209,32 @@
                         /// If command contains "sudo" become root user
                         if (/sudo/.test(value)) {
 
+                            c = c + 1;
                             THIS.root = true;
                             PREFIX = THIS.buildPrefix();
                             STATUSBAR = THIS.buildStatusBar();
                             CONTENT += '' +
-                                '<div class="line root">' +
+                                '<div class="line line-' + c + ' root">' +
                                     '[sudo] password for ' + THIS.user + ':<span class="command"></span>' +
-                                '</div>'
+                                '</div>';
 
                         }
 
                         /// If command contains "exit" logout from root
                         if (/exit/.test(value)) {
 
+                            c = c + 1;
                             THIS.root = false;
                             PREFIX = THIS.buildPrefix();
                             STATUSBAR = THIS.buildStatusBar();
-                            CONTENT += '<div class="line logout">logout</div>'
+                            CONTENT += '<div class="line line-' + c + ' logout">logout</div>';
 
                         }
 
                     }
-                    
+
+                    c = c + 1;
+
                 })
             }
 
@@ -249,16 +242,42 @@
             CONTENT += '</div>';
 
             /// Fill the HTML element with status bar and content
-            $(this.element).addClass(CLASSES);
-            $(this.element).html(STATUSBAR + CONTENT);
+            $(THIS.element).addClass(CLASSES);
+            $(THIS.element).html(STATUSBAR + CONTENT);
+
+            /// Typed.js integration
+            if(THIS.typed && typeof $.fn.typed !== 'undefined') {
+
+                var nCommands = $(THIS.element).find(".line").length,
+                    line, command, commandText,
+                    initCommands = function (i) {
+
+                        line = $(THIS.element).find(".line-" + i);
+                        command = line.find(".command");
+                        commandText = line.find(".command").html();
+
+                        command.html(null);
+                        line.addClass("active");
+
+                        command.typed({
+                            strings: ["^800" + commandText],
+                            typeSpeed: 50,
+                            cursorChar: "&nbsp;",
+                            callback: function () {
+                                if (i < nCommands) initCommands(i + 1);
+                            }
+                        });
+
+                    };
+
+                initCommands(0);
+
+            }
 
         }
 
     };
 
-    var API = {
-        //example: Plugin.prototype.example
-    };
 
     $.fn[NAME] = function (value) {
         var args = arguments;
@@ -268,9 +287,6 @@
             if (!plugin) {
                 plugin = new Plugin(this, value);
                 $this.data(NAME, plugin);
-            }
-            if (API[value]) {
-                plugin[value].apply(plugin, Array.prototype.slice.call(args, 1));
             }
         });
     };
