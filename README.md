@@ -54,18 +54,13 @@ var shell = new Shell(awesomeShell, {
 If you're using **[jQuery][jquery]** you can use **Shell.js** as a plugin:
 
 ```javascript
-$('#awesome-shell').shell();
-```
-
-### jQuery: Passing Options
-
-```javascript
 $('#awesome-shell').shell({
   user: "foobar",
   host: "MacMini",
   path: "/etc/",
   style: "osx",
   theme: "dark",
+  typed: true,
   responsive: false,
   commands: ["First command", "Second command", "..."]
 });
