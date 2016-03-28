@@ -58,7 +58,7 @@ html {
   display: block;
 }
 /* line 34, ../../src/sass/shell.min.sass */
-.shell .typed-cursor {
+.shell .typed-cursor, .shell .cursor {
   opacity: 1;
   width: 10px;
   background: #F1F1F1;

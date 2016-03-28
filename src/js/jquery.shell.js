@@ -192,7 +192,7 @@
             /// If have some commands...
             if (typeof COMMANDS === "object" && COMMANDS[0]) {
 
-                var c = 0;
+                var c = 0, i = 0;
                 THIS.root = false;
                 PREFIX = THIS.buildPrefix();
 
@@ -233,9 +233,22 @@
 
                     }
 
-                    c = c + 1;
+                    if( i == COMMANDS.length - 1 ) {
 
-                })
+                        PREFIX = THIS.buildPrefix();
+                        STATUSBAR = THIS.buildStatusBar();
+                        CONTENT += '' +
+                            '<div class="line line-' + c + (THIS.root ? ' root' : '') + (!THIS.typed ? ' active' : '') + '">' + PREFIX +
+                                '<span class="command"></span>' + (!THIS.typed ? '<span class="typed-cursor">&nbsp;</span>' : '') +
+                            '</div>';
+
+                    }
+
+                    c = c + 1;
+                    i = i + 1;
+
+                });
+
             }
 
             /// Close the content of the shell
@@ -249,7 +262,7 @@
             if(THIS.typed && typeof $.fn.typed !== 'undefined') {
 
                 var nCommands = $(THIS.element).find(".line").length,
-                    line, command, commandText, speed,
+                    line, command, commandText, speed, reset,
                     initCommands = function (i) {
 
                         line = $(THIS.element).find(".line-" + i);
@@ -264,11 +277,18 @@
                             strings: ["^" + speed + commandText],
                             typeSpeed: 50,
                             cursorChar: "&nbsp;",
+                            showCursor: true,
                             callback: function () {
-                                line.find(".typed-cursor").remove();
-                                if (i < nCommands) initCommands(i + 1);
+                                if( i === nCommands - 2 ) {
+
+                                } else if (i < nCommands ) {
+                                    line.find(".typed-cursor").remove();
+                                    initCommands(i + 1);
+                                }
                             }
                         });
+
+
 
                     };
 

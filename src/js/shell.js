@@ -216,7 +216,7 @@
             /// If have some commands...
             if (typeof COMMANDS === "object" && COMMANDS[0]) {
 
-                var c = 0;
+                var c = 0, i = 0;
                 THIS.root = false;
                 PREFIX = THIS.buildPrefix();
 
@@ -256,6 +256,20 @@
                         }
 
                     }
+
+                    if( i == COMMANDS.length - 1 ) {
+
+                        PREFIX = THIS.buildPrefix();
+                        STATUSBAR = THIS.buildStatusBar();
+                        CONTENT += '' +
+                            '<div class="line line-' + c + (THIS.root ? ' root' : '') + (!THIS.typed ? ' active' : '') + '">' + PREFIX +
+                            '<span class="command"></span>' + (!THIS.typed ? '<span class="typed-cursor">&nbsp;</span>' : '') +
+                            '</div>';
+
+                    }
+
+                    c = c + 1;
+                    i = i + 1;
 
                 });
 
