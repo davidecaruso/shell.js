@@ -233,6 +233,7 @@
 
                     }
 
+                    /// Adds a new empty line of command at the end
                     if( i == COMMANDS.length - 1 ) {
 
                         PREFIX = THIS.buildPrefix();
@@ -279,16 +280,13 @@
                             cursorChar: "&nbsp;",
                             showCursor: true,
                             callback: function () {
-                                if( i === nCommands - 2 ) {
-
-                                } else if (i < nCommands ) {
+                                /// Removes cursor from each line except for the last one
+                                if( i !== nCommands - 2 && i < nCommands ) {
                                     line.find(".typed-cursor").remove();
                                     initCommands(i + 1);
                                 }
                             }
                         });
-
-
 
                     };
 

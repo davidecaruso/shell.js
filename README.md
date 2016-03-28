@@ -31,7 +31,7 @@ For each **Shell** instance you can set the following options:
 | `style`             | `custom` \| `ubuntu` \| `osx` \| `windows`  | The operating system. (default: `custom`)                                                                 |
 | `theme`             | `dark`  \| `light`                          | The theme of the shell. (default: `dark`)                                                                 |
 | `responsive`        | `false` \| `true`                           | `true` sets width and height to 100%, `false` leaves unchanged the inherited size. (default: `false`)     |
-| `typed`             | `false` \| `true`                           | Only for the jQuery version. Add the **[Typed.js][typedjs]** integration. (default: `false`)              |
+| `typed`             | `false` \| `true`                           | Only for the jQuery version. Adds the **[Typed.js][typedjs]** integration. (default: `false`)              |
 | `commands`          | `array`                                     | Array that contains the shell's commands                                                                  |
 
 ### Constructor Object Example

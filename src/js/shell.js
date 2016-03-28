@@ -257,6 +257,7 @@
 
                     }
 
+                    /// Adds a new empty line of command at the end
                     if( i == COMMANDS.length - 1 ) {
 
                         PREFIX = THIS.buildPrefix();
