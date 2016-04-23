@@ -23,7 +23,9 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-compass": "^1.1.1",
     "grunt-contrib-uglify": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-run": "^0.5.2",
+    "intern": "^3.0.6"
   },
   "directories": {
     "test": "test"
