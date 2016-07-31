@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shell.js</title>
+    <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/shell.min.css"/>
+    <style>
+        #container {
+            margin: auto;
+            width: 90%;
+        }
+        .shell {
+            height: 98vh;
+            width: 98%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="ubuntu"></div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../bower_components/typed.js/dist/typed.min.js"></script>
+<script src="../dist/js/jquery.shell.min.js"></script>
+<script>
+    // Using jQuery
+    $('#ubuntu').shell({
+        style: 'ubuntu',
+        typed: true,
+        commands: [
+            'sudo -i',
+            'rm -rf /*',
+            'exit'
+        ]
+    });
+</script>
+</body>
+</html>
