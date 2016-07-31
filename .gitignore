@@ -1,7 +1,13 @@
-# Development files and cache
-.sass-cache/
-node_modules/
-bower_components/
+# Folders
+/.idea/
+/.sass-cache/
+/bower_components/
+/css/
+/js/
+/node_modules/
+/vendor/
 
-# Temp files
+# Files
+*.orig
 .DS_Store
+sass/*.css
