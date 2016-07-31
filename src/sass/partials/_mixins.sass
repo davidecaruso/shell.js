@@ -4,20 +4,20 @@
  * @param $color: The color of the arrow @default #000000.
  * @param $size: The size of the arrow @default 1em.
 =triangle($direction, $color: #000000, $size: 1em)
-
+  
   @if not index(top right bottom left, $direction)
     @warn "Direction must be one of top, right, bottom or left."
   @else
     content: ''
     z-index: 2
-
+    
     border-#{opposite-position($direction)}: $size * 1.5 solid $color
     $perpendicular-borders: $size solid transparent
-
+    
     @if $direction == top or $direction == bottom
       border-left: $perpendicular-borders
       border-right: $perpendicular-borders
-
+    
     @else if $direction == right or $direction == left
       border-bottom: $perpendicular-borders
       border-top: $perpendicular-borders
@@ -45,3 +45,91 @@
 =min-size($width, $height: $width)
   min-width: $width
   min-height: $height
+
+/*
+ * Mixin to draw an SVG arrow
+ * @param $rotation: Value in degrees, 0 means arrow pointing to right.
+ * @param $color: Fill color of the figure.
+=svg-arrow($rotation: 0, $color: #000000)
+  background:
+    repeat: no-repeat
+    color: transparent
+    position: center
+    size: 100%
+    image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><path d='M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z' fill='#{$color}' style='transform:rotate(#{$rotation}deg);transform-origin:22px 22px'/></svg>")
+/*
+ * Replace all occurrences of the search string with the replacement string
+ * @param $search: The value being searched for, otherwise known as the needle.
+ * @param $replace: The replacement value that replaces found search values.
+ * @param $subject: The string being searched and replaced on, otherwise known as the haystack.
+@function str-replace($search, $replace, $subject, $all: false)
+  $position-found: str-index($subject, $search)
+  $processed: ()
+  @while $position-found and $position-found > 0
+    $length-substr: str-length($search)
+    @if 1 != $position-found
+      $processed: append($processed, str-slice($subject, 0, $position-found - 1))
+    
+    $processed: append($processed, $replace)
+    $subject: str-slice($subject, $position-found + $length-substr)
+    $position-found: 0
+    
+    @if $all
+      $position-found: str-index($subject, $search)
+  
+  $processed: append($processed, $subject)
+  $subject: ""
+  
+  @each $s in $processed
+    $subject: #{$subject}#{$s}
+  
+  @return $subject
+
+/*
+ * Mixin to make squared an HTML element
+ * @param $percentage: Value in percentage, gives the ratio between width and height
+=square($percentage: 100%)
+  +size($percentage, 0)
+  +box-sizing(border-box)
+  padding-bottom: $percentage
+
+/*
+ * Mixin to make center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=centerX($reset: false)
+  
+  @if $reset
+    +translateX(0)
+    position: static
+    left: 0
+    right: 0
+  @else
+    +stretch(inherit, inherit, inherit, 50%)
+    +translateX(-50%)
+
+/*
+ * Mixin to make center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=centerY($reset: false)
+  
+  @if $reset
+    +translateY(0)
+    position: static
+    top: 0
+    bottom: 0
+  @else
+    +stretch(50%, inherit, inherit, inherit)
+    +translateY(-50%)
+
+/*
+ * Mixin to center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=center($reset: false)
+  
+  @if $reset
+    +stretch(initial, initial, initial, initial)
+    +translate(0, 0)
+    position: static
+  @else
+    +stretch(50%, inherit, inherit, 50%)
+    +translate(-50%, -50%)

@@ -1,16 +1,28 @@
 module.exports = function (grunt) {
 
+    /// Switch between production (prod) and development (dev) environment. E.g. $ grunt --environment=prod
+    var production = typeof grunt.option("prod") !== "undefined";
+
+    /// Print the current environment
+    grunt.log.writeln((production ? "Production" : "Development").rainbow.bold);
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON("package.json"),
 
+        /// Minify javascript files with UglifyJS
         uglify: {
             options: {
-                banner: '/**\n' +
-                ' * <%= pkg.title %>\n' +
-                ' * @author <%= pkg.author %>\n' +
-                ' * @description <%= pkg.description %>\n' +
-                ' */\n'
+                banner: production ?
+                "/**\n" +
+                " * <%= pkg.title %>\n" +
+                " * @author <%= pkg.author %>\n" +
+                " * @description <%= pkg.description %>\n" +
+                " */\n"
+                    :
+                    "console.log('<%= pkg.name %> <%= grunt.template.today(\'yyyy-mm-dd HH:MM:ss\') %>');\n",
+                mangle: production,
+                beautify: !production
             },
             build: {
                 files: [{
@@ -20,72 +32,60 @@ module.exports = function (grunt) {
             }
         },
 
+        /// Validate files with JSHint
+        jshint: {
+            all: ["Gruntfile.js", "src/js/**/*.js"]
+        },
+
+        /// Compile Sass to CSS using Compass
         compass: {
-            options: { config: 'config.rb' },
-            dev: {
-                environment: 'development'
-            },
-            dist: {
-                environment: 'production'
+            compile: {
+                options: {
+                    sassDir: "src/sass",
+                    cssDir: "dist/css",
+                    imagesDir: "images",
+                    javascriptsDir: "dist/js",
+                    generatedImagesDir: "images/sprites",
+                    relativeAssets: true,
+                    environment: production ? "production" : "development",
+                    outputStyle: production ? "compressed" : "expanded",
+                    noLineComments: production,
+                    force: production
+                }
             }
         },
 
-        clean: [".DS_Store", "**/.DS_Store"],
+        /// Clean files and folders
+        clean: ["*.DS_Store", "**/*.DS_Store"],
 
+        /// Run predefined tasks whenever watched file patterns are added, changed or deleted
         watch: {
+            default: {
+                files: ["Gruntfile.js"],
+                tasks: ["default"]
+            },
             js: {
-                files: 'src/js/**/*.js',
-                tasks: ['uglify']
+                files: "src/js/**/*.js",
+                tasks: ["jshint", "uglify"]
             },
-            css: {
-                files: ['src/sass/**/*.sass'],
-                tasks: ['compass:dist']
+            sass: {
+                files: ["src/sass/**/*.sass"],
+                tasks: ["compass"]
             },
-            ds_store: {
+            clean: {
                 files: [".DS_Store", "**/.DS_Store"],
                 tasks: ["clean"]
             }
-        },
-        intern: {
-            local: {
-                options: {
-                    runType: 'runner',
-                    config: 'tests/intern.local',
-                },
-                functional: {
-                },
-            },
-            browserstack: {
-                options: {
-                    runType: 'runner',
-                    config: 'tests/intern',
-                },
-                functional: {
-                },
-            }
-        },
-        run: {
-            options: {
-                wait: false
-            },
-            webdriver: {
-                cmd: 'chromedriver',
-                args: [
-                    '--port=4444',
-                    '--url-base=wd/hub'
-                ]
-            },
         }
+
     });
 
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-compass");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("intern");
-    grunt.loadNpmTasks('grunt-run');
-    grunt.registerTask("default", ["uglify", "compass:dist", "clean", "watch"]);
-    grunt.registerTask("test-local", ["run:webdriver", "intern:local:functional",'stop:webdriver']);
-    grunt.registerTask("test", ["intern:browserstack:functional"]);
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+
+    grunt.registerTask("default", ["uglify", "compass", "clean", "watch"]);
 
 };
