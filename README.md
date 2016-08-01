@@ -90,7 +90,7 @@ grunt
 
 ## Author
 
-Davide Caruso: [linkedin][linkedin]
+[Davide Caruso][linkedin]
 
 ## License
 
