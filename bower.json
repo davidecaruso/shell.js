@@ -1,17 +1,28 @@
 {
   "title": "Shell.js",
   "name": "shell.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A JavaScript and CSS library to create terminals",
-  "authors": "Davide Caruso  <davide.caruso93@gmail.com>",
+  "author": "Davide Caruso  <davide.caruso93@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidecaruso/shell.js.git"
+  },
   "keywords": [
     "shell",
     "terminal",
+    "command-line",
     "javascript",
-    "jquery",
-    "library",
-    "plugin"
+    "jquery-plugin"
+  ],
+  "scripts": [
+    "dist/js/shell.min.js",
+    "dist/js/jquery.shell.min.js"
+  ],
+  "main": [
+    "dist/js/jquery.shell.min.js",
+    "dist/css/shell.css"
   ],
   "moduleType": [],
   "homepage": "https://github.com/davidecaruso/shell.js",
@@ -20,10 +31,14 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "LICENSE",
+    "package.json",
+    "README.md",
+    "Gruntfile.js"
   ],
   "dependencies": {
-    "font-awesome": "~4.5.0",
-    "typed.js": "^1.1.1"
+    "font-awesome": "~4.6.3",
+    "typed.js": "^1.1.4"
   }
 }
