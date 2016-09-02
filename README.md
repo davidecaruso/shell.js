@@ -2,10 +2,8 @@
 
 Quickly create a terminal window.
 
-[![Require it with Bower](https://img.shields.io/badge/require_it_with-Bower-FFCC2F.svg?style=flat)](#install)
-[![Built with Grunt](https://img.shields.io/badge/built_with-Grunt-E48632.svg?style=flat)][grunt]
-[![MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)][mit]
-![Made with heart](https://img.shields.io/badge/made_with-❤-FF4969.svg?style=flat)
+[![GitHub version](https://badge.fury.io/gh/davidecaruso%2Fshell.js.svg)](https://badge.fury.io/gh/davidecaruso%2Fshell.js)
+[![Bower version](https://badge.fury.io/bo/shell.js.svg)](#install)
 
 ![Screenshot](https://github.com/davidecaruso/shell.js/blob/master/images/screenshot.png)
 
@@ -82,6 +80,10 @@ $ grunt
 ## Author
 
 [Davide Caruso][linkedin]
+
+## License
+
+Licensed under [MIT][mit].
 
 [linkedin]: https://it.linkedin.com/in/davidecaruso93
 [mit]: http://www.opensource.org/licenses/mit-license.php
