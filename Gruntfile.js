@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
 
-    /// Switch between production (prod) and development (dev) environment. E.g. $ grunt --environment=prod
+    /// Switch between production (prod) and development (dev) environment. For production mode run: grunt --prod
     var production = typeof grunt.option("prod") !== "undefined";
 
     /// Print the current environment
