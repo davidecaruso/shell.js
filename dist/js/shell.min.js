@@ -1,5 +1,5 @@
 /**
- * Shell.js 1.0.3
+ * Shell.js 1.0.4
  * A JavaScript and CSS library to create terminals
  * 
  * Copyright (c) 2016, Davide Caruso
