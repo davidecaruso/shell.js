@@ -1,15 +1,15 @@
-// Mobile width
+/// Mobile width
 $mobile-width: 320px
-// Tablet width
+/// Tablet width
 $tablet-width: 768px
-// Desktop width
+/// Desktop width
 $regular-desktop-width: 1025px
-// Medium width
+/// Medium width
 $medium-desktop-width: 1366px
-// Large desktop width
+/// Large desktop width
 $large-desktop-width: 1600px
 
-// Devices
+/// Devices
 =mobile
     @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width - 1px})
         @content
@@ -23,7 +23,7 @@ $large-desktop-width: 1600px
         @content
 
 =regular-desktop
-    @media (min-width: #{$regular-desktop-width}) and (max-width: #{$large-desktop-width - 1px})
+    @media (min-width: #{$regular-desktop-width}) and (max-width: #{$medium-desktop-width - 1px})
         @content
 
 =medium-desktop
@@ -34,7 +34,7 @@ $large-desktop-width: 1600px
     @media (min-width: #{$large-desktop-width})
         @content
 
-// Orientations
+/// Orientations
 =portrait
     @media (orientation: portrait)
         @content

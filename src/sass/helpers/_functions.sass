@@ -1,0 +1,27 @@
+/*
+ * Replace all occurrences of the search string with the replacement string
+ * @param $search: The value being searched for, otherwise known as the needle.
+ * @param $replace: The replacement value that replaces found search values.
+ * @param $subject: The string being searched and replaced on, otherwise known as the haystack.
+@function str-replace($search, $replace, $subject, $all: false)
+    $position-found: str-index($subject, $search)
+    $processed: ()
+    @while $position-found and $position-found > 0
+        $length-substr: str-length($search)
+        @if 1 != $position-found
+            $processed: append($processed, str-slice($subject, 0, $position-found - 1))
+        
+        $processed: append($processed, $replace)
+        $subject: str-slice($subject, $position-found + $length-substr)
+        $position-found: 0
+        
+        @if $all
+            $position-found: str-index($subject, $search)
+    
+    $processed: append($processed, $subject)
+    $subject: ""
+    
+    @each $s in $processed
+        $subject: #{$subject}#{$s}
+    
+    @return $subject

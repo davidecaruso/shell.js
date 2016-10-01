@@ -1,16 +1,11 @@
 @import compass
-@import compass/css3/transition
-@import compass/utilities/sprites
-@import compass/layout/stretching
+@import compass/layout
 
-@import partials/variables
-@import partials/resolutions
-@import partials/mixins
-@import partials/typography
-@import partials/placeholders
+@import helpers/all
+@import base/all
 
 .shell
-    @extend %SansSerif
+    @extend %sans-serif
     display: block
     position: relative
     text-align: left
@@ -106,9 +101,8 @@
             +adjust-font-size-to(16px, 27px)
             text-align: center
 
-
     .content
-        @extend %Monospace
+        @extend %monospace
         position: relative
         height: 100%
         border: 1px solid #292929
@@ -132,6 +126,7 @@
             .path
                 color: #FFFFFF
 
+        
     /// Ubuntu
     &.ubuntu
         &.dark
@@ -277,7 +272,6 @@
                         color: #666666
                     .path
                         color: #666666
-
 
 
     /// Windows

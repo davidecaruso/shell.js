@@ -1,0 +1,105 @@
+/*
+ * Mixin to create a triangle element
+ * @param $direction: The direction of the arrow.
+ * @param $color: The color of the arrow @default #000000.
+ * @param $size: The size of the arrow @default 1em.
+=triangle($direction, $color: #000000, $size: 1em)
+    
+    @if not index(top right bottom left, $direction)
+        @warn "Direction must be one of top, right, bottom or left."
+    @else
+        content: ''
+        z-index: 2
+        
+        border-#{opposite-position($direction)}: $size * 1.5 solid $color
+        $perpendicular-borders: $size solid transparent
+        
+        @if $direction == top or $direction == bottom
+            border-left: $perpendicular-borders
+            border-right: $perpendicular-borders
+        
+        @else if $direction == right or $direction == left
+            border-bottom: $perpendicular-borders
+            border-top: $perpendicular-borders
+
+/*
+ * Mixin for setting both width and height of an element
+ * @param $width: The width size.
+ * @param $height: The height size @default same of $width.
+=size($width, $height: $width)
+    width: $width
+    height: $height
+
+/*
+ * Mixin for setting both max-width and max-height of an element
+ * @param $width: The max-width size.
+ * @param $height: The max-height size @default same of $width.
+=max-size($width, $height: $width)
+    max-width: $width
+    max-height: $height
+
+/*
+ * Mixin for setting both min-width and hmin-eight of an element
+ * @param $width: The min-width size.
+ * @param $height: The min-height size @default same of $width.
+=min-size($width, $height: $width)
+    min-width: $width
+    min-height: $height
+
+/*
+ * Mixin to make squared an HTML element
+ * @param $percentage: Value in percentage, gives the ratio between width and height
+=square($percentage: 100%)
+    +size($percentage, 0)
+    +box-sizing(border-box)
+    padding-bottom: $percentage
+
+/*
+ * Mixin to make center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=centerX($reset: false)
+    
+    @if $reset
+        +translateX(0)
+        position: static
+        left: 0
+        right: 0
+    @else
+        +stretch(inherit, inherit, inherit, 50%)
+        +translateX(-50%)
+
+/*
+ * Mixin to make center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=centerY($reset: false)
+    
+    @if $reset
+        +translateY(0)
+        position: static
+        top: 0
+        bottom: 0
+    @else
+        +stretch(50%, inherit, inherit, inherit)
+        +translateY(-50%)
+
+/*
+ * Mixin to center things with position and transform properties
+ * @param $reset: Get the initial behaviour
+=center($reset: false)
+    
+    @if $reset
+        +stretch(initial, initial, initial, initial)
+        +translate(0, 0)
+        position: static
+    @else
+        +stretch(50%, inherit, inherit, 50%)
+        +translate(-50%, -50%)
+
+/*
+ * Mixin for cross-browser rules for clip-path rule
+ * @param $clip: The clip-path property
+=clip-path($clip)
+    -webkit-clip-path: $clip
+    -moz-clip-path: $clip
+    -ms-clip-path: $clip
+    clip-path: $clip
