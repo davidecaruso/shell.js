@@ -8,19 +8,34 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
 
+        /// Load the package.json
         pkg: grunt.file.readJSON("package.json"),
+
+        /// Current date
+        date: {
+            year: new Date().getFullYear(),
+            month: ('January February March April May June July August September October November December').split(' ')[new Date().getMonth()],
+            day: new Date().getDate()
+        },
+
+        /// Banners
+        banners: {
+            production: "/**\n" +
+                        " * <%= pkg.title %> <%= pkg.version %>\n" +
+                        " * <%= pkg.description %>\n" +
+                        " * \n" +
+                        " * Copyright (c) <%= date.year %>, <%= pkg.author %>\n" +
+                        " * Licensed under <%= pkg.license %>\n" +
+                        " * \n" +
+                        " * Released on <%= date.month %> <%= date.day %>, <%= date.year %>\n" +
+                        " */\n",
+            development: "<%= pkg.name %> <%= grunt.template.today('yyyy-mm-dd HH:MM:ss') %>"
+        },
 
         /// Minify javascript files with UglifyJS
         uglify: {
             options: {
-                banner: production ?
-                "/**\n" +
-                " * <%= pkg.title %>\n" +
-                " * @author <%= pkg.author %>\n" +
-                " * @description <%= pkg.description %>\n" +
-                " */\n"
-                    :
-                    "console.log('<%= pkg.name %> <%= grunt.template.today(\'yyyy-mm-dd HH:MM:ss\') %>');\n",
+                banner: production ? "<%= banners.production %>" : "console.log('<%= banners.development %>');\n",
                 mangle: production,
                 beautify: !production
             },
@@ -41,12 +56,15 @@ module.exports = function (grunt) {
         compass: {
             compile: {
                 options: {
+                    banner: production ? "<%= banners.production %>" : "/* <%= banners.development %> */",
+                    specify: "src/sass/shell.min.sass",
                     sassDir: "src/sass",
                     cssDir: "dist/css",
                     imagesDir: "images",
                     javascriptsDir: "dist/js",
                     generatedImagesDir: "images/sprites",
                     relativeAssets: true,
+                    require: ["compass/import-once/activate"],
                     environment: production ? "production" : "development",
                     outputStyle: production ? "compressed" : "expanded",
                     noLineComments: production,
