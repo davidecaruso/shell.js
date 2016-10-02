@@ -30,6 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidecaruso/shell.js.git"
-  }
+    "url": "git+https://github.com/davidecaruso/shell.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidecaruso/shell.js/issues"
+  },
+  "homepage": "https://github.com/davidecaruso/shell.js",
+  "main": "Gruntfile.js"
 }

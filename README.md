@@ -4,8 +4,9 @@ Quickly create a terminal window.
 
 [![GitHub version](https://badge.fury.io/gh/davidecaruso%2Fshell.js.svg)](https://badge.fury.io/gh/davidecaruso%2Fshell.js)
 [![Bower version](https://badge.fury.io/bo/shell.js.svg)](#install)
+[![npm version](https://badge.fury.io/js/shell.js.svg)](#install)
 
-![Screenshot](https://github.com/davidecaruso/shell.js/blob/master/images/screenshot.png)
+![Screenshot](https://github.com/davidecaruso/shell.js/raw/master/images/screenshot.png)
 
 ## Install
 
@@ -13,6 +14,12 @@ You need [Bower][bower] installed: `$ npm install -g bower`
 
 ```bash
 $ bower install shell.js --save
+```
+
+Or using npm:
+
+```bash
+$ npm install shell.js --save
 ```
 
 ## Options
