@@ -57,7 +57,7 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     banner: production ? "<%= banners.production %>" : "/* <%= banners.development %> */",
-                    specify: "src/sass/shell.min.sass",
+                    specify: "src/sass/shell.min.scss",
                     sassDir: "src/sass",
                     cssDir: "dist/css",
                     imagesDir: "images",

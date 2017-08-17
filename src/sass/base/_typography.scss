@@ -1,0 +1,29 @@
+/// Base font size
+$base-font-size: 12px;
+/// Base line height
+$base-line-height: 1;
+/// Setting font base option
+@include establish-baseline;
+
+/// Font families
+%sans-serif { font-family: sans-serif; }
+%monospace { font-family: monospace; }
+
+/// Font styles
+%italic { font-style: italic; }
+%normal { font-style: normal; }
+
+/// Font weights
+%light { font-weight: 200; }
+%book { font-weight: 300; }
+%regular { font-weight: 400; }
+%bold { font-weight: 700; }
+
+body {
+  @extend %normal;
+  @extend %regular;
+
+  @include mobile {
+    @include adjust-font(10px);
+  }
+}
