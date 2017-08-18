@@ -64,6 +64,7 @@
                 break;
 
             case "ubuntu":
+                /* falls through */
             default:
                 prefix = '<span class="user">' + userName + '@</span>' +
                          '<span class="host">' + this.host +'</span>:' +
@@ -112,6 +113,7 @@
                 break;
 
             case "ubuntu":
+                /* falls through */
             default:
                 buttons = '<div class="buttons">' +
                             '<a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>' +
