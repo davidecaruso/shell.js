@@ -30,10 +30,13 @@
     "gulp": "^3.9.1",
     "gulp-compass": "^2.1.0",
     "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "pump": "^1.0.2"
   },
   "directories": {
     "test": "test"
