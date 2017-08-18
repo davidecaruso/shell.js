@@ -1,9 +1,9 @@
 # Folders
-/.idea/
-/.sass-cache/
-/bower_components/
-/node_modules/
-/vendor/
+.idea/
+.sass-cache/
+bower_components/
+node_modules/
+tmp/
 
 # Files
 *.orig
