@@ -29,6 +29,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "compass-mixins": "^0.12.10",
+    "css-loader": "^0.28.7",
     "eslint": "^4.5.0",
     "grunt": "^0.4.5",
     "grunt-auto-install": "^0.3.1",
