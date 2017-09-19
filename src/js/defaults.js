@@ -38,7 +38,12 @@ const defaults = {
   /**
    * @property {array} commands The commands list
    */
-  commands: []
+  commands: [],
+
+  /**
+   * @property {boolean} root If logged user is root or not
+   */
+  root: false
 };
 
 export default defaults;

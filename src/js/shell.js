@@ -2,288 +2,292 @@ import defaults from './defaults.js';
 
 /**
  * Shell.js
- * @param {string} elementId HTML element ID _OR_ HTML element
+ * @param {string} elementSelector HTML element selector _OR_ HTML element
  * @param {object} options options object
  * @returns {object} a new Typed object
  */
-export default class Shell {
+class Shell {
 
-  constructor(elementId, options) {
-    this.initialize(elementId, options);
+  constructor(elementSelector, options) {
+    this.initialize(elementSelector, options);
     this.build();
   }
 
   /**
    * Load up defaults & options on the Shell instance
-   * @param {string} elementId HTML element ID || instance of HTML element
+   * @param {string} elementSelector HTML element ID || instance of HTML element
    * @param {object} options options object
    * @static
    * @private
    */
-  static initialize(elementId, options) {
+  initialize(elementSelector, options) {
 
     this.el = null;
-    this.options = {};
-    this.commands = [];
-
-    if (typeof elementId === 'string') {
-      this.el = document.querySelector(elementId);
-    } else {
-      this.el = elementId;
+    if (typeof elementSelector === 'string') {
+      let el = document.querySelectorAll(elementSelector);
+      if (el.length) {
+        this.el = el;
+      }
     }
 
     this.options = {...defaults, ...options};
 
-  };
+    /// Hardcode for Windows
+    if (this.options.style === 'windows' && !this.options.path) {
+      this.options.path = 'C:\\Windows\\system32\\';
+    }
+
+  }
 
   build() {
-/*
-    if (self.el) {
 
-      /// Commands list
-      COMMANDS = self.commands;
+    if (this.el) {
 
-      /// Classes for HTML element
-      CLASSES = (
-        "shell " + self.style + " " + self.theme + " " +
-        (self.responsive ? "responsive " : "").toString() + " " +
-        (self.shadow ? "shadow " : "")
-      ).toString();
+      /// HTML element's classes
+      let classes = ['shell', this.options.style, this.options.theme];
+      if (this.options.responsive) classes.push('responsive');
+      if (this.options.shadow) classes.push('shadow');
 
-      /// Build the status bar with title and buttons
-      STATUSBAR = self.buildStatusBar();
+      this.el.className = this.el.className + ' ' + classes.join(' ');
+      this.el.innerHTML = this.buildStatusBar() + this.buildContent();
 
-      /// Open the content of the shell
-      CONTENT = '<div class="content">';
+    }
 
-      /// If style is OSX add a new line with last login
-      if (self.style === "osx") {
+  }
 
-        CONTENT += '' +
-          '<div class="line">' +
-          '<span class="command">Last login: ' + DAYS[DATE.getDay()] + ' ' + MONTHS[DATE.getMonth()] +
-          ' ' + pad(DATE.getHours(), 2) + ':' + pad(DATE.getMinutes(), 2) + ':' +
-          pad(DATE.getSeconds(), 2) + ' on ttys000</span>' +
-          '</div>';
+  buildPrefix() {
 
-      }
+    let prefix = '<span class="prefix">';
+    let user = this.options.root ? 'root' : this.options.user;
+    let char = this.options.root ? '#' : null;
 
-      /// If have some commands...
-      if (typeof COMMANDS === "object" && COMMANDS[0]) {
+    /// Which OS
+    switch (this.options.style) {
 
-        var c = 0, i = 0;
-        self.root = false;
-        PREFIX = self.buildPrefix();
+      case 'osx':
+        char = char || '$';
+        prefix += `<span class="host">${this.options.host}</span>:<span class="path">${this.options.path}</span><span class="user">${user}${char}</span>`;
+        break;
 
-        COMMANDS.forEach(function(command) {
+      case 'windows':
+        char = char || '&gt;';
+        prefix += `<span class="path">${this.options.path}${char}</span>`;
+        break;
 
-          CONTENT += '' +
-            '<div class="line line-' + c + (self.root ? ' root' : '') + '">' + PREFIX +
-            '<span class="command">' + command + '</span>' +
-            '</div>';
+      case 'ubuntu':
+      /* falls through */
+      default:
+        char = char || '$';
+        prefix += `<span class="user">${user}@</span><span class="host">${this.options.host}</span>:<span class="path">${this.options.path}</span>${char}`;
+        break;
 
+    }
 
-          if(self.style !== "windows") {
+    prefix += '</span>';
 
-            /// If command contains "sudo" become root user
-            if (/sudo/.test(command)) {
+    return prefix;
 
-              c = c + 1;
-              self.root = true;
-              PREFIX = self.buildPrefix();
-              STATUSBAR = self.buildStatusBar();
-              CONTENT += '' +
-                '<div class="line line-' + c + ' root">' +
-                '[sudo] password for ' + self.user + ':<span class="command"></span>' +
-                '</div>';
+  }
 
-            }
+  buildStatusBar() {
 
-            /// If command contains "exit" logout from root
-            if (/exit/.test(command)) {
+    let statusBar = '<div class="status-bar">';
+    let user = this.options.root ? 'root' : this.options.user;
+    let buttons;
+    let title;
 
-              c = c + 1;
-              self.root = false;
-              PREFIX = self.buildPrefix();
-              STATUSBAR = self.buildStatusBar();
-              CONTENT += '<div class="line line-' + c + ' logout">logout</div>';
+    /// Which OS
+    switch (this.options.style) {
 
-            }
+      case 'osx':
+        buttons = `<div class="buttons">
+                     <button class="close" title="Close"><i class="fa fa-times"></i></button>
+                     <button class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
+                     <button class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></button>
+                   </div>`;
+        title = `<div class="title">${user} &horbar; sh</div>`;
+        break;
 
+      case 'windows':
+        buttons = `<div class="buttons">
+                    <button class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
+                    <button class="enlarge" title="Enlarge"><i class="fa fa-square-o"></i></button>
+                    <button class="close" title="Close"><i class="fa fa-times"></i></button>
+                   </div>`;
+        title = `<div class="title">
+                  <span class="icon"><i class="fa fa-terminal"></i></span> Command Prompt
+                 </div>`;
+        break;
+
+      case 'ubuntu':
+      /* falls through */
+      default:
+        buttons = `<div class="buttons">
+                    <a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>
+                    <a href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></a>
+                   </div>`;
+        title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
+        break;
+
+    }
+
+    statusBar += buttons + title;
+    statusBar += '</div>';
+
+    return statusBar;
+
+  }
+
+  buildContent() {
+
+    /// Content's HTML wrapper
+    let content = '<div class="content">';
+    let date = new Date();
+    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    /// If style is OSX add a new line with last login
+    if (this.options.style === 'osx') {
+
+      let hours = this._pad(date.getHours(), 2);
+      let minutes = this._pad(date.getMinutes(), 2);
+      let seconds = this._pad(date.getSeconds(), 2);
+
+      content += this.buildLine({
+        command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
+        prefix:  false
+      });
+
+    }
+
+    /// If have some commands...
+    if (this.options.commands.length) {
+
+      let index = 0;
+      let counter = 0;
+
+      this.options.commands.forEach(command => {
+
+        let params = {
+          command,
+          counter,
+          output: null
+        };
+
+        /// Build line
+        content += this.buildLine(params);
+
+        /// If command contains "sudo" become root user
+        if (/sudo/.test(command)) {
+
+          counter++;
+          params.counter = counter;
+
+          if (this.options.style !== 'windows') {
+            params.command = 'bash: sudo: command not found';
+          } else {
+            this.options.root = true;
+            params.command = null;
+            params.output = `[sudo] password for ${this.options.user} :`;
           }
 
-          /// Adds a new empty line of command at the end
-          if( i == COMMANDS.length - 1 ) {
+          content += this.buildLine(params);
 
-            PREFIX = self.buildPrefix();
-            STATUSBAR = self.buildStatusBar();
-            CONTENT += '' +
-              '<div class="line line-' + c + (self.root ? ' root' : '') + (!self.typed ? ' active' : '') + '">' + PREFIX +
-              '<span class="command"></span>' + (!self.typed ? '<span class="typed-cursor">&nbsp;</span>' : '') +
-              '</div>';
+        }
 
+        /// If command contains "exit" logout from root
+        if (/exit/.test(command)) {
+
+          counter++;
+          params.counter = counter;
+
+          if (this.options.style !== 'windows') {
+            params.command = 'bash: sudo: command not found';
+          } else {
+            this.options.root = false;
+            params.command = null;
+            params.output = 'logout';
           }
 
-          c = c + 1;
-          i = i + 1;
+          content += this.buildLine(params);
 
-        });
+        }
 
+        counter++;
+        index++;
+
+      });
+
+    }
+
+    content += this.buildLine({empty: true});
+
+    /// Close the content of the shell
+    content += '</div>';
+
+    return '';
+
+  }
+
+  buildLine(params) {
+
+    let line;
+
+    /// Default parameters
+    params = {
+      ...{
+        counter: 0,
+        empty:   false,
+        command: null,
+        prefix:  true,
+        output:  false
+      },
+      ...params
+    };
+
+    let classes = ['line'];
+    /// Add "root" class
+    if (this.options.root) {
+      classes.push('root');
+    }
+    /// Add "line-[number]" class
+    if (!isNaN(params.counter)) {
+      classes.push(`line-${params.counter}`);
+    }
+
+    if (params.empty) {
+
+      /// Add "active" class
+      if (!this.options.typed) {
+        classes.push('active');
       }
 
-      /// Close the content of the shell
-      CONTENT += '</div>';
+      line = `<div class="${classes.join(' ')}">
+                ${this.buildPrefix()}
+                <span class="command"></span>
+                ${(!this.options.typed ? '<span class="typed-cursor">&nbsp;</span>' : '')}
+              </div>`;
 
-      /// Fill the HTML element with status bar and content
-      self.el.className += CLASSES;
-      self.el.innerHTML = STATUSBAR + CONTENT;
+    } else {
 
-    }*/
+      line = `<div class="${classes.join(' ')}">
+              ${(params.output ? `<span class="output">${params.output}</span>` : null)}
+              ${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : null)}<span class="command">${params.command}</span>` : null)}
+            </div>`;
+
+    }
+
+    return line;
+
+  }
+
+  static _pad(string, length, char) {
+    char = char || '0';
+    string = string + '';
+    return string.length >= length ? string : new Array(length - string.length + 1).join(char) + string;
   }
 
 }
 
-
-// ;(function (window, document, undefined) {
-//
-//     /// Strict Mode
-//     'use strict';
-//
-//     /// Constants
-//     var NAME = 'Shell',
-//         DATE = new Date(),
-//         DAYS = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ],
-//         MONTHS = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ],
-//         COMMANDS, CLASSES, STATUSBAR, CONTENT, PREFIX;
-//
-//     /// Fill a string of a determinate length with a char
-//     function pad(string, length, char) {
-//         char = char || '0';
-//         string = string + '';
-//         return string.length >= length ? string : new Array(length - string.length + 1).join(char) + string;
-//     }
-//
-//     Shell.prototype.extend = function() {
-//         if (arguments.length > 1) {
-//             var master = arguments[0];
-//             for (var i = 1, l = arguments.length; i < l; i++) {
-//                 var object = arguments[i];
-//                 for (var key in object) {
-//                     master[key] = object[key];
-//                 }
-//             }
-//         }
-//     };
-//
-//     Shell.prototype.data = function(element, name) {
-//         return this.deserialize(element.getAttribute('data-'+name));
-//     };
-//
-//     Shell.prototype.deserialize = function(value) {
-//         if (value === 'true') {
-//             return true;
-//         } else if (value === 'false') {
-//             return false;
-//         } else if (value === 'null') {
-//             return null;
-//         } else if (!isNaN(parseFloat(value)) && isFinite(value)) {
-//             return parseFloat(value);
-//         } else {
-//             return value;
-//         }
-//     };
-//
-//     /// Builds the prefix of the command
-//     Shell.prototype.buildPrefix = function() {
-//
-//         var PREFIX = '',
-//             userName = this.root ? 'root' : this.user,
-//             bashChar = this.root ? '#' : '$';
-//
-//         switch(this.style) { /// Which OS
-//
-//             case "osx":
-//                 PREFIX = '<span class="host">' + this.host +'</span>:' +
-//                          '<span class="path">' + this.path + '</span> ' +
-//                          '<span class="user">' + userName + bashChar + '</span> ';
-//                 break;
-//
-//             case "windows":
-//                 this.path = typeof arguments[0].path !== "undefined" ? this.path : "C:\\Windows\\system32\\";
-//                 PREFIX = '<span class="path">' + this.path + '&gt;</span> ';
-//                 break;
-//
-//             case "ubuntu":
-//                 /* falls through */
-//             default:
-//                 PREFIX = '<span class="user">' + userName + '@</span>' +
-//                          '<span class="host">' + this.host +'</span>:' +
-//                          '<span class="path">' + this.path + '</span>' + bashChar + ' ';
-//                 break;
-//
-//         }
-//
-//         return PREFIX;
-//
-//     };
-//
-//
-//     /// Builds the status bar of the shell window
-//     Shell.prototype.buildStatusBar = function () {
-//
-//         var statusBar = '<div class="status-bar">',
-//             userName = this.root ? 'root' : this.user,
-//             buttons,
-//             title;
-//
-//         switch (this.style) { /// Which OS
-//
-//             case "osx":
-//                 buttons = '<div class="buttons">' +
-//                             '<a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>' +
-//                             '<a href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></a>' +
-//                             '<a href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></a>' +
-//                           '</div>';
-//                 title = '<div class="title">' +
-//                             userName + ' &horbar; sh' +
-//                         '</div>';
-//                 statusBar += buttons + title;
-//                 break;
-//
-//             case "windows":
-//                 buttons = '<div class="buttons">' +
-//                     '<a href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></a>' +
-//                     '<a href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-square-o"></i></a>' +
-//                     '<a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>' +
-//                     '</div>';
-//                 title = '<div class="title">' +
-//                     '<span class="icon"><i class="fa fa-terminal"></i></span> Command Prompt' +
-//                     '</div>';
-//                 statusBar += title + buttons;
-//                 break;
-//
-//             case "ubuntu":
-//                 /* falls through */
-//             default:
-//                 buttons = '<div class="buttons">' +
-//                             '<a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>' +
-//                             '<a href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></a>' +
-//                             '<a href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></a>' +
-//                           '</div>';
-//                 title = '<div class="title">' +
-//                             userName + '@' + this.host + ': ' + this.path +
-//                         '</div>';
-//                 statusBar += buttons + title;
-//                 break;
-//
-//         }
-//
-//         statusBar += '</div>';
-//
-//         return statusBar;
-//     };
-//
-//     // Expose Shell
-//     window[NAME] = Shell;
-//
-// })(window, document);
+module.exports = Shell;

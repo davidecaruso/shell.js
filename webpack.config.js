@@ -1,29 +1,50 @@
 /// Requires
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const pkg = require('./package.json');
 
 /// Environment
-const env = process.env.NODE_ENV || 'development';
-const production = env === 'production';
+const env = process.env.NODE_ENV || 'dev';
+const build = env === 'build';
 const dist = __dirname + '/dist';
 const src = __dirname + '/src';
 
 /// Library info
-const library = 'shell';
+const library = 'Shell';
+const filename = library.toLowerCase();
 const banner = `${pkg.name} - ${pkg.description}
 Author: ${pkg.author}
 Version: v${pkg.version}
 URL: ${pkg.homepage}
 License(s): ${pkg.license}`;
 
+let plugins = [
+  new webpack.BannerPlugin(banner),
+];
+let outputFilename;
+
+if (env === 'build') {
+  plugins.push(new UglifyJsPlugin({
+    minimize: true,
+    sourceMap: true,
+    mangle: {
+      except: ['Shell']
+    }
+  }));
+  outputFilename = `${filename}.min.js`;
+} else {
+  outputFilename = `${filename}.js`;
+}
+
+
 /// Export Webpack config
 module.exports = {
-  devtool: production ? 'source-map' : 'eval',
-  entry:   [`${src}/js/${library}.js`, `${src}/sass/${library}.scss`],
+  devtool: 'nosources-source-map',
+  entry:   [`${src}/js/${filename}.js`/*, `${src}/sass/${filename}.scss`*/],
   output:  {
     path:           dist,
-    filename:       `${library}.min.js`,
-    library:        library,
+    filename:       outputFilename,
+    library,
     libraryTarget:  'umd',
     umdNamedDefine: true
   },
@@ -34,7 +55,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use:     {
           loader:  'babel-loader',
-          options: {presets: ['es2015', 'stage-2' ]},
+          options: {presets: ['es2015', 'stage-2']},
         }
       },
       {
@@ -44,21 +65,19 @@ module.exports = {
         }, {
           loader:  'css-loader',
           options: {
-            minimize:  production,
-            sourceMap: !production
+            minimize:  build,
+            sourceMap: !build
           }
         }, {
           loader:  'sass-loader',
           options: {
-            data:         '$env: ' + env + ';',
-            sourceMap:    !production,
+            data:         `$env: ${env}`,
+            sourceMap:    !build,
             includePaths: ['node_modules/compass-mixins/lib']
           }
         }],
       }
     ]
   },
-  plugins: [
-    new webpack.BannerPlugin(banner)
-  ]
+  plugins
 };
