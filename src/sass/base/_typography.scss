@@ -1,9 +1,5 @@
-/// Base font size
-$base-font-size: 12px;
-/// Base line height
-$base-line-height: 1;
-/// Setting font base option
-@include establish-baseline;
+/// Base font size: 12px
+$base-font-size: 0.750;
 
 /// Font families
 %sans-serif { font-family: sans-serif; }

@@ -5,9 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 /// Environment
 const env = process.env.NODE_ENV || 'dev';
-const build = env === 'build';
-const dist = __dirname + '/dist';
-const src = __dirname + '/src';
+const distPath = __dirname + '/dist';
+const srcPath = __dirname + '/src';
 
 /// Library info
 const library = 'Shell';
@@ -39,9 +38,9 @@ if (env === 'build') {
 /// Export Webpack config
 module.exports = {
   devtool: 'nosources-source-map',
-  entry:   [`${src}/sass/${filename}.scss`, `${src}/js/${filename}.js`],
+  entry:   [`${srcPath}/sass/${filename}.scss`, `${srcPath}/js/${filename}.js`],
   output:  {
-    path:           dist,
+    path:           distPath,
     filename:       outputFilename,
     library,
     libraryTarget:  'umd',
@@ -54,16 +53,23 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use:     {
           loader:  'babel-loader',
-          options: {presets: ['es2015', 'stage-2']},
+          options: {
+            presets: ['es2015', 'stage-2']
+          }
         }
       },
       {
         test: /\.scss$/,
-        use:  [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use:  [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader:  'sass-loader',
+          options: {
+            includePaths: ['node_modules/bourbon/app/assets/stylesheets']
+          }
+        }]
       }
     ]
   },

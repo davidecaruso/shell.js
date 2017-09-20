@@ -43,14 +43,17 @@ module.exports = class Shell {
   build() {
 
     if (this.el) {
-
       /// HTML element's classes
       let classes = ['shell', this.options.style, this.options.theme];
       if (this.options.responsive) classes.push('responsive');
       if (this.options.shadow) classes.push('shadow');
 
-      this.el.className = this.el.className + ' ' + classes.join(' ');
-      this.el.innerHTML = this.buildStatusBar() + this.buildContent();
+      if (this.el[0].className.length) {
+        this.el[0].className = `${this.el[0].className} ${classes.join(' ')}`;
+      } else {
+        this.el[0].className = classes.join(' ');
+      }
+      this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
 
     }
 
