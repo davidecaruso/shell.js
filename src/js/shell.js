@@ -1,4 +1,5 @@
 import defaults from './defaults.js';
+import '../sass/shell.scss'
 
 /**
  * Shell.js
@@ -6,7 +7,7 @@ import defaults from './defaults.js';
  * @param {object} options options object
  * @returns {object} a new Typed object
  */
-class Shell {
+module.exports = class Shell {
 
   constructor(elementSelector, options) {
     this.initialize(elementSelector, options);
@@ -289,5 +290,3 @@ class Shell {
   }
 
 }
-
-module.exports = Shell;

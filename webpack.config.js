@@ -1,7 +1,7 @@
 /// Requires
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const pkg = require('./package.json');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 /// Environment
 const env = process.env.NODE_ENV || 'dev';
@@ -17,30 +17,29 @@ Author: ${pkg.author}
 Version: v${pkg.version}
 URL: ${pkg.homepage}
 License(s): ${pkg.license}`;
+let outputFilename = `${filename}.js`;
 
+/// Plugins
 let plugins = [
   new webpack.BannerPlugin(banner),
 ];
-let outputFilename;
 
+/// If is build environment
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({
-    minimize: true,
+    minimize:  true,
     sourceMap: true,
-    mangle: {
+    mangle:    {
       except: ['Shell']
     }
   }));
   outputFilename = `${filename}.min.js`;
-} else {
-  outputFilename = `${filename}.js`;
 }
-
 
 /// Export Webpack config
 module.exports = {
   devtool: 'nosources-source-map',
-  entry:   [`${src}/js/${filename}.js`/*, `${src}/sass/${filename}.scss`*/],
+  entry:   [`${src}/sass/${filename}.scss`, `${src}/js/${filename}.js`],
   output:  {
     path:           dist,
     filename:       outputFilename,
@@ -60,22 +59,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use:  [{
-          loader: 'style-loader'
-        }, {
-          loader:  'css-loader',
-          options: {
-            minimize:  build,
-            sourceMap: !build
-          }
-        }, {
-          loader:  'sass-loader',
-          options: {
-            data:         `$env: ${env}`,
-            sourceMap:    !build,
-            includePaths: ['node_modules/compass-mixins/lib']
-          }
-        }],
+        use:  [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
