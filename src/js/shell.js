@@ -230,7 +230,7 @@ module.exports = class Shell {
     /// Close the content of the shell
     content += '</div>';
 
-    return '';
+    return content;
 
   }
 
