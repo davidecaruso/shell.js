@@ -1,6 +1,7 @@
 /// Requires
 const webpack = require('webpack');
 const pkg = require('./package.json');
+const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 /// Environment
@@ -20,6 +21,13 @@ let outputFilename = `${filename}.js`;
 
 /// Plugins
 let plugins = [
+  new webpack.LoaderOptionsPlugin({
+    options: {
+      postcss: [
+        autoprefixer(),
+      ]
+    }
+  }),
   new webpack.BannerPlugin(banner),
 ];
 
@@ -63,12 +71,17 @@ module.exports = {
         use:  [{
           loader: 'style-loader'
         }, {
-          loader: 'css-loader'
-        }, {
-          loader:  'sass-loader',
+          loader: 'css-loader',
           options: {
-            includePaths: ['node_modules/bourbon/app/assets/stylesheets']
+            importLoaders: 1
           }
+        }, {
+          loader: 'postcss-loader',
+          options: {
+            plugins: () => [require('autoprefixer')]
+          }
+        }, {
+          loader:  'sass-loader'
         }]
       }
     ]

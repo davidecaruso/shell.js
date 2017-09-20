@@ -112,12 +112,3 @@
   -ms-clip-path: $clip;
   clip-path: $clip;
 }
-
-// Round all corners by a specific amount, defaults to value of `$default-border-radius`.
-//
-// When two values are passed, the first is the horizontal radius
-// and the second is the vertical radius.
-@mixin border-radius($radius: 0) {
-  @include border-top-radius($radius);
-  @include border-bottom-radius($radius);
-}
