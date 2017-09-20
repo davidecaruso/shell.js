@@ -1,5 +1,6 @@
 import defaults from './defaults.js';
 import '../sass/shell.scss'
+import Typed from 'typed.js';
 
 /**
  * Shell.js
@@ -55,6 +56,45 @@ module.exports = class Shell {
       }
       this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
 
+      /// Typed.js integration
+      if (this.options.typed) {
+
+        if (typeof Typed !== 'undefined') {
+
+          let commandsNum = this.el[0].querySelectorAll('.line').length;
+          let initCommands = (i) => {
+
+            let line = this.el[0].querySelectorAll(`.line-${i}`);
+            let command = line[0].querySelectorAll('.command');
+            let commandText = command[0].innerHTML;
+            let speed = line[0].className.indexOf('root') >= 0 ? 2500 : 800; /// Time for password
+
+            command[0].innerHTML = '';
+            line[0].className = `active ${line[0].className}`;
+
+            let typed = new Typed(command[0], {
+              strings: [`^${speed} ${commandText}`],
+              typeSpeed:  50,
+              loop: false,
+              contentType: 'html',
+              showCursor: true,
+              onStringTyped:   function (arrayPos, self) {
+                // Removes cursor from each line except for the last one
+                if (i + 1 !== commandsNum && i < commandsNum) {
+                  line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
+                  initCommands(i + 1);
+                }
+              }
+            });
+
+          };
+
+          initCommands(0);
+
+        }
+
+      }
+
     }
 
   }
@@ -63,26 +103,35 @@ module.exports = class Shell {
 
     let prefix = '<span class="prefix">';
     let user = this.options.root ? 'root' : this.options.user;
-    let char = this.options.root ? '#' : null;
+    let char = this.options.root ? '#' : '';
 
     /// Which OS
     switch (this.options.style) {
 
       case 'osx':
         char = char || '$';
-        prefix += `<span class="host">${this.options.host}</span>:<span class="path">${this.options.path}</span><span class="user">${user}${char}</span>`;
+        prefix += `<span class="host">${this.options.host}</span><span 
+                    class="colon">:</span><span 
+                    class="path">${this.options.path}</span><span 
+                    class="user">${user}</span><span 
+                    class="char">${char}</span>`;
         break;
 
       case 'windows':
         char = char || '&gt;';
-        prefix += `<span class="path">${this.options.path}${char}</span>`;
+        prefix += `<span class="path">${this.options.path}</span><span 
+                    class="char">${char}</span>`;
         break;
 
       case 'ubuntu':
       /* falls through */
       default:
         char = char || '$';
-        prefix += `<span class="user">${user}@</span><span class="host">${this.options.host}</span>:<span class="path">${this.options.path}</span>${char}`;
+        prefix += `<span class="user">${user}@</span><span 
+                    class="host">${this.options.host}</span><span 
+                    class="colon">:</span><span 
+                    class="path">${this.options.path}</span><span 
+                    class="char">${char}</span>`;
         break;
 
     }
@@ -223,9 +272,9 @@ module.exports = class Shell {
 
       });
 
-    }
+      content += this.buildLine({counter, empty: true});
 
-    content += this.buildLine({empty: true});
+    }
 
     /// Close the content of the shell
     content += '</div>';
@@ -236,7 +285,7 @@ module.exports = class Shell {
 
   buildLine(params) {
 
-    let line;
+    let line = '';
 
     /// Default parameters
     params = {
@@ -267,18 +316,11 @@ module.exports = class Shell {
         classes.push('active');
       }
 
-      line = `<div class="${classes.join(' ')}">
-                ${this.buildPrefix()}
-                <span class="command"></span>
-                ${(!this.options.typed ? '<span class="typed-cursor">&nbsp;</span>' : '')}
-              </div>`;
+      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command">${(!this.options.typed ? '<span class="typed-cursor">&nbsp;</span>' : '')}</span></div>`;
 
     } else {
 
-      line = `<div class="${classes.join(' ')}">
-              ${(params.output ? `<span class="output">${params.output}</span>` : null)}
-              ${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : null)}<span class="command">${params.command}</span>` : null)}
-            </div>`;
+      line = `<div class="${classes.join(' ')}">${(params.output ? `<span class="output">${params.output}</span>` : '')}${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : '')}<span class="command">${params.command}</span>` : '')}</div>`;
 
     }
 
@@ -292,4 +334,4 @@ module.exports = class Shell {
     return string.length >= length ? string : new Array(length - string.length + 1).join(char) + string;
   }
 
-}
+};

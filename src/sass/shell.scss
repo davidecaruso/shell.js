@@ -3,24 +3,22 @@
 
 .shell {
   @extend %sans-serif;
-  display: block;
+  @include size(auto);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   text-align: left;
-  color: #F1F1F1;
+  color: $main-text-color;
   overflow: hidden;
   font-weight: 300;
   box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
-  @include size(auto);
-  border-radius: 7px;
-
-  &.responsive {
-    @include size(100%);
-  }
+  border-radius: 2px;
 
   &.typed {
     .line {
       display: none;
-
       &.active {
         display: block;
       }
@@ -30,20 +28,12 @@
   .typed-cursor, .cursor {
     opacity: 1;
     width: 10px;
-    background: #F1F1F1;
-    animation: cursor-blink 0.8s infinite;
-    keyframes(cursor-blink) {
-      0% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0;
-      }
-
-      100% {
-        opacity: 1;
-      }
+    background: $main-text-color;
+    animation: blink 1s infinite;
+    @keyframes blink {
+      0% { opacity: 0; }
+      49% { opacity: 0; }
+      50% { opacity: 1; }
     }
   }
 
@@ -54,21 +44,22 @@
   }
 
   .status-bar {
-    position: relative;
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
     background: lighten(#292929, 4%);
     border: 1px solid #292929;
     border-bottom: 0;
-    height: $status-bar-height;
 
     .buttons {
-      float: left;
-      padding: 6px;
-      position: relative;
-      z-index: 1;
+      display: inline-flex;
+      align-items: stretch;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 5px;
 
       a {
         cursor: pointer;
-        display: inline-block;
         text-align: center;
         text-decoration: none;
         margin: 0 2px;
@@ -122,51 +113,55 @@
     }
 
     .title {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
       @include adjust-font(16px, 27px);
       text-align: center;
+      flex-grow: 1;
     }
   }
 
   .content {
     @extend %monospace;
-    position: relative;
-    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     border: 1px solid #292929;
-    padding: 2px 2px $status-bar-height;
+    padding: 1px;
     @include adjust-font(16px, 18px);
     background: #292929;
     box-sizing: border-box;
 
-    .user {
-      color: #8AD733;
-    }
+    .line {
+      display: none;
 
-    .host {
-      color: #8AD733;
-    }
-
-    .path {
-      color: #729FCF;
-    }
-
-    .root {
-      .user {
-        color: #FFFFFF;
+      &.active {
+        display: flex;
       }
 
-      .host {
-        color: #FFFFFF;
+      .prefix {
+
+        .user { color: #8AD733; }
+
+        .host { color: #8AD733; }
+
+        .path { color: #729FCF; }
+
+        .root {
+
+          .user { color: #FFFFFF; }
+
+          .host { color: #FFFFFF; }
+
+          .path { color: #FFFFFF; }
+        }
+
       }
 
-      .path {
-        color: #FFFFFF;
+      .command {
+
       }
+
     }
+
   }
 
   /// Ubuntu
@@ -415,11 +410,13 @@
     box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
 
     .status-bar {
+      flex-wrap: wrap-reverse;
       height: 30px;
       border: 0;
       background-color: #69C1F0;
 
       .buttons {
+        flex-wrap: wrap-reverse;
         float: right;
         padding: 0;
 

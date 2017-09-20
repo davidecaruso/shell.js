@@ -18,7 +18,8 @@
     "plugin"
   ],
   "dependencies": {
-    "grunt2gulp": "https://github.com/omouse/grunt2gulp.js/archive/0.0.2-cool-card.tar.gz"
+    "grunt2gulp": "https://github.com/omouse/grunt2gulp.js/archive/0.0.2-cool-card.tar.gz",
+    "typed.js": "^2.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.4",
