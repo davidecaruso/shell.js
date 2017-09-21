@@ -6,7 +6,7 @@ Quickly create a terminal window.
 [![Bower version](https://badge.fury.io/bo/shell.js.svg)](#install)
 [![npm version](https://badge.fury.io/js/shell.js.svg)](https://www.npmjs.com/package/shell.js)
 
-![Screenshot](https://github.com/davidecaruso/shell.js/raw/master/images/screenshot.png)
+![Screenshot](https://github.com/davidecaruso/shell.js/raw/master/assets/images/screenshot.png)
 
 ## Install
 
