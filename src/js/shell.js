@@ -1,6 +1,5 @@
 import defaults from './defaults.js';
 import '../sass/shell.scss'
-import Typed from 'typed.js';
 
 /**
  * Shell.js
@@ -35,7 +34,7 @@ module.exports = class Shell {
     this.options = {...defaults, ...options};
 
     /// Hardcode for Windows
-    if (this.options.style === 'windows' && !this.options.path) {
+    if (this.options.style === 'windows' && this.options.path === '~') {
       this.options.path = 'C:\\Windows\\system32\\';
     }
 
@@ -48,6 +47,7 @@ module.exports = class Shell {
       let classes = ['shell', this.options.style, this.options.theme];
       if (this.options.responsive) classes.push('responsive');
       if (this.options.shadow) classes.push('shadow');
+      if (this.options.typed) classes.push('typed');
 
       if (this.el[0].className.length) {
         this.el[0].className = `${this.el[0].className} ${classes.join(' ')}`;
@@ -57,42 +57,54 @@ module.exports = class Shell {
       this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
 
       /// Typed.js integration
-      if (this.options.typed) {
+      if (this.options.typed && typeof Typed !== 'undefined') {
 
-        if (typeof Typed !== 'undefined') {
+        let commandsNum = this.el[0].querySelectorAll('.line').length;
+        let lastLine = this.el[0].querySelectorAll(`.line-${commandsNum - 1}`);
+        let initCommands = (i) => {
 
-          let commandsNum = this.el[0].querySelectorAll('.line').length;
-          let initCommands = (i) => {
+          let line = this.el[0].querySelectorAll(`.line-${i}`);
+          let command = line[0].querySelectorAll('.command');
+          let commandText = command[0].innerHTML;
+          let speed = line[0].className.indexOf('root') >= 0 ? 2500 : 800; /// Time for password
 
-            let line = this.el[0].querySelectorAll(`.line-${i}`);
-            let command = line[0].querySelectorAll('.command');
-            let commandText = command[0].innerHTML;
-            let speed = line[0].className.indexOf('root') >= 0 ? 2500 : 800; /// Time for password
+          /// Show the line
+          line[0].className = `active ${line[0].className}`;
 
+          if (command[0].className.indexOf('output') === -1 && i < commandsNum - 1) {
+
+            /// Empty the command
             command[0].innerHTML = '';
-            line[0].className = `active ${line[0].className}`;
 
-            let typed = new Typed(command[0], {
-              strings: [`^${speed} ${commandText}`],
-              typeSpeed:  50,
-              loop: false,
-              contentType: 'html',
-              showCursor: true,
-              onStringTyped:   function (arrayPos, self) {
+            new Typed(command[0], {
+              strings:       [`^${speed} ${commandText}`],
+              typeSpeed:     50,
+              loop:          false,
+              contentType:   'html',
+              cursorChar:    '&nbsp;',
+              showCursor:    true,
+              onStringTyped: function (arrayPos, self) {
                 // Removes cursor from each line except for the last one
-                if (i + 1 !== commandsNum && i < commandsNum) {
-                  line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
-                  initCommands(i + 1);
-                }
+                line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
+                initCommands(i + 1);
               }
             });
 
-          };
+          } else {
+            if (i <= commandsNum - 2) {
+              /// After the bash output go type next line
+              initCommands(i + 1);
+            }
+          }
 
-          initCommands(0);
+        };
 
-        }
+        /// Type first line
+        initCommands(0);
 
+      } else {
+        /// Typed.js was not found, remove class
+        this.el[0].className = this.el[0].className.replace(' typed', '');
       }
 
     }
@@ -158,7 +170,7 @@ module.exports = class Shell {
                      <button class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
                      <button class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></button>
                    </div>`;
-        title = `<div class="title">${user} &horbar; sh</div>`;
+        title = `<div class="title">${user} &horbar; sh &horbar; 80x24</div>`;
         break;
 
       case 'windows':
@@ -167,18 +179,16 @@ module.exports = class Shell {
                     <button class="enlarge" title="Enlarge"><i class="fa fa-square-o"></i></button>
                     <button class="close" title="Close"><i class="fa fa-times"></i></button>
                    </div>`;
-        title = `<div class="title">
-                  <span class="icon"><i class="fa fa-terminal"></i></span> Command Prompt
-                 </div>`;
+        title = `<div class="icon"><i class="fa fa-terminal"></i></div><div class="title">Command Prompt</div>`;
         break;
 
       case 'ubuntu':
       /* falls through */
       default:
         buttons = `<div class="buttons">
-                    <a href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></a>
-                    <a href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></a>
+                    <button href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></button>
+                    <button href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
+                    <button href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></button>
                    </div>`;
         title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
         break;
@@ -199,26 +209,28 @@ module.exports = class Shell {
     let date = new Date();
     let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let index = 0;
+    let counter = 0;
 
     /// If style is OSX add a new line with last login
     if (this.options.style === 'osx') {
 
-      let hours = this._pad(date.getHours(), 2);
-      let minutes = this._pad(date.getMinutes(), 2);
-      let seconds = this._pad(date.getSeconds(), 2);
+      let hours = Shell._pad(date.getHours(), 2);
+      let minutes = Shell._pad(date.getMinutes(), 2);
+      let seconds = Shell._pad(date.getSeconds(), 2);
 
       content += this.buildLine({
         command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
+        output:  true,
         prefix:  false
       });
+
+      counter++;
 
     }
 
     /// If have some commands...
     if (this.options.commands.length) {
-
-      let index = 0;
-      let counter = 0;
 
       this.options.commands.forEach(command => {
 
@@ -227,6 +239,7 @@ module.exports = class Shell {
           counter,
           output: null
         };
+        let becomeRoot = false;
 
         /// Build line
         content += this.buildLine(params);
@@ -237,15 +250,19 @@ module.exports = class Shell {
           counter++;
           params.counter = counter;
 
-          if (this.options.style !== 'windows') {
+          if (this.options.style === 'windows') {
             params.command = 'bash: sudo: command not found';
+            params.output = true;
           } else {
-            this.options.root = true;
-            params.command = null;
-            params.output = `[sudo] password for ${this.options.user} :`;
+            params.command = `[sudo] password for ${this.options.user}:`;
+            params.output = true;
+            becomeRoot = true;
           }
 
           content += this.buildLine(params);
+          if (becomeRoot) {
+            this.options.root = true;
+          }
 
         }
 
@@ -255,7 +272,7 @@ module.exports = class Shell {
           counter++;
           params.counter = counter;
 
-          if (this.options.style !== 'windows') {
+          if (this.options.style === 'windows') {
             params.command = 'bash: sudo: command not found';
           } else {
             this.options.root = false;
@@ -316,11 +333,11 @@ module.exports = class Shell {
         classes.push('active');
       }
 
-      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command">${(!this.options.typed ? '<span class="typed-cursor">&nbsp;</span>' : '')}</span></div>`;
+      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command"><span class="typed-cursor">&nbsp;</span></span></div>`;
 
     } else {
 
-      line = `<div class="${classes.join(' ')}">${(params.output ? `<span class="output">${params.output}</span>` : '')}${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : '')}<span class="command">${params.command}</span>` : '')}</div>`;
+      line = `<div class="${classes.join(' ')}">${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : '')}<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` : '')}</div>`;
 
     }
 

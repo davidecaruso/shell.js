@@ -6,7 +6,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 /// Environment
 const env = process.env.NODE_ENV || 'dev';
-const distPath = __dirname + '/dist';
+const distPath = __dirname + '/lib';
 const srcPath = __dirname + '/src';
 
 /// Library info

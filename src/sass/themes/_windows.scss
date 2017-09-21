@@ -1,0 +1,93 @@
+&.windows {
+    color: #FFFFFF;
+    border-radius: 0;
+    box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
+
+    .status-bar {
+        border: 0;
+        height: 30px;
+        background-color: $main-windows-color;
+
+        .buttons {
+            align-items: stretch;
+            order: 1;
+            padding: 0;
+
+            button {
+                margin: 0;
+                border-radius: 0;
+                @include size(25px, 20px);
+                @include adjust-font(18px, 20px);
+
+                i {
+                    @include size(100%, 20px);
+                    @include adjust-font(10px, 20px);
+                }
+
+                &.close {
+                    width: 50px;
+                    background: #C75050;
+                    color: #FFFFFF;
+
+                    &:hover {
+                        background: darken(#C75050, 5%);
+                        color: #FFFFFF;
+                    }
+                }
+
+                &.minimize {
+                    background: transparent;
+                    color: #292929;
+
+                    &:hover {
+                        background: darken($main-windows-color, 20%);
+                        color: #FFFFFF;
+                    }
+                }
+
+                &.enlarge {
+                    background: transparent;
+                    color: #292929;
+
+                    &:hover {
+                        background: darken($main-windows-color, 20%);
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+
+        .icon {
+            background: #000000;
+            color: #FFFFFF;
+            @include size(20px);
+            display: inline-block;
+            @include adjust-font(12px, 20px);
+            border-radius: 3px;
+            margin: 5px;
+        }
+
+        .title {
+            color: #292929;
+            @include adjust-font(16px, 38px);
+        }
+    }
+
+    .content {
+        border-color: $main-windows-color;
+        background: #000000;
+
+        .line {
+            .prefix {
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
+                .root {
+                    .user { color: #FFFFFF; }
+                    .host { color: #FFFFFF; }
+                    .path { color: #FFFFFF; }
+                }
+            }
+        }
+    }
+}

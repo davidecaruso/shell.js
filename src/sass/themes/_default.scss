@@ -1,0 +1,106 @@
+.status-bar {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    background: lighten(#292929, 4%);
+    border: 1px solid #292929;
+    border-bottom: 0;
+
+    .buttons {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        flex-grow: 2;
+
+        button {
+            appearance: none;
+            border: 0;
+            padding: 0;
+            outline: none;
+            text-align: center;
+            margin: 0 2px;
+            border-radius: 50%;
+            @include size(15px, 15px);
+            @include adjust-font(18px, 15px);
+
+            i {
+                text-align: center;
+                @include size(100%, 15px);
+                display: block;
+                @include adjust-font(10px, 15px);
+            }
+
+            &.close {
+                background: #F25056;
+                color: #F25056;
+
+                &:hover {
+                    color: #A21F2C;
+                }
+            }
+
+            &.minimize {
+                background: #FAC536;
+                color: #FAC536;
+
+                &:hover {
+                    color: #C28723;
+                }
+            }
+
+            &.enlarge {
+                background: #39EA49;
+                color: #39EA49;
+
+                &:hover {
+                    color: #0B7407;
+                }
+            }
+        }
+    }
+
+    .title {
+        @include adjust-font(16px, 27px);
+        text-align: center;
+        flex-grow: 98;
+    }
+}
+
+.content {
+    @extend %monospace;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid #292929;
+    padding: 1px;
+    @include adjust-font(16px, 18px);
+    background: #292929;
+    box-sizing: border-box;
+
+    .line {
+        &.active { display: flex; }
+        .prefix {
+            .user { color: #8AD733; }
+            .host { color: #8AD733; }
+            .path { color: #729FCF; }
+            .root {
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
+            }
+        }
+    }
+}
+
+.typed-cursor {
+    opacity: 1;
+    background: $main-text-color;
+    animation: blink 1s infinite;
+    @keyframes blink {
+        0% { opacity: 0; }
+        49% { opacity: 0; }
+        50% { opacity: 1; }
+    }
+}

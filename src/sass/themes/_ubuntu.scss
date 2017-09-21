@@ -1,0 +1,77 @@
+&.ubuntu {
+    .status-bar {
+        border-color: transparent;
+        background-image: linear-gradient(to bottom, #3F3F3F 0%, #585858 100%);
+        .icon { display: none; }
+        .title { color: #FFFFFF; }
+        .buttons {
+            button {
+                &.close {
+                    background: #D75224;
+                    color: #444444;
+
+                    &:hover {
+                        color: #A21F2C;
+                    }
+                }
+
+                &.minimize {
+                    background: #898989;
+                    color: #555555;
+
+                    &:hover {
+                        color: #555555;
+                    }
+                }
+
+                &.enlarge {
+                    background: #898989;
+                    color: #555555;
+
+                    &:hover {
+                        color: #555555;
+                    }
+                }
+            }
+        }
+    }
+
+    .content {
+        border-color: transparent;
+        background: #300924;
+
+        .line {
+            .prefix {
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
+                .root {
+                    .user { color: #FFFFFF; }
+                    .host { color: #FFFFFF; }
+                    .path { color: #FFFFFF; }
+                }
+            }
+        }
+    }
+
+    &.light {
+        color: $gray-text-color;
+
+        .content {
+            background: #FFFFFF;
+
+            .line {
+                .prefix {
+                    .user { color: $gray-text-color; }
+                    .host { color: $gray-text-color; }
+                    .path { color: $gray-text-color; }
+                    .root {
+                        .user { color: $gray-text-color; }
+                        .host { color: $gray-text-color; }
+                        .path { color: $gray-text-color; }
+                    }
+                }
+            }
+        }
+    }
+}
