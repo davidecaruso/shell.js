@@ -10,35 +10,31 @@ Quickly create a terminal window.
 
 ## Install
 
-You need [Bower][bower] installed: `$ npm install -g bower`
-
 ```bash
+$ yarn add shell.js
+$ # OR
+$ npm i shell.js
+$ # OR
 $ bower install shell.js --save
-```
-
-Or using npm:
-
-```bash
-$ npm install shell.js --save
 ```
 
 ## Options
 
 For each **Shell** instance you can set the following options:
 
-| Options       | Values                                        | Description                                                                                           |
-| ------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| user          | string                                        | The username. (default: `'user'`)                                                                     |
-| host          | string                                        | The host. (default: `'host'`)                                                                         |
-| path          | string                                        | The local directory. (default: `'~'`)                                                                 |
-| style         | `'custom'`, `'ubuntu'`, `'osx'`, `'windows'`  | The operating system which defines style. (default: `'custom'`)                                       |
-| theme         | `'dark'`, `'light'`                           | The theme of the shell. (default: `'dark'`)                                                           |
-| responsive    | `false`, `true`                               | `true` sets width and height to 100%, `false` leaves unchanged the inherited size. (default: `false`) |
-| typed         | `false`, `true`                               | Only for the jQuery version. Adds the **[Typed.js][typedjs]** integration. (default: `false`)         |
-| commands      | array                                         | Array that contains the shell's commands.                                                             |
+| Options       | Values                                                    | Description                                                            |
+| ------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
+| user          | string                                                    | The logged user (default: `'user'`)                                    |
+| host          | string                                                    | The local host (default: `'host'`)                                     |
+| path          | string                                                    | The current path displayed in the terminal (default: `'~'`)            |
+| style         | `'custom'`&#124;`'ubuntu'`&#124;`'osx'`&#124;`'windows'`  | The operating system (default: `'custom'`)                             |
+| theme         | `'dark'`&#124;`'light'`                                   | The theme (default: `'dark'`)                                          |
+| responsive    | `false`&#124;`true`                                       | If `true` the terminal will be fluid (default: `false`)                |
+| typed         | `false`&#124;`true`                                       | Adds the **[Typed.js][typedjs]** integration (default: `false`)     |
+| commands      | array                                                     | The commands list (default: `[]`)                                      |
 
 
-## Setup
+## Usage
 
 Create an HTML element with a specified ID. 
 ```html
@@ -48,40 +44,17 @@ Create an HTML element with a specified ID.
 Then pass your DOM Element to the **Shell** constructor:
 
 ```javascript
-var awesomeShell = document.getElementById('awesome-shell');
-var shell = new Shell(awesomeShell, {
-  user: "foobar",
-  host: "MacMini",
-  path: "/etc/",
-  style: "osx",
-  theme: "dark",
-  responsive: false,
-  commands: ["First command", "Second command", "..."]
+document.addEventListener('DOMContentLoaded', function() {
+    let shell = new Shell('#awesome-shell', {
+        user: 'foobar',
+        host: 'MacMini',
+        path: '/etc/',
+        style: 'osx',
+        theme: 'dark',
+        responsive: false,
+        commands: ['First command', 'Second command', '...']
+    });
 });
-```
-
-Or if you're using **[jQuery][jquery]**:
-
-```javascript
-$('#awesome-shell').shell({
-  user: "foobar",
-  host: "MacMini",
-  path: "/etc/",
-  style: "osx",
-  theme: "dark",
-  typed: true,
-  responsive: false,
-  commands: ["First command", "Second command", "..."]
-});
-```
-
-## Build
-
-You need [Grunt][grunt] installed: `npm install -g grunt`
-
-```bash
-$ npm install
-$ grunt
 ```
 
 ## Author
@@ -96,5 +69,4 @@ Licensed under [MIT][mit].
 [mit]: http://www.opensource.org/licenses/mit-license.php
 [jquery]: http://jquery.com/
 [grunt]: http://gruntjs.com/
-[bower]: http://bower.io/
 [typedjs]: https://github.com/mattboldt/typed.js/

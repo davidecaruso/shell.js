@@ -21,7 +21,7 @@ const defaults = {
   path: '~',
 
   /**
-   * @property {string} style The terminal's style (ubuntu || osx || windows || custom)
+   * @property {string} style The operating system (ubuntu || osx || windows || custom)
    */
   style: 'custom',
 
@@ -29,6 +29,11 @@ const defaults = {
    * @property {string} theme The theme (dark || light)
    */
   theme: 'dark',
+
+  /**
+   * @property {string} theme Adds the Typed.js integration
+   */
+  typed: false,
 
   /**
    * @property {boolean} responsive If true the terminal will be fluid
