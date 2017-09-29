@@ -6,7 +6,7 @@
         .title { color: #FFFFFF; }
         .buttons {
             button {
-                &.close {
+                &.icon-close {
                     background: #D75224;
                     color: #444444;
 
@@ -15,7 +15,7 @@
                     }
                 }
 
-                &.minimize {
+                &.icon-minimize {
                     background: #898989;
                     color: #555555;
 
@@ -24,7 +24,7 @@
                     }
                 }
 
-                &.enlarge {
+                &.icon-enlarge {
                     background: #898989;
                     color: #555555;
 

@@ -65,24 +65,28 @@ module.exports = {
             presets: ['es2015', 'stage-2']
           }
         }
-      },
-      {
+      }, {
         test: /\.scss$/,
-        use:  [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
+        use:  [
+          'style-loader',
+          'css-loader',
+          {
+            loader:  'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')]
+            }
+          },
+          'sass-loader'
+        ]
+      }, {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        use:  {
+          loader:  'url-loader',
           options: {
-            importLoaders: 1
+            limit: 10000,
+            name:  'assets/fonts/[name].[ext]'
           }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: () => [require('autoprefixer')]
-          }
-        }, {
-          loader:  'sass-loader'
-        }]
+        }
       }
     ]
   },

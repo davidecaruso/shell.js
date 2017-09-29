@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <font id="shell" horiz-adv-x="1024">
+            <font-face units-per-em="1024" ascent="960" descent="-64"/>
+            <missing-glyph horiz-adv-x="1024"/>
+            <glyph unicode="&#x20;" horiz-adv-x="512" d=""/>
+            <glyph unicode="&#xe15b;" glyph-name="minimize" d="M810 384.667h-596v84h596v-84z"/>
+            <glyph unicode="&#xe2c7;" glyph-name="folder"
+                   d="M426 768.667l86-86h342c46 0 84-40 84-86v-426c0-46-38-86-84-86h-684c-46 0-84 40-84 86v512c0 46 38 86 84 86h256z"/>
+            <glyph unicode="&#xe3c1;" glyph-name="enlarge"
+                   d="M810 128.667v596h-596v-596h596zM810 810.667c46 0 86-40 86-86v-596c0-46-40-86-86-86h-596c-46 0-86 40-86 86v596c0 46 40 86 86 86h596z"/>
+            <glyph unicode="&#xe5cd;" glyph-name="close"
+                   d="M810 664.667l-238-238 238-238-60-60-238 238-238-238-60 60 238 238-238 238 60 60 238-238 238 238z"/>
+            <glyph unicode="&#xe5dd;" glyph-name="command"
+                   d="M682 682.667h86v-512h-86v512zM238 622.667l60 60 256-256-256-256-60 60 196 196z"/>
+        </font>
+    </defs>
+</svg>

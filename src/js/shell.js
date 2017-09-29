@@ -166,29 +166,29 @@ module.exports = class Shell {
 
       case 'osx':
         buttons = `<div class="buttons">
-                     <button class="close" title="Close"><i class="fa fa-times"></i></button>
-                     <button class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
-                     <button class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></button>
+                     <button class="icon-close" title="Close"></button>
+                     <button class="icon-minimize" title="Minimize"></button>
+                     <button class="icon-enlarge" title="Enlarge"></button>
                    </div>`;
         title = `<div class="title">${user} &horbar; sh &horbar; 80x24</div>`;
         break;
 
       case 'windows':
         buttons = `<div class="buttons">
-                    <button class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
-                    <button class="enlarge" title="Enlarge"><i class="fa fa-square-o"></i></button>
-                    <button class="close" title="Close"><i class="fa fa-times"></i></button>
+                    <button class="icon-minimize" title="Minimize"></button>
+                    <button class="icon-enlarge" title="Enlarge"></button>
+                    <button class="icon-close" title="Close"></button>
                    </div>`;
-        title = `<div class="icon"><i class="fa fa-terminal"></i></div><div class="title">Command Prompt</div>`;
+        title = `<div class="icon"><i class="icon-command"></i></div><div class="title">Command Prompt</div>`;
         break;
 
       case 'ubuntu':
       /* falls through */
       default:
         buttons = `<div class="buttons">
-                    <button href="javascript:;" class="close" title="Close"><i class="fa fa-times"></i></button>
-                    <button href="javascript:;" class="minimize" title="Minimize"><i class="fa fa-minus"></i></button>
-                    <button href="javascript:;" class="enlarge" title="Enlarge"><i class="fa fa-plus"></i></button>
+                    <button class="icon-close" title="Close"></button>
+                    <button class="icon-minimize" title="Minimize"></button>
+                    <button class="icon-enlarge" title="Enlarge"></button>
                    </div>`;
         title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
         break;
@@ -333,7 +333,7 @@ module.exports = class Shell {
         classes.push('active');
       }
 
-      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command"><span class="typed-cursor">&nbsp;</span></span></div>`;
+      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command">&nbsp;<span class="typed-cursor">&nbsp;</span></span></div>`;
 
     } else {
 

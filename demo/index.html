@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shell.js</title>
+  <script src="../lib/shell.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let a = new Shell('#shell', {
+        style: 'osx',
+        commands: ['sudo -i'],
+        typed: true
+      });
+    });
+  </script>
+</head>
+<body>
+<div id="container">
+  <div id="shell"></div>
+</div>
+</body>
+</html>

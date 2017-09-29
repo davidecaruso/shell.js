@@ -24,7 +24,7 @@
                     @include adjust-font(10px, 20px);
                 }
 
-                &.close {
+                &.icon-close {
                     width: 50px;
                     background: #C75050;
                     color: #FFFFFF;
@@ -35,7 +35,7 @@
                     }
                 }
 
-                &.minimize {
+                &.icon-minimize {
                     background: transparent;
                     color: #292929;
 
@@ -45,7 +45,7 @@
                     }
                 }
 
-                &.enlarge {
+                &.icon-enlarge {
                     background: transparent;
                     color: #292929;
 
