@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Shell.js</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
   <script src="../lib/shell.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      let a = new Shell('#shell', {
+      let a = new Shell('#awesome-shell', {
         style: 'osx',
         commands: ['sudo -i'],
         typed: true
@@ -16,7 +17,7 @@
 </head>
 <body>
 <div id="container">
-  <div id="shell"></div>
+  <div id="awesome-shell"></div>
 </div>
 </body>
 </html>

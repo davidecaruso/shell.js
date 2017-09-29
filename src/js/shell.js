@@ -60,7 +60,6 @@ module.exports = class Shell {
       if (this.options.typed && typeof Typed !== 'undefined') {
 
         let commandsNum = this.el[0].querySelectorAll('.line').length;
-        let lastLine = this.el[0].querySelectorAll(`.line-${commandsNum - 1}`);
         let initCommands = (i) => {
 
           let line = this.el[0].querySelectorAll(`.line-${i}`);
@@ -148,6 +147,7 @@ module.exports = class Shell {
 
     }
 
+    prefix += '<span class="spacer">&nbsp;</span>';
     prefix += '</span>';
 
     return prefix;
@@ -333,7 +333,7 @@ module.exports = class Shell {
         classes.push('active');
       }
 
-      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command">&nbsp;<span class="typed-cursor">&nbsp;</span></span></div>`;
+      line = `<div class="${classes.join(' ')}">${this.buildPrefix()}<span class="command"><span class="typed-cursor">&nbsp;</span></span></div>`;
 
     } else {
 
