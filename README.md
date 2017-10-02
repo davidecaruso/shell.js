@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 Licensed under [MIT][mit].
 
 [linkedin]: https://it.linkedin.com/in/davidecaruso93
-[mit]: http://www.opensource.org/licenses/mit-license.php
+[mit]: https://opensource.org/licenses/mit-license.php
 [jquery]: http://jquery.com/
 [grunt]: http://gruntjs.com/
 [typedjs]: https://github.com/mattboldt/typed.js/
