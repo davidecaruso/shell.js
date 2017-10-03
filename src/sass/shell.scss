@@ -16,7 +16,7 @@
     box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
     border-radius: 2px;
 
-    &.responsive { @include size(100%); }
+    &.responsive { @include size(100%); min-height: 200px; }
     &.typed .content .line { display: none; }
 
     @import "themes/all";

@@ -68,8 +68,8 @@
         }
 
         .title {
+            @include adjust-font(16px, 40px);
             color: #292929;
-            @include adjust-font(16px, 38px);
         }
     }
 

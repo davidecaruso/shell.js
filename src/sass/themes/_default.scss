@@ -1,5 +1,6 @@
 .status-bar {
     display: flex;
+    height: 21px;
     align-items: stretch;
     flex-wrap: wrap;
     background: lighten(#292929, 4%);
@@ -32,29 +33,29 @@
             }
 
             &.icon-close {
-                background: #F25056;
-                color: #F25056;
+                background: $close-button-color;
+                color: $close-button-color;
 
                 &:hover {
-                    color: #A21F2C;
+                    color: darken($close-button-color, 35%);
                 }
             }
 
             &.icon-minimize {
-                background: #FAC536;
-                color: #FAC536;
+                background: $minimize-button-color;
+                color: $minimize-button-color;
 
                 &:hover {
-                    color: #C28723;
+                    color: darken($minimize-button-color, 20%);
                 }
             }
 
             &.icon-enlarge {
-                background: #39EA49;
-                color: #39EA49;
+                background: $enlarge-button-color;
+                color: $enlarge-button-color;
 
                 &:hover {
-                    color: #0B7407;
+                    color: darken($enlarge-button-color, 20%);
                 }
             }
         }
@@ -62,7 +63,7 @@
 
     .title {
         @include adjust-font(16px, 27px);
-        text-align: center;
+        text-align: left;
         flex-grow: 98;
     }
 }
@@ -80,7 +81,7 @@
     box-sizing: border-box;
 
     .line {
-        &.active { display: flex; }
+        &.active { display: block; }
         .prefix {
             .user { color: #8AD733; }
             .host { color: #8AD733; }
@@ -94,9 +95,20 @@
     }
 }
 
+&.light {
+    .content {
+        color: $gray-text-color;
+        border-color: #EBEBEB;
+        background: #FFFFFF;
+    }
+    .typed-cursor {
+        background-color: $gray-text-color;
+    }
+}
+
 .typed-cursor {
     opacity: 1;
-    background: $main-text-color;
+    background-color: $main-text-color;
     animation: blink 1s infinite;
     @keyframes blink {
         0% { opacity: 0; }

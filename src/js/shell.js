@@ -65,7 +65,7 @@ module.exports = class Shell {
           let line = this.el[0].querySelectorAll(`.line-${i}`);
           let command = line[0].querySelectorAll('.command');
           let commandText = command[0].innerHTML;
-          let speed = line[0].className.indexOf('root') >= 0 ? 2500 : 800; /// Time for password
+          let speed = 800;
 
           /// Show the line
           line[0].className = `active ${line[0].className}`;
@@ -76,7 +76,7 @@ module.exports = class Shell {
             command[0].innerHTML = '';
 
             new Typed(command[0], {
-              strings:       [`^${speed} ${commandText}`],
+              strings:       [`^${speed}${commandText}`],
               typeSpeed:     50,
               loop:          false,
               contentType:   'html',
@@ -124,7 +124,7 @@ module.exports = class Shell {
         prefix += `<span class="host">${this.options.host}</span><span 
                     class="colon">:</span><span 
                     class="path">${this.options.path}</span><span 
-                    class="user">${user}</span><span 
+                    class="user">&nbsp;${user}</span><span 
                     class="char">${char}</span>`;
         break;
 
@@ -166,18 +166,18 @@ module.exports = class Shell {
 
       case 'osx':
         buttons = `<div class="buttons">
-                     <button class="icon-close" title="Close"></button>
-                     <button class="icon-minimize" title="Minimize"></button>
-                     <button class="icon-enlarge" title="Enlarge"></button>
+                     <button class="icon-close icon-dot"></button>
+                     <button class="icon-minimize"></button>
+                     <button class="icon-enlarge"></button>
                    </div>`;
         title = `<div class="title">${user} &horbar; sh &horbar; 80x24</div>`;
         break;
 
       case 'windows':
         buttons = `<div class="buttons">
-                    <button class="icon-minimize" title="Minimize"></button>
-                    <button class="icon-enlarge" title="Enlarge"></button>
-                    <button class="icon-close" title="Close"></button>
+                    <button class="icon-minimize"></button>
+                    <button class="icon-enlarge"></button>
+                    <button class="icon-close"></button>
                    </div>`;
         title = `<div class="icon"><i class="icon-command"></i></div><div class="title">Command Prompt</div>`;
         break;
@@ -186,9 +186,9 @@ module.exports = class Shell {
       /* falls through */
       default:
         buttons = `<div class="buttons">
-                    <button class="icon-close" title="Close"></button>
-                    <button class="icon-minimize" title="Minimize"></button>
-                    <button class="icon-enlarge" title="Enlarge"></button>
+                    <button class="icon-close"></button>
+                    <button class="icon-minimize"></button>
+                    <button class="icon-enlarge"></button>
                    </div>`;
         title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
         break;
@@ -213,19 +213,21 @@ module.exports = class Shell {
     let counter = 0;
 
     /// If style is OSX add a new line with last login
-    if (this.options.style === 'osx') {
+    switch (this.options.style) {
 
-      let hours = Shell._pad(date.getHours(), 2);
-      let minutes = Shell._pad(date.getMinutes(), 2);
-      let seconds = Shell._pad(date.getSeconds(), 2);
+      case 'osx':
+        let hours = Shell._pad(date.getHours(), 2);
+        let minutes = Shell._pad(date.getMinutes(), 2);
+        let seconds = Shell._pad(date.getSeconds(), 2);
 
-      content += this.buildLine({
-        command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
-        output:  true,
-        prefix:  false
-      });
+        content += this.buildLine({
+          command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
+          output:  true,
+          prefix:  false
+        });
 
-      counter++;
+        counter++;
+        break;
 
     }
 
@@ -250,19 +252,29 @@ module.exports = class Shell {
           counter++;
           params.counter = counter;
 
-          if (this.options.style === 'windows') {
-            params.command = 'bash: sudo: command not found';
-            params.output = true;
-          } else {
-            params.command = `[sudo] password for ${this.options.user}:`;
-            params.output = true;
-            becomeRoot = true;
+          switch (this.options.style) {
+            case 'windows':
+              params.command = 'bash: sudo: command not found';
+              params.output = true;
+              this.options.root = false;
+              break;
+
+            case 'osx':
+              params.command = `Password:<span class="icon-key"></span>`;
+              params.output = true;
+              this.options.root = true;
+              break;
+
+            case 'ubuntu':
+            /* falls through */
+            default:
+              params.command = `[sudo] password for ${this.options.user}:`;
+              params.output = true;
+              this.options.root = true;
+              break;
           }
 
           content += this.buildLine(params);
-          if (becomeRoot) {
-            this.options.root = true;
-          }
 
         }
 
@@ -273,11 +285,11 @@ module.exports = class Shell {
           params.counter = counter;
 
           if (this.options.style === 'windows') {
-            params.command = 'bash: sudo: command not found';
+            params.command = 'bash: exit: command not found';
           } else {
             this.options.root = false;
-            params.command = null;
-            params.output = 'logout';
+            params.command = 'logout';
+            params.output = true;
           }
 
           content += this.buildLine(params);
@@ -337,7 +349,7 @@ module.exports = class Shell {
 
     } else {
 
-      line = `<div class="${classes.join(' ')}">${(params.command ? `${(params.prefix ? this.buildPrefix() + ' ' : '')}<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` : '')}</div>`;
+      line = `<div class="${classes.join(' ')}">${(params.command ? `${(params.prefix ? this.buildPrefix() : '')}<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` : '')}</div>`;
 
     }
 
