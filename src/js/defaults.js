@@ -21,9 +21,9 @@ const defaults = {
   path: '~',
 
   /**
-   * @property {string} style The operating system (ubuntu || osx || windows || custom)
+   * @property {string} style The operating system (ubuntu || osx || windows || default)
    */
-  style: 'custom',
+  style: 'default',
 
   /**
    * @property {string} theme The theme (dark || light)
