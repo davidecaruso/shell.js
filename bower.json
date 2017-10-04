@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A JavaScript and CSS library to create terminals",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "license": "MIT",
