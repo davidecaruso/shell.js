@@ -15,11 +15,14 @@
     "terminal-emulators",
     "terminal",
     "ecmascript2015",
-    "command-line"
+    "command-line",
+    "es2015",
+    "javascript-library",
+    "javascript-plugin"
   ],
   "scripts": [],
   "moduleType": [],
-  "homepage": "https://github.com/davidecaruso/shell.js",
+  "homepage": "https://davidecaruso.github.io/shell.js",
   "ignore": [
     "**/.*",
     "node_modules",

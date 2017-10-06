@@ -5,8 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev webpack --watch",
-    "build": "NODE_ENV=build webpack -p",
-    "publish": "npm publish"
+    "build": "NODE_ENV=dev webpack; NODE_ENV=build webpack -p"
   },
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "license": "MIT",
@@ -17,7 +16,10 @@
     "terminal-emulators",
     "terminal",
     "ecmascript2015",
-    "command-line"
+    "command-line",
+    "es2015",
+    "javascript-library",
+    "javascript-plugin"
   ],
   "dependencies": {},
   "devDependencies": {
@@ -30,7 +32,6 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "compass-mixins": "^0.12.10",
     "css-loader": "^0.28.7",
     "eslint": "^4.5.0",
     "jshint-stylish": "^2.2.1",
@@ -51,6 +52,6 @@
   "bugs": {
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
-  "homepage": "https://github.com/davidecaruso/shell.js",
+  "homepage": "https://davidecaruso.github.io/shell.js",
   "main": "lib/shell.js"
 }
