@@ -7,10 +7,10 @@
   <script src="../lib/shell.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      let a = new Shell('#awesome-shell', {
+      let shell = new Shell('#awesome-shell', {
         style: 'osx',
         commands: ['sudo -i'],
-        typed: true
+        typed: Typed
       });
     });
   </script>

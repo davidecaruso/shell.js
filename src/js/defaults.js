@@ -31,7 +31,7 @@ const defaults = {
   theme: 'dark',
 
   /**
-   * @property {string} theme Adds the Typed.js integration
+   * @property {(boolean|function)} theme Adds the Typed.js integration
    */
   typed: false,
 

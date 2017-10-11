@@ -30,7 +30,7 @@ For each **Shell** instance you can set the following options:
 | style         | `'custom'`&#124;`'ubuntu'`&#124;`'osx'`&#124;`'windows'`  | The operating system (default: `'custom'`)                             |
 | theme         | `'dark'`&#124;`'light'`                                   | The theme (default: `'dark'`)                                          |
 | responsive    | `false`&#124;`true`                                       | If `true` the terminal will be fluid (default: `false`)                |
-| typed         | `false`&#124;`true`                                       | Adds the **[Typed.js][typedjs]** integration (default: `false`)     |
+| typed         | `false`&#124;*Typed instance*                                       | Adds the **[Typed.js][typedjs]** integration (default: `false`)     |
 | commands      | array                                                     | The commands list (default: `[]`)                                      |
 
 

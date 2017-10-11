@@ -57,8 +57,8 @@ module.exports = class Shell {
       this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
 
       /// Typed.js integration
-      if (this.options.typed && typeof Typed !== 'undefined') {
-
+      if (this.options.typed && typeof this.options.typed === 'function') {
+        let Typed = this.options.typed;
         let commandsNum = this.el[0].querySelectorAll('.line').length;
         let initCommands = (i) => {
 

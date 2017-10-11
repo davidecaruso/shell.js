@@ -27,8 +27,7 @@ let plugins = [
         autoprefixer(),
       ]
     }
-  }),
-  new webpack.BannerPlugin(banner),
+  })
 ];
 
 /// If is build environment
@@ -38,10 +37,16 @@ if (env === 'build') {
     sourceMap: true,
     mangle:    {
       except: ['Shell']
+    },
+    output: {
+      comments: false
     }
   }));
   outputFilename = `${filename}.min.js`;
 }
+
+/// Add banner
+plugins.push(new webpack.BannerPlugin(banner));
 
 /// Export Webpack config
 module.exports = {
