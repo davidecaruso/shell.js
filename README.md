@@ -5,6 +5,7 @@ Quickly create a terminal window.
 [![GitHub version](https://badge.fury.io/gh/davidecaruso%2Fshell.js.svg)](https://badge.fury.io/gh/davidecaruso%2Fshell.js)
 [![Bower version](https://badge.fury.io/bo/shell.js.svg)](#install)
 [![npm version](https://badge.fury.io/js/shell.js.svg)](https://www.npmjs.com/package/shell.js)
+[![Known Vulnerabilities](https://snyk.io/test/github/davidecaruso/shell.js/badge.svg)](https://snyk.io/test/github/davidecaruso/shell.js)
 
 ![Screenshot](https://github.com/davidecaruso/shell.js/raw/master/assets/images/screenshot.png)
 
