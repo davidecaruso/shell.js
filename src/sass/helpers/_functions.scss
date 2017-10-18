@@ -1,9 +1,3 @@
-/**
- * Replace all occurrences of the search string with the replacement string
- * @param $search: The value being searched for, otherwise known as the needle.
- * @param $replace: The replacement value that replaces found search values.
- * @param $subject: The string being searched and replaced on, otherwise known as the haystack.
- */
 @function str-replace($search, $replace, $subject, $all: false) {
   $position-found: str-index($subject, $search);
   $processed: ();

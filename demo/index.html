@@ -4,20 +4,60 @@
   <meta charset="UTF-8">
   <title>Shell.js</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
-  <script src="../lib/shell.min.js"></script>
+  <script src="../lib/shell.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let shell = new Shell('#awesome-shell', {
-        style: 'osx',
-        commands: ['sudo -i'],
-        typed: Typed
+      document.addEventListener('DOMContentLoaded', function () {
+          new Shell('#default', {
+              user: 'guest',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#default-light', {
+              user: 'guest',
+              theme: 'light',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#osx', {
+              user: 'guest',
+              host: 'MacBook-Pro',
+              style: 'osx',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#osx-light', {
+              user: 'guest',
+              host: 'MacBook-Pro',
+              style: 'osx',
+              theme: 'light',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#ubuntu', {
+              user: 'guest',
+              host: 'localhost',
+              style: 'ubuntu',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#ubuntu-light', {
+              user: 'guest',
+              host: 'localhost',
+              style: 'ubuntu',
+              theme: 'light',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
+          new Shell('#windows', {
+              style: 'windows',
+              commands: ['sudo -i', 'rm -rf /', 'exit']
+          });
       });
-    });
   </script>
 </head>
 <body>
 <div id="container">
-  <div id="awesome-shell"></div>
+  <div id="default"></div>
+  <div id="default-light"></div>
+  <div id="osx"></div>
+  <div id="osx-light"></div>
+  <div id="ubuntu"></div>
+  <div id="ubuntu-light"></div>
+  <div id="windows"></div>
 </div>
 </body>
 </html>
