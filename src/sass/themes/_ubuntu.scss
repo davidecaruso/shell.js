@@ -11,24 +11,17 @@
                     color: #444444;
 
                     &:hover {
-                        color: #A21F2C;
+                        background: darken(#D75224, 5%);
+                        color: #444444;
                     }
                 }
 
-                &.icon-minimize {
+                &.icon-minimize, &.icon-enlarge {
                     background: #898989;
                     color: #555555;
 
                     &:hover {
-                        color: #555555;
-                    }
-                }
-
-                &.icon-enlarge {
-                    background: #898989;
-                    color: #555555;
-
-                    &:hover {
+                        background: darken(#898989, 5%);
                         color: #555555;
                     }
                 }

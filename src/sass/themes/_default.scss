@@ -22,6 +22,7 @@
             text-align: center;
             margin: 0 2px;
             border-radius: 50%;
+            cursor: pointer;
             @include size(15px, 15px);
             @include adjust-font(18px, 15px);
 
