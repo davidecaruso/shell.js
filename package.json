@@ -3,17 +3,23 @@
   "version": "2.0.6",
   "description": "A JavaScript and CSS library to create terminals",
   "scripts": {
-    "test": "NODE_ENV=test _mocha --require babel-core/register --require test/helpers/* \"test/test.js\"",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "NODE_ENV=test mocha --require babel-core/register --require test/helpers/* test/test.js",
+    "test:coverage": "nyc --reporter=lcov npm run test",
     "test:report": "nyc report",
     "dev": "NODE_ENV=dev webpack --watch",
     "build": "NODE_ENV=dev webpack; NODE_ENV=build webpack -p"
   },
   "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "node_modules",
+      "test/**/*.js"
+    ],
     "sourceMap": false,
     "instrument": false,
-    "check-coverage": true,
-    "exclude": ["node_modules"]
+    "check-coverage": true
   },
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "license": "MIT",
@@ -44,6 +50,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
+    "clean": "^4.0.2",
     "css-loader": "^0.28.7",
     "css-modules-require-hook": "^4.2.2",
     "eslint": "^4.5.0",

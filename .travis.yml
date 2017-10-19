@@ -16,10 +16,10 @@ cache:
 script:
   - node --version
   - yarn --version
-  - yarn test
+  - yarn test:coverage
   - yarn test:report
 
-after_success: "yarn test:coverage"
+after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 notifications:
   email: false
