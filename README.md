@@ -2,12 +2,12 @@
 
 Quickly create a terminal window.
 
-![GitHub version](https://badge.fury.io/gh/davidecaruso%2Fshell.js.svg)
-[![npm version](https://badge.fury.io/js/shell.js.svg)](https://www.npmjs.com/package/shell.js)
-![Bower version](https://badge.fury.io/bo/shell.js.svg)
-[![Known Vulnerabilities](https://snyk.io/test/github/davidecaruso/shell.js/badge.svg)](https://snyk.io/test/github/davidecaruso/shell.js)
-[![Build Status](https://travis-ci.org/davidecaruso/shell.js.svg?branch=master)](https://travis-ci.org/davidecaruso/shell.js)
-[![Coverage Status](https://coveralls.io/repos/github/davidecaruso/shell.js/badge.svg?branch=master)](https://coveralls.io/github/davidecaruso/shell.js?branch=master)
+[![npm](https://img.shields.io/npm/v/shell.js.svg)](https://www.npmjs.com/package/shell.js)
+![bower](https://img.shields.io/bower/v/shell.js.svg)
+![version](https://badge.fury.io/gh/davidecaruso%2Fshell.js.svg)
+[![snyk](https://snyk.io/test/github/davidecaruso/shell.js/badge.svg)](https://snyk.io/test/github/davidecaruso/shell.js)
+[![travis](https://travis-ci.org/davidecaruso/shell.js.svg?branch=master)](https://travis-ci.org/davidecaruso/shell.js)
+[![coveralls](https://coveralls.io/repos/github/davidecaruso/shell.js/badge.svg?branch=master)](https://coveralls.io/github/davidecaruso/shell.js?branch=master)
 
 ## Install
 
