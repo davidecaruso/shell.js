@@ -4,6 +4,7 @@
   "description": "A JavaScript and CSS library to create terminals",
   "scripts": {
     "test": "mocha",
+    "test:coverage": "istanbul cover _mocha",
     "dev": "NODE_ENV=dev webpack --watch",
     "build": "NODE_ENV=dev webpack; NODE_ENV=build webpack -p"
   },
@@ -21,7 +22,9 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "coveralls": "^3.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "^7.1.4",
     "babel": "^6.23.0",

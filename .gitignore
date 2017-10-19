@@ -2,9 +2,10 @@
 .idea/
 .sass-cache/
 bower_components/
+coverage/
 node_modules/
-tmp/
 source/
+tmp/
 
 # Files
 *.orig
