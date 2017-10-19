@@ -9,7 +9,7 @@ describe('Shell', () => {
     global.window = document.defaultView;
 
     before(() => {
-        Shell = require('../lib/shell.min');
+        Shell = require('../lib/shell');
     });
 
     it('should initialize without error', () => {
