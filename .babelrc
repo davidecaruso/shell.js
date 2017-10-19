@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "stage-2",
+    "es2015"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul",
+        "transform-object-rest-spread"
+      ]
+    }
+  }
+}
