@@ -1,4 +1,5 @@
-import defaults from './defaults.js';
+import Defaults from './defaults';
+import Helpers from './helpers';
 import '../sass/shell.scss'
 
 /**
@@ -31,7 +32,7 @@ module.exports = class Shell {
       }
     }
 
-    this.options = {...defaults, ...options};
+    this.options = {...Defaults, ...options};
 
     /// Hardcode for Windows
     if (this.options.style === 'windows' && this.options.path === '~') {
@@ -46,7 +47,6 @@ module.exports = class Shell {
       /// HTML element's classes
       let classes = ['shell', this.options.style, this.options.theme];
       if (this.options.responsive) classes.push('responsive');
-      if (this.options.shadow) classes.push('shadow');
       if (this.options.typed) classes.push('typed');
 
       if (this.el[0].className.length) {
@@ -60,7 +60,7 @@ module.exports = class Shell {
       if (this.options.typed && typeof this.options.typed === 'function') {
         let Typed = this.options.typed;
         let commandsNum = this.el[0].querySelectorAll('.line').length;
-        let initCommands = (i) => {
+        let _initCommands = (i) => {
 
           let line = this.el[0].querySelectorAll(`.line-${i}`);
           let command = line[0].querySelectorAll('.command');
@@ -85,21 +85,21 @@ module.exports = class Shell {
               onStringTyped: function (arrayPos, self) {
                 // Removes cursor from each line except for the last one
                 line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
-                initCommands(i + 1);
+                _initCommands(i + 1);
               }
             });
 
           } else {
             if (i <= commandsNum - 2) {
               /// After the bash output go type next line
-              initCommands(i + 1);
+              _initCommands(i + 1);
             }
           }
 
         };
 
         /// Type first line
-        initCommands(0);
+        if (commandsNum) _initCommands(0);
 
       } else {
         /// Typed.js was not found, remove class
@@ -216,9 +216,9 @@ module.exports = class Shell {
     switch (this.options.style) {
 
       case 'osx':
-        let hours = Shell._pad(date.getHours(), 2);
-        let minutes = Shell._pad(date.getMinutes(), 2);
-        let seconds = Shell._pad(date.getSeconds(), 2);
+        let hours = Helpers.str_pad(date.getHours(), 2, 'STR_PAD_LEFT');
+        let minutes = Helpers.str_pad(date.getMinutes(), 2, 'STR_PAD_LEFT');
+        let seconds = Helpers.str_pad(date.getSeconds(), 2, 'STR_PAD_LEFT');
 
         content += this.buildLine({
           command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
@@ -286,6 +286,7 @@ module.exports = class Shell {
 
           if (this.options.style === 'windows') {
             params.command = 'bash: exit: command not found';
+            params.output = true;
           } else {
             this.options.root = false;
             params.command = 'logout';
@@ -355,12 +356,6 @@ module.exports = class Shell {
 
     return line;
 
-  }
-
-  static _pad(string, length, char) {
-    char = char || '0';
-    string = string + '';
-    return string.length >= length ? string : new Array(length - string.length + 1).join(char) + string;
   }
 
 };
