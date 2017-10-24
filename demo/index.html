@@ -9,6 +9,7 @@
       document.addEventListener('DOMContentLoaded', function () {
           new Shell('#default', {
               user: 'guest',
+              typed: Typed,
               commands: ['sudo -i', 'rm -rf /', 'exit']
           });
           new Shell('#default-light', {
