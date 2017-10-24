@@ -100,7 +100,41 @@ describe('Shell', () => {
                 context('when present', () => {
                     it('should have commands', () => {
                         let shell = new Shell('#shell', {commands: ['foo', 'bar']});
-                        expect(this.options.commands).to.contains('responsive');
+                        expect(shell.options.commands.length).to.equal(2);
+                    });
+                    context('when one command contains "sudo"', () => {
+                        context('if style is "ubuntu" or "default"', () => {
+                            it('should print an additional line', () => {
+                                let shell = new Shell('#shell', {style: 'ubuntu', commands: ['sudo']});
+                                expect(shell.el[0].innerHTML).to.match(/class="command output">\[sudo\] password/);
+                            });
+                        });
+                        context('if style is "osx"', () => {
+                            it('should print an additional line', () => {
+                                let shell = new Shell('#shell', {style: 'osx', commands: ['sudo']});
+                                expect(shell.el[0].innerHTML).to.match(/class="command output">Password:/);
+                            });
+                        });
+                        context('if style is "windows"', () => {
+                            it('should print an additional line', () => {
+                                let shell = new Shell('#shell', {style: 'windows', commands: ['sudo']});
+                                expect(shell.el[0].innerHTML).to.match(/class="command output">bash: sudo: command not found/);
+                            });
+                        });
+                    });
+                    context('when one command contains "exit"', () => {
+                        context('if style is "windows"', () => {
+                            it('should print an additional line', () => {
+                                let shell = new Shell('#shell', {style: 'windows', commands: ['exit']});
+                                expect(shell.el[0].innerHTML).to.match(/class="command output">bash: exit: command not found</);
+                            });
+                        });
+                        context('else', () => {
+                            it('should print an additional line', () => {
+                                let shell = new Shell('#shell', {commands: ['exit']});
+                                expect(shell.el[0].innerHTML).to.match(/class="command output">logout</);
+                            });
+                        });
                     });
                 });
             });
