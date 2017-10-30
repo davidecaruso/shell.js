@@ -162,6 +162,11 @@ describe('Shell', () => {
                     it('should be a function', () => {
                         let shell = new Shell('#shell', {typed: Typed});
                     });
+                    context('when there are commands', () => {
+                        it('should be invoked', () => {
+                            let shell = new Shell('#shell', {typed: Typed, commands: ['foo', 'bar', 'sudo foobar']});
+                        });
+                    });
                 });
             });
         });

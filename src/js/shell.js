@@ -58,48 +58,10 @@ module.exports = class Shell {
 
       /// Typed.js integration
       if (this.options.typed && typeof this.options.typed === 'function') {
-        let Typed = this.options.typed;
         let commandsNum = this.el[0].querySelectorAll('.line').length;
-        let _initCommands = (i) => {
 
-          let line = this.el[0].querySelectorAll(`.line-${i}`);
-          let command = line[0].querySelectorAll('.command');
-          let commandText = command[0].innerHTML;
-          let speed = 800;
-
-          /// Show the line
-          line[0].className = `active ${line[0].className}`;
-
-          if (command[0].className.indexOf('output') === -1 && i < commandsNum - 1) {
-
-            /// Empty the command
-            command[0].innerHTML = '';
-
-            new Typed(command[0], {
-              strings:       [`^${speed}${commandText}`],
-              typeSpeed:     50,
-              loop:          false,
-              contentType:   'html',
-              cursorChar:    '&nbsp;',
-              showCursor:    true,
-              onStringTyped: function (arrayPos, self) {
-                // Removes cursor from each line except for the last one
-                line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
-                _initCommands(i + 1);
-              }
-            });
-
-          } else {
-            if (i <= commandsNum - 2) {
-              /// After the bash output go type next line
-              _initCommands(i + 1);
-            }
-          }
-
-        };
-
-        /// Type first line
-        if (commandsNum) _initCommands(0);
+        /// Execute commands
+        if (commandsNum) this.executeCommand(0, commandsNum);
 
       } else {
         /// Typed.js was not found, remove class
@@ -109,6 +71,43 @@ module.exports = class Shell {
     }
 
   }
+
+  executeCommand(index, commandsNum) {
+
+    let typed = this.options.typed;
+    let line = this.el[0].querySelectorAll(`.line-${index}`);
+    let command = line[0].querySelectorAll('.command');
+    let commandText = command[0].innerHTML;
+    let speed = '^800';
+
+    /// Show the line
+    line[0].className = `active ${line[0].className}`;
+
+    if (command[0].className.indexOf('output') === -1 && index < commandsNum - 1) {
+
+      /// Empty the command
+      command[0].innerHTML = '';
+
+      new typed(command[0], {
+        strings:       [speed + commandText],
+        typeSpeed:     50,
+        loop:          false,
+        contentType:   'html',
+        cursorChar:    '&nbsp;',
+        showCursor:    true,
+        onStringTyped: () => {
+          /// Removes cursor from each line except for the last one
+          line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
+          this.executeCommand((index + 1), commandsNum);
+        }
+      });
+
+    } else if (index <= commandsNum - 2) {
+      /// After the bash output go type next line
+      this.executeCommand((index + 1), commandsNum);
+    }
+
+  };
 
   buildPrefix() {
 
@@ -241,7 +240,6 @@ module.exports = class Shell {
           counter,
           output: null
         };
-        let becomeRoot = false;
 
         /// Build line
         content += this.buildLine(params);
