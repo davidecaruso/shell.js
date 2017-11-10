@@ -25,11 +25,8 @@ module.exports = class Shell {
   initialize(elementSelector, options) {
 
     this.el = null;
-    if (typeof elementSelector === 'string') {
-      let el = document.querySelectorAll(elementSelector);
-      if (el.length) {
-        this.el = el;
-      }
+    if (typeof elementSelector === 'string' && document.querySelectorAll(elementSelector).length) {
+        this.el = document.querySelectorAll(elementSelector);
     }
 
     this.options = {...Defaults, ...options};
@@ -333,9 +330,7 @@ module.exports = class Shell {
       classes.push('root');
     }
     /// Add "line-[number]" class
-    if (!isNaN(params.counter)) {
-      classes.push(`line-${params.counter}`);
-    }
+    classes.push(`line-${params.counter}`);
 
     if (params.empty) {
 
