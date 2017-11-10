@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "A JavaScript and CSS library to create terminals",
   "scripts": {
     "build": "NODE_ENV=dev webpack; NODE_ENV=build webpack -p",
@@ -36,9 +36,7 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "dependencies": {
-    "coveralls": "^3.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^7.1.4",
     "babel": "^6.23.0",
@@ -52,6 +50,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "clean": "^4.0.2",
+    "coveralls": "^3.0.0",
     "css-loader": "^0.28.7",
     "css-modules-require-hook": "^4.2.2",
     "eslint": "^4.5.0",
