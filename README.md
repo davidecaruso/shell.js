@@ -31,7 +31,7 @@ For each **Shell** instance you can set the following options:
 | style         | `'custom'`&#124;`'ubuntu'`&#124;`'osx'`&#124;`'windows'`  | The operating system (default: `'custom'`)                             |
 | theme         | `'dark'`&#124;`'light'`                                   | The theme (default: `'dark'`)                                          |
 | responsive    | `false`&#124;`true`                                       | If `true` the terminal will be fluid (default: `false`)                |
-| typed         | `false`&#124;*Typed instance*                                       | Adds the **[Typed.js][typedjs]** integration (default: `false`)     |
+| typed         | `false`&#124;*Typed instance*                                       | Adds the **[Typed.js](https://github.com/mattboldt/typed.js/)** integration (default: `false`)     |
 | commands      | array                                                     | The commands list (default: `[]`)                                      |
 
 
@@ -59,15 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 ```
 
 ## Author
-
-[Davide Caruso][linkedin]
+[Davide Caruso](https://davidecaruso.github.io)
 
 ## License
-
-Licensed under [MIT][mit].
-
-[linkedin]: https://it.linkedin.com/in/davidecaruso93
-[mit]: https://opensource.org/licenses/mit-license.php
-[jquery]: http://jquery.com/
-[grunt]: http://gruntjs.com/
-[typedjs]: https://github.com/mattboldt/typed.js/
+Licensed under [MIT](https://opensource.org/licenses/mit-license.php).
