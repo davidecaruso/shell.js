@@ -1,7 +1,5 @@
 /**
- * Default options
- * @returns {object} Shell default options
- * @public
+ * Default options:
  */
 const defaults = {
 

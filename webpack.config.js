@@ -1,25 +1,27 @@
-/// Requires
+// Libs
 const webpack = require('webpack');
-const pkg = require('./package.json');
+const path = require('path');
+const package = require('./package.json');
 const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-/// Environment
+// Environment
 const env = process.env.NODE_ENV || 'dev';
-const distPath = __dirname + '/lib';
-const srcPath = __dirname + '/src';
+const root = path.resolve(__dirname);
+const destination = `${root}/lib`;
+const source = `${root}/src`;
 
-/// Library info
+// Library
 const library = 'Shell';
-const filename = library.toLowerCase();
-const banner = `${pkg.name} - ${pkg.description}
-Author: ${pkg.author}
-Version: v${pkg.version}
-URL: ${pkg.homepage}
-License(s): ${pkg.license}`;
-let outputFilename = `${filename}.js`;
+const libraryLowercase = library.toLowerCase();
+const filename = `${libraryLowercase}${(env === 'prod' ? '.min' : '')}.js`;
+const banner = `${package.name} - ${package.description}
+Author: ${package.author}
+Version: v${package.version}
+URL: ${package.homepage}
+License(s): ${package.license}`;
 
-/// Plugins
+// Plugins
 let plugins = [
   new webpack.LoaderOptionsPlugin({
     options: {
@@ -30,41 +32,48 @@ let plugins = [
   })
 ];
 
-/// If is build environment
+// If is build environment
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({
     minimize:  true,
     sourceMap: true,
     mangle:    {
-      except: ['Shell']
+      except: [library]
     },
     output: {
       comments: false
     }
   }));
-  outputFilename = `${filename}.min.js`;
 }
 
-/// Add banner
+// Add banner
 plugins.push(new webpack.BannerPlugin(banner));
 
-/// Export Webpack config
+// Export Webpack config
 module.exports = {
-  devtool: 'nosources-source-map',
-  entry:   [`${srcPath}/sass/${filename}.scss`, `${srcPath}/js/${filename}.js`],
+  // devtool: 'nosources-source-map',
+  entry:   [`${source}/sass/${libraryLowercase}.scss`, `${source}/js/${libraryLowercase}.js`],
   output:  {
-    path:           distPath,
-    filename:       outputFilename,
+    path: destination,
+    filename,
     library,
     libraryTarget:  'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    publicPath: destination
   },
   module:  {
     rules: [
       {
         test:    /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        use:     'babel-loader'
+        use:     [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['es2015']
+              }
+            }
+        ]
       }, {
         test: /\.scss$/,
         use:  [

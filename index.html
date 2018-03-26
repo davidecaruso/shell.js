@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shell.js</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="text-center">
+    <h1 class="pt-4">Shell.js</h1>
+    <h2 class="lead">Here a bit of example of <strong>Shell.js</strong>' instances:</h2>
+    <div class="d-flex flex-wrap flex-row justify-content-around">
+        <div class="p-2"><div id="default"></div></div>
+        <div class="p-2"><div id="default-light"></div></div>
+        <div class="p-2"><div id="osx"></div></div>
+        <div class="p-2"><div id="osx-light"></div></div>
+        <div class="p-2"><div id="ubuntu"></div></div>
+        <div class="p-2"><div id="ubuntu-light"></div></div>
+        <div class="p-2"><div id="windows"></div></div>
+    </div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
+<script src="./lib/shell.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Shell('#default', {
+            user: 'guest',
+            typed: Typed,
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#default-light', {
+            user: 'guest',
+            theme: 'light',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#osx', {
+            user: 'guest',
+            host: 'MacBook-Pro',
+            style: 'osx',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#osx-light', {
+            user: 'guest',
+            host: 'MacBook-Pro',
+            style: 'osx',
+            theme: 'light',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#ubuntu', {
+            user: 'guest',
+            host: 'localhost',
+            style: 'ubuntu',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#ubuntu-light', {
+            user: 'guest',
+            host: 'localhost',
+            style: 'ubuntu',
+            theme: 'light',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#windows', {
+            style: 'windows',
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+    });
+</script>
+</body>
+</html>
