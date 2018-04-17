@@ -30,6 +30,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
+    "@types/webpack-env": "^1.13.6",
     "autoprefixer": "^7.1.4",
     "clean": "^4.0.2",
     "coveralls": "^3.0.0",

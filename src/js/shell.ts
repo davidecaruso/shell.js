@@ -1,8 +1,7 @@
 import Options from './options';
 import '../sass/shell.scss'
 
-export default class Shell {
-
+module.exports = class Shell {
     private readonly el: Object;
     private options: Options = {
         commands: [],
@@ -18,52 +17,58 @@ export default class Shell {
 
     /**
      * Shell.js
-     * @param {string} elementSelector  HTML element selector OR HTML element.
+     * @param {string} selector  HTML element selector OR HTML element.
      * @param {object} options          Options object.
      * @returns {object}                Shell object.
      */
-    constructor(elementSelector: string, options: Options) {
-        if (document.querySelectorAll(elementSelector).length) {
-            this.el = document.querySelectorAll(elementSelector);
-        }
+    constructor(selector: string, options: Options) {
+        // If element exists
+        if (document.querySelectorAll(selector).length) {
+            this.el = document.querySelectorAll(selector);
 
-        this.options = {...this.options, ...options};
+            // Merge options
+            this.options = {...this.options, ...options};
 
-        // Hardcode for Windows
-        if (this.options.style === 'windows' && this.options.path === '~') {
-            this.options.path = 'C:\\Windows\\system32\\';
+            // Hardcode for Windows
+            if (this.options.style === 'windows' && this.options.path === '~') {
+                this.options.path = 'C:\\Windows\\system32\\';
+            }
+
+            this.build();
         }
-        this.build();
     }
 
     /**
      * Build the HTML structure and execute commands.
      */
     private build(): void {
-        if (this.el) {
-            // HTML element's classes
-            let classes = ['shell', this.options.style, this.options.theme];
-            if (this.options.responsive) classes.push('responsive');
-            if (this.options.typed) classes.push('typed');
+        // HTML element's classes
+        let classes = ['shell', this.options.style, this.options.theme];
+        if (this.options.responsive) {
+            classes.push('responsive');
+        }
+        if (this.options.typed) {
+            classes.push('typed');
+        }
 
-            if (this.el[0].className.length) {
-                this.el[0].className = `${this.el[0].className} ${classes.join(' ')}`;
-            } else {
-                this.el[0].className = classes.join(' ');
+        if (this.el[0].className.length) {
+            this.el[0].className = `${this.el[0].className} ${classes.join(' ')}`;
+        } else {
+            this.el[0].className = classes.join(' ');
+        }
+        this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
+
+        // Typed.js integration
+        if (this.options.typed && typeof this.options.typed === 'function') {
+            let commandsNum = this.el[0].querySelectorAll('.line').length;
+
+            // Execute commands
+            if (commandsNum) {
+                this.type(0, commandsNum);
             }
-            this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
-
-            // Typed.js integration
-            if (this.options.typed && typeof this.options.typed === 'function') {
-                let commandsNum = this.el[0].querySelectorAll('.line').length;
-
-                // Execute commands
-                if (commandsNum) this.type(0, commandsNum);
-
-            } else {
-                // Typed.js was not found, remove class
-                this.el[0].className = this.el[0].className.replace(' typed', '');
-            }
+        } else {
+            // Typed.js was not found, remove class
+            this.el[0].className = this.el[0].className.replace(' typed', '');
         }
     }
 
