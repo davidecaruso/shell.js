@@ -66,10 +66,10 @@
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.dev.js --mode=development --watch",
+    "dev": "webpack-dev-server --mode=development --watch",
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "webpack --config webpack.dev.js  --mode=development",
-    "build:prod": "webpack --config webpack.prod.js  --mode=production -p",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production -p",
     "test": "mocha --timeout 15000 --require babel-core/register --require test/helpers/* test/*.test.js",
     "test:coverage": "nyc --reporter=lcov npm run test",
     "test:report": "npm run test:coverage; nyc report --reporter=html",

@@ -1,28 +1,27 @@
 const webpack = require('webpack');
-const common = require('./webpack.common');
 const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const uglifyjs = require('uglifyjs-webpack-plugin');
+const common = require('./common');
+const mode = 'production';
 
-module.exports = merge(common, {
+module.exports = merge(common.config, {
     output: {
         filename: '[name].min.js'
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
-        new UglifyJSPlugin({
+        new uglifyjs({
             include: /\.min\.js$/,
             sourceMap: true,
             uglifyOptions: {
                 minimize: true,
                 mangle: {
-                    reserved: [common.output.library]
+                    reserved: [common.config.output.library]
                 },
                 output: {
                     comments: false
                 }
             }
         })
-    ]
+    ],
+    mode
 });
