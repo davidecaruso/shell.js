@@ -1,8 +1,20 @@
-import Defaults from './defaults';
-import Helpers from './helpers';
+import Options from './options';
 import '../sass/shell.scss'
 
-module.exports = class Shell {
+export default class Shell {
+
+    private readonly el: Object;
+    private options: Options = {
+        commands: [],
+        host: "host",
+        path: "~",
+        responsive: true,
+        root: false,
+        style: "default",
+        theme: "dark",
+        typed: null,
+        user: "user"
+    };
 
     /**
      * Shell.js
@@ -10,34 +22,24 @@ module.exports = class Shell {
      * @param {object} options          Options object.
      * @returns {object}                Shell object.
      */
-    constructor(elementSelector, options) {
-        this.initialize(elementSelector, options);
-        this.build();
-    }
-
-    /**
-     * Load up defaults & options on the Shell instance.
-     * @param {string} elementSelector  HTML element selector OR HTML element.
-     * @param {object} options          Options object.
-     */
-    initialize(elementSelector, options) {
-        this.el = null;
-        if (typeof elementSelector === 'string' && document.querySelectorAll(elementSelector).length) {
+    constructor(elementSelector: string, options: Options) {
+        if (document.querySelectorAll(elementSelector).length) {
             this.el = document.querySelectorAll(elementSelector);
         }
 
-        this.options = {...Defaults, ...options};
+        this.options = {...this.options, ...options};
 
         // Hardcode for Windows
         if (this.options.style === 'windows' && this.options.path === '~') {
             this.options.path = 'C:\\Windows\\system32\\';
         }
+        this.build();
     }
 
     /**
      * Build the HTML structure and execute commands.
      */
-    build() {
+    private build(): void {
         if (this.el) {
             // HTML element's classes
             let classes = ['shell', this.options.style, this.options.theme];
@@ -68,7 +70,7 @@ module.exports = class Shell {
     /**
      * Type terminal commands.
      */
-    type(index, commandsNum) {
+    private type(index, commandsNum): void {
         let typed = this.options.typed;
         let line = this.el[0].querySelectorAll(`.line-${index}`);
         let command = line[0].querySelectorAll('.command');
@@ -106,7 +108,7 @@ module.exports = class Shell {
     /**
      * Build the HTML structure of terminal's prefix.
      */
-    buildPrefix() {
+    private buildPrefix(): string {
         let prefix = '<span class="prefix">';
         let user = this.options.root ? 'root' : this.options.user;
         let char = this.options.root ? '#' : '';
@@ -148,7 +150,7 @@ module.exports = class Shell {
     /**
      * Build the HTML structure of terminal's status bar.
      */
-    buildStatusBar() {
+    private buildStatusBar(): string {
         let statusBar = '<div class="status-bar">';
         let user = this.options.root ? 'root' : this.options.user;
         let buttons;
@@ -158,19 +160,19 @@ module.exports = class Shell {
         switch (this.options.style) {
             case 'osx':
                 buttons = `<div class="buttons">` +
-                             `<button class="icon-close icon-dot"></button>` +
-                             `<button class="icon-minimize"></button>` +
-                             `<button class="icon-enlarge"></button>` +
-                           `</div>`;
+                    `<button class="icon-close icon-dot"></button>` +
+                    `<button class="icon-minimize"></button>` +
+                    `<button class="icon-enlarge"></button>` +
+                    `</div>`;
                 title = `<div class="title">${user} &horbar; sh &horbar; 80x24</div>`;
                 break;
 
             case 'windows':
                 buttons = `<div class="buttons">` +
-                            `<button class="icon-minimize"></button>` +
-                            `<button class="icon-enlarge"></button>` +
-                            `<button class="icon-close"></button>` +
-                           `</div>`;
+                    `<button class="icon-minimize"></button>` +
+                    `<button class="icon-enlarge"></button>` +
+                    `<button class="icon-close"></button>` +
+                    `</div>`;
                 title = `<div class="icon"><i class="icon-command"></i></div><div class="title">Command Prompt</div>`;
                 break;
 
@@ -178,10 +180,10 @@ module.exports = class Shell {
             /* falls through */
             default:
                 buttons = `<div class="buttons">` +
-                            `<button class="icon-close"></button>` +
-                            `<button class="icon-minimize"></button>` +
-                            `<button class="icon-enlarge"></button>` +
-                           `</div>`;
+                    `<button class="icon-close"></button>` +
+                    `<button class="icon-minimize"></button>` +
+                    `<button class="icon-enlarge"></button>` +
+                    `</div>`;
                 title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
                 break;
         }
@@ -194,7 +196,7 @@ module.exports = class Shell {
     /**
      * Build the HTML structure of terminal's content.
      */
-    buildContent() {
+    private buildContent(): string {
         // Content's HTML wrapper
         let content = '<div class="content">';
         let date = new Date();
@@ -206,9 +208,9 @@ module.exports = class Shell {
         // If style is OSX add a new line with last login
         switch (this.options.style) {
             case 'osx':
-                let hours = Helpers.str_pad(date.getHours(), 2, 'STR_PAD_LEFT');
-                let minutes = Helpers.str_pad(date.getMinutes(), 2, 'STR_PAD_LEFT');
-                let seconds = Helpers.str_pad(date.getSeconds(), 2, 'STR_PAD_LEFT');
+                let hours = this.str_pad(date.getHours(), 2, 'STR_PAD_LEFT');
+                let minutes = this.str_pad(date.getMinutes(), 2, 'STR_PAD_LEFT');
+                let seconds = this.str_pad(date.getSeconds(), 2, 'STR_PAD_LEFT');
 
                 content += this.buildLine({
                     command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
@@ -292,7 +294,7 @@ module.exports = class Shell {
     /**
      * Build the HTML structure of a single terminal's line.
      */
-    buildLine(params) {
+    private buildLine(params): string {
         let line = '';
 
         // Default parameters
@@ -323,18 +325,48 @@ module.exports = class Shell {
             }
 
             line = `<div class="${classes.join(' ')}">` +
-                        this.buildPrefix() +
-                        `<span class="command"><span class="typed-cursor">&nbsp;</span></span>` +
-                    `</div>`;
+                this.buildPrefix() +
+                `<span class="command"><span class="typed-cursor">&nbsp;</span></span>` +
+                `</div>`;
         } else {
             line = `<div class="${classes.join(' ')}">` +
-                        (params.command ?
-                            (params.prefix ? this.buildPrefix() : '') +
-                            `<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` :
-                        '') +
-                    `</div>`;
+                (params.command ?
+                    (params.prefix ? this.buildPrefix() : '') +
+                    `<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` :
+                    '') +
+                `</div>`;
         }
 
         return line;
+    }
+
+    private str_pad(input, padLength, padString, padType = 'STR_PAD_RIGHT'): string {
+        let half = '';
+        let padToGo;
+        let _strPadRepeater = (s, len) => {
+            let collect = '';
+            while (collect.length < len) collect += s;
+            collect = collect.substr(0, len);
+            return collect
+        };
+        input += '';
+        if ((padToGo = padLength - input.length) > 0) {
+            switch (padType) {
+                case 'STR_PAD_LEFT':
+                    input = _strPadRepeater(padString, padToGo) + input;
+                    break;
+
+                case 'STR_PAD_BOTH':
+                    half = _strPadRepeater(padString, Math.ceil(padToGo / 2));
+                    input = half + input + half;
+                    input = input.substr(0, padLength);
+                    break;
+
+                default:
+                    input = input + _strPadRepeater(padString, padToGo);
+                    break;
+            }
+        }
+        return input
     }
 };
