@@ -67,8 +67,9 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js --mode=development --watch",
-    "build": "webpack-dev-server --mode=development",
-    "build:prod": "webpack --mode=development; webpack --mode=production -p",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "webpack --config webpack.dev.js  --mode=development",
+    "build:prod": "webpack --config webpack.prod.js  --mode=production -p",
     "test": "mocha --timeout 15000 --require babel-core/register --require test/helpers/* test/*.test.js",
     "test:coverage": "nyc --reporter=lcov npm run test",
     "test:report": "npm run test:coverage; nyc report --reporter=html",

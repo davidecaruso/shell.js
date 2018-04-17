@@ -12,14 +12,16 @@ module.exports = merge(common, {
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new UglifyJSPlugin({
-            minimize: true,
-            sourceMap: true,
             include: /\.min\.js$/,
-            mangle: {
-                except: [common.output.library]
-            },
-            output: {
-                comments: false
+            sourceMap: true,
+            uglifyOptions: {
+                minimize: true,
+                mangle: {
+                    reserved: [common.output.library]
+                },
+                output: {
+                    comments: false
+                }
             }
         })
     ]

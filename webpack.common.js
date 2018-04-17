@@ -9,24 +9,26 @@ const pkg = require(`${root}/package`);
 
 // Library
 const library = 'Shell';
-const libraryLowercase = library.toLowerCase();
+const bundle = library.toLowerCase();
+const entry = {};
+entry[bundle] = [
+    `${path.join(__dirname, source)}/sass/${bundle}.scss`,
+    `${path.join(__dirname, source)}/js/${bundle}.ts`
+];
 
 const banner = `${pkg.name} - ${pkg.description}
 Author: ${pkg.author}
 Version: v${pkg.version}
 URL: ${pkg.homepage}
 License(s): ${pkg.license}`;
-console.log( `${source}/js/${libraryLowercase}.ts`);
+
 // Export Webpack config
 module.exports = {
     // devtool: 'nosources-source-map',
-    entry: [
-        `${path.join(__dirname, source)}/sass/${libraryLowercase}.scss`,
-        `${path.join(__dirname, source)}/js/${libraryLowercase}.ts`
-    ],
+    entry,
     output: {
         path: path.join(__dirname, destination),
-        filename: `${destination}/shell.js`,
+        filename: `[name].js`,
         library,
         libraryTarget: 'umd',
         umdNamedDefine: true,
