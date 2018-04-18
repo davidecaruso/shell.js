@@ -1,9 +1,8 @@
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./common');
 const mode = 'development';
 
-module.exports = merge(common.config, {
+module.exports = merge(common, {
     devServer: {
         contentBase: './'
     },
