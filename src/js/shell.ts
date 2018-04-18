@@ -1,12 +1,16 @@
 import {$, arrDiff, strPad} from "./utils";
+import Director from "./Director";
+import Factory from "./Factory";
 import {Style, Theme} from './Enums';
 import {Options} from './Interfaces';
 import {expand} from '@emmetio/expand-abbreviation';
 import '../sass/shell.scss'
 
 module.exports = class Shell {
+    private readonly director: Director;
+    private readonly el: Element;
+    private readonly factory: Factory;
     private readonly name = 'shell';
-    private readonly el: Object;
     private options: Options = {
         commands: [],
         host: "host",
@@ -27,7 +31,9 @@ module.exports = class Shell {
     constructor(selector: string, options: Options) {
         // If element exists
         if ($(selector).length) {
-            this.el = $(selector);
+            this.el = $(selector)[0];
+            this.director = new Director();
+            this.factory = new Factory();
 
             // Merge options
             this.options = {...this.options, ...options};
@@ -56,22 +62,19 @@ module.exports = class Shell {
         }
 
         // Get current classes of the element
-        let currentClasses = this.el[0].className.split(' ').filter(className => className !== "");
+        let currentClasses = this.el.className.split(' ').filter(className => className !== "");
         // Remove duplicates
         currentClasses = arrDiff(classes, currentClasses);
 
         // Add classes to element
-        this.el[0].className = `${currentClasses.join(' ')} ${classes.join(' ')}`;
+        this.el.className = `${currentClasses.join(' ')} ${classes.join(' ')}`;
     }
 
-    private build(): void {
-        this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
-    }
 
     private bindTyping(): void {
         // Typed.js integration
         if (this.options.typed && typeof this.options.typed === 'function') {
-            let commandsNum = $('.line', this.el[0]).length;
+            let commandsNum = $('.line', this.el).length;
 
             // Execute commands
             if (commandsNum) {
@@ -79,7 +82,7 @@ module.exports = class Shell {
             }
         } else {
             // Typed.js was not found, remove class
-            this.el[0].className = this.el[0].className.replace(' typed', '');
+            this.el.className = this.el.className.replace(' typed', '');
         }
     }
 
@@ -88,7 +91,8 @@ module.exports = class Shell {
      */
     private init(): void {
         this.addClassNames();
-        this.build();
+        let builder = this.factory.create(this.options.style);
+        this.el.innerHTML = this.director.build(builder);
         this.bindTyping();
     }
 
@@ -97,7 +101,7 @@ module.exports = class Shell {
      */
     private type(index, commandsNum): void {
         let typed = this.options.typed;
-        let line = $(`.line-${index}`, this.el[0]);
+        let line = $(`.line-${index}`, this.el);
         let command = $('.command', line[0]);
         let commandText = command[0].innerHTML;
         let speed = '^800';

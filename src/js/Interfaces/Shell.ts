@@ -1,7 +1,6 @@
 import {Style} from '../Enums';
-export interface Os {
+export interface Shell {
     name: Style;
     defaultPath: string,
     char: string,
-
 }
