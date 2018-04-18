@@ -1,7 +1,11 @@
-import Options from './options';
+import {$, arrDiff, strPad} from "./utils";
+import {Style, Theme} from './Enums';
+import {Options} from './Interfaces';
+import {expand} from '@emmetio/expand-abbreviation';
 import '../sass/shell.scss'
 
 module.exports = class Shell {
+    private readonly name = 'shell';
     private readonly el: Object;
     private options: Options = {
         commands: [],
@@ -9,22 +13,21 @@ module.exports = class Shell {
         path: "~",
         responsive: true,
         root: false,
-        style: "default",
-        theme: "dark",
+        style: Style.DEFAULT,
+        theme: Theme.DARK,
         typed: null,
         user: "user"
     };
 
     /**
-     * Shell.js
-     * @param {string} selector  HTML element selector OR HTML element.
-     * @param {object} options          Options object.
-     * @returns {object}                Shell object.
+     * Shell.js constructor
+     * @param {string} selector
+     * @param {Options} options
      */
     constructor(selector: string, options: Options) {
         // If element exists
-        if (document.querySelectorAll(selector).length) {
-            this.el = document.querySelectorAll(selector);
+        if ($(selector).length) {
+            this.el = $(selector);
 
             // Merge options
             this.options = {...this.options, ...options};
@@ -34,16 +37,17 @@ module.exports = class Shell {
                 this.options.path = 'C:\\Windows\\system32\\';
             }
 
-            this.build();
+            this.init();
         }
     }
 
-    /**
-     * Build the HTML structure and execute commands.
-     */
-    private build(): void {
-        // HTML element's classes
-        let classes = ['shell', this.options.style, this.options.theme];
+    private addClassNames() {
+        let classes = [
+            this.name,
+            this.options.style,
+            this.options.theme
+        ];
+
         if (this.options.responsive) {
             classes.push('responsive');
         }
@@ -51,16 +55,23 @@ module.exports = class Shell {
             classes.push('typed');
         }
 
-        if (this.el[0].className.length) {
-            this.el[0].className = `${this.el[0].className} ${classes.join(' ')}`;
-        } else {
-            this.el[0].className = classes.join(' ');
-        }
-        this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
+        // Get current classes of the element
+        let currentClasses = this.el[0].className.split(' ').filter(className => className !== "");
+        // Remove duplicates
+        currentClasses = arrDiff(classes, currentClasses);
 
+        // Add classes to element
+        this.el[0].className = `${currentClasses.join(' ')} ${classes.join(' ')}`;
+    }
+
+    private build(): void {
+        this.el[0].innerHTML = this.buildStatusBar() + this.buildContent();
+    }
+
+    private bindTyping(): void {
         // Typed.js integration
         if (this.options.typed && typeof this.options.typed === 'function') {
-            let commandsNum = this.el[0].querySelectorAll('.line').length;
+            let commandsNum = $('.line', this.el[0]).length;
 
             // Execute commands
             if (commandsNum) {
@@ -73,12 +84,21 @@ module.exports = class Shell {
     }
 
     /**
+     * Build the HTML structure and execute commands.
+     */
+    private init(): void {
+        this.addClassNames();
+        this.build();
+        this.bindTyping();
+    }
+
+    /**
      * Type terminal commands.
      */
     private type(index, commandsNum): void {
         let typed = this.options.typed;
-        let line = this.el[0].querySelectorAll(`.line-${index}`);
-        let command = line[0].querySelectorAll('.command');
+        let line = $(`.line-${index}`, this.el[0]);
+        let command = $('.command', line[0]);
         let commandText = command[0].innerHTML;
         let speed = '^800';
 
@@ -99,7 +119,7 @@ module.exports = class Shell {
                 showCursor: true,
                 onStringTyped: () => {
                     // Removes cursor from each line except for the last one
-                    line[0].removeChild(line[0].querySelectorAll('.typed-cursor')[0]);
+                    line[0].removeChild($('.typed-cursor', line[0])[0]);
                     this.type((index + 1), commandsNum);
                 }
             });
@@ -213,9 +233,9 @@ module.exports = class Shell {
         // If style is OSX add a new line with last login
         switch (this.options.style) {
             case 'osx':
-                let hours = this.str_pad(date.getHours(), 2, 'STR_PAD_LEFT');
-                let minutes = this.str_pad(date.getMinutes(), 2, 'STR_PAD_LEFT');
-                let seconds = this.str_pad(date.getSeconds(), 2, 'STR_PAD_LEFT');
+                let hours = strPad(date.getHours().toString(), 2, 'STR_PAD_LEFT');
+                let minutes = strPad(date.getMinutes().toString(), 2, 'STR_PAD_LEFT');
+                let seconds = strPad(date.getSeconds().toString(), 2, 'STR_PAD_LEFT');
 
                 content += this.buildLine({
                     command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
@@ -343,35 +363,5 @@ module.exports = class Shell {
         }
 
         return line;
-    }
-
-    private str_pad(input, padLength, padString, padType = 'STR_PAD_RIGHT'): string {
-        let half = '';
-        let padToGo;
-        let _strPadRepeater = (s, len) => {
-            let collect = '';
-            while (collect.length < len) collect += s;
-            collect = collect.substr(0, len);
-            return collect
-        };
-        input += '';
-        if ((padToGo = padLength - input.length) > 0) {
-            switch (padType) {
-                case 'STR_PAD_LEFT':
-                    input = _strPadRepeater(padString, padToGo) + input;
-                    break;
-
-                case 'STR_PAD_BOTH':
-                    half = _strPadRepeater(padString, Math.ceil(padToGo / 2));
-                    input = half + input + half;
-                    input = input.substr(0, padLength);
-                    break;
-
-                default:
-                    input = input + _strPadRepeater(padString, padToGo);
-                    break;
-            }
-        }
-        return input
     }
 };

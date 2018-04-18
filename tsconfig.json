@@ -6,6 +6,9 @@
     "target": "es5",
     "sourceMap": true
   },
+  "include": [
+    "**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,9 +1,10 @@
-export default interface OptionsInterface {
+import {Style, Theme} from '../Enums';
+export interface Options {
     user: string;
     host: string;
     path: string;
-    style: "osx"|"windows"|"ubuntu"|"default";
-    theme: "dark"|"light";
+    style: Style;
+    theme: Theme;
     typed?: any;
     responsive: boolean;
     commands: string[];
