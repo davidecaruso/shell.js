@@ -1,11 +1,10 @@
-import {Style} from "./Enums";
-import {Builder} from "./Interfaces";
+import {Builder, Options} from "./Interfaces";
 import {UbuntuBuilder} from "./UbuntuBuilder";
 export default class Factory {
-    public create(style: Style): Builder {
-        // switch (style) {
+    public create(options: Options): Builder {
+        // switch (options.style) {
         //     default:
-                return new UbuntuBuilder();
+                return new UbuntuBuilder(options);
         // }
     }
 }

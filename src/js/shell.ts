@@ -91,7 +91,7 @@ module.exports = class Shell {
      */
     private init(): void {
         this.addClassNames();
-        let builder = this.factory.create(this.options.style);
+        let builder = this.factory.create(this.options);
         this.el.innerHTML = this.director.build(builder);
         this.bindTyping();
     }
@@ -204,17 +204,6 @@ module.exports = class Shell {
                     `</div>`;
                 title = `<div class="icon"><i class="icon-command"></i></div><div class="title">Command Prompt</div>`;
                 break;
-
-            case 'ubuntu':
-            /* falls through */
-            default:
-                buttons = `<div class="buttons">` +
-                    `<button class="icon-close"></button>` +
-                    `<button class="icon-minimize"></button>` +
-                    `<button class="icon-enlarge"></button>` +
-                    `</div>`;
-                title = `<div class="title">${user}@${this.options.host}: ${this.options.path}</div>`;
-                break;
         }
         statusBar += buttons + title;
         statusBar += '</div>';
@@ -250,7 +239,7 @@ module.exports = class Shell {
                 counter++;
                 break;
         }
-
+/*
         // If have some commands...
         if (this.options.commands.length) {
             this.options.commands.forEach(command => {
@@ -282,7 +271,7 @@ module.exports = class Shell {
                             break;
 
                         case 'ubuntu':
-                        /* falls through */
+                        /!* falls through *!/
                         default:
                             params.command = `[sudo] password for ${this.options.user}:`;
                             params.output = true;
@@ -313,59 +302,10 @@ module.exports = class Shell {
                 index++;
             });
             content += this.buildLine({counter, empty: true});
-        }
+        }*/
         // Close the content of the shell
         content += '</div>';
 
         return content;
-    }
-
-    /**
-     * Build the HTML structure of a single terminal's line.
-     */
-    private buildLine(params): string {
-        let line = '';
-
-        // Default parameters
-        params = {
-            ...{
-                counter: 0,
-                empty: false,
-                command: null,
-                prefix: true,
-                output: false
-            },
-            ...params
-        };
-
-        let classes = ['line'];
-        // Add "root" class
-        if (this.options.root) {
-            classes.push('root');
-        }
-        // Add "line-[number]" class
-        classes.push(`line-${params.counter}`);
-
-        if (params.empty) {
-
-            // Add "active" class
-            if (!this.options.typed) {
-                classes.push('active');
-            }
-
-            line = `<div class="${classes.join(' ')}">` +
-                this.buildPrefix() +
-                `<span class="command"><span class="typed-cursor">&nbsp;</span></span>` +
-                `</div>`;
-        } else {
-            line = `<div class="${classes.join(' ')}">` +
-                (params.command ?
-                    (params.prefix ? this.buildPrefix() : '') +
-                    `<span class="command${(params.output ? ' output' : '')}">${params.command}</span>` :
-                    '') +
-                `</div>`;
-        }
-
-        return line;
     }
 };
