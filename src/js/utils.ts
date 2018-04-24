@@ -1,3 +1,6 @@
+import {expand as ex} from "@emmetio/expand-abbreviation";
+let Subtract = require("array-subtract");
+
 enum PadType {
     STR_PAD_BOTH,
     STR_PAD_LEFT,
@@ -53,37 +56,36 @@ function strPad(input: string, length: number, string: string, type: PadType = P
  *                   in a2.
  */
 function arrDiff(a1: any[], a2: any[]): any[] {
-    let a = [], diff = [];
-
-    for (let i = 0; i < a1.length; i++) {
-        a[a1[i]] = true;
-    }
-
-    for (let i = 0; i < a2.length; i++) {
-        if (a[a2[i]]) {
-            delete a[a2[i]];
-        } else {
-            a[a2[i]] = true;
-        }
-    }
-
-    for (let k in a) {
-        diff.push(k);
-    }
-
-    return diff;
+    return (new Subtract((a, b) => {
+        return a === b;
+    })).sub(a1, a2);
 }
 
 /**
  * Query selector wrapper
- * @param {string}     selector CSS selector.
- * @param {ParentNode} parent   Parent element where to search in.
- * @returns {NodeListOf<Element>}     HTML object.
+ * @param {string}     selector    CSS selector.
+ * @param {ParentNode} parent      Parent element where to search in.
+ * @returns {NodeListOf<Element>}  HTML object.
  */
 function $(selector: string, parent: ParentNode = document): NodeListOf<Element> {
     return parent.querySelectorAll(selector);
 }
 
+/**
+ * Expande Emmet source into HTML.
+ * @param {string} source
+ * @param {boolean} minify
+ * @param {Object} options
+ * @returns {string}
+ */
+function expand(source: string, minify: boolean = true, options?: Object): string {
+    let html = ex(source, options);
+    if (minify) {
+        html = html.replace(/\n|\r|\t/g, "");
+    }
+    return html;
+}
+
 export {
-    $, arrDiff, strPad
+    $, arrDiff, strPad, expand
 }

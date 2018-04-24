@@ -1,4 +1,4 @@
-import {Style, Theme} from '../Enums';
+import {Style, Theme} from "../Enums";
 export interface Options {
     user: string;
     host: string;

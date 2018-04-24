@@ -32,6 +32,7 @@
   "devDependencies": {
     "@emmetio/expand-abbreviation": "^0.7.0",
     "@types/webpack-env": "^1.13.6",
+    "array-subtract": "^2.0.0",
     "autoprefixer": "^7.1.4",
     "clean": "^4.0.2",
     "coveralls": "^3.0.0",

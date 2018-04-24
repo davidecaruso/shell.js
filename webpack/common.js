@@ -9,8 +9,8 @@ const library = 'Shell';
 const bundle = library.toLowerCase();
 const entry = {};
 entry[bundle] = [
-    `${path.join(__dirname, source)}/sass/${bundle}.scss`,
-    `${path.join(__dirname, source)}/js/${bundle}.ts`
+    `${path.join(__dirname, source)}/sass/main.scss`,
+    `${path.join(__dirname, source)}/js/main.ts`
 ];
 
 // Export Webpack config
