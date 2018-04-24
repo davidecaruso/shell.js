@@ -1,9 +1,6 @@
-import {DefaultBuilder} from "./DefaultBuilder";
+import {DefaultBuilder} from "./";
 
 export class UbuntuBuilder extends DefaultBuilder {
-    protected readonly _char: string = "$";
-    protected readonly cursor: string = "&nbsp;";
-
     addStatusBar(): void {
         this.shell.statusBar = `(.status-bar>` +
             `(.buttons>(button.icon-close+button.icon-minimize+button.icon-enlarge))+` +

@@ -1,7 +1,6 @@
-import {Builder} from "./Builder";
+import {Builder, Options} from "../Interfaces";
+import {Shell} from "./Shell";
 import {expand} from "../utils";
-import {Options} from "../Interfaces";
-import {Shell} from "../Shell";
 
 export class DefaultBuilder implements Builder {
     protected readonly _char: string = "$";
@@ -26,9 +25,6 @@ export class DefaultBuilder implements Builder {
     }
 
     get(): string {
-        if(this.constructor.toString().indexOf("Windows") >= 0) {
-
-        }
         return expand(this.shell.toString());
     }
 

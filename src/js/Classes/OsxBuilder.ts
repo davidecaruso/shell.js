@@ -1,9 +1,6 @@
-import {DefaultBuilder} from "./DefaultBuilder";
+import {DefaultBuilder} from "./";
 
 export class OsxBuilder extends DefaultBuilder {
-    protected readonly _char: string = "$";
-    protected readonly cursor: string = "&nbsp;";
-
     addStatusBar(): void {
         this.shell.statusBar = `(.status-bar>` +
             `(.buttons>(button.icon-close.icon-dot+button.icon-minimize+button.icon-enlarge))+` +

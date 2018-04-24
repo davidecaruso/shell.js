@@ -1,6 +1,6 @@
-import {Builder} from "./Builders/Builder";
+import {Builder} from "../Interfaces";
 
-export default class Director {
+export class Director {
     public build(builder: Builder): string {
         builder.create();
         builder.addStatusBar();

@@ -1,9 +1,8 @@
-import {$, arrDiff, strPad} from "./utils";
-import Director from "./Director";
-import BuilderFactory from "./Builders/BuilderFactory";
-import {Style, Theme} from "./Enums";
-import {Options} from "./Interfaces";
 import "../sass/main.scss"
+import {BuilderFactory, Director} from "./Classes";
+import {Options} from "./Interfaces";
+import {Style, Theme} from "./Enums";
+import {$, arrDiff, strPad} from "./utils";
 
 module.exports = class Shell {
     private readonly director: Director;
@@ -160,62 +159,6 @@ module.exports = class Shell {
                 counter++;
                 break;
         }
-/*
-        // If have some commands...
-        if (this.options.commands.length) {
-            this.options.commands.forEach(command => {
-                let params = {
-                    command,
-                    counter,
-                    output: null
-                };
-
-                // Build line
-                content += this.buildLine(params);
-
-                // If command contains "sudo" become root user
-                if (/sudo/.test(command)) {
-                    counter++;
-                    params.counter = counter;
-
-                    switch (this.options.style) {
-                        case 'windows':
-                            params.command = 'bash: sudo: command not found';
-                            params.output = true;
-                            this.options.root = false;
-                            break;
-
-                        case 'osx':
-                            params.command = `Password:<span class="icon-key"></span>`;
-                            params.output = true;
-                            this.options.root = true;
-                            break;
-                    }
-                    content += this.buildLine(params);
-                }
-
-                // If command contains "exit" logout from root
-                if (/exit/.test(command)) {
-                    counter++;
-                    params.counter = counter;
-
-                    if (this.options.style === 'windows') {
-                        params.command = 'bash: exit: command not found';
-                        params.output = true;
-                    } else {
-                        this.options.root = false;
-                        params.command = 'logout';
-                        params.output = true;
-                    }
-
-                    content += this.buildLine(params);
-                }
-
-                counter++;
-                index++;
-            });
-            content += this.buildLine({counter, empty: true});
-        }*/
         // Close the content of the shell
         content += '</div>';
 

@@ -79,6 +79,8 @@ function $(selector: string, parent: ParentNode = document): NodeListOf<Element>
  * @returns {string}
  */
 function expand(source: string, minify: boolean = true, options?: Object): string {
+    // Escape backslashes
+    source = source.replace(/\\/g, "\\\\");
     let html = ex(source, options);
     if (minify) {
         html = html.replace(/\n|\r|\t/g, "");
