@@ -1,4 +1,6 @@
 import {DefaultBuilder} from "./";
+import {strPad} from "../utils";
+import {CommandParams} from "../Interfaces/";
 
 export class OsxBuilder extends DefaultBuilder {
     addStatusBar(): void {
@@ -16,5 +18,20 @@ export class OsxBuilder extends DefaultBuilder {
             `span.user{&nbsp;${this.user}}+` +
             `span.char{${this.char}}` +
         `))`;
+    }
+
+    additionalContent(): CommandParams {
+        let date = new Date();
+        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let hours = strPad(date.getHours().toString(), 2, "STR_PAD_LEFT");
+        let minutes = strPad(date.getMinutes().toString(), 2, "STR_PAD_LEFT");
+        let seconds = strPad(date.getSeconds().toString(), 2, "STR_PAD_LEFT");
+
+        return {
+            command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
+            output: true,
+            prefix: false
+        }
     }
 }

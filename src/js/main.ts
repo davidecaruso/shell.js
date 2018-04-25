@@ -2,7 +2,7 @@ import "../sass/main.scss"
 import {BuilderFactory, Director} from "./Classes";
 import {Options} from "./Interfaces";
 import {Style, Theme} from "./Enums";
-import {$, arrDiff, strPad} from "./utils";
+import {$, arrDiff} from "./utils";
 
 module.exports = class Shell {
     private readonly director: Director;
@@ -67,7 +67,6 @@ module.exports = class Shell {
         this.el.className = `${currentClasses.join(" ")} ${classes.join(" ")}`;
     }
 
-
     private bindTyping(): void {
         // Typed.js integration
         if (this.options.typed && typeof this.options.typed === "function") {
@@ -130,38 +129,4 @@ module.exports = class Shell {
             this.type((index + 1), commandsNum);
         }
     };
-
-    /**
-     * Build the HTML structure of terminal's content.
-     */
-    private buildContent(): string {
-        // Content's HTML wrapper
-        let content = `<div class="content">`;
-        let date = new Date();
-        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        let index = 0;
-        let counter = 0;
-
-        // If style is OSX add a new line with last login
-        switch (this.options.style) {
-            case "osx":
-                let hours = strPad(date.getHours().toString(), 2, "STR_PAD_LEFT");
-                let minutes = strPad(date.getMinutes().toString(), 2, "STR_PAD_LEFT");
-                let seconds = strPad(date.getSeconds().toString(), 2, "STR_PAD_LEFT");
-
-                // content += this.buildLine({
-                //     command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
-                //     output: true,
-                //     prefix: false
-                // });
-
-                counter++;
-                break;
-        }
-        // Close the content of the shell
-        content += '</div>';
-
-        return content;
-    }
 };

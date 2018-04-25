@@ -1,6 +1,7 @@
 import {Builder, Options} from "../Interfaces";
 import {Shell} from "./Shell";
 import {expand} from "../utils";
+import {CommandParams} from "../Interfaces/CommandParams";
 
 export class DefaultBuilder implements Builder {
     protected readonly _char: string = "$";
@@ -38,6 +39,14 @@ export class DefaultBuilder implements Builder {
     addContent(): void {
         let content = "(.content>(";
         let counter = 0;
+
+        let additional = this.additionalContent();
+
+        if (Object.keys(additional).length) {
+            counter++;
+            content += this.buildLine(additional);
+        }
+
         // If have some commands...
         if (this.options.commands.length) {
             this.options.commands.forEach(command => {
@@ -85,7 +94,7 @@ export class DefaultBuilder implements Builder {
     /**
      * Build the HTML structure of a single terminal line.
      */
-    private buildLine(params): string {
+    private buildLine(params: CommandParams): string {
         let line = "(";
         let classes = ["line", `line-${params.counter}`];
 
@@ -133,5 +142,9 @@ export class DefaultBuilder implements Builder {
             `span.path{${this.options.path}}+` +
             `span.char{${this.char}}` +
         `))`;
+    }
+
+    additionalContent(): CommandParams {
+        return {};
     }
 }
