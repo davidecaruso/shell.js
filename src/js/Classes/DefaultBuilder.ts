@@ -1,7 +1,6 @@
-import {Builder, Options} from "../Interfaces";
+import {Builder, CommandParams, Options} from "../Interfaces";
 import {Shell} from "./Shell";
-import {expand} from "../utils";
-import {CommandParams} from "../Interfaces/CommandParams";
+import {expand} from "../util";
 
 export class DefaultBuilder implements Builder {
     protected readonly _char: string = "$";
@@ -40,7 +39,7 @@ export class DefaultBuilder implements Builder {
         let content = "(.content>(";
         let counter = 0;
 
-        let additional = this.additionalContent();
+        let additional = this.additionalLine();
 
         if (Object.keys(additional).length) {
             counter++;
@@ -125,7 +124,7 @@ export class DefaultBuilder implements Builder {
             line += `.${classes.join(".")}>(`;
             if (params.command) {
                 line += (params.prefix ? this.getPrefix() + "+" : "") +
-                    `span.command${(params.output ? ".output" : "")}>{&nbsp;${params.command}}`;
+                    `span.command${(params.output ? ".output" : "")}>{ ${params.command}}`;
             }
             line += ")"
         }
@@ -144,7 +143,7 @@ export class DefaultBuilder implements Builder {
         `))`;
     }
 
-    additionalContent(): CommandParams {
+    additionalLine(): CommandParams {
         return {};
     }
 }

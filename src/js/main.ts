@@ -2,7 +2,7 @@ import "../sass/main.scss"
 import {BuilderFactory, Director} from "./Classes";
 import {Options} from "./Interfaces";
 import {Style, Theme} from "./Enums";
-import {$, arrDiff} from "./utils";
+import {$, arrDiff} from "./util";
 
 module.exports = class Shell {
     private readonly director: Director;

@@ -1,5 +1,5 @@
 import {DefaultBuilder} from "./";
-import {strPad} from "../utils";
+import {strPad} from "../util";
 import {CommandParams} from "../Interfaces/";
 
 export class OsxBuilder extends DefaultBuilder {
@@ -15,12 +15,12 @@ export class OsxBuilder extends DefaultBuilder {
             `span.host{${this.options.host}}+` +
             `span.colon{:}+` +
             `span.path{${this.options.path}}+` +
-            `span.user{&nbsp;${this.user}}+` +
+            `span.user{ ${this.user}}+` +
             `span.char{${this.char}}` +
         `))`;
     }
 
-    additionalContent(): CommandParams {
+    additionalLine(): CommandParams {
         let date = new Date();
         let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

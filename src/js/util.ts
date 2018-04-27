@@ -85,6 +85,8 @@ function expand(source: string, minify: boolean = true, options?: Object): strin
     if (minify) {
         html = html.replace(/\n|\r|\t/g, "");
     }
+    // Remove double-backslashes
+    html = html.replace(/\\\\/g, "\\");
     return html;
 }
 
