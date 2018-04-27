@@ -1,5 +1,6 @@
 .status-bar {
     display: flex;
+    flex-direction: row;
     height: 21px;
     align-items: stretch;
     flex-wrap: wrap;
@@ -8,11 +9,11 @@
     border-bottom: 0;
 
     .buttons {
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
         flex-wrap: wrap;
-        flex-grow: 2;
+        flex-grow: 5;
 
         button {
             appearance: none;
@@ -63,9 +64,10 @@
     }
 
     .title {
+        display: flex;
         @include adjust-font(16px, 27px);
         text-align: left;
-        flex-grow: 98;
+        flex-grow: 95;
     }
 }
 
