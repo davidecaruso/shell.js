@@ -5,15 +5,13 @@
     align-items: stretch;
     flex-wrap: wrap;
     background: lighten(#292929, 4%);
-    border: 1px solid #292929;
-    border-bottom: 0;
 
     .buttons {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        flex-grow: 5;
+        flex-grow: 3;
 
         button {
             appearance: none;
@@ -21,17 +19,16 @@
             padding: 0;
             outline: none;
             text-align: center;
-            margin: 0 2px;
+            margin: 0 3px;
             border-radius: 50%;
             cursor: pointer;
-            @include size(15px, 15px);
-            @include adjust-font(18px, 15px);
+            @include size(13px, 13px);
+            @include adjust-font(15px, 13px);
 
             i {
                 text-align: center;
-                @include size(100%, 15px);
+                @include size(100%, 13px);
                 display: block;
-                @include adjust-font(10px, 15px);
             }
 
             &.icon-close {
@@ -67,7 +64,7 @@
         display: flex;
         @include adjust-font(16px, 27px);
         text-align: left;
-        flex-grow: 95;
+        flex-grow: 97;
     }
 }
 
@@ -77,8 +74,8 @@
     flex-grow: 1;
     flex-wrap: wrap;
     flex-direction: column;
-    border: 1px solid #292929;
-    padding: 1px;
+    border: 1px solid transparent;
+    padding: 2px;
     @include adjust-font(16px, 18px);
     background: #292929;
     box-sizing: border-box;

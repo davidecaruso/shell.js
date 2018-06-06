@@ -1,13 +1,7 @@
 &.osx {
     .status-bar {
-        border-color: #EBEBEB;
         background-image: linear-gradient(to bottom, #EBEBEB 0%, #CBCBCB 100%);
         position: relative;
-
-        .buttons {
-            position: absolute;
-            height: 100%;
-        }
 
         .title {
             color: $gray-text-color;
