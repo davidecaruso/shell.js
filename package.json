@@ -51,6 +51,7 @@
     "should": "^13.1.2",
     "style-loader": "^0.18.2",
     "ts-loader": "^4.2.0",
+    "ts-node": "^6.1.0",
     "typed.js": "^2.0.6",
     "typescript": "^2.8.1",
     "uglifyjs-webpack-plugin": "^1.2.4",
@@ -73,7 +74,7 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production -p",
-    "test": "mocha --timeout 15000 --require babel-core/register  test/shell.test.js",
+    "test": "mocha -r ts-node/register test/*.ts",
     "test:coverage": "nyc --reporter=lcov npm run test",
     "test:report": "npm run test:coverage; nyc report --reporter=html",
     "test:watch": "npm run test --watch"
