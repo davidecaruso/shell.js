@@ -1,10 +1,10 @@
 import {expand as ex} from "@emmetio/expand-abbreviation";
 let Subtract = require("array-subtract");
 
-enum PadType {
-    STR_PAD_BOTH,
-    STR_PAD_LEFT,
-    STR_PAD_RIGHT
+export enum PadType {
+    STR_PAD_BOTH = "STR_PAD_BOTH",
+    STR_PAD_LEFT = "STR_PAD_LEFT",
+    STR_PAD_RIGHT = "STR_PAD_RIGHT"
 }
 
 /**
@@ -18,7 +18,7 @@ enum PadType {
  *                               If type is not specified it is assumed to be STR_PAD_RIGHT.
  * @returns {string}             Returns the padded string.
  */
-function strPad(input: string, length: number, string: string, type: PadType = PadType.STR_PAD_RIGHT): string {
+export function strPad(input: string, length: number, string: string, type: PadType = PadType.STR_PAD_RIGHT): string {
     let half = "";
     let padToGo;
     let repeater = (s: string, len: number): string => {
@@ -55,7 +55,7 @@ function strPad(input: string, length: number, string: string, type: PadType = P
  * @returns {any[]}  Returns an array containing all the entries from a1 that are not present
  *                   in a2.
  */
-function arrDiff(a1: any[], a2: any[]): any[] {
+export function arrDiff(a1: any[], a2: any[]): any[] {
     return (new Subtract((a, b) => {
         return a === b;
     })).sub(a1, a2);
@@ -67,7 +67,7 @@ function arrDiff(a1: any[], a2: any[]): any[] {
  * @param {ParentNode} parent      Parent element where to search in.
  * @returns {NodeListOf<Element>}  HTML object.
  */
-function $(selector: string, parent: ParentNode = document): NodeListOf<Element> {
+export function $(selector: string, parent: ParentNode = document): NodeListOf<Element> {
     return parent.querySelectorAll(selector);
 }
 
@@ -78,7 +78,7 @@ function $(selector: string, parent: ParentNode = document): NodeListOf<Element>
  * @param {Object} options
  * @returns {string}
  */
-function expand(source: string, minify: boolean = true, options?: Object): string {
+export function expand(source: string, minify: boolean = true, options?: Object): string {
     // Escape backslashes
     source = source.replace(/\\/g, "\\\\");
     let html = ex(source, options);
@@ -88,8 +88,4 @@ function expand(source: string, minify: boolean = true, options?: Object): strin
     // Remove double-backslashes
     html = html.replace(/\\\\/g, "\\");
     return html;
-}
-
-export {
-    $, arrDiff, strPad, expand
 }

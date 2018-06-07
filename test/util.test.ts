@@ -1,9 +1,11 @@
 import * as Util from '../src/js/util';
-import { expect } from 'chai';
+import {expect} from 'chai';
+
 const JSDOM = (require("jsdom")).JSDOM;
 let document;
 
 describe('Util', () => {
+
     it('should be not empty', () => {
         expect(Util).to.be.not.empty;
     });
@@ -41,7 +43,64 @@ describe('Util', () => {
             });
         });
         after(() => {
-           document = null;
+            document = null;
+        });
+    });
+
+    describe('strPad function', () => {
+        it('should exist', () => {
+            expect(Util.strPad).exist;
+        });
+        context('when invoked without type', () => {
+            it('should return a right-padded string', () => {
+                expect(Util.strPad('bar', 9, 'foo')).to.equal('barfoofoo');
+            });
+        });
+        context('when invoked with "STR_PAD_RIGHT" type', () => {
+            it('should return a right-padded string', () => {
+                expect(Util.strPad('bar', 9, 'foo', Util.PadType.STR_PAD_RIGHT)).to.equal('barfoofoo');
+            });
+        });
+        context('when invoked with "STR_PAD_LEFT" type', () => {
+            it('should return a left-padded string', () => {
+                expect(Util.strPad('bar', 9, 'foo', Util.PadType.STR_PAD_LEFT)).to.equal('foofoobar');
+            });
+        });
+        context('when invoked with "STR_PAD_BOTH" type', () => {
+            it('should return a both-padded string', () => {
+                expect(Util.strPad('bar', 9, 'foo', Util.PadType.STR_PAD_BOTH)).to.equal('foobarfoo');
+            });
+        });
+    });
+
+    describe('arrDiff function', () => {
+        it('should exist', () => {
+            expect(Util.arrDiff).exist;
+        });
+        context('when arrays are both empty', () => {
+            it('should return an empty array', () => {
+                expect(Util.arrDiff([], [])).to.be.empty;
+            });
+        });
+        context('when the first array is empty and the second not', () => {
+            it('should return an empty array', () => {
+                expect(Util.arrDiff([], [1,2,3])).to.be.empty;
+            });
+        });
+        context('when the second array is empty and the first not', () => {
+            it('should return the first array', () => {
+                expect(JSON.stringify(Util.arrDiff([1,2,3], []))).to.be.equal(JSON.stringify([1,2,3]));
+            });
+        });
+        context('when arrays are not empty and equal', () => {
+            it('should return an empty array', () => {
+                expect(Util.arrDiff([1,2,3], [1,2,3])).to.be.empty;
+            });
+        });
+        context('when arrays are not empty and different', () => {
+            it('should return an array equal to the first minus the elements of the second', () => {
+                expect(JSON.stringify(Util.arrDiff([1,2,3], [3,4,5]))).to.be.equal(JSON.stringify([1,2]));
+            });
         });
     });
 });
