@@ -72,7 +72,7 @@ export function $(selector: string, parent: ParentNode = document): NodeListOf<E
 }
 
 /**
- * Expande Emmet source into HTML.
+ * Expand Emmet source into HTML.
  * @param {string} source
  * @param {boolean} minify
  * @param {Object} options

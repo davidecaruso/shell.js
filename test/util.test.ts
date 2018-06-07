@@ -10,7 +10,7 @@ describe('Util', () => {
         expect(Util).to.be.not.empty;
     });
 
-    describe('$ function', () => {
+    describe('"$" function', () => {
         before(() => {
             document = new JSDOM(`<body><div class="foo"><p class="bar">Foobar</p></div></body>`).window.document;
         });
@@ -47,7 +47,7 @@ describe('Util', () => {
         });
     });
 
-    describe('strPad function', () => {
+    describe('"strPad" function', () => {
         it('should exist', () => {
             expect(Util.strPad).exist;
         });
@@ -73,7 +73,7 @@ describe('Util', () => {
         });
     });
 
-    describe('arrDiff function', () => {
+    describe('"arrDiff" function', () => {
         it('should exist', () => {
             expect(Util.arrDiff).exist;
         });
@@ -100,6 +100,22 @@ describe('Util', () => {
         context('when arrays are not empty and different', () => {
             it('should return an array equal to the first minus the elements of the second', () => {
                 expect(JSON.stringify(Util.arrDiff([1,2,3], [3,4,5]))).to.be.equal(JSON.stringify([1,2]));
+            });
+        });
+    });
+
+    describe('"expand" function', () => {
+        it('should exist', () => {
+            expect(Util.expand).exist;
+        });
+        context('when minify options is "false"', () => {
+            it('should return the not minified HTML', () => {
+                expect(Util.expand("div>p", false)).to.be.equal(`<div>\n\t<p></p>\n</div>`);
+            });
+        });
+        context('when minify options is "true"', () => {
+            it('should return the minified HTML', () => {
+                expect(Util.expand("div>p", true)).to.be.equal(`<div><p></p></div>`);
             });
         });
     });
