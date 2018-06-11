@@ -8,15 +8,18 @@ License(s): ${pkg.license}`;
 
 module.exports = (env, options) => {
     let config;
-    switch (options.mode) {
+    let bannerPlugin = new webpack.BannerPlugin(banner);
+    switch (env) {
         case 'production':
             config = require('./webpack/prod');
+            config.plugins.push(bannerPlugin);
             break;
         case 'development':
         default:
             config = require('./webpack/dev');
+            config.plugins.push(bannerPlugin);
             break;
     }
-    config.plugins.push(new webpack.BannerPlugin(banner));
+
     return config;
 };

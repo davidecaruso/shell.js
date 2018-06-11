@@ -2,18 +2,6 @@
   "name": "shell.js",
   "version": "2.0.9",
   "description": "A JavaScript and CSS library to create terminals",
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ],
-    "exclude": [
-      "node_modules",
-      "test/**/*.js"
-    ],
-    "sourceMap": false,
-    "instrument": false,
-    "check-coverage": true
-  },
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -34,6 +22,7 @@
     "@types/webpack-env": "^1.13.6",
     "array-subtract": "^2.0.0",
     "autoprefixer": "^7.1.4",
+    "chai": "^4.1.2",
     "clean": "^4.0.2",
     "coveralls": "^3.0.0",
     "css-loader": "^0.28.7",
@@ -43,7 +32,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "^11.3.0",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^4.0.1",
+    "mocha": "^5.2.0",
     "node-sass": "^4.5.3",
     "nyc": "^11.2.1",
     "postcss-loader": "^2.0.6",
@@ -70,14 +59,14 @@
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
   "scripts": {
-    "dev": "webpack-dev-server --mode=development --watch",
+    "dev": "webpack-dev-server --env=development --watch",
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production -p",
+    "build:dev": "webpack --env=development",
+    "build:prod": "webpack --env=production -p",
     "test": "mocha -r ts-node/register test/*.ts",
-    "test:coverage": "nyc --reporter=lcov npm run test",
-    "test:report": "npm run test:coverage; nyc report --reporter=html",
-    "test:watch": "npm run test --watch"
+    "test:watch": "npm run test --watch",
+    "test:coverage": "nyc npm run test",
+    "test:report": "npm run test:coverage; nyc report --reporter=html"
   },
   "homepage": "https://davidecaruso.github.io/shell.js",
   "main": "lib/shell.js"

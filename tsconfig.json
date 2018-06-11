@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "outDir": "./lib/",
+    "baseUrl": "./",
+    "outDir": "lib/",
     "module": "commonjs",
     "removeComments": true,
-    "target": "es5",
-    "sourceMap": true
+    "target": "es5"
   },
   "include": [
-    "**/*.ts"
+    "src/**/*.ts",
+    "typings/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test",
+    "coverage"
   ]
 }
