@@ -1,7 +1,7 @@
 {
   "name": "shell.js",
-  "version": "2.0.9",
-  "description": "A JavaScript and CSS library to create terminals",
+  "version": "3.0.0-rc.1",
+  "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -10,13 +10,10 @@
   },
   "keywords": [
     "shell",
-    "shelljs",
-    "javascript",
+    "shell.js",
     "terminal-emulators",
     "terminal",
-    "ecmascript2015",
-    "command-line",
-    "es2015",
+    "typescript",
     "javascript-library",
     "javascript-plugin"
   ],
