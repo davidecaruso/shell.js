@@ -84,22 +84,22 @@ describe("Util", () => {
         });
         context("when the first array is empty and the second not", () => {
             it("should return an empty array", () => {
-                expect(Util.arrDiff([], [1,2,3])).to.be.empty;
+                expect(Util.arrDiff([], [1, 2, 3])).to.be.empty;
             });
         });
         context("when the second array is empty and the first not", () => {
             it("should return the first array", () => {
-                expect(JSON.stringify(Util.arrDiff([1,2,3], []))).to.be.equal(JSON.stringify([1,2,3]));
+                expect(JSON.stringify(Util.arrDiff([1, 2, 3], []))).to.be.equal(JSON.stringify([1, 2, 3]));
             });
         });
         context("when arrays are not empty and equal", () => {
             it("should return an empty array", () => {
-                expect(Util.arrDiff([1,2,3], [1,2,3])).to.be.empty;
+                expect(Util.arrDiff([1, 2, 3], [1, 2, 3])).to.be.empty;
             });
         });
         context("when arrays are not empty and different", () => {
             it("should return an array equal to the first minus the elements of the second", () => {
-                expect(JSON.stringify(Util.arrDiff([1,2,3], [3,4,5]))).to.be.equal(JSON.stringify([1,2]));
+                expect(JSON.stringify(Util.arrDiff([1, 2, 3], [3, 4, 5]))).to.be.equal(JSON.stringify([1, 2]));
             });
         });
     });
