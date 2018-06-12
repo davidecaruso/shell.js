@@ -64,8 +64,8 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --env=development",
     "build:prod": "webpack --env=production -p",
-    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/shell.test.ts",
-    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.ts --watch",
+    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/*.test.ts",
+    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.test.ts --watch",
     "test:coverage": "nyc npm run test",
     "test:report": "npm run test:coverage & nyc report --reporter=html"
   },
