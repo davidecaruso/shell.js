@@ -3,40 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Shell.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+    <style type="text/css">
+        .shell {
+            margin: 0 auto 40px;
+        }
+    </style>
 </head>
 <body>
 <div class="text-center">
     <h1 class="pt-4">Shell.js</h1>
     <h2 class="lead">Here a bit of example of <strong>Shell.js</strong>' instances:</h2>
-    <div class="d-flex flex-wrap flex-row justify-content-around">
-        <div class="p-2"><div id="default"></div></div>
-        <div class="p-2"><div id="default-light"></div></div>
-        <div class="p-2"><div id="osx"></div></div>
-        <div class="p-2"><div id="osx-light"></div></div>
-        <div class="p-2"><div id="ubuntu"></div></div>
-        <div class="p-2"><div id="ubuntu-light"></div></div>
-        <div class="p-2"><div id="windows"></div></div>
-    </div>
+    <div id="default"></div>
+    <div id="default-light"></div>
+    <div id="osx"></div>
+    <div id="osx-light"></div>
+    <div id="ubuntu"></div>
+    <div id="ubuntu-light"></div>
+    <div id="windows"></div>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
-<script src="./lib/shell.js"></script>
+<script src="/shell.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         new Shell('#default', {
             user: 'guest',
             typed: Typed,
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#default-light', {
             user: 'guest',
             theme: 'light',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#osx', {
             user: 'guest',
             host: 'MacBook-Pro',
             style: 'osx',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#osx-light', {
@@ -44,12 +51,14 @@
             host: 'MacBook-Pro',
             style: 'osx',
             theme: 'light',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#ubuntu', {
             user: 'guest',
             host: 'localhost',
             style: 'ubuntu',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#ubuntu-light', {
@@ -57,10 +66,12 @@
             host: 'localhost',
             style: 'ubuntu',
             theme: 'light',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#windows', {
             style: 'windows',
+            responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
     });
