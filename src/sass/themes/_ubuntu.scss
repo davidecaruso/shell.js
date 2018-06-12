@@ -1,6 +1,5 @@
 &.ubuntu {
     .status-bar {
-        border-color: transparent;
         background-image: linear-gradient(to bottom, #3F3F3F 0%, #585858 100%);
         .icon { display: none; }
         .title { color: #FFFFFF; }
@@ -30,7 +29,6 @@
     }
 
     .content {
-        border-color: transparent;
         background: #300924;
 
         .line {

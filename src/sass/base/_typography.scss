@@ -1,22 +1,13 @@
-/// Font families
+//Font families
 %sans-serif { font-family: sans-serif; }
 %monospace { font-family: monospace; }
 
-/// Font styles
+//Font styles
 %italic { font-style: italic; }
 %normal { font-style: normal; }
 
-/// Font weights
+//Font weights
 %light { font-weight: 200; }
 %book { font-weight: 300; }
 %regular { font-weight: 400; }
 %bold { font-weight: 700; }
-
-body {
-  @extend %normal;
-  @extend %regular;
-
-  @include mobile {
-    @include adjust-font(10px);
-  }
-}
