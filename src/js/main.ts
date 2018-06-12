@@ -46,15 +46,16 @@ module.exports = class Shell {
     }
 
     private addClassNames() {
-        let classes = [
-            this.name,
-            this.options.style,
-            this.options.theme
-        ];
+        let classes = [this.name, this.options.theme];
+
+        if (this.options.style !== "default") {
+            classes.push(this.options.style);
+        }
 
         if (this.options.responsive) {
             classes.push("responsive");
         }
+
         if (this.options.typed) {
             classes.push("typed");
         }

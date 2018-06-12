@@ -19,6 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "@emmetio/expand-abbreviation": "^0.7.0",
+    "@types/node": "^10.3.2",
     "@types/webpack-env": "^1.13.6",
     "array-subtract": "^2.0.0",
     "autoprefixer": "^7.1.4",
@@ -63,10 +64,10 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --env=development",
     "build:prod": "webpack --env=production -p",
-    "test": "mocha -r ts-node/register test/*.ts",
-    "test:watch": "npm run test --watch",
+    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/shell.test.ts",
+    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.ts --watch",
     "test:coverage": "nyc npm run test",
-    "test:report": "npm run test:coverage; nyc report --reporter=html"
+    "test:report": "npm run test:coverage & nyc report --reporter=html"
   },
   "homepage": "https://davidecaruso.github.io/shell.js",
   "main": "lib/shell.js"

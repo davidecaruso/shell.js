@@ -4,7 +4,10 @@
     "outDir": "lib/",
     "module": "commonjs",
     "removeComments": true,
-    "target": "es5"
+    "target": "es5",
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "src/**/*.ts",

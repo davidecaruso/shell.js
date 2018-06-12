@@ -64,10 +64,10 @@ export function arrDiff(a1: any[], a2: any[]): any[] {
 /**
  * Query selector wrapper
  * @param {string}     selector    CSS selector.
- * @param {ParentNode} parent      Parent element where to search in.
+ * @param {ParentNode} parent      Parent element where to search in. Default: window.document.
  * @returns {NodeListOf<Element>}  HTML object.
  */
-export function $(selector: string, parent: ParentNode = document): NodeListOf<Element> {
+export function $(selector: string, parent: ParentNode = window.document): NodeListOf<Element> {
     return parent.querySelectorAll(selector);
 }
 
