@@ -1,5 +1,5 @@
-import {should} from "should";
 import {expect} from "chai";
+import * as Typed from "typed.js";
 
 const JSDOM = (require("jsdom")).JSDOM;
 const GLOBAL: any = global;
@@ -170,6 +170,17 @@ describe("Shell", () => {
                         it("should have \"responsive\" class", () => {
                             shell = new Shell('#shell', {responsive: true});
                             expect(div.classList.contains("responsive")).to.be.true;
+                        });
+                    });
+                });
+            });
+
+            describe("\"options.typed\" property", () => {
+                context('when is not false', () => {
+                    describe("HTML element", () => {
+                        it("should have \"typed\" class", () => {
+                            shell = new Shell('#shell', {typed: Typed, commands: ['foo']});
+                            expect(div.classList.contains("typed")).to.be.true;
                         });
                     });
                 });
