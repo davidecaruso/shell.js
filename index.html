@@ -35,12 +35,14 @@
         });
         new Shell('#default-light', {
             user: 'guest',
+            typed: Typed,
             theme: 'light',
             responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#osx', {
             user: 'guest',
+            typed: Typed,
             host: 'MacBook-Pro',
             style: 'osx',
             responsive: false,
@@ -48,6 +50,7 @@
         });
         new Shell('#osx-light', {
             user: 'guest',
+            typed: Typed,
             host: 'MacBook-Pro',
             style: 'osx',
             theme: 'light',
@@ -56,6 +59,7 @@
         });
         new Shell('#ubuntu', {
             user: 'guest',
+            typed: Typed,
             host: 'localhost',
             style: 'ubuntu',
             responsive: false,
@@ -63,6 +67,7 @@
         });
         new Shell('#ubuntu-light', {
             user: 'guest',
+            typed: Typed,
             host: 'localhost',
             style: 'ubuntu',
             theme: 'light',
@@ -71,6 +76,7 @@
         });
         new Shell('#windows', {
             style: 'windows',
+            typed: Typed,
             responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });

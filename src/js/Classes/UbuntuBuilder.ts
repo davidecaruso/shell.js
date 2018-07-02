@@ -8,7 +8,7 @@ export class UbuntuBuilder extends DefaultBuilder {
         `)`;
     }
 
-    getPrefix(): string {
+    protected getPrefix(): string {
         return `(span.prefix>(` +
             `span.user{${this.user}@}+` +
             `span.host{${this.options.host}}+` +
