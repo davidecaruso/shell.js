@@ -99,35 +99,38 @@ module.exports = class Shell {
     private type(index, commandsNum): void {
         let typed = this.options.typed;
         let line = $(`.line-${index}`, this.el);
-        let command = $(".command", line[0]);
-        let commandText = command[0].innerHTML;
         let speed = "^800";
 
-        // Show the line
-        line[0].className = `active ${line[0].className}`;
+        if (line.length) {
+            let command = $(".command", line[0]);
+            let commandText = command[0].innerHTML;
 
-        if (command[0].className.indexOf("output") === -1 && index < commandsNum - 1) {
+            // Show the line
+            line[0].className = `active ${line[0].className}`;
 
-            // Empty the command
-            command[0].innerHTML = "";
+            if (command[0].className.indexOf("output") === -1 && index < commandsNum - 1) {
 
-            new typed(command[0], {
-                strings: [speed + commandText],
-                typeSpeed: 50,
-                loop: false,
-                contentType: "html",
-                cursorChar: "&nbsp;",
-                showCursor: true,
-                onStringTyped: () => {
-                    // Removes cursor from each line except for the last one
-                    line[0].removeChild($(".typed-cursor", line[0])[0]);
-                    this.type((index + 1), commandsNum);
-                }
-            });
+                // Empty the command
+                command[0].innerHTML = "";
 
-        } else if (index <= commandsNum - 2) {
-            // After the bash output go type next line
-            this.type((index + 1), commandsNum);
+                new typed(command[0], {
+                    strings: [speed + commandText],
+                    typeSpeed: 50,
+                    loop: false,
+                    contentType: "html",
+                    cursorChar: "&nbsp;",
+                    showCursor: true,
+                    onStringTyped: () => {
+                        // Removes cursor from each line except for the last one
+                        line[0].removeChild($(".typed-cursor", line[0])[0]);
+                        this.type((index + 1), commandsNum);
+                    }
+                });
+
+            } else if (index <= commandsNum - 2) {
+                // After the bash output go type next line
+                this.type((index + 1), commandsNum);
+            }
         }
     };
 };

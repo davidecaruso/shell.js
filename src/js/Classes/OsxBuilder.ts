@@ -3,14 +3,17 @@ import {strPad} from "../util";
 import {CommandParams} from "../Interfaces/";
 
 export class OsxBuilder extends DefaultBuilder {
+    protected readonly columns: number = 80;
+    protected readonly rows: number = 24;
+
     addStatusBar(): void {
         this.shell.statusBar = `(.status-bar>` +
             `(.buttons>(button.icon-close.icon-dot+button.icon-minimize+button.icon-enlarge))+` +
-            `(.title>{${this.user} ‒ sh ‒ 80x24})` +
+            `(.title>{${this.user} ‒ sh ‒ ${this.columns + "x" + this.rows}})` +
         `)`;
     }
 
-    getPrefix(): string {
+    protected getPrefix(): string {
         return `(span.prefix>(` +
             `span.host{${this.options.host}}+` +
             `span.colon{:}+` +
@@ -20,7 +23,7 @@ export class OsxBuilder extends DefaultBuilder {
         `))`;
     }
 
-    additionalLine(): CommandParams {
+    protected login(counter: number): CommandParams {
         let date = new Date();
         let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -31,7 +34,13 @@ export class OsxBuilder extends DefaultBuilder {
         return {
             command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
             output: true,
-            prefix: false
+            counter
         }
+    }
+
+    protected sudo(params: CommandParams): CommandParams {
+        params = super.sudo(params);
+        params.command = `Password: <span class="icon-key"></span>`;
+        return params
     }
 }

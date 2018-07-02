@@ -39,17 +39,17 @@ export class DefaultBuilder implements Builder {
         let content = "(.content>(";
         let counter = 0;
 
-        let additional = this.additionalLine();
+        let loginParams = this.login(counter);
 
-        if (Object.keys(additional).length) {
+        if (Object.keys(loginParams).length) {
+            content += this.buildLine(loginParams);
             counter++;
-            content += this.buildLine(additional);
         }
 
         // If have some commands...
         if (this.options.commands.length) {
             this.options.commands.forEach(command => {
-                let params = {
+                let params: CommandParams = {
                     command,
                     counter,
                     output: null
@@ -67,9 +67,7 @@ export class DefaultBuilder implements Builder {
                 if (/sudo/.test(command)) {
                     counter++;
                     params.counter = counter;
-                    params.command = `[sudo] password for ${this.options.user}:`;
-                    params.output = true;
-                    this.options.root = true;
+                    params = this.sudo(params);
                     content += "+" + this.buildLine(params);
                 }
 
@@ -77,9 +75,7 @@ export class DefaultBuilder implements Builder {
                 if (/exit/.test(command)) {
                     counter++;
                     params.counter = counter;
-                    this.options.root = false;
-                    params.command = "logout";
-                    params.output = true;
+                    params = this.logout(params);
                     content += "+" + this.buildLine(params);
                 }
                 counter++;
@@ -103,15 +99,19 @@ export class DefaultBuilder implements Builder {
                 counter: 0,
                 empty: false,
                 command: null,
-                prefix: true,
                 output: false
             },
             ...params
         };
 
-        // Add "root" class
+        // Add/remove "root" class
         if (this.options.root) {
             classes.push("root");
+        } else {
+            let idx = classes.indexOf("root");
+            if (idx != -1) {
+                classes = classes.splice(idx, 1);
+            }
         }
 
         if (params.empty) {
@@ -119,11 +119,11 @@ export class DefaultBuilder implements Builder {
             if (!this.options.typed) {
                 classes.push("active");
             }
-            line += `.${classes.join(".")}>(span.command>span.typed-cursor{${this.cursor}})`;
+            line += `.${classes.join(".")}>(${this.getPrefix()}+span.command>span.typed-cursor{${this.cursor}})`;
         } else {
             line += `.${classes.join(".")}>(`;
             if (params.command) {
-                line += (params.prefix ? this.getPrefix() + "+" : "") +
+                line += (params.output ? "" : this.getPrefix() + "+") +
                     `span.command${(params.output ? ".output" : "")}>{ ${params.command}}`;
             }
             line += ")"
@@ -133,17 +133,31 @@ export class DefaultBuilder implements Builder {
         return line;
     }
 
-    getPrefix(): string {
+    protected getPrefix(): string {
         return `(span.prefix>(` +
             `span.user{${this.user}@}+` +
             `span.host{${this.options.host}}+` +
             `span.colon{:}+` +
             `span.path{${this.options.path}}+` +
             `span.char{${this.char}}` +
-        `))`;
+            `))`;
     }
 
-    additionalLine(): CommandParams {
+    protected sudo(params: CommandParams): CommandParams {
+        this.options.root = true;
+        params.command = `[sudo] password for ${this.options.user}:`;
+        params.output = true;
+        return params
+    }
+
+    protected logout(params: CommandParams): CommandParams {
+        this.options.root = false;
+        params.command = "logout";
+        params.output = true;
+        return params
+    }
+
+    protected login(counter: number): CommandParams {
         return {};
     }
 }
