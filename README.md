@@ -1,6 +1,5 @@
-# Shell.js
-
-Quickly create a terminal window.
+![Shell.js](assets/images/logo.margins.png)
+> A **JavaScript** library to create HTML **terminals** in web pages.
 
 [![npm](https://img.shields.io/npm/v/shell.js.svg)](https://www.npmjs.com/package/shell.js)
 [![npm](https://img.shields.io/npm/dm/shell.js.svg)](https://www.npmjs.com/package/shell.js)
@@ -10,40 +9,33 @@ Quickly create a terminal window.
 ![license](https://img.shields.io/github/license/davidecaruso/shell.js.svg)
 
 ## Install
-
 ```bash
-$ yarn add shell.js
-$ # OR
+$ yarn add shell.js # recommended
 $ npm i shell.js
-$ # OR
 $ bower install shell.js --save
 ```
 
 ## Options
-
 For each **Shell** instance you can set the following options:
 
-| Options       | Values                                                    | Description                                                            |
-| ------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- |
-| user          | string                                                    | The logged user (default: `'user'`)                                    |
-| host          | string                                                    | The local host (default: `'host'`)                                     |
-| path          | string                                                    | The current path displayed in the terminal (default: `'~'`)            |
-| style         | `'custom'`&#124;`'ubuntu'`&#124;`'osx'`&#124;`'windows'`  | The operating system (default: `'custom'`)                             |
-| theme         | `'dark'`&#124;`'light'`                                   | The theme (default: `'dark'`)                                          |
-| responsive    | `false`&#124;`true`                                       | If `true` the terminal will be fluid (default: `false`)                |
-| typed         | `false`&#124;*Typed instance*                                       | Adds the **[Typed.js](https://github.com/mattboldt/typed.js/)** integration (default: `false`)     |
-| commands      | array                                                     | The commands list (default: `[]`)                                      |
+| Options | Allowed values | Description | Defaut value |
+| ------- | -------------- | ----------- | ------------ |
+| user | *string* | The user | **"user"** |
+| host | *string* | The host | **"host"** |
+| path | *string* | The working directory | **~** &#124; C:\Windows\system32\ |
+| style | **"default"**&#124;**"ubuntu"**&#124;**"osx"**&#124;**"windows"** | The OS style | **"default"** |
+| theme | **"dark"**&#124;**"light"** | The theme | **"dark"** |
+| responsive | *boolean* | Responsiveness  | *true* |
+| typed | *Typed* callabke | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
+| commands | array | The commands list | *[]* |
 
 
 ## Usage
-
-Create an HTML element with a specified ID. 
+Create a HTML element with a specified ID... 
 ```html
 <div id="awesome-shell"></div>
 ```
-
-Then pass your DOM Element to the **Shell** constructor:
-
+...and pass the CSS selector to the **Shell.js** constructor:
 ```javascript
 document.addEventListener('DOMContentLoaded', function() {
     let shell = new Shell('#awesome-shell', {
@@ -58,8 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
+> Visit the documentation [page](https://davidecaruso.github.io/shell.js)
+
 ## Author
 [Davide Caruso](https://davidecaruso.github.io)
 
 ## License
-Licensed under [MIT](https://opensource.org/licenses/mit-license.php).
+Licensed under [MIT](LICENSE).
