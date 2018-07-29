@@ -1,4 +1,5 @@
 import {expand as ex} from "@emmetio/expand-abbreviation";
+
 let Subtract = require("array-subtract");
 
 export enum PadType {
@@ -18,7 +19,12 @@ export enum PadType {
  *                               If type is not specified it is assumed to be STR_PAD_RIGHT.
  * @returns {string}             Returns the padded string.
  */
-export function strPad(input: string, length: number, string: string, type: PadType = PadType.STR_PAD_RIGHT): string {
+export function strPad(
+    input: string,
+    length: number,
+    string: string,
+    type: PadType = PadType.STR_PAD_RIGHT
+): string {
     let half = "";
     let padToGo;
     let repeater = (s: string, len: number): string => {
@@ -45,7 +51,7 @@ export function strPad(input: string, length: number, string: string, type: PadT
                 break;
         }
     }
-    return input
+    return input;
 }
 
 /**

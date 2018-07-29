@@ -1,5 +1,5 @@
 import {DefaultBuilder} from "./";
-import {strPad} from "../util";
+import {strPad} from "../Helpers/utils";
 import {CommandParams} from "../Interfaces/";
 
 export class OsxBuilder extends DefaultBuilder {

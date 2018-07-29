@@ -1,0 +1,10 @@
+.#{shell}--light {
+    .#{shell}__content {
+        color: $gray-text-color;
+        border-color: #EBEBEB;
+        background: #FFFFFF;
+    }
+    .#{shell}__typed-cursor {
+        background-color: $gray-text-color;
+    }
+}

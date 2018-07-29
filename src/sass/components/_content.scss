@@ -1,0 +1,31 @@
+.#{shell}__content {
+    @extend %monospace;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid transparent;
+    padding: 2px;
+    @include adjust-font(16px, 18px);
+    background: #292929;
+    box-sizing: border-box;
+
+    .#{shell}__line {
+        .line__prefix {
+            .line__user { color: #8AD733; }
+            .line__host { color: #8AD733; }
+            .line__path { color: #729FCF; }
+        }
+    }
+    .#{shell}__line--root {
+        .line__prefix {
+            .line__user { color: #FFFFFF; }
+            .line__host { color: #FFFFFF; }
+            .line__path { color: #FFFFFF; }
+        }
+    }
+
+    .#{shell}__line--active {
+        display: block;
+    }
+}

@@ -1,4 +1,4 @@
-import * as Util from "../src/js/util";
+import * as Util from "../src/js/Helpers/utils";
 import {expect} from "chai";
 
 const JSDOM = (require("jsdom")).JSDOM;

@@ -1,9 +1,9 @@
-import {Builder, Options} from "../Interfaces";
-import {Style} from "../Enums";
+import {BuilderInterface, Options} from "../Interfaces/";
+import {Style} from "../Enums/";
 import {OsxBuilder, UbuntuBuilder, WindowsBuilder, DefaultBuilder} from "./";
 
 export class BuilderFactory {
-    public create(options: Options): Builder {
+    public create(options: Options): BuilderInterface {
         switch (options.style) {
             case Style.OSX:
                 return new OsxBuilder(options);

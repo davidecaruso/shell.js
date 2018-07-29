@@ -1,7 +1,9 @@
 @import "helpers/all";
 @import "base/all";
 
-.shell {
+$shell: shell;
+
+.#{$shell} {
     @extend %regular;
     @extend %sans-serif;
     @include size(400px, 300px);
@@ -20,8 +22,7 @@
         @include adjust-font(10px);
     }
 
-    &.responsive { @include size(100%); min-height: 200px; }
-    &.typed .content .line { display: none; }
-
-    @import "themes/all";
+    @import "components/all";
 }
+
+@import "modifiers/all";

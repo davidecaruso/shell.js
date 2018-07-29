@@ -1,11 +1,18 @@
 import {DefaultBuilder} from "./";
-import {CommandParams} from "../Interfaces";
+import {CommandParams, Options} from "../Interfaces/";
 
 export class WindowsBuilder extends DefaultBuilder {
     protected readonly _char: string = "&gt;";
 
+    constructor(o: Options) {
+        super(o);
+        if (this.options.path === "~") {
+            this.options.path = "C:\\Windows\\system32\\";
+        }
+    }
+
     addStatusBar(): void {
-        this.shell.statusBar = `(.status-bar>(` +
+        this.shell.statusBar = `(.shell__status-bar>(` +
             `(.buttons>(button.icon-minimize+button.icon-enlarge+button.icon-close))+` +
             `(.icon>i.icon-command)+` +
             `(.title>{Command Prompt})` +
