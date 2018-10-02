@@ -1,6 +1,5 @@
-import {BuilderInterface, Options} from "../Interfaces/";
-import {Style} from "../Enums/";
-import {OsxBuilder, UbuntuBuilder, WindowsBuilder, DefaultBuilder} from "./";
+import {Options, Style} from "../Interfaces/";
+import {OsxBuilder, UbuntuBuilder, WindowsBuilder, DefaultBuilder, BuilderInterface} from "./";
 
 export class BuilderFactory {
     public create(options: Options): BuilderInterface {

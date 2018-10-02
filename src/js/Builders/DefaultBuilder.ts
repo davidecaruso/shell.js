@@ -20,15 +20,16 @@ export class DefaultBuilder implements BuilderInterface {
         return this.options.root ? "root" : this.options.user;
     }
 
-    addStatusBar(): void {
-
+    addStatusBar(): this {
         this.shell.statusBar = `(.shell__status-bar>` +
             `(.buttons>(button.icon-close+button.icon-minimize+button.icon-enlarge))+` +
             `(.title>{${this.user}@${this.options.host}: ${this.options.path}})` +
             `)`;
+
+        return this;
     }
 
-    addContent(): void {
+    addContent(): this {
         let content = "(.content>(";
         let counter = 0;
 
@@ -77,6 +78,8 @@ export class DefaultBuilder implements BuilderInterface {
         }
         content += "))";
         this.shell.content = content;
+
+        return this;
     }
 
     /**
@@ -154,7 +157,7 @@ export class DefaultBuilder implements BuilderInterface {
         return {};
     }
 
-    get(): string {
-        return this.html;
+    build(): string {
+        return "";
     }
 }

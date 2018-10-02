@@ -1,5 +1,5 @@
 export interface BuilderInterface {
-    addContent(): void;
-    addStatusBar(): void;
-    get(): string;
+    addContent(): this;
+    addStatusBar(): this;
+    build(): string;
 }

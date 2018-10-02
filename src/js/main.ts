@@ -31,11 +31,9 @@ module.exports = class Shell {
      * Build the HTML structure and execute commands.
      */
     private init(): void {
-        let builder = this.factory.create(this.options);
         this.addClasses();
-        builder.addStatusBar();
-        builder.addContent();
-        this.el.innerHTML = builder.get();
+        let builder = this.factory.create(this.options);
+        this.el.innerHTML = builder.addStatusBar().addContent().build();
 
         // Typed.js integration
         if (this.options.typed && typeof this.options.typed === "function") {

@@ -1,16 +1,18 @@
 import {DefaultBuilder} from "./";
-import {strPad} from "../Helpers/utils";
 import {CommandParams} from "../Interfaces/";
+import {strPad} from "../Helpers";
 
 export class OsxBuilder extends DefaultBuilder {
     protected readonly columns: number = 80;
     protected readonly rows: number = 24;
 
-    addStatusBar(): void {
+    addStatusBar(): this {
         this.shell.statusBar = `(.status-bar>` +
             `(.buttons>(button.icon-close.icon-dot+button.icon-minimize+button.icon-enlarge))+` +
             `(.title>{${this.user} ‒ sh ‒ ${this.columns + "x" + this.rows}})` +
         `)`;
+
+        return this;
     }
 
     protected getPrefix(): string {

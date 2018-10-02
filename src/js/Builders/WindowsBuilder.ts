@@ -11,12 +11,14 @@ export class WindowsBuilder extends DefaultBuilder {
         }
     }
 
-    addStatusBar(): void {
+    addStatusBar(): this {
         this.shell.statusBar = `(.shell__status-bar>(` +
             `(.buttons>(button.icon-minimize+button.icon-enlarge+button.icon-close))+` +
             `(.icon>i.icon-command)+` +
             `(.title>{Command Prompt})` +
         `))`;
+
+        return this;
     }
 
     protected getPrefix(): string {
