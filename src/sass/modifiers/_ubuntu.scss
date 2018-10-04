@@ -1,10 +1,10 @@
-.#{shell}--ubuntu {
-    .#{shell}__status-bar {
+.#{$shell}--ubuntu {
+    .#{$shell}__status-bar {
         background-image: linear-gradient(to bottom, #3F3F3F 0%, #585858 100%);
         .icon { display: none; }
-        .#{shell}__title { color: #FFFFFF; }
-        .#{shell}__buttons {
-            .#{shell}__button--close {
+        .#{$statusBar}__title { color: #FFFFFF; }
+        .#{$statusBar}__buttons {
+            .button--close {
                 background: #D75224;
                 color: #444444;
 
@@ -14,7 +14,7 @@
                 }
             }
 
-            .#{shell}__button--minimize, .#{shell}__button--enlarge {
+            .button--minimize, .button--enlarge {
                 background: #898989;
                 color: #555555;
 
@@ -26,45 +26,45 @@
         }
     }
 
-    .#{shell}__content {
+    .#{$shell}__#{$content} {
         background: #300924;
 
-        .#{shell}__line {
+        .line {
             .line__prefix {
-                .line__user { color: #FFFFFF; }
-                .line__host { color: #FFFFFF; }
-                .line__path { color: #FFFFFF; }
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
             }
         }
 
-        .#{shell}__line--root {
+        .line--root {
             .line__prefix {
-                .line__user { color: #FFFFFF; }
-                .line__host { color: #FFFFFF; }
-                .line__path { color: #FFFFFF; }
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
             }
         }
     }
 
-    &.#{shell}--light {
+    &.#{$shell}--light {
         color: $gray-text-color;
 
-        .#{shell}__content {
+        .#{$shell}__#{$content} {
             background: #FFFFFF;
 
-            .#{shell}__line {
+            .line {
                 .line__prefix {
-                    .line__user { color: $gray-text-color; }
-                    .line__host { color: $gray-text-color; }
-                    .line__path { color: $gray-text-color; }
+                    .user { color: $gray-text-color; }
+                    .host { color: $gray-text-color; }
+                    .path { color: $gray-text-color; }
                 }
             }
 
-            .#{shell}__line--root {
+            .line--root {
                 .line__prefix {
-                    .line__user { color: $gray-text-color; }
-                    .line__host { color: $gray-text-color; }
-                    .line__path { color: $gray-text-color; }
+                    .user { color: $gray-text-color; }
+                    .host { color: $gray-text-color; }
+                    .path { color: $gray-text-color; }
                 }
             }
         }

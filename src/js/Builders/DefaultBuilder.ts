@@ -1,6 +1,7 @@
-import {CommandParams, Options} from "../Interfaces/";
+import {defaultClassName} from "../Helpers";
 import {BuilderInterface} from "./BuilderInterface";
-import {Shell} from "./Shell";
+import {CommandParams, Options} from "../Interfaces/";
+import {Shell, StatusBar, StatusBarTitle, StatusBarButtons, Content} from "../Shell";
 
 export class DefaultBuilder implements BuilderInterface {
     protected readonly _char: string = "$";
@@ -10,6 +11,7 @@ export class DefaultBuilder implements BuilderInterface {
 
     constructor(o: Options) {
         this.options = o;
+        this.shell = new Shell(o);
     }
 
     get char(): string {
@@ -21,16 +23,20 @@ export class DefaultBuilder implements BuilderInterface {
     }
 
     addStatusBar(): this {
-        this.shell.statusBar = `(.shell__status-bar>` +
-            `(.buttons>(button.icon-close+button.icon-minimize+button.icon-enlarge))+` +
-            `(.title>{${this.user}@${this.options.host}: ${this.options.path}})` +
-            `)`;
+        let buttons = new StatusBarButtons(
+            `<button class="button button--close"><i class="icon-close"></i></button>` +
+            `<button class="button button--minimize"><i class="icon-minimize"></i></button>` +
+            `<button class="button button--enlarge"><i class="icon-enlarge"></i></button>`
+        );
+        let title = new StatusBarTitle(`${this.user}@${this.options.host}: ${this.options.path}`);
+
+        this.shell.statusBar = new StatusBar(buttons, title);
 
         return this;
     }
 
     addContent(): this {
-        let content = "(.content>(";
+        let content = "";
         let counter = 0;
 
         let loginParams = this.login(counter);
@@ -49,11 +55,6 @@ export class DefaultBuilder implements BuilderInterface {
                     output: null
                 };
 
-                // To concatenate lines
-                if (counter > 0) {
-                    content += "+";
-                }
-
                 // Build line
                 content += this.buildLine(params);
 
@@ -62,7 +63,7 @@ export class DefaultBuilder implements BuilderInterface {
                     counter++;
                     params.counter = counter;
                     params = this.sudo(params);
-                    content += "+" + this.buildLine(params);
+                    content += this.buildLine(params);
                 }
 
                 // If command contains "exit" logout from root
@@ -70,14 +71,14 @@ export class DefaultBuilder implements BuilderInterface {
                     counter++;
                     params.counter = counter;
                     params = this.logout(params);
-                    content += "+" + this.buildLine(params);
+                    content += this.buildLine(params);
                 }
                 counter++;
             });
-            content += "+" + this.buildLine({counter, empty: true});
+            content += this.buildLine({counter, empty: true});
         }
-        content += "))";
-        this.shell.content = content;
+
+        this.shell.content = new Content(content);
 
         return this;
     }
@@ -86,8 +87,8 @@ export class DefaultBuilder implements BuilderInterface {
      * Build the HTML structure of a single terminal line.
      */
     private buildLine(params: CommandParams): string {
-        let line = "(";
-        let classes = [`line`, `line-${params.counter}`];
+        let classes = [`line`];
+        let counter = params.counter;
 
         // Default parameters
         params = {
@@ -102,41 +103,43 @@ export class DefaultBuilder implements BuilderInterface {
 
         // Add/remove "root" class
         if (this.options.root) {
-            classes.push("root");
+            classes.push(`line--root`);
         } else {
-            let idx = classes.indexOf("root");
+            let idx = classes.indexOf(`line--root`);
             if (idx != -1) {
                 classes = classes.splice(idx, 1);
             }
         }
 
+        let line = `<div class="${classes.join(" ")}" data-index="${counter}">`;
+
         if (params.empty) {
             // Add "active" class
             if (!this.options.typed) {
-                classes.push("active");
+                classes.push(`line--active`);
             }
-            line += `.${classes.join(".")}>(${this.getPrefix()}+span.command>span.typed-cursor{${this.cursor}})`;
+            line += `${this.getPrefix()}` +
+                `<span class="command"><span class="${defaultClassName}__typed-cursor">${this.cursor}</span></span>`;
         } else {
-            line += `.${classes.join(".")}>(`;
             if (params.command) {
-                line += (params.output ? "" : this.getPrefix() + "+") +
-                    `span.command${(params.output ? ".output" : "")}>{ ${params.command}}`;
+                line += (params.output ? "" : this.getPrefix()) +
+                    `<span class="command` + (params.output ? ` line--output` : "") + `">` +
+                    `${params.command}</span>`;
             }
-            line += ")";
         }
-        line += ")";
+        line += "</div>";
 
         return line;
     }
 
     protected getPrefix(): string {
-        return `(span.prefix>(` +
-            `span.user{${this.user}@}+` +
-            `span.host{${this.options.host}}+` +
-            `span.colon{:}+` +
-            `span.path{${this.options.path}}+` +
-            `span.char{${this.char}}` +
-            `))`;
+        return `<span class="line__prefix">` +
+            `<span class="user">${this.user}@</span>` +
+            `<span class="host">${this.options.host}</span>` +
+            `<span class="colon">:</span>` +
+            `<span class="path">${this.options.path}</span>` +
+            `<span class="char">${this.char}</span>` +
+        `</span>`;
     }
 
     protected sudo(params: CommandParams): CommandParams {
@@ -158,6 +161,6 @@ export class DefaultBuilder implements BuilderInterface {
     }
 
     build(): string {
-        return "";
+        return this.shell.toString();
     }
 }

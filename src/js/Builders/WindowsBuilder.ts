@@ -1,5 +1,10 @@
 import {DefaultBuilder} from "./";
 import {CommandParams, Options} from "../Interfaces/";
+import {StatusBar} from "../Shell";
+import {defaultClassName} from "../Helpers";
+import {StatusBarButtons} from "../Shell/StatusBarButtons";
+import {StatusBarTitle} from "../Shell/StatusBarTitle";
+import {StatusBarIcon} from "../Shell/StatusBarIcon";
 
 export class WindowsBuilder extends DefaultBuilder {
     protected readonly _char: string = "&gt;";
@@ -12,20 +17,24 @@ export class WindowsBuilder extends DefaultBuilder {
     }
 
     addStatusBar(): this {
-        this.shell.statusBar = `(.shell__status-bar>(` +
-            `(.buttons>(button.icon-minimize+button.icon-enlarge+button.icon-close))+` +
-            `(.icon>i.icon-command)+` +
-            `(.title>{Command Prompt})` +
-        `))`;
+        let buttons = new StatusBarButtons(
+            `<button class="button button--minimize"><i class="icon-minimize"></i></button>` +
+            `<button class="button button--enlarge"><i class="icon-enlarge"></i></button>` +
+            `<button class="button button--close"><i class="icon-close"></i></button>`
+        );
+        let icon = new StatusBarIcon(`<i class="icon-command"></i>`);
+        let title = new StatusBarTitle("Command Prompt");
+
+        this.shell.statusBar = new StatusBar(buttons, icon, title);
 
         return this;
     }
 
     protected getPrefix(): string {
-        return `(span.prefix>(` +
-            `span.path{${this.options.path}}+` +
-            `span.char{${this.char}}` +
-        `))`;
+        return `<span class="line__prefix">` +
+            `<span class="path">${this.options.path}</span>` +
+            `<span class="char">${this.char}</span>` +
+        `</span>`;
     }
 
     protected sudo(params: CommandParams): CommandParams {

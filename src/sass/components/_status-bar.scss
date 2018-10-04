@@ -1,5 +1,4 @@
-
-.#{shell}__status-bar {
+.#{$shell}__#{$statusBar} {
     display: flex;
     flex-direction: row;
     height: 21px;
@@ -7,14 +6,14 @@
     flex-wrap: wrap;
     background: lighten(#292929, 4%);
 
-    .#{shell}__buttons {
+    .#{$statusBar}__buttons {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         flex-grow: 3;
 
-        .#{shell}__button {
+        .button {
             appearance: none;
             border: 0;
             padding: 0;
@@ -30,10 +29,14 @@
                 text-align: center;
                 @include size(100%, 13px);
                 display: block;
+                &:before {
+                    line-height: 13px;
+                    display: block;
+                }
             }
         }
 
-        .#{shell}__button--close {
+        .button--close {
             background: $close-button-color;
             color: $close-button-color;
 
@@ -42,7 +45,7 @@
             }
         }
 
-        .#{shell}__button--minimize {
+        .button--minimize {
             background: $minimize-button-color;
             color: $minimize-button-color;
 
@@ -51,7 +54,7 @@
             }
         }
 
-        .#{shell}__button--enlarge {
+        .button--enlarge {
             background: $enlarge-button-color;
             color: $enlarge-button-color;
 
@@ -61,7 +64,7 @@
         }
     }
 
-    .#{shell}__title {
+    .#{$statusBar}__title {
         display: flex;
         @include adjust-font(16px, 27px);
         text-align: left;

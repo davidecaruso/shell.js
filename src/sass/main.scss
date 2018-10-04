@@ -1,8 +1,6 @@
 @import "helpers/all";
 @import "base/all";
 
-$shell: shell;
-
 .#{$shell} {
     @extend %regular;
     @extend %sans-serif;

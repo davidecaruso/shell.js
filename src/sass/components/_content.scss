@@ -1,4 +1,4 @@
-.#{shell}__content {
+.#{$shell}__#{$content} {
     @extend %monospace;
     display: flex;
     flex-grow: 1;
@@ -10,22 +10,23 @@
     background: #292929;
     box-sizing: border-box;
 
-    .#{shell}__line {
+    .line {
         .line__prefix {
-            .line__user { color: #8AD733; }
-            .line__host { color: #8AD733; }
-            .line__path { color: #729FCF; }
+            .user { color: #8AD733; }
+            .host { color: #8AD733; }
+            .path { color: #729FCF; }
         }
-    }
-    .#{shell}__line--root {
-        .line__prefix {
-            .line__user { color: #FFFFFF; }
-            .line__host { color: #FFFFFF; }
-            .line__path { color: #FFFFFF; }
-        }
-    }
 
-    .#{shell}__line--active {
-        display: block;
+        &.line--root {
+            .line__prefix {
+                .user { color: #FFFFFF; }
+                .host { color: #FFFFFF; }
+                .path { color: #FFFFFF; }
+            }
+        }
+
+        &.line--active {
+            display: block;
+        }
     }
 }

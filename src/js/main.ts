@@ -2,7 +2,6 @@ import "../sass/main.scss";
 import {BuilderFactory} from "./Builders/";
 import {Options} from "./Interfaces";
 import {$, defaultClassName, defaultOptions} from "./Helpers/";
-import {arrDiff} from "./Helpers";
 
 module.exports = class Shell {
     private readonly el: Element;
@@ -31,13 +30,12 @@ module.exports = class Shell {
      * Build the HTML structure and execute commands.
      */
     private init(): void {
-        this.addClasses();
         let builder = this.factory.create(this.options);
         this.el.innerHTML = builder.addStatusBar().addContent().build();
 
         // Typed.js integration
         if (this.options.typed && typeof this.options.typed === "function") {
-            let commandsNum = $(`.${defaultClassName}__line`, this.el).length;
+            let commandsNum = $(`.line`, this.el).length;
 
             // Execute commands
             if (commandsNum) {
@@ -50,53 +48,22 @@ module.exports = class Shell {
         }
     }
 
-    addClasses(): void {
-        let classes = [defaultClassName];
-
-        if (this.options.style !== "default") {
-            classes.push(`${defaultClassName}--${this.options.style}`);
-        }
-
-        if (this.options.theme !== "dark") {
-            classes.push(`${defaultClassName}--${this.options.theme}`);
-        }
-
-        if (this.options.responsive) {
-            classes.push(`${defaultClassName}--responsive`);
-        }
-
-        if (this.options.typed) {
-            classes.push(`${defaultClassName}--typed`);
-        }
-
-        // Get current classes of the element
-        let currentClasses = this.el.className.split(" ")
-        .filter(className => className !== "");
-
-        // Remove duplicates
-        currentClasses = arrDiff(currentClasses, classes);
-
-        // Add classes to element
-        this.el.className = `${currentClasses.join(" ")} ${classes.join(" ")}`;
-    }
-
     /**
      * Type terminal commands.
      */
     private type(index, commandsNum): void {
         let typed = this.options.typed;
-        let line = $(`.${defaultClassName}__line[data-index=${index}]`, this.el);
+        let line = $(`.line[data-index='${index}']`, this.el);
         let speed = "^800";
 
         if (line.length) {
-            let command = $(`.${defaultClassName}__command`, line[0]);
+            let command = $(`.command`, line[0]);
             let commandText = command[0].innerHTML;
 
             // Show the line
-            line[0].className = `${defaultClassName}__line--active
-            ${line[0].className}`;
+            line[0].className = `line--active ${line[0].className}`;
 
-            if (command[0].className.indexOf(`${defaultClassName}__line--output`)
+            if (command[0].className.indexOf(`line--output`)
                 === -1 && index < commandsNum - 1) {
                 // Empty the command
                 command[0].innerHTML = "";

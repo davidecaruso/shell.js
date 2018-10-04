@@ -1,10 +1,20 @@
-.#{shell}--light {
-    .#{shell}__content {
+.#{$shell}--light {
+    .#{$shell}__#{$content} {
         color: $gray-text-color;
         border-color: #EBEBEB;
         background: #FFFFFF;
+
+        .line {
+            &.line--root {
+                .line__prefix {
+                    .user { color: #8AD733; }
+                    .host { color: #8AD733; }
+                    .path { color: #729FCF; }
+                }
+            }
+        }
     }
-    .#{shell}__typed-cursor {
+    .#{$shell}__#{$typedCursor} {
         background-color: $gray-text-color;
     }
 }

@@ -1,28 +1,35 @@
 import {DefaultBuilder} from "./";
 import {CommandParams} from "../Interfaces/";
-import {strPad} from "../Helpers";
+import {defaultClassName, strPad} from "../Helpers";
+import {StatusBar} from "../Shell";
+import {StatusBarButtons} from "../Shell/StatusBarButtons";
+import {StatusBarTitle} from "../Shell/StatusBarTitle";
 
 export class OsxBuilder extends DefaultBuilder {
     protected readonly columns: number = 80;
     protected readonly rows: number = 24;
 
     addStatusBar(): this {
-        this.shell.statusBar = `(.status-bar>` +
-            `(.buttons>(button.icon-close.icon-dot+button.icon-minimize+button.icon-enlarge))+` +
-            `(.title>{${this.user} ‒ sh ‒ ${this.columns + "x" + this.rows}})` +
-        `)`;
+        let buttons = new StatusBarButtons(
+            `<button class="button button--close"><i class="icon-dot"></i></button>` +
+            `<button class="button button--minimize"><i class="icon-minimize"></i></button>` +
+            `<button class="button button--enlarge"><i class="icon-enlarge"></i></button>`
+        );
+        let title = new StatusBarTitle(`${this.user} ‒ sh ‒ ${this.columns + "x" + this.rows}`);
+
+        this.shell.statusBar = new StatusBar(buttons, title);
 
         return this;
     }
 
     protected getPrefix(): string {
-        return `(span.prefix>(` +
-            `span.host{${this.options.host}}+` +
-            `span.colon{:}+` +
-            `span.path{${this.options.path}}+` +
-            `span.user{ ${this.user}}+` +
-            `span.char{${this.char}}` +
-        `))`;
+        return `<span class="line__prefix">` +
+            `<span class="host">${this.options.host}</span>` +
+            `<span class="colon">:</span>` +
+            `<span class="path">${this.options.path}</span>` +
+            `<span class="user"> ${this.user}</span>` +
+            `<span class="char">${this.char}</span>` +
+        `</span>`;
     }
 
     protected login(counter: number): CommandParams {
@@ -34,7 +41,8 @@ export class OsxBuilder extends DefaultBuilder {
         let seconds = strPad(date.getSeconds().toString(), 2, "STR_PAD_LEFT");
 
         return {
-            command: `Last login: ${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
+            command: `Last login: ` +
+                `${days[date.getDay()]} ${months[date.getMonth()]} ${hours}:${minutes}:${seconds} on ttys000`,
             output: true,
             counter
         }
