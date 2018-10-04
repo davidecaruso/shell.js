@@ -92,7 +92,7 @@ describe("Shell", () => {
                 expect(shell.options.responsive).to.be.a("boolean").that.is.true;
                 expect(shell.options.root).to.be.a("boolean").that.is.false;
                 expect(shell.options.style).to.be.a("string").that.is.equal("default");
-                expect(shell.options.typed).to.be.null;
+                expect(shell.options.typed).to.be.undefined;
                 expect(shell.options.user).to.be.a("string").that.is.equal("user");
             });
         });
@@ -123,8 +123,8 @@ describe("Shell", () => {
                             shell = new Shell('#shell', {style: 'osx'});
                         });
 
-                        it("should have \"osx\" class", () => {
-                            expect(div.classList.contains("osx")).to.be.true;
+                        it("should have \"shell--osx\" class", () => {
+                            expect(div.classList.contains("shell--osx")).to.be.true;
                         });
                     });
 
@@ -133,8 +133,8 @@ describe("Shell", () => {
                             shell = new Shell('#shell', {style: 'ubuntu'});
                         });
 
-                        it("should have \"ubuntu\" class", () => {
-                            expect(div.classList.contains("ubuntu")).to.be.true;
+                        it("should have \"shell--ubuntu\" class", () => {
+                            expect(div.classList.contains("shell--ubuntu")).to.be.true;
                         });
                     });
 
@@ -143,8 +143,8 @@ describe("Shell", () => {
                             shell = new Shell('#shell', {style: 'windows'});
                         });
 
-                        it("should have \"windows\" class", () => {
-                            expect(div.classList.contains("windows")).to.be.true;
+                        it("should have \"shell--windows\" class", () => {
+                            expect(div.classList.contains("shell--windows")).to.be.true;
                         });
                     });
                 });
@@ -167,9 +167,9 @@ describe("Shell", () => {
             describe("\"options.responsive\" property", () => {
                 context("when is true", () => {
                     describe("HTML element", () => {
-                        it("should have \"responsive\" class", () => {
+                        it("should have \"shell--responsive\" class", () => {
                             shell = new Shell('#shell', {responsive: true});
-                            expect(div.classList.contains("responsive")).to.be.true;
+                            expect(div.classList.contains("shell--responsive")).to.be.true;
                         });
                     });
                 });
@@ -178,9 +178,9 @@ describe("Shell", () => {
             describe("\"options.typed\" property", () => {
                 context('when is not false', () => {
                     describe("HTML element", () => {
-                        it("should have \"typed\" class", () => {
+                        it("should have \"shell--typed\" class", () => {
                             shell = new Shell('#shell', {typed: Typed, commands: ['foo']});
-                            expect(div.classList.contains("typed")).to.be.true;
+                            expect(div.classList.contains("shell--typed")).to.be.true;
                         });
                     });
                 });

@@ -1,4 +1,4 @@
-enum PadType {
+export enum PadType {
     STR_PAD_BOTH = "STR_PAD_BOTH",
     STR_PAD_LEFT = "STR_PAD_LEFT",
     STR_PAD_RIGHT = "STR_PAD_RIGHT"
@@ -15,12 +15,7 @@ enum PadType {
  *                               If type is not specified it is assumed to be STR_PAD_RIGHT.
  * @return {string}             Returns the padded string.
  */
-export function strPad(
-    input: string,
-    length: number,
-    string: string,
-    type: PadType = PadType.STR_PAD_RIGHT
-): string {
+export function strPad( input: string, length: number, string: string, type: PadType = PadType.STR_PAD_RIGHT): string {
     let half = "";
     let padToGo;
     let repeater = (s: string, len: number): string => {

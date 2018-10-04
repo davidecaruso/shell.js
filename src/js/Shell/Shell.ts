@@ -38,16 +38,14 @@ export class Shell implements ShellElement {
      * @return {string}
      */
     public toString(): string {
-        return `<div class="${this.classes()}">` +
-            this._statusBar.toString() + this._content.toString() +
-        `</div>`;
+        return this._statusBar.toString() + this._content.toString();
     }
 
     /**
      * Get HTML classes basing on options.
-     * @return {string}
+     * @return {string[]}
      */
-    protected classes(): string {
+    get classes(): string[] {
         let classes = [Shell.IDENTIFIER];
 
         if (this.options.style !== "default") {
@@ -66,6 +64,6 @@ export class Shell implements ShellElement {
             classes.push(`${Shell.IDENTIFIER}--typed`);
         }
 
-        return classes.join(" ");
+        return classes;
     }
 }
