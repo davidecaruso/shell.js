@@ -1,4 +1,4 @@
-import * as Util from "../src/js/util";
+import * as Util from "../src/js/utils";
 import {expect} from "chai";
 
 const JSDOM = (require("jsdom")).JSDOM;
@@ -69,53 +69,6 @@ describe("Util", () => {
         context("when invoked with \"STR_PAD_BOTH\" type", () => {
             it("should return a both-padded string", () => {
                 expect(Util.strPad("bar", 9, "foo", Util.PadType.STR_PAD_BOTH)).to.equal("foobarfoo");
-            });
-        });
-    });
-
-    describe("\"arrDiff\" function", () => {
-        it("should exist", () => {
-            expect(Util.arrDiff).exist;
-        });
-        context("when arrays are both empty", () => {
-            it("should return an empty array", () => {
-                expect(Util.arrDiff([], [])).to.be.empty;
-            });
-        });
-        context("when the first array is empty and the second not", () => {
-            it("should return an empty array", () => {
-                expect(Util.arrDiff([], [1, 2, 3])).to.be.empty;
-            });
-        });
-        context("when the second array is empty and the first not", () => {
-            it("should return the first array", () => {
-                expect(JSON.stringify(Util.arrDiff([1, 2, 3], []))).to.be.equal(JSON.stringify([1, 2, 3]));
-            });
-        });
-        context("when arrays are not empty and equal", () => {
-            it("should return an empty array", () => {
-                expect(Util.arrDiff([1, 2, 3], [1, 2, 3])).to.be.empty;
-            });
-        });
-        context("when arrays are not empty and different", () => {
-            it("should return an array equal to the first minus the elements of the second", () => {
-                expect(JSON.stringify(Util.arrDiff([1, 2, 3], [3, 4, 5]))).to.be.equal(JSON.stringify([1, 2]));
-            });
-        });
-    });
-
-    describe("\"expand\" function", () => {
-        it("should exist", () => {
-            expect(Util.expand).exist;
-        });
-        context("when minify options is \"false\"", () => {
-            it("should return the not minified HTML", () => {
-                expect(Util.expand("div>p", false)).to.be.equal(`<div>\n\t<p></p>\n</div>`);
-            });
-        });
-        context("when minify options is \"true\"", () => {
-            it("should return the minified HTML", () => {
-                expect(Util.expand("div>p", true)).to.be.equal(`<div><p></p></div>`);
             });
         });
     });

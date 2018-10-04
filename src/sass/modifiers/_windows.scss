@@ -1,18 +1,24 @@
-&.windows {
+.#{$shell}--windows {
     color: #FFFFFF;
     border-radius: 0;
     box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
 
-    .status-bar {
+    .#{$shell}__status-bar {
         height: 30px;
         background-color: $main-windows-color;
 
-        .buttons {
+        .#{$statusBar}__title {
+            @include adjust-font(16px, 40px);
+            color: #292929;
+        }
+
+        .#{$statusBar}__buttons {
             align-items: stretch;
+            justify-content: flex-end;
             order: 1;
             padding: 0;
 
-            button {
+            .button {
                 margin: 0;
                 border-radius: 0;
                 @include size(25px, 20px);
@@ -20,10 +26,14 @@
 
                 i {
                     @include size(100%, 20px);
-                    @include adjust-font(10px, 20px);
+                    @include adjust-font(20px, 20px);
+
+                    &:before {
+                        line-height: 20px;
+                    }
                 }
 
-                &.icon-close {
+                &.button--close {
                     width: 50px;
                     background: #C75050;
                     color: #FFFFFF;
@@ -34,7 +44,7 @@
                     }
                 }
 
-                &.icon-minimize {
+                &.button--minimize {
                     background: transparent;
                     color: #292929;
 
@@ -44,7 +54,7 @@
                     }
                 }
 
-                &.icon-enlarge {
+                &.button--enlarge {
                     background: transparent;
                     color: #292929;
 
@@ -56,7 +66,7 @@
             }
         }
 
-        .icon {
+        .#{$statusBar}__icon {
             background: #000000;
             color: #FFFFFF;
             @include size(20px);
@@ -65,23 +75,18 @@
             border-radius: 3px;
             margin: 5px;
         }
-
-        .title {
-            @include adjust-font(16px, 40px);
-            color: #292929;
-        }
     }
 
-    .content {
+    .#{$shell}__#{$content} {
         border-color: $main-windows-color;
         background: #000000;
 
         .line {
-            .prefix {
+            .line__prefix {
                 .user { color: #FFFFFF; }
                 .host { color: #FFFFFF; }
                 .path { color: #FFFFFF; }
-                .root {
+                .line--root {
                     .user { color: #FFFFFF; }
                     .host { color: #FFFFFF; }
                     .path { color: #FFFFFF; }

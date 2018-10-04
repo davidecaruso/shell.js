@@ -1,6 +1,6 @@
 export * from "./BuilderFactory";
-export * from "./Director";
-export * from "./Shell";
+
+export * from "./BuilderInterface";
 export * from "./DefaultBuilder";
 export * from "./OsxBuilder";
 export * from "./UbuntuBuilder";

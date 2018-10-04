@@ -1,15 +1,12 @@
-import "../sass/main.scss"
-import {BuilderFactory, Director} from "./Classes";
-import {Options} from "./Interfaces";
-import {Style, Theme} from "./Enums";
-import {$, arrDiff} from "./util";
+import "../sass/main.scss";
+import {Options, Style, Theme} from "./Interfaces";
+import {BuilderFactory} from "./Builders";
+import {$} from "./utils";
 
 module.exports = class Shell {
-    private readonly director: Director;
     private readonly el: Element;
     private readonly factory: BuilderFactory;
-    private readonly name = "shell";
-    private options: Options = {
+    private readonly options: Options = {
         commands: [],
         host: "host",
         path: "~",
@@ -17,119 +14,106 @@ module.exports = class Shell {
         root: false,
         style: Style.DEFAULT,
         theme: Theme.DARK,
-        typed: null,
+        typed: undefined,
         user: "user"
     };
 
     /**
-     * Shell.js constructor
-     * @param {string} selector
-     * @param {Options} options
+     * Shell.js constructor.
+     * @param {string}  selector The CSS selector for the element.
+     * @param {Options} options  Object of options.
+     *
+     * @return {void}
      */
     constructor(selector: string, options: Options) {
         // If element exists
         if ($(selector).length) {
             this.el = $(selector)[0];
-            this.director = new Director();
             this.factory = new BuilderFactory();
 
-            // Merge options
+            // Merge passed options with default options
             this.options = {...this.options, ...options};
 
-            // Hardcode for Windows
-            if (this.options.style === "windows" && this.options.path === "~") {
-                this.options.path = "C:\\Windows\\system32\\";
-            }
-
+            // Initialize Shell.js
             this.init();
-        }
-    }
-
-    private addClassNames() {
-        let classes = [this.name, this.options.theme];
-
-        if (this.options.style !== "default") {
-            classes.push(this.options.style);
-        }
-
-        if (this.options.responsive) {
-            classes.push("responsive");
-        }
-
-        if (this.options.typed) {
-            classes.push("typed");
-        }
-
-        // Get current classes of the element
-        let currentClasses = this.el.className.split(" ").filter(className => className !== "");
-        // Remove duplicates
-        currentClasses = arrDiff(currentClasses, classes);
-        // Add classes to element
-        this.el.className = `${currentClasses.join(" ")} ${classes.join(" ")}`;
-    }
-
-    private bindTyping(): void {
-        // Typed.js integration
-        if (this.options.typed && typeof this.options.typed === "function") {
-            let commandsNum = $(".line", this.el).length;
-
-            // Execute commands
-            if (commandsNum) {
-                this.type(0, commandsNum);
-            }
-        } else {
-            // Typed.js was not found, remove class
-            this.el.className = this.el.className.replace(" typed", "");
         }
     }
 
     /**
      * Build the HTML structure and execute commands.
+     *
+     * @return {void}
      */
     private init(): void {
-        this.addClassNames();
+        // Basing on the passed options, create a Shell builder
         let builder = this.factory.create(this.options);
-        this.el.innerHTML = this.director.build(builder);
-        this.bindTyping();
+
+        // Build the Shell
+        let shell = builder.addStatusBar().addContent().build();
+
+        // Get current classes of the element
+        let currentClasses = this.el.className.split(" ").filter(className => {
+            return className !== "" && shell.classes.indexOf(className) === -1;
+        });
+
+        // Add classes to element
+        this.el.className = `${currentClasses.join(" ")} ${shell.classes.join(" ")}`;
+
+        // Build the HTML
+        this.el.innerHTML = shell.toString();
+
+        // Typed.js integration
+        if (this.options.typed && typeof this.options.typed === "function") {
+            this.type(0, $(`.line`, this.el).length || 0);
+        }
     }
 
     /**
      * Type terminal commands.
+     * @param {number} index       The index of the command to type
+     * @param {number} commandsNum The number of the commands to execute
+     *
+     * @return {void}
      */
-    private type(index, commandsNum): void {
-        let typed = this.options.typed;
-        let line = $(`.line-${index}`, this.el);
-        let speed = "^800";
+    private type(index: number, commandsNum: number): void {
+        if (commandsNum > 0) {
+            let line = $(`.line[data-index="${index}"]`, this.el);
+            let delay = 600;
 
-        if (line.length) {
-            let command = $(".command", line[0]);
-            let commandText = command[0].innerHTML;
+            // If line exists
+            if (line.length) {
+                // Get the command
+                let commandEl = $(`.command`, line[0]);
+                let commandContent = commandEl[0].innerHTML;
 
-            // Show the line
-            line[0].className = `active ${line[0].className}`;
+                // Show the line
+                line[0].className = `line--active ${line[0].className}`;
 
-            if (command[0].className.indexOf("output") === -1 && index < commandsNum - 1) {
+                // If is an output command AND is not the last command, type it
+                if (commandEl[0].className.indexOf(`line--output`) === -1 && index < commandsNum - 1) {
+                    // Empty the command
+                    commandEl[0].innerHTML = "";
 
-                // Empty the command
-                command[0].innerHTML = "";
+                    // Create a new instance of Typed.js
+                    new this.options.typed(commandEl[0], {
+                        strings: [`${commandContent}^${delay}`],
+                        typeSpeed: 90,
+                        loop: false,
+                        contentType: "html",
+                        cursorChar: "&nbsp;",
+                        showCursor: true,
+                        onStringTyped: () => {
+                            // Remove cursor from each line except for the last one
+                            line[0].removeChild($(`.typed-cursor`, line[0])[0]);
+                            // Let's type the next line
+                            this.type((index + 1), commandsNum);
+                        }
+                    });
 
-                new typed(command[0], {
-                    strings: [speed + commandText],
-                    typeSpeed: 50,
-                    loop: false,
-                    contentType: "html",
-                    cursorChar: "&nbsp;",
-                    showCursor: true,
-                    onStringTyped: () => {
-                        // Removes cursor from each line except for the last one
-                        line[0].removeChild($(".typed-cursor", line[0])[0]);
-                        this.type((index + 1), commandsNum);
-                    }
-                });
-
-            } else if (index <= commandsNum - 2) {
-                // After the bash output go type next line
-                this.type((index + 1), commandsNum);
+                } else if (index <= commandsNum - 2) {
+                    // After the bash output let's type next line
+                    this.type((index + 1), commandsNum);
+                }
             }
         }
     };
