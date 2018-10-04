@@ -29,7 +29,7 @@ export class OsxBuilder extends DefaultBuilder {
             `<span class="path">${this.options.path}</span>` +
             `<span class="user"> ${this.user}</span>` +
             `<span class="char">${this.char}</span>` +
-        `</span>`;
+        `&nbsp;</span>`;
     }
 
     protected login(counter: number): CommandParams {

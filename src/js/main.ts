@@ -76,10 +76,8 @@ module.exports = class Shell {
                     cursorChar: "&nbsp;",
                     showCursor: true,
                     onStringTyped: () => {
-                        // Removes cursor from each line except for the last one
-                        line[0].removeChild(
-                            $(`.${defaultClassName}__typed-cursor`, line[0])[0]
-                        );
+                        // Remove cursor from each line except for the last one
+                        line[0].removeChild($(`.typed-cursor`, line[0])[0]);
                         this.type((index + 1), commandsNum);
                     }
                 });

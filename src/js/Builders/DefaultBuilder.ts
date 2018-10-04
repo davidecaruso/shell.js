@@ -1,4 +1,3 @@
-import {defaultClassName} from "../Helpers";
 import {BuilderInterface} from "./BuilderInterface";
 import {CommandParams, Options} from "../Interfaces/";
 import {Shell, StatusBar, StatusBarTitle, StatusBarButtons, Content} from "../Shell";
@@ -119,12 +118,11 @@ export class DefaultBuilder implements BuilderInterface {
                 classes.push(`line--active`);
             }
             line += `${this.getPrefix()}` +
-                `<span class="command"><span class="${defaultClassName}__typed-cursor">${this.cursor}</span></span>`;
+                `<span class="command"><span class="typed-cursor">${this.cursor}</span></span>`;
         } else {
             if (params.command) {
                 line += (params.output ? "" : this.getPrefix()) +
-                    `<span class="command` + (params.output ? ` line--output` : "") + `">` +
-                    `${params.command}</span>`;
+                    `<span class="command` + (params.output ? ` line--output` : "") + `">${params.command}</span>`;
             }
         }
         line += "</div>";
@@ -139,7 +137,7 @@ export class DefaultBuilder implements BuilderInterface {
             `<span class="colon">:</span>` +
             `<span class="path">${this.options.path}</span>` +
             `<span class="char">${this.char}</span>` +
-        `</span>`;
+        `&nbsp;</span>`;
     }
 
     protected sudo(params: CommandParams): CommandParams {

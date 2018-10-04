@@ -1,5 +1,5 @@
-#{$shell}--typed {
-    .content .line {
+.#{$shell}--typed {
+    .#{$shell}__#{$content} .line {
         display: none;
     }
 }
