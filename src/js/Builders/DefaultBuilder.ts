@@ -1,26 +1,56 @@
 import {BuilderInterface} from "./BuilderInterface";
-import {CommandParams, Options} from "../Interfaces/";
+import {CommandParams, Options} from "../Interfaces";
 import {Shell, StatusBar, StatusBarTitle, StatusBarButtons, Content} from "../Shell";
 
 export class DefaultBuilder implements BuilderInterface {
-    protected readonly _char: string = "$";
-    protected readonly cursor: string = "&nbsp;";
     protected shell: Shell;
     protected options: Options;
+    protected readonly _char: string = "$";
+    protected readonly cursor: string = "&nbsp;";
 
-    constructor(o: Options) {
-        this.options = o;
-        this.shell = new Shell(o);
+    /**
+     * DefaultBuilder constructor.
+     * @param {Options} options Object of options.
+     *
+     * @return {void}
+     */
+    constructor(options: Options) {
+        this.options = options;
+        this.shell = new Shell(options);
     }
 
+    /**
+     * Get the Shell char,
+     *
+     * @return {string}
+     */
     get char(): string {
         return this.options.root ? "#" : this._char;
     }
 
+    /**
+     * Get the Shell user,
+     *
+     * @return {string}
+     */
     get user(): string {
         return this.options.root ? "root" : this.options.user;
     }
 
+    /**
+     * Build the Shell.
+     *
+     * @return {Shell}
+     */
+    build(): Shell {
+        return this.shell;
+    }
+
+    /**
+     * Add the status bar to the Shell.
+     *
+     * @return {BuilderInterface}
+     */
     addStatusBar(): this {
         let buttons = new StatusBarButtons(
             `<button class="button button--close"><i class="icon-close"></i></button>` +
@@ -34,6 +64,11 @@ export class DefaultBuilder implements BuilderInterface {
         return this;
     }
 
+    /**
+     * Add the content to the Shell.
+     *
+     * @return {BuilderInterface}
+     */
     addContent(): this {
         let content = "";
         let counter = 0;
@@ -51,7 +86,7 @@ export class DefaultBuilder implements BuilderInterface {
                 let params: CommandParams = {
                     command,
                     counter,
-                    output: null
+                    output: undefined
                 };
 
                 // Build line
@@ -84,6 +119,8 @@ export class DefaultBuilder implements BuilderInterface {
 
     /**
      * Build the HTML structure of a single terminal line.
+     *
+     * @return {string}
      */
     private buildLine(params: CommandParams): string {
         let classes = [`line`];
@@ -94,7 +131,7 @@ export class DefaultBuilder implements BuilderInterface {
             ...{
                 counter: 0,
                 empty: false,
-                command: null,
+                command: undefined,
                 output: false
             },
             ...params
@@ -130,6 +167,11 @@ export class DefaultBuilder implements BuilderInterface {
         return line;
     }
 
+    /**
+     * Build the line prefix.
+     *
+     * @return {string}
+     */
     protected getPrefix(): string {
         return `<span class="line__prefix">` +
             `<span class="user">${this.user}@</span>` +
@@ -140,6 +182,22 @@ export class DefaultBuilder implements BuilderInterface {
         `&nbsp;</span>`;
     }
 
+    /**
+     * Get effect of login behaviour.
+     * @param {number} counter The index of the command.
+     *
+     * @return {CommandParams}
+     */
+    protected login(counter: number): CommandParams {
+        return {};
+    }
+
+    /**
+     * Get effect of sudo behaviour.
+     * @param {CommandParams} params Params for the command.
+     *
+     * @return {CommandParams}
+     */
     protected sudo(params: CommandParams): CommandParams {
         this.options.root = true;
         params.command = `[sudo] password for ${this.options.user}:`;
@@ -147,18 +205,16 @@ export class DefaultBuilder implements BuilderInterface {
         return params;
     }
 
+    /**
+     * Get effect of logout behaviour.
+     * @param {CommandParams} params Params for the command.
+     *
+     * @return {CommandParams}
+     */
     protected logout(params: CommandParams): CommandParams {
         this.options.root = false;
         params.command = "logout";
         params.output = true;
         return params;
-    }
-
-    protected login(counter: number): CommandParams {
-        return {};
-    }
-
-    build(): string {
-        return this.shell.toString();
     }
 }

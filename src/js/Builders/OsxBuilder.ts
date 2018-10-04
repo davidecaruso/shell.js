@@ -1,14 +1,17 @@
+import {strPad} from "../utils";
 import {DefaultBuilder} from "./";
-import {CommandParams} from "../Interfaces/";
-import {defaultClassName, strPad} from "../Helpers";
-import {StatusBar} from "../Shell";
-import {StatusBarButtons} from "../Shell/StatusBarButtons";
-import {StatusBarTitle} from "../Shell/StatusBarTitle";
+import {CommandParams} from "../Interfaces";
+import {StatusBar, StatusBarTitle, StatusBarButtons} from "../Shell";
 
 export class OsxBuilder extends DefaultBuilder {
     protected readonly columns: number = 80;
     protected readonly rows: number = 24;
 
+    /**
+     * Add the status bar to the Shell.
+     *
+     * @return {BuilderInterface}
+     */
     addStatusBar(): this {
         let buttons = new StatusBarButtons(
             `<button class="button button--close"><i class="icon-dot"></i></button>` +
@@ -22,6 +25,11 @@ export class OsxBuilder extends DefaultBuilder {
         return this;
     }
 
+    /**
+     * Build the line prefix.
+     *
+     * @return {string}
+     */
     protected getPrefix(): string {
         return `<span class="line__prefix">` +
             `<span class="host">${this.options.host}</span>` +
@@ -32,6 +40,12 @@ export class OsxBuilder extends DefaultBuilder {
         `&nbsp;</span>`;
     }
 
+    /**
+     * Get effect of login behaviour.
+     * @param {number} counter The index of the command.
+     *
+     * @return {CommandParams}
+     */
     protected login(counter: number): CommandParams {
         let date = new Date();
         let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -48,6 +62,12 @@ export class OsxBuilder extends DefaultBuilder {
         }
     }
 
+    /**
+     * Get effect of sudo behaviour.
+     * @param {CommandParams} params Params for the command.
+     *
+     * @return {CommandParams}
+     */
     protected sudo(params: CommandParams): CommandParams {
         params = super.sudo(params);
         params.command = `Password: <span class="icon-key"></span>`;

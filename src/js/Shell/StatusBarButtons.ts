@@ -1,17 +1,23 @@
-import {ShellElement} from "./ShellElement";
+import {ShellElement, StatusBar} from "./";
 
 export class StatusBarButtons implements ShellElement {
-    protected elements: string;
+    protected content: string;
 
-    constructor(elements: string) {
-        this.elements = elements;
+    /**
+     * StatusBarButtons constructor.
+     * @param {string} content The content.
+     *
+     * @return {void}
+     */
+    constructor(content: string) {
+        this.content = content;
     }
 
     /**
      * Get StatusBarButtons in string format.
-     * @returns {string}
+     * @return {string}
      */
     public toString(): string {
-        return `<div class="status-bar__buttons">${this.elements}</div>`;
+        return `<div class="${StatusBar.IDENTIFIER}__buttons">${this.content}</div>`;
     }
 }

@@ -13,7 +13,7 @@ enum PadType {
  *                               can't be evenly divided by the pad_string's length.
  * @param {PadType}       type   Optional argument type can be STR_PAD_RIGHT, STR_PAD_LEFT, or STR_PAD_BOTH.
  *                               If type is not specified it is assumed to be STR_PAD_RIGHT.
- * @returns {string}             Returns the padded string.
+ * @return {string}             Returns the padded string.
  */
 export function strPad(
     input: string,
@@ -51,10 +51,11 @@ export function strPad(
 }
 
 /**
- * Query selector wrapper
+ * Query selector wrapper.
  * @param {string}     selector    CSS selector.
  * @param {ParentNode} parent      Parent element where to search in. Default: window.document.
- * @returns {NodeListOf<Element>}  HTML object.
+ *
+ * @return {NodeListOf<Element>}  HTML object.
  */
 export function $(selector: string, parent: ParentNode = window.document): NodeListOf<Element> {
     return parent.querySelectorAll(selector);

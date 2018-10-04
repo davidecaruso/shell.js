@@ -1,14 +1,20 @@
 import {Options} from "../Interfaces";
-import {defaultClassName} from "../Helpers";
 import {ShellElement, StatusBar, Content} from "./";
 
 export class Shell implements ShellElement {
+    static readonly IDENTIFIER = "shell";
     protected readonly options: Options;
     protected _statusBar: StatusBar;
     protected _content: Content;
 
-    constructor(o: Options) {
-        this.options = o;
+    /**
+     * Shell constructor.
+     * @param {Options} options Object of options.
+     *
+     * @return {void}
+     */
+    constructor(options: Options) {
+        this.options = options;
     }
 
     /**
@@ -29,7 +35,7 @@ export class Shell implements ShellElement {
 
     /**
      * Get Shell in string format.
-     * @returns {string}
+     * @return {string}
      */
     public toString(): string {
         return `<div class="${this.classes()}">` +
@@ -39,25 +45,25 @@ export class Shell implements ShellElement {
 
     /**
      * Get HTML classes basing on options.
-     * @returns {string}
+     * @return {string}
      */
     protected classes(): string {
-        let classes = [defaultClassName];
+        let classes = [Shell.IDENTIFIER];
 
         if (this.options.style !== "default") {
-            classes.push(`${defaultClassName}--${this.options.style}`);
+            classes.push(`${Shell.IDENTIFIER}--${this.options.style}`);
         }
 
         if (this.options.theme !== "dark") {
-            classes.push(`${defaultClassName}--${this.options.theme}`);
+            classes.push(`${Shell.IDENTIFIER}--${this.options.theme}`);
         }
 
         if (this.options.responsive) {
-            classes.push(`${defaultClassName}--responsive`);
+            classes.push(`${Shell.IDENTIFIER}--responsive`);
         }
 
-        if (this.options.typed) {
-            classes.push(`${defaultClassName}--typed`);
+        if (this.options.typed && typeof this.options.typed === "function") {
+            classes.push(`${Shell.IDENTIFIER}--typed`);
         }
 
         return classes.join(" ");

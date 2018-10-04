@@ -1,18 +1,23 @@
-import {defaultClassName} from "../Helpers";
-import {ShellElement} from "./ShellElement";
+import {ShellElement, Shell} from "./";
 
 export class Content implements ShellElement {
-    protected _inner: string;
+    protected content: string;
 
-    constructor(inner: string) {
-        this._inner = `<div class="${defaultClassName}__content">${inner}</div>`;
+    /**
+     * Content constructor.
+     * @param {string} content The content.
+     *
+     * @return {void}
+     */
+    constructor(content: string) {
+        this.content = content;
     }
 
     /**
-     * Get StatusBar in string format.
-     * @returns {string}
+     * Get Shell content in string format.
+     * @return {string}
      */
     public toString(): string {
-        return this._inner;
+        return `<div class="${Shell.IDENTIFIER}__content">${this.content}</div>`;
     }
 }
