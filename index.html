@@ -22,35 +22,35 @@
     <div id="ubuntu"></div>
     <div id="ubuntu-light"></div>
     <div id="windows"></div>
+    <div id="windows-2"></div>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
 <script src="/shell.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         new Shell('#default', {
-            user: 'guest',
+            user: 'foo',
+            host: 'bar',
             typed: Typed,
-            responsive: false,
+            responsive: true,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#default-light', {
-            user: 'guest',
-            typed: Typed,
+            user: 'bar',
             theme: 'light',
             responsive: false,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#osx', {
             user: 'guest',
-            typed: Typed,
             host: 'MacBook-Pro',
+            typed: Typed,
             style: 'osx',
-            responsive: false,
+            responsive: true,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#osx-light', {
             user: 'guest',
-            typed: Typed,
             host: 'MacBook-Pro',
             style: 'osx',
             theme: 'light',
@@ -59,15 +59,14 @@
         });
         new Shell('#ubuntu', {
             user: 'guest',
-            typed: Typed,
             host: 'localhost',
+            typed: Typed,
             style: 'ubuntu',
-            responsive: false,
+            responsive: true,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
         new Shell('#ubuntu-light', {
             user: 'guest',
-            typed: Typed,
             host: 'localhost',
             style: 'ubuntu',
             theme: 'light',
@@ -78,6 +77,11 @@
             style: 'windows',
             typed: Typed,
             responsive: false,
+            commands: ['sudo -i', 'rm -rf /', 'exit']
+        });
+        new Shell('#windows-2', {
+            style: 'windows',
+            responsive: true,
             commands: ['sudo -i', 'rm -rf /', 'exit']
         });
     });
