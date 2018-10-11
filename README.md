@@ -22,11 +22,11 @@ For each **Shell** instance you can set the following options:
 | ------- | -------------- | ----------- | ------------ |
 | user | *string* | The user | **"user"** |
 | host | *string* | The host | **"host"** |
-| path | *string* | The working directory | **~** &#124; C:\Windows\system32\ |
+| path | *string* | The working directory | **"~"** &#124; **"C:\Windows\system32\"** |
 | style | **"default"**&#124;**"ubuntu"**&#124;**"osx"**&#124;**"windows"** | The OS style | **"default"** |
 | theme | **"dark"**&#124;**"light"** | The theme | **"dark"** |
 | responsive | *boolean* | Responsiveness  | *true* |
-| typed | *Typed* callabke | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
+| typed | *Typed* callable | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
 | commands | array | The commands list | *[]* |
 
 
