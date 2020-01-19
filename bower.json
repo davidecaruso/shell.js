@@ -1,8 +1,10 @@
 {
   "name": "shell.js",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
+  "homepage": "http://shelljs.io",
+  "main": "lib/shell.js",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,9 +19,7 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "scripts": [],
   "moduleType": [],
-  "homepage": "https://davidecaruso.github.io/shell.js",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -31,8 +31,5 @@
     "package.json",
     "README.md"
   ],
-  "authors": [
-    "Davide Caruso <davide.caruso93@gmail.com>"
-  ],
-  "main": "lib/shell.js"
+  "scripts": []
 }
