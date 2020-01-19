@@ -1,9 +1,25 @@
 {
   "name": "shell.js",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
+  "homepage": "http://shelljs.io",
+  "main": "lib/shell.js",
   "license": "MIT",
+  "repository": "git+https://github.com/davidecaruso/shell.js.git",
+  "bugs": {
+    "url": "https://github.com/davidecaruso/shell.js/issues"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --env=development --watch",
+    "build": "npm run build:dev && npm run build:prod",
+    "build:dev": "webpack --env=development",
+    "build:prod": "webpack --env=production -p",
+    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/*.test.ts",
+    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.test.ts --watch",
+    "test:coverage": "nyc npm run test",
+    "test:report": "npm run test:coverage & nyc report --reporter=html"
+  },
   "keywords": [
     "shell",
     "shell.js",
@@ -49,21 +65,5 @@
   },
   "directories": {
     "test": "test"
-  },
-  "repository": "git+https://github.com/davidecaruso/shell.js.git",
-  "bugs": {
-    "url": "https://github.com/davidecaruso/shell.js/issues"
-  },
-  "scripts": {
-    "dev": "webpack-dev-server --env=development --watch",
-    "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "webpack --env=development",
-    "build:prod": "webpack --env=production -p",
-    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/*.test.ts",
-    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.test.ts --watch",
-    "test:coverage": "nyc npm run test",
-    "test:report": "npm run test:coverage & nyc report --reporter=html"
-  },
-  "homepage": "https://davidecaruso.github.io/shell.js",
-  "main": "lib/shell.js"
+  }
 }
