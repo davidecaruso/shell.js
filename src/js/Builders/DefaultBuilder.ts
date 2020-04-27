@@ -85,8 +85,7 @@ export class DefaultBuilder implements BuilderInterface {
             this.options.commands.forEach(command => {
                 // check if there is an object, and if object is valid
                 if (typeof command === "object" && command["input"] ) {
-                    console.log("command", command);
-                    var outputLine= command["output"];
+                    var outputLines: string[] = command["output"];
                     command = command["input"];
                 }
                 let params: CommandParams = {
@@ -115,12 +114,14 @@ export class DefaultBuilder implements BuilderInterface {
                 }
 
                 // If there is an output
-                if (outputLine) {
-                    counter++;
-                    params.counter = counter;
-                    params.command = outputLine;
-                    params.output = true;
-                    content += this.buildLine(params);
+                if (outputLines) {
+                    for (const outputLine of outputLines){
+                        counter++;
+                        params.counter = counter;
+                        params.command = outputLine;
+                        params.output = true;
+                        content += this.buildLine(params);
+                    }
                 }
 
                 counter++;

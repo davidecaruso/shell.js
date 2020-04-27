@@ -33,13 +33,13 @@
             host: 'bar',
             typed: Typed,
             responsive: true,
-            commands: ['sudo -i', 'rm -rf /', 'exit', {'input': 'pwd', 'output': '/Users/Carmelo Anthony'}]
+            commands: ['sudo -i', 'rm -rf /', 'exit', {'input': 'pwd', 'output': ['/Users/Carmelo Anthony']}]
         });
         new Shell('#default-light', {
             user: 'bar',
             theme: 'light',
             responsive: false,
-            commands: ['sudo -i', 'rm -rf /', 'exit']
+            commands: ['sudo -i', 'rm -rf /', 'exit', {'input': 'ls', 'output': ['Applications  Desktop  Downloads  Movies  Pictures', 'Documents  Library  Music  Public']}]
         });
         new Shell('#osx', {
             user: 'guest',
