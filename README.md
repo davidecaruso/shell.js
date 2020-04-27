@@ -1,5 +1,5 @@
 ![Shell.js](assets/images/logo.margins.png)
-> A **JavaScript** library to create HTML **terminals** in web pages.
+<p align="center">
 
 [![npm](https://img.shields.io/npm/v/shell.js.svg)](https://www.npmjs.com/package/shell.js)
 [![npm](https://img.shields.io/npm/dm/shell.js.svg)](https://www.npmjs.com/package/shell.js)
@@ -7,6 +7,10 @@
 [![travis](https://travis-ci.org/davidecaruso/shell.js.svg?branch=master)](https://travis-ci.org/davidecaruso/shell.js)
 [![coveralls](https://coveralls.io/repos/github/davidecaruso/shell.js/badge.svg?branch=master)](https://coveralls.io/github/davidecaruso/shell.js?branch=master)
 ![license](https://img.shields.io/github/license/davidecaruso/shell.js.svg)
+
+</p>
+
+> A **JavaScript** library to create HTML **terminals** in web pages.
 
 ## Install
 ```bash
@@ -50,10 +54,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-> Visit the documentation [page](https://davidecaruso.github.io/shell.js)
+> Visit the documentation [page](https:///shelljs.io)
 
 ## Author
-[Davide Caruso](https://davidecaruso.github.io)
+[Davide Caruso](https://about.me/davidecaruso)
 
 ## License
 Licensed under [MIT](LICENSE).

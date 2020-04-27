@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "http://shelljs.io",
@@ -45,7 +45,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "^11.3.0",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^5.2.0",
+    "mocha": "^7.1.2",
     "node-sass": "^4.5.3",
     "nyc": "^15.0.0",
     "postcss-loader": "^2.0.6",
