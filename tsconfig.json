@@ -5,6 +5,7 @@
     "module": "commonjs",
     "removeComments": true,
     "target": "es5",
+    "skipLibCheck": true,
     "types": [
       "node"
     ]
