@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-> Visit the documentation [page](https:///shelljs.io)
+> Visit the documentation [page](https://shelljs.io)
 
 ## Author
 [Davide Caruso](https://about.me/davidecaruso)
