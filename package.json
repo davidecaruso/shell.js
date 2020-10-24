@@ -29,8 +29,7 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",
