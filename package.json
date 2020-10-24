@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "http://shelljs.io",
@@ -29,8 +29,7 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",
