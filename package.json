@@ -10,8 +10,11 @@
   "bugs": {
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
+  "engines": {
+    "node": ">=12"
+  },
   "scripts": {
-    "dev": "webpack-dev-server --env=development --watch",
+    "dev": "webpack --env=development",
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --env=development",
     "build:prod": "webpack --env=production -p",
@@ -29,7 +32,6 @@
     "javascript-library",
     "javascript-plugin"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",
@@ -45,21 +47,20 @@
     "jsdom": "^11.3.0",
     "jshint-stylish": "^2.2.1",
     "mocha": "^7.1.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "nyc": "^15.0.0",
     "postcss-loader": "^2.0.6",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^12.1.0",
     "should": "^13.1.2",
     "style-loader": "^0.18.2",
     "terser-webpack-plugin": "^2.3.8",
     "ts-loader": "^4.2.0",
-    "typescript": "^4.0.2",
     "ts-node": "^6.1.0",
     "typed.js": "^2.0.7",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.0",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.11.0",
+    "typescript": "^4.0.2",
+    "url-loader": "^3.0",
+    "webpack": "^5.0",
+    "webpack-cli": "^4.8.0",
     "webpack-merge": "^4.1.2"
   },
   "directories": {

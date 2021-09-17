@@ -5,5 +5,6 @@ module.exports = merge(common, {
     devServer: {
         contentBase: './'
     },
-    mode: 'development'
+    mode: 'development',
+    watch: true,
 });
