@@ -1,4 +1,4 @@
-import {DefaultBuilder} from "./";
+import {DefaultBuilder} from "./index";
 import {CommandParams, Options} from "../Interfaces";
 import {StatusBar, StatusBarTitle, StatusBarButtons, StatusBarIcon} from "../Shell";
 

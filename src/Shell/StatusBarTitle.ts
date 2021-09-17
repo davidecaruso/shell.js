@@ -1,4 +1,4 @@
-import {ShellElement, StatusBar} from "./";
+import {ShellElement, StatusBar} from "./index";
 
 export class StatusBarTitle implements ShellElement {
     protected content: string;

@@ -1,10 +1,10 @@
-import {ShellElement, StatusBar} from "./";
+import {ShellElement, Shell} from "./index";
 
-export class StatusBarButtons implements ShellElement {
+export class Content implements ShellElement {
     protected content: string;
 
     /**
-     * StatusBarButtons constructor.
+     * Content constructor.
      * @param {string} content The content.
      *
      * @return {void}
@@ -14,10 +14,10 @@ export class StatusBarButtons implements ShellElement {
     }
 
     /**
-     * Get StatusBarButtons in string format.
+     * Get Shell content in string format.
      * @return {string}
      */
     public toString(): string {
-        return `<div class="${StatusBar.IDENTIFIER}__buttons">${this.content}</div>`;
+        return `<div class="${Shell.IDENTIFIER}__content">${this.content}</div>`;
     }
 }

@@ -1,5 +1,5 @@
 import {Options, Style} from "../Interfaces";
-import {OsxBuilder, UbuntuBuilder, WindowsBuilder, DefaultBuilder, BuilderInterface} from "./";
+import {OsxBuilder, UbuntuBuilder, WindowsBuilder, DefaultBuilder, BuilderInterface} from "./index";
 
 export class BuilderFactory {
     /**

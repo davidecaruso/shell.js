@@ -1,5 +1,5 @@
-@import "helpers/all";
-@import "base/all";
+@import "assets/style/helpers/all";
+@import "assets/style/base/all";
 
 .#{$shell} {
     @extend %regular;
@@ -20,7 +20,7 @@
         @include adjust-font(10px);
     }
 
-    @import "components/all";
+    @import "assets/style/components/all";
 }
 
-@import "modifiers/all";
+@import "assets/style/modifiers/all";

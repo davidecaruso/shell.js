@@ -1,4 +1,4 @@
-import "../sass/main.scss";
+import "../assets/style/main.scss";
 import {Options, Style, Theme} from "./Interfaces";
 import {BuilderFactory} from "./Builders";
 import {$} from "./utils";

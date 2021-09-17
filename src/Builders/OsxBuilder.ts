@@ -1,5 +1,5 @@
 import {strPad} from "../utils";
-import {DefaultBuilder} from "./";
+import {DefaultBuilder} from "./index";
 import {CommandParams} from "../Interfaces";
 import {StatusBar, StatusBarTitle, StatusBarButtons} from "../Shell";
 

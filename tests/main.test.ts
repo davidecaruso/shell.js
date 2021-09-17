@@ -6,7 +6,7 @@ const GLOBAL: any = global;
 GLOBAL.window = new JSDOM(`<!doctype html><html><body></body></html>`).window;
 GLOBAL.document = window.document;
 
-let Shell = require("../src/js/main");
+let Shell = require("../src/main");
 
 describe("Shell", () => {
     it("should initialize without error", () => {

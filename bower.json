@@ -23,6 +23,7 @@
   "ignore": [
     "assets/images",
     "assets/fonts/selection.json",
+    "assets/style",
     "bower_components",
     "node_modules",
     "src",

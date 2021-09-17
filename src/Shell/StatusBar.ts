@@ -1,4 +1,4 @@
-import {ShellElement, Shell} from "./";
+import {ShellElement, Shell} from "./index";
 
 export class StatusBar implements ShellElement {
     static readonly IDENTIFIER = "status-bar";

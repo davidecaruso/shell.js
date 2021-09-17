@@ -1,5 +1,5 @@
 import {Options} from "../Interfaces";
-import {ShellElement, StatusBar, Content} from "./";
+import {ShellElement, StatusBar, Content} from "./index";
 
 export class Shell implements ShellElement {
     static readonly IDENTIFIER = "shell";
