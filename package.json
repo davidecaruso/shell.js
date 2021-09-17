@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "https://shelljs.io",
