@@ -1,0 +1,28 @@
+@function str-replace($search, $replace, $subject, $all: false) {
+    $position-found: str-index($subject, $search);
+    $processed: ();
+
+    @while $position-found and $position-found > 0 {
+        $length-substr: str-length($search);
+        @if 1 != $position-found {
+            $processed: append($processed, str-slice($subject, 0, $position-found - 1));
+        }
+
+        $processed: append($processed, $replace);
+        $subject: str-slice($subject, $position-found + $length-substr);
+        $position-found: 0;
+
+        @if $all {
+            $position-found: str-index($subject, $search);
+        }
+    }
+
+    $processed: append($processed, $subject);
+    $subject: "";
+
+    @each $s in $processed {
+        $subject: #{$subject}#{$s};
+    }
+
+    @return $subject;
+}

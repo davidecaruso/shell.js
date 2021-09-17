@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
+const assets = '../assets';
 const source = '../src';
 const destination = '../lib';
 
@@ -9,8 +10,8 @@ const library = 'Shell';
 const bundle = library.toLowerCase();
 const entry = {};
 entry[bundle] = [
-    `${path.join(__dirname, source)}/sass/main.scss`,
-    `${path.join(__dirname, source)}/js/main.ts`
+    `${path.join(__dirname, assets)}/style/main.scss`,
+    `${path.join(__dirname, source)}/main.ts`,
 ];
 
 // Export Webpack config
@@ -38,33 +39,33 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: () => [require('autoprefixer')]
-                        }
+                            plugins: () => [require('autoprefixer')],
+                        },
                     },
-                    'sass-loader'
-                ]
+                    'sass-loader',
+                ],
             }, {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: {
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
-                        name: 'assets/fonts/[name].[ext]'
-                    }
-                }
-            }
-        ]
+                        name: 'assets/fonts/[name].[ext]',
+                    },
+                },
+            },
+        ],
     },
     plugins: [
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: [
                     autoprefixer(),
-                ]
-            }
-        })
+                ],
+            },
+        }),
     ],
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.ts', '.js'],
     },
 };

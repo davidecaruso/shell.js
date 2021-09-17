@@ -1,0 +1,114 @@
+// Mixin for creating a triangle element
+// @param $direction: The direction of the arrow.
+// @param $color: The color of the arrow @default #000000.
+// @param $size: The size of the arrow @default 1em.
+
+@mixin triangle($direction, $color: #000000, $size: 1em) {
+    @if not index(top right bottom left, $direction) {
+        @warn "Direction must be one of top, right, bottom or left.";
+    } @else {
+        content: '';
+        z-index: 2;
+        border-#{opposite-position($direction)}: $size * 1.5 solid $color;
+        $perpendicular-borders: $size solid transparent;
+
+        @if $direction == top or $direction == bottom {
+            border-left: $perpendicular-borders;
+            border-right: $perpendicular-borders;
+        } @else if $direction == right or $direction == left {
+            border-bottom: $perpendicular-borders;
+            border-top: $perpendicular-borders;
+        }
+    }
+}
+
+
+// Mixin for setting both width and height of an element
+// @param $width: The width size.
+// @param $height: The height size @default same of $width.
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+
+// Mixin for setting both max-width and max-height of an element
+// @param $width: The max-width size.
+// @param $height: The max-height size @default same of $width.
+@mixin max-size($width, $height: $width) {
+    max-width: $width;
+    max-height: $height;
+}
+
+
+// Mixin for setting both min-width and hmin-eight of an element
+// @param $width: The min-width size.
+// @param $height: The min-height size @default same of $width.
+@mixin min-size($width, $height: $width) {
+    min-width: $width;
+    min-height: $height;
+}
+
+
+// Mixin for making squared an HTML element
+// @param $percentage: Value in percentage, gives the ratio between width and height
+@mixin square($percentage: 100%) {
+    @include size($percentage, 0);
+    @include box-sizing(border-box);
+    padding-bottom: $percentage;
+}
+
+
+// Mixin for centering horizontally
+// @param $reset: Get the initial behaviour
+@mixin centerX($reset: false) {
+
+    @if $reset {
+        @include translateX(0);
+        position: static;
+        left: 0;
+        right: 0;
+    } @else {
+        @include stretch(inherit, inherit, inherit, 50%);
+        @include translateX(-50%);
+    }
+
+}
+
+
+// Mixin for centering vertically
+// @param $reset: Get the initial behaviour
+@mixin centerY($reset: false) {
+
+    @if $reset {
+        @include translateY(0);
+        position: static;
+        top: 0;
+        bottom: 0;
+    } @else {
+        @include stretch(50%, inherit, inherit, inherit);
+        @include translateY(-50%);
+    }
+
+}
+
+
+// Mixin for adjusting the font size
+// @param $to-size: The size of the desired font
+// @param $line-height: The desired line height (Default: auto)
+// @param $from-size: The parent's font size (Default: $base-font-size)
+@mixin adjust-font($to-size, $line-height: auto) {
+    font-size: $to-size * $base-font-size;
+    @if $line-height != auto {
+        line-height: $line-height * $base-font-size;
+    }
+}
+
+// Mixin for cross-browser rules for clip-path rule
+// @param $clip: The clip-path property
+@mixin clip-path($clip) {
+    -webkit-clip-path: $clip;
+    -moz-clip-path: $clip;
+    -ms-clip-path: $clip;
+    clip-path: $clip;
+}

@@ -1,0 +1,36 @@
+.#{$shell}__#{$content} {
+    @extend %monospace;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid transparent;
+    padding: 2px;
+    @include adjust-font(16px, 18px);
+    background: #292929;
+    box-sizing: border-box;
+
+    .line {
+        .line__prefix {
+            .user { color: #8AD733; }
+
+            .host { color: #8AD733; }
+
+            .path { color: #729FCF; }
+        }
+
+        &.line--root {
+            .line__prefix {
+                .user { color: #FFFFFF; }
+
+                .host { color: #FFFFFF; }
+
+                .path { color: #FFFFFF; }
+            }
+        }
+
+        &.line--active {
+            display: block;
+        }
+    }
+}
