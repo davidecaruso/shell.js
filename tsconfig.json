@@ -15,8 +15,8 @@
     "typings/**/*.ts"
   ],
   "exclude": [
+    "coverage",
     "node_modules",
-    "test",
-    "coverage"
+    "tests"
   ]
 }

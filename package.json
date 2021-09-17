@@ -18,8 +18,8 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --env=development",
     "build:prod": "webpack --env=production -p",
-    "test": "mocha -r test/helpers/* -r ts-node/register --globals window test/*.test.ts",
-    "test:watch": "mocha -r test/helpers/* -r ts-node/register test/*.test.ts --watch",
+    "test": "mocha -r tests/helpers/* -r ts-node/register --globals window tests/*.test.ts",
+    "test:watch": "mocha -r tests/helpers/* -r ts-node/register tests/*.test.ts --watch",
     "test:coverage": "nyc npm run test",
     "test:report": "npm run test:coverage & nyc report --reporter=html"
   },
@@ -64,6 +64,6 @@
     "webpack-merge": "^4.1.2"
   },
   "directories": {
-    "test": "test"
+    "test": "tests"
   }
 }
