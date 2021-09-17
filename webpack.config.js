@@ -7,19 +7,9 @@ URL: ${pkg.homepage}
 License(s): ${pkg.license}`;
 
 module.exports = (env, options) => {
-    let config;
     let bannerPlugin = new webpack.BannerPlugin(banner);
-    switch (env) {
-        case 'production':
-            config = require('./webpack/prod');
-            config.plugins.push(bannerPlugin);
-            break;
-        case 'development':
-        default:
-            config = require('./webpack/dev');
-            config.plugins.push(bannerPlugin);
-            break;
-    }
+    const config = env.production ? require('./webpack/prod') : require('./webpack/dev');
 
+    config.plugins.push(bannerPlugin);
     return config;
 };

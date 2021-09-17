@@ -3,8 +3,7 @@ const common = require('./common');
 
 module.exports = merge(common, {
     devServer: {
-        contentBase: './'
+        contentBase: './',
     },
     mode: 'development',
-    watch: true,
 });

@@ -4,11 +4,11 @@ const common = require('./common');
 
 module.exports = merge(common, {
     output: {
-        filename: '[name].min.js'
+        filename: '[name].min.js',
     },
     optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin()]
+        minimizer: [new TerserPlugin()],
     },
-    mode: 'production'
+    mode: 'production',
 });
