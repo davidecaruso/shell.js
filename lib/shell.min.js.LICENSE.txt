@@ -1,7 +1,7 @@
 /*!
  * shell.js - A JavaScript library to create HTML terminals in web pages.
  * Author: Davide Caruso <davide.caruso93@gmail.com>
- * Version: v3.3.0
+ * Version: v3.3.1
  * URL: https://shelljs.io
  * License(s): MIT
  */
