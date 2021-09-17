@@ -1,10 +1,10 @@
-export * from "./ShellElement";
+export * from './ShellElement'
 
-export * from "./Shell";
+export * from './Shell'
 
-export * from "./StatusBar";
-export * from "./StatusBarIcon";
-export * from "./StatusBarTitle";
-export * from "./StatusBarButtons";
+export * from './StatusBar'
+export * from './StatusBarIcon'
+export * from './StatusBarTitle'
+export * from './StatusBarButtons'
 
-export * from "./Content";
+export * from './Content'

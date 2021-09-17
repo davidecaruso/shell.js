@@ -1,8 +1,8 @@
-import {ShellElement, Shell} from "./index";
+import { Shell, ShellElement } from './index'
 
 export class StatusBar implements ShellElement {
-    static readonly IDENTIFIER = "status-bar";
-    protected elements: ShellElement[];
+    static readonly IDENTIFIER = 'status-bar'
+    protected elements: ShellElement[]
 
     /**
      * StatusBar constructor.
@@ -11,7 +11,7 @@ export class StatusBar implements ShellElement {
      * @return {void}
      */
     constructor(...elements: ShellElement[]) {
-        this.elements = elements;
+        this.elements = elements
     }
 
     /**
@@ -19,11 +19,11 @@ export class StatusBar implements ShellElement {
      * @return {string}
      */
     public toString(): string {
-        let content = `<div class="${Shell.IDENTIFIER}__${StatusBar.IDENTIFIER}">`;
+        let content = `<div class="${Shell.IDENTIFIER}__${StatusBar.IDENTIFIER}">`
         this.elements.forEach(el => {
-            content += el.toString();
-        });
-        content += `</div>`;
-        return content;
+            content += el.toString()
+        })
+        content += `</div>`
+        return content
     }
 }

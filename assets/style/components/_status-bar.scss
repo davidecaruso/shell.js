@@ -29,6 +29,7 @@
                 text-align: center;
                 @include size(100%, 13px);
                 display: block;
+
                 &:before {
                     line-height: 13px;
                     display: block;

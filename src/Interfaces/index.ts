@@ -1,7 +1,7 @@
 // Interfaces
-export * from "./CommandParams";
-export * from "./Options";
+export * from './CommandParams'
+export * from './Options'
 
 // Enums
-export * from "./Style";
-export * from "./Theme";
+export * from './Style'
+export * from './Theme'

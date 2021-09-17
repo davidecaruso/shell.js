@@ -1,4 +1,4 @@
-import {Style, Theme} from "./index";
+import { Style, Theme } from './index'
 
 export interface Options {
     user: string;

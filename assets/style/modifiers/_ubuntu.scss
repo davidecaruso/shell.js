@@ -1,8 +1,11 @@
 .#{$shell}--ubuntu {
     .#{$shell}__status-bar {
         background-image: linear-gradient(to bottom, #3F3F3F 0%, #585858 100%);
+
         .icon { display: none; }
+
         .#{$statusBar}__title { color: #FFFFFF; }
+
         .#{$statusBar}__buttons {
             .button--close {
                 background: #D75224;
@@ -32,7 +35,9 @@
         .line {
             .line__prefix {
                 .user { color: #FFFFFF; }
+
                 .host { color: #FFFFFF; }
+
                 .path { color: #FFFFFF; }
             }
         }
@@ -40,7 +45,9 @@
         .line--root {
             .line__prefix {
                 .user { color: #FFFFFF; }
+
                 .host { color: #FFFFFF; }
+
                 .path { color: #FFFFFF; }
             }
         }
@@ -55,7 +62,9 @@
             .line {
                 .line__prefix {
                     .user { color: $gray-text-color; }
+
                     .host { color: $gray-text-color; }
+
                     .path { color: $gray-text-color; }
                 }
             }
@@ -63,7 +72,9 @@
             .line--root {
                 .line__prefix {
                     .user { color: $gray-text-color; }
+
                     .host { color: $gray-text-color; }
+
                     .path { color: $gray-text-color; }
                 }
             }

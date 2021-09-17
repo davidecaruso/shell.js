@@ -1,7 +1,7 @@
-import {ShellElement, Shell} from "./index";
+import { Shell, ShellElement } from './index'
 
 export class Content implements ShellElement {
-    protected content: string;
+    protected content: string
 
     /**
      * Content constructor.
@@ -10,7 +10,7 @@ export class Content implements ShellElement {
      * @return {void}
      */
     constructor(content: string) {
-        this.content = content;
+        this.content = content
     }
 
     /**
@@ -18,6 +18,6 @@ export class Content implements ShellElement {
      * @return {string}
      */
     public toString(): string {
-        return `<div class="${Shell.IDENTIFIER}__content">${this.content}</div>`;
+        return `<div class="${Shell.IDENTIFIER}__content">${this.content}</div>`
     }
 }

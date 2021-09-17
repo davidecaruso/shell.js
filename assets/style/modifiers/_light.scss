@@ -8,12 +8,15 @@
             &.line--root {
                 .line__prefix {
                     .user { color: $gray-text-color; }
+
                     .host { color: $gray-text-color; }
+
                     .path { color: $gray-text-color; }
                 }
             }
         }
     }
+
     .#{$shell}__#{$typedCursor} {
         background-color: $gray-text-color;
     }

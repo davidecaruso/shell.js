@@ -1,9 +1,9 @@
-import {DefaultBuilder} from "./index";
-import {CommandParams, Options} from "../Interfaces";
-import {StatusBar, StatusBarTitle, StatusBarButtons, StatusBarIcon} from "../Shell";
+import { CommandParams, Options } from '../Interfaces'
+import { StatusBar, StatusBarButtons, StatusBarIcon, StatusBarTitle } from '../Shell'
+import { DefaultBuilder } from './index'
 
 export class WindowsBuilder extends DefaultBuilder {
-    protected readonly _char: string = "&gt;";
+    protected readonly _char: string = '&gt;'
 
     /**
      * WindowsBuilder constructor.
@@ -12,9 +12,9 @@ export class WindowsBuilder extends DefaultBuilder {
      * @return {void}
      */
     constructor(options: Options) {
-        super(options);
-        if (this.options.path === "~") {
-            this.options.path = "C:\\Windows\\system32\\";
+        super(options)
+        if (this.options.path === '~') {
+            this.options.path = 'C:\\Windows\\system32\\'
         }
     }
 
@@ -27,14 +27,14 @@ export class WindowsBuilder extends DefaultBuilder {
         let buttons = new StatusBarButtons(
             `<button class="button button--minimize"><i class="icon-minimize"></i></button>` +
             `<button class="button button--enlarge"><i class="icon-enlarge"></i></button>` +
-            `<button class="button button--close"><i class="icon-close"></i></button>`
-        );
-        let icon = new StatusBarIcon(`<i class="icon-command"></i>`);
-        let title = new StatusBarTitle("Command Prompt");
+            `<button class="button button--close"><i class="icon-close"></i></button>`,
+        )
+        let icon = new StatusBarIcon(`<i class="icon-command"></i>`)
+        let title = new StatusBarTitle('Command Prompt')
 
-        this.shell.statusBar = new StatusBar(buttons, icon, title);
+        this.shell.statusBar = new StatusBar(buttons, icon, title)
 
-        return this;
+        return this
     }
 
     /**
@@ -46,7 +46,7 @@ export class WindowsBuilder extends DefaultBuilder {
         return `<span class="line__prefix">` +
             `<span class="path">${this.options.path}</span>` +
             `<span class="char">${this.char}</span>` +
-        `</span>`;
+            `</span>`
     }
 
     /**
@@ -56,9 +56,9 @@ export class WindowsBuilder extends DefaultBuilder {
      * @return {CommandParams}
      */
     protected sudo(params: CommandParams): CommandParams {
-        params = super.sudo(params);
-        this.options.root = false;
-        params.command = `bash: sudo: command not found`;
+        params = super.sudo(params)
+        this.options.root = false
+        params.command = `bash: sudo: command not found`
         return params
     }
 
@@ -69,9 +69,9 @@ export class WindowsBuilder extends DefaultBuilder {
      * @return {CommandParams}
      */
     protected logout(params: CommandParams): CommandParams {
-        params = super.sudo(params);
-        this.options.root = false;
-        params.command = `bash: exit: command not found`;
+        params = super.sudo(params)
+        this.options.root = false
+        params.command = `bash: exit: command not found`
         return params
     }
 }

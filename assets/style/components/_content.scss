@@ -13,14 +13,18 @@
     .line {
         .line__prefix {
             .user { color: #8AD733; }
+
             .host { color: #8AD733; }
+
             .path { color: #729FCF; }
         }
 
         &.line--root {
             .line__prefix {
                 .user { color: #FFFFFF; }
+
                 .host { color: #FFFFFF; }
+
                 .path { color: #FFFFFF; }
             }
         }

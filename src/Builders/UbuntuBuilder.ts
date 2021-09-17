@@ -1,4 +1,4 @@
-import {DefaultBuilder} from "./index";
+import { DefaultBuilder } from './index'
 
 export class UbuntuBuilder extends DefaultBuilder {
 }

@@ -84,11 +84,16 @@
         .line {
             .line__prefix {
                 .user { color: #FFFFFF; }
+
                 .host { color: #FFFFFF; }
+
                 .path { color: #FFFFFF; }
+
                 .line--root {
                     .user { color: #FFFFFF; }
+
                     .host { color: #FFFFFF; }
+
                     .path { color: #FFFFFF; }
                 }
             }
