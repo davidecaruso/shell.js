@@ -2,7 +2,7 @@ assets/images/
 assets/fonts/selection.json
 assets/style/
 src/
-test/
+tests/
 typings/
 webpack/
 .*
