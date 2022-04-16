@@ -1,4 +1,3 @@
 import { DefaultBuilder } from './index'
 
-export class UbuntuBuilder extends DefaultBuilder {
-}
+export class UbuntuBuilder extends DefaultBuilder {}

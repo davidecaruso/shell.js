@@ -1,5 +1,5 @@
 // Available themes
 export enum Theme {
-    DARK = 'dark',
-    LIGHT = 'light'
+  DARK = 'dark',
+  LIGHT = 'light',
 }
