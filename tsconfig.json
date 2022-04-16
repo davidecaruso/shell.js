@@ -1,19 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "lib/",
-    "module": "commonjs",
+    "outDir": "./lib/",
     "removeComments": true,
-    "target": "es5",
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ]
+    "module": "CommonJS",
+    "target": "ES5",
+    "moduleResolution": "Node",
   },
-  "include": [
-    "src/**/*.ts",
-    "typings/**/*.ts"
-  ],
   "exclude": [
     "coverage",
     "node_modules",

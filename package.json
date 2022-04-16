@@ -33,12 +33,13 @@
     "javascript-plugin"
   ],
   "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/jest": "^27.4.1",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",
-    "array-subtract": "^2.0.0",
     "autoprefixer": "^7.1.4",
     "chai": "^4.1.2",
-    "clean": "^4.0.2",
     "coveralls": "^3.0.0",
     "css-loader": "^3.4.2",
     "css-modules-require-hook": "^4.2.2",

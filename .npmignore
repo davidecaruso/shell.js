@@ -3,7 +3,6 @@ assets/fonts/selection.json
 assets/style/
 src/
 tests/
-typings/
 webpack/
 .*
 bower.json
