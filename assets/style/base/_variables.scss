@@ -1,4 +1,14 @@
 $shell: "shell";
-$statusBar: "status-bar";
-$content: "content";
-$typedCursor: "typed-cursor";
+
+$status-bar: "status-bar";
+$shell-status-bar: "#{$shell}__#{$status-bar}";
+$status-bar-buttons: "#{$status-bar}__buttons";
+$status-bar-icon: "#{$status-bar}__icon";
+$status-bar-title: "#{$status-bar}__title";
+
+$shell-content: "content";
+
+$button: "button";
+$line: "line";
+$command: "command";
+$cursor: "typed-cursor";

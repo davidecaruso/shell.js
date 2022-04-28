@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
+    "strict": true,
     "baseUrl": "./",
     "outDir": "./lib/",
     "removeComments": true,
     "module": "CommonJS",
-    "target": "ES5",
+    "target": "ES6",
     "moduleResolution": "Node",
+//    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "pretty": true,
+    "sourceMap": false,
+    "importsNotUsedAsValues": "error",
+    "importHelpers": true
   },
   "exclude": [
     "coverage",

@@ -1,13 +1,13 @@
 .#{$shell}--ubuntu {
-    .#{$shell}__status-bar {
+    .#{$shell-status-bar} {
         background-image: linear-gradient(to bottom, #3F3F3F 0%, #585858 100%);
 
         .icon { display: none; }
 
-        .#{$statusBar}__title { color: #FFFFFF; }
+        .#{$status-bar-title} { color: #FFFFFF; }
 
-        .#{$statusBar}__buttons {
-            .button--close {
+        .#{$status-bar-buttons} {
+            .#{$button}--close {
                 background: #D75224;
                 color: #444444;
 
@@ -17,7 +17,7 @@
                 }
             }
 
-            .button--minimize, .button--enlarge {
+            .#{$button}--minimize, .#{$button}--enlarge {
                 background: #898989;
                 color: #555555;
 
@@ -29,11 +29,11 @@
         }
     }
 
-    .#{$shell}__#{$content} {
+    .#{$shell}__#{$shell-content} {
         background: #300924;
 
-        .line {
-            .line__prefix {
+        .#{$line} {
+            .#{$line}__prefix {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
@@ -42,8 +42,8 @@
             }
         }
 
-        .line--root {
-            .line__prefix {
+        .#{$line}--root {
+            .#{$line}__prefix {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
@@ -56,11 +56,11 @@
     &.#{$shell}--light {
         color: $gray-text-color;
 
-        .#{$shell}__#{$content} {
+        .#{$shell}__#{$shell-content} {
             background: #FFFFFF;
 
-            .line {
-                .line__prefix {
+            .#{$line} {
+                .#{$line}__prefix {
                     .user { color: $gray-text-color; }
 
                     .host { color: $gray-text-color; }
@@ -69,8 +69,8 @@
                 }
             }
 
-            .line--root {
-                .line__prefix {
+            .#{$line}--root {
+                .#{$line}__prefix {
                     .user { color: $gray-text-color; }
 
                     .host { color: $gray-text-color; }

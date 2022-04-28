@@ -19,15 +19,15 @@ $ npm i shell.js
 $ bower install shell.js --save
 ```
 
-## Options
+## Config
 For each **Shell** instance you can set the following options:
 
-| Options | Allowed values | Description | Defaut value |
+| Config | Allowed values | Description | Defaut value |
 | ------- | -------------- | ----------- | ------------ |
 | user | *string* | The user | **"user"** |
 | host | *string* | The host | **"host"** |
 | path | *string* | The working directory | **"~"** &#124; **"C:\Windows\system32\"** |
-| style | **"default"**&#124;**"ubuntu"**&#124;**"osx"**&#124;**"windows"** | The OS style | **"default"** |
+| style | **"default"**&#124;**"ubuntu"**&#124;**"macos"**&#124;**"windows"** | The OS style | **"default"** |
 | theme | **"dark"**&#124;**"light"** | The theme | **"dark"** |
 | responsive | *boolean* | Responsiveness  | *true* |
 | typed | *Typed* callable | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
@@ -40,17 +40,18 @@ Create a HTML element with a specified ID...
 <div id="awesome-shell"></div>
 ```
 ...and pass the CSS selector to the **Shell.js** constructor:
+
 ```javascript
-document.addEventListener('DOMContentLoaded', function() {
-    let shell = new Shell('#awesome-shell', {
-        user: 'foobar',
-        host: 'MacMini',
-        path: '/etc/',
-        style: 'osx',
-        theme: 'dark',
-        responsive: false,
-        commands: ['First command', 'Second command', '...']
-    });
+document.addEventListener('DOMContentLoaded', function () {
+  let shell = new shell('#awesome-shell', {
+    user: 'foobar',
+    host: 'MacMini',
+    path: '/etc/',
+    style: 'macos',
+    theme: 'dark',
+    responsive: false,
+    commands: ['First command', 'Second command', '...']
+  });
 });
 ```
 
