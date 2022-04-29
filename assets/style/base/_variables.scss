@@ -10,5 +10,6 @@ $shell-content: "content";
 
 $button: "button";
 $line: "line";
-$command: "command";
+$line-prefix: "#{$line}__prefix";
+$line-command: "#{$line}__command";
 $cursor: "typed-cursor";

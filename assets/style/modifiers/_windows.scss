@@ -82,7 +82,7 @@
         background: #000000;
 
         .#{$line} {
-            .#{$line}__prefix {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }

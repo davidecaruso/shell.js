@@ -33,7 +33,7 @@
         background: #300924;
 
         .#{$line} {
-            .#{$line}__prefix {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
@@ -43,7 +43,7 @@
         }
 
         .#{$line}--root {
-            .#{$line}__prefix {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
@@ -60,7 +60,7 @@
             background: #FFFFFF;
 
             .#{$line} {
-                .#{$line}__prefix {
+                .#{$line-prefix} {
                     .user { color: $gray-text-color; }
 
                     .host { color: $gray-text-color; }
@@ -70,7 +70,7 @@
             }
 
             .#{$line}--root {
-                .#{$line}__prefix {
+                .#{$line-prefix} {
                     .user { color: $gray-text-color; }
 
                     .host { color: $gray-text-color; }

@@ -73,7 +73,7 @@ describe('Shell', () => {
                 'path',
                 'responsive',
                 'root',
-                'style',
+                'os',
                 'theme',
                 'typed',
                 'user'
@@ -91,7 +91,7 @@ describe('Shell', () => {
                 expect(shell.options.path).to.be.a('string').that.is.equal('~')
                 expect(shell.options.responsive).to.be.a('boolean').that.is.true
                 expect(shell.options.root).to.be.a('boolean').that.is.false
-                expect(shell.options.style).to.be.a('string').that.is.equal('default')
+                expect(shell.options.os).to.be.a('string').that.is.equal('default')
                 expect(shell.options.typed).to.be.undefined
                 expect(shell.options.user).to.be.a('string').that.is.equal('user')
             })
@@ -106,11 +106,11 @@ describe('Shell', () => {
                 document.body.appendChild(div)
             })
 
-            describe('"options.style" property', () => {
+            describe('"options.engine" property', () => {
                 describe('HTML element', () => {
-                    context('when style is "default"', () => {
+                    context('when engine is "default"', () => {
                         before(() => {
-                            shell = new Shell('#shell', { style: 'default' })
+                            shell = new Shell('#shell', { os: 'default' })
                         })
 
                         it('should not have "default" class', () => {
@@ -118,9 +118,9 @@ describe('Shell', () => {
                         })
                     })
 
-                    context('when style is "macos"', () => {
+                    context('when engine is "macos"', () => {
                         before(() => {
-                            shell = new Shell('#shell', { style: 'macos' })
+                            shell = new Shell('#shell', { os: 'macos' })
                         })
 
                         it('should have "shell--macos" class', () => {
@@ -128,9 +128,9 @@ describe('Shell', () => {
                         })
                     })
 
-                    context('when style is "ubuntu"', () => {
+                    context('when engine is "ubuntu"', () => {
                         before(() => {
-                            shell = new Shell('#shell', { style: 'ubuntu' })
+                            shell = new Shell('#shell', { os: 'ubuntu' })
                         })
 
                         it('should have "shell--ubuntu" class', () => {
@@ -138,9 +138,9 @@ describe('Shell', () => {
                         })
                     })
 
-                    context('when style is "windows"', () => {
+                    context('when engine is "windows"', () => {
                         before(() => {
-                            shell = new Shell('#shell', { style: 'windows' })
+                            shell = new Shell('#shell', { os: 'windows' })
                         })
 
                         it('should have "shell--windows" class', () => {

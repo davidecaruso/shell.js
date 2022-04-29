@@ -27,7 +27,7 @@ For each **Shell** instance you can set the following options:
 | user | *string* | The user | **"user"** |
 | host | *string* | The host | **"host"** |
 | path | *string* | The working directory | **"~"** &#124; **"C:\Windows\system32\"** |
-| style | **"default"**&#124;**"ubuntu"**&#124;**"macos"**&#124;**"windows"** | The OS style | **"default"** |
+| engine | **"default"**&#124;**"ubuntu"**&#124;**"macos"**&#124;**"windows"** | The Engine engine | **"default"** |
 | theme | **"dark"**&#124;**"light"** | The theme | **"dark"** |
 | responsive | *boolean* | Responsiveness  | *true* |
 | typed | *Typed* callable | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     user: 'foobar',
     host: 'MacMini',
     path: '/etc/',
-    style: 'macos',
+    engine: 'macos',
     theme: 'dark',
     responsive: false,
     commands: ['First command', 'Second command', '...']

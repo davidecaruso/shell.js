@@ -4,14 +4,15 @@
     flex-grow: 1;
     flex-wrap: wrap;
     flex-direction: column;
-    border: 1px solid transparent;
+    border: .1em solid transparent;
+    border-top: 0;
     padding: 2px;
     @include adjust-font(16px, 18px);
     background: #292929;
     box-sizing: border-box;
 
     .#{$line} {
-        .#{$line}__prefix {
+        .#{$line-prefix} {
             .user { color: #8AD733; }
 
             .host { color: #8AD733; }
@@ -20,7 +21,7 @@
         }
 
         &.#{$line}--root {
-            .#{$line}__prefix {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }

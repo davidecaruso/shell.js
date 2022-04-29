@@ -17,7 +17,7 @@ export type Idle = {
     context: Config
 }
 
-export type Command = Input | Output | Idle
+export type IO = Input | Output | Idle
 
 export const input =
     (context: Config) =>
@@ -42,8 +42,8 @@ export const idle = (context: Config) => (): Idle => ({
 
 const is =
     <A extends Input | Output | Idle>(t: A['_type']) =>
-    (c: Command): c is A =>
-        c._type === t
+    (io: IO): io is A =>
+        io._type === t
 export const isInput = is<Input>('Input')
 export const isOutput = is<Output>('Output')
 export const isIdle = is<Idle>('Idle')
@@ -59,7 +59,7 @@ export const login = (context: Config): Output => {
         d.getSeconds().toString(),
     ]
     return output(context)(
-        context.style === 'macos'
+        context.style.engine === 'macos'
             ? `Last login: ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day]} ${
                   ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month]
               } ${date} ${hours.length === 2 ? hours : '0' + hours}:${minutes.length === 2 ? minutes : '0' + minutes}:${
@@ -69,18 +69,21 @@ export const login = (context: Config): Output => {
     )
 }
 
-const commands: Record<string, (input: Input) => Output> = {
+const commands: Record<string, (input: Input) => Output | null> = {
     sudo: ({ context }: Input) =>
-        output({ ...context, ...{ root: context.style !== 'windows' ? true : context.root } })(
-            context.style === 'macos'
-                ? 'Password: <span class="icon-key"></span>'
-                : context.style === 'windows'
-                ? 'bash: sudo: command not found'
-                : `[sudo] password for ${context.user}:`
-        ),
+        context.root
+            ? null
+            : output({ ...context, ...{ root: context.style.engine !== 'windows' ? true : context.root } })(
+                  context.style.engine === 'macos'
+                      ? 'Password: <span class="icon-key"></span>'
+                      : context.style.engine === 'windows'
+                      ? 'bash: sudo: command not found'
+                      : `[sudo] password for ${context.user}:`
+              ),
+
     exit: ({ context }: Input) =>
-        output({ ...context, ...{ root: context.style !== 'windows' ? false : context.root } })(
-            context.style === 'windows' ? 'bash: exit: command not found' : 'logout'
+        output({ ...context, ...{ root: context.style.engine !== 'windows' ? false : context.root } })(
+            context.style.engine === 'windows' ? 'bash: exit: command not found' : 'logout'
         ),
 }
 
