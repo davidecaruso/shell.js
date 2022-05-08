@@ -1,15 +1,21 @@
-.#{$shell}__#{$shell-content} {
+.#{$shell-content} {
     @extend %monospace;
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    flex-direction: column;
     border: .1em solid transparent;
     border-top: 0;
     padding: 2px;
     @include adjust-font(16px, 18px);
     background: #292929;
     box-sizing: border-box;
+    overflow-y: auto;
+    position: absolute;
+    top: 21px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .lines {
+        overflow-y: auto;
+    }
 
     .#{$line} {
         .#{$line-prefix} {

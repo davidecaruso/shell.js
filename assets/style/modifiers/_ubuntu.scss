@@ -29,7 +29,7 @@
         }
     }
 
-    .#{$shell}__#{$shell-content} {
+    .#{$shell-content} {
         background: #300924;
 
         .#{$line} {
@@ -56,7 +56,7 @@
     &.#{$shell}--light {
         color: $gray-text-color;
 
-        .#{$shell}__#{$shell-content} {
+        .#{$shell-content} {
             background: #FFFFFF;
 
             .#{$line} {

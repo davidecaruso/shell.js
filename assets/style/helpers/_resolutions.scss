@@ -1,15 +1,4 @@
-//Mobile width
-$mobile-width: 320px;
-//Tablet width
-$tablet-width: 768px;
-//Desktop width
-$regular-desktop-width: 1025px;
-//Medium width
-$medium-desktop-width: 1366px;
-//Large desktop width
-$large-desktop-width: 1600px;
-
-//Devices
+// Devices
 @mixin mobile {
     @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width - 1px}) { @content; }
 }
@@ -34,7 +23,7 @@ $large-desktop-width: 1600px;
     @media (min-width: #{$large-desktop-width}) { @content; }
 }
 
-//Orientations
+// Orientations
 @mixin portrait {
     @media (orientation: portrait) { @content; }
 }

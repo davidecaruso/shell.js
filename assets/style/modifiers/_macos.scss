@@ -11,7 +11,7 @@
         }
     }
 
-    .#{$shell}__#{$shell-content} {
+    .#{$shell-content} {
         background: rgba(#000000, 0.85);
 
         .#{$line} {
@@ -34,7 +34,7 @@
     &.#{$shell}--light {
         color: $gray-text-color;
 
-        .#{$shell}__#{$shell-content} {
+        .#{$shell-content} {
             border-color: #EBEBEB;
             background: #FFFFFF;
 

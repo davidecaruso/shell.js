@@ -77,9 +77,10 @@
         }
     }
 
-    .#{$shell}__#{$shell-content} {
+    .#{$shell-content} {
         border-color: $main-windows-color;
         background: #000000;
+        top: 30px;
 
         .#{$line} {
             .#{$line-prefix} {

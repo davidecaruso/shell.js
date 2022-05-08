@@ -1,0 +1,21 @@
+.#{$shell} {
+    @extend %regular;
+    @extend %sans-serif;
+    @include size(400px, 300px);
+    position: relative;
+    text-align: left;
+    color: $main-text-color;
+    overflow: hidden;
+    font-weight: 300;
+    border-radius: 5px;
+
+    @include mobile {
+        @include adjust-font(10px);
+    }
+
+    @import "components/status-bar";
+    @import "components/content";
+    @import "components/cursor";
+}
+
+@import "assets/style/modifiers/all";

@@ -1,3 +1,22 @@
+// Fonts
+$base-font-size: 0.750;
+
+// Colors
+$main-text-color: #F1F1F1;
+$main-windows-color: #69C1F0;
+$gray-text-color: #878787;
+$close-button-color: #FF4F37;
+$minimize-button-color: #FEC600;
+$enlarge-button-color: #00DB51;
+
+// Resolutions
+$mobile-width: 320px;
+$tablet-width: 768px;
+$regular-desktop-width: 1025px;
+$medium-desktop-width: 1366px;
+$large-desktop-width: 1600px;
+
+// Classes
 $shell: "shell";
 
 $status-bar: "status-bar";
@@ -6,7 +25,8 @@ $status-bar-buttons: "#{$status-bar}__buttons";
 $status-bar-icon: "#{$status-bar}__icon";
 $status-bar-title: "#{$status-bar}__title";
 
-$shell-content: "content";
+$content: "content";
+$shell-content: #{$shell}__#{$content};
 
 $button: "button";
 $line: "line";
