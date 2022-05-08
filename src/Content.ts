@@ -1,8 +1,8 @@
-import { lineCommandClass, cursorClass, lineClass, shellContentClass, linePrefixClass } from './Classes'
+import { cursorClass, lineClass, lineCommandClass, linePrefixClass, shellContentClass } from './Classes'
+import type { Config } from './Config'
 import { isExecutable, isTyped } from './Config'
 import type { IO } from './IO'
 import { exec, idle, input, isInput, isOutput, login, output } from './IO'
-import type { Config } from './Config'
 
 const prefix = ({ context }: IO): string =>
     `<span class="${linePrefixClass}">` +
@@ -27,29 +27,21 @@ const prefix = ({ context }: IO): string =>
     })() +
     '</span>'
 
-const line = (
-    (counter: number) =>
-    (io: IO): string => {
-        const content =
-            `<div class="${[
-                lineClass,
-                io.context.root ? `${lineClass}--root` : '',
-                !isTyped(io.context) ? `${lineClass}--active` : '',
-            ].join(' ')}" data-index="${counter}">` +
-            (isInput(io)
-                ? `${prefix(io)}<span class="${lineCommandClass}">${io.value}</span>`
-                : isOutput(io)
-                ? `<span class="${lineCommandClass} ${lineCommandClass}--output">${io.value}</span>`
-                : `${prefix(io)}<span class="${lineCommandClass}"><span class="${cursorClass}">&nbsp;</span></span>`) +
-            '</div>'
+const line = (io: IO): string =>
+    `<div class="${[
+        lineClass,
+        io.context.root ? `${lineClass}--root` : '',
+        !isTyped(io.context) ? `${lineClass}--active` : '',
+    ].join(' ')}">` +
+    (isInput(io)
+        ? `${prefix(io)}<span class="${lineCommandClass}">${io.value}</span>`
+        : isOutput(io)
+        ? `<span class="${lineCommandClass} ${lineCommandClass}--output">${io.value}</span>`
+        : `${prefix(io)}<span class="${lineCommandClass}"><span class="${cursorClass}">&nbsp;</span></span>`) +
+    '</div>'
 
-        counter++
-
-        return content
-    }
-)(0)
-
-const run = (config: Config): string =>
+const lines = (config: Config): string =>
+    line(login(config)) +
     config.commands
         .map(value => {
             if (isExecutable(value)) {
@@ -64,7 +56,7 @@ const run = (config: Config): string =>
                 return line(command) + (result ? line(result) : '')
             }
         })
-        .join('')
+        .join('') +
+    line(idle(config)())
 
-export const buildContent = (config: Config): string =>
-    `<div class="${shellContentClass}">` + line(login(config)) + run(config) + line(idle(config)()) + `</div>`
+export const buildContent = (config: Config): string => `<div class="${shellContentClass}">${lines(config)}</div>`

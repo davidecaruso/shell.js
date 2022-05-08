@@ -42,20 +42,30 @@
         },
       ],
     }).type();
-    // shell(document.querySelectorAll('#default-light')[0], {
-    //   user: 'bar',
-    //   style: {
-    //     theme: 'light',
-    //     responsive: false,
-    //     shadow: true,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit', {
-    //     'input': 'ls',
-    //     'output': () => ({
-    //       value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-    //     }),
-    //   }],
-    // });
+    shell(document.querySelectorAll('#default-light')[0], {
+      user: 'bar',
+      style: {
+        theme: 'light',
+        responsive: false,
+        shadow: true,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit', {
+        'input': 'ls',
+        'output': () => ({
+          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+        }),
+      },'sudo -i', 'rm -rf /', 'exit', {
+        'input': 'ls',
+        'output': () => ({
+          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+        }),
+      },'sudo -i', 'rm -rf /', 'exit', {
+        'input': 'ls',
+        'output': () => ({
+          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+        }),
+      }],
+    });
     shell(document.querySelectorAll('#macos')[0], {
       user: 'guest',
       host: 'MacBook-Pro',
@@ -68,56 +78,56 @@
       },
       commands: ['sudo -i', 'rm -rf /', 'exit'],
     }).type();
-    // shell(document.querySelectorAll('#macos-light')[0], {
-    //   user: 'guest',
-    //   host: 'MacBook-Pro',
-    //   style: {
-    //     engine: 'macos',
-    //     theme: 'light',
-    //     responsive: false,
-    //     shadow: true,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit'],
-    // });
-    // shell(document.querySelectorAll('#ubuntu')[0], {
-    //   user: 'guest',
-    //   host: 'localhost',
-    //   typing: {ctor: Typed},
-    //   style: {
-    //     engine: 'ubuntu',
-    //     responsive: true,
-    //     shadow: false,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit'],
-    // }).type();
-    // shell(document.querySelectorAll('#ubuntu-light')[0], {
-    //   user: 'guest',
-    //   host: 'localhost',
-    //   style: {
-    //     engine: 'ubuntu',
-    //     theme: 'light',
-    //     responsive: false,
-    //     shadow: true,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit'],
-    // });
-    // shell(document.querySelectorAll('#windows')[0], {
-    //   typing: {ctor: Typed},
-    //   style: {
-    //     engine: 'windows',
-    //     responsive: false,
-    //     shadow: true,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit'],
-    // }).type();
-    // shell(document.querySelectorAll('#windows-2')[0], {
-    //   style: {
-    //     engine: 'windows',
-    //     responsive: true,
-    //     shadow: false,
-    //   },
-    //   commands: ['sudo -i', 'rm -rf /', 'exit'],
-    // });
+    shell(document.querySelectorAll('#macos-light')[0], {
+      user: 'guest',
+      host: 'MacBook-Pro',
+      style: {
+        engine: 'macos',
+        theme: 'light',
+        responsive: false,
+        shadow: true,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit'],
+    });
+    shell(document.querySelectorAll('#ubuntu')[0], {
+      user: 'guest',
+      host: 'localhost',
+      typing: {ctor: Typed},
+      style: {
+        engine: 'ubuntu',
+        responsive: true,
+        shadow: false,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit'],
+    }).type();
+    shell(document.querySelectorAll('#ubuntu-light')[0], {
+      user: 'guest',
+      host: 'localhost',
+      style: {
+        engine: 'ubuntu',
+        theme: 'light',
+        responsive: false,
+        shadow: true,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit'],
+    });
+    shell(document.querySelectorAll('#windows')[0], {
+      typing: {ctor: Typed},
+      style: {
+        engine: 'windows',
+        responsive: false,
+        shadow: true,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit'],
+    }).type();
+    shell(document.querySelectorAll('#windows-2')[0], {
+      style: {
+        engine: 'windows',
+        responsive: true,
+        shadow: false,
+      },
+      commands: ['sudo -i', 'rm -rf /', 'exit'],
+    });
   });
 </script>
 </body>
