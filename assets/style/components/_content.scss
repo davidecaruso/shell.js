@@ -18,6 +18,8 @@
     }
 
     .#{$line} {
+        display: none;
+
         .#{$line-prefix} {
             .user { color: #8AD733; }
 

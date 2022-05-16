@@ -1,125 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shell.js</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
-    <script src="../lib/shell.js"></script>
-    <style>.shell { margin: 1em; }</style>
+  <meta charset="UTF-8">
+  <title>Shell.js</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.6/typed.min.js"></script>
+  <script src="../lib/shell.js"></script>
+  <style>.shell { margin: 1em; }</style>
 </head>
 <body>
 <div class="text-center p2">
-    <h1 class="pt-4">Shell.js</h1>
-    <h2 class="lead">Here a bit of example of <strong>Shell.js</strong>' instances:</h2>
-    <div id="default"></div>
-    <div id="default-light"></div>
-    <div id="macos"></div>
-    <div id="macos-light"></div>
-    <div id="ubuntu"></div>
-    <div id="ubuntu-light"></div>
-    <div id="windows"></div>
-    <div id="windows-2"></div>
+  <h1 class="pt-4">Shell.js</h1>
+  <h2 class="lead">Here a bit of example of <strong>Shell.js</strong>' instances:</h2>
+  <div id="default"></div>
+  <div id="default-light"></div>
+  <div id="macos"></div>
+  <div id="macos-light"></div>
+  <div id="ubuntu"></div>
+  <div id="ubuntu-light"></div>
+  <div id="windows"></div>
+  <div id="windows-2"></div>
 </div>
 <script type="application/javascript">
-  document.addEventListener('DOMContentLoaded', function () {
-    shell('#default', ['sudo -i', 'rm -rf /', 'exit',
+  document.addEventListener("DOMContentLoaded", function() {
+    shell("#default", ["sudo -i", "rm -rf /", "exit",
       {
-        'input': 'ls',
-        'output': () => ({
-          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-        }),
-      },
+        "input": "ls",
+        "output": () => ({
+          value: "Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public"
+        })
+      }
     ], {
-      user: 'foo',
-      host: 'bar',
-      typing: {ctor: Typed},
+      user: "foo",
+      host: "bar",
+      typing: { ctor: Typed },
       style: {
         responsive: true,
-        shadow: false,
-      },
+        shadow: false
+      }
     }).type();
-    shell('#default-light', ['sudo -i', 'rm -rf /', 'exit', {
-      'input': 'ls',
-      'output': () => ({
-        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-      }),
-    }, 'sudo -i', 'rm -rf /', 'exit', {
-      'input': 'ls',
-      'output': () => ({
-        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-      }),
-    }, 'sudo -i', 'rm -rf /', 'exit', {
-      'input': 'ls',
-      'output': () => ({
-        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-      }),
+
+
+    shell("#default-light", ["sudo -i", "rm -rf /", "exit", {
+      "input": "ls",
+      "output": () => ({
+        value: "Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public"
+      })
+    }, "sudo -i", "rm -rf /", "exit", {
+      "input": "ls",
+      "output": () => ({
+        value: "Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public"
+      })
+    }, "sudo -i", "rm -rf /", "exit", {
+      "input": "ls",
+      "output": () => ({
+        value: "Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public"
+      })
     }], {
-      user: 'bar',
+      user: "bar",
       style: {
-        theme: 'light',
+        theme: "light",
         responsive: false,
-        shadow: true,
-      },
-    });
-    shell('#macos', ['sudo -i', 'rm -rf /', 'exit'], {
-      user: 'guest',
-      host: 'MacBook-Pro',
-      typing: {ctor: Typed},
-      style: {
-        theme: 'light',
-        engine: 'macos',
-        responsive: true,
-        shadow: false,
-      },
+        shadow: true
+      }
     }).type();
-    shell('#macos-light', ['sudo -i', 'rm -rf /', 'exit'], {
-      user: 'guest',
-      host: 'MacBook-Pro',
+
+
+    shell("#macos", ["sudo -i", "rm -rf /", "exit"], {
+      user: "guest",
+      host: "MacBook-Pro",
+      typing: { ctor: Typed },
       style: {
-        engine: 'macos',
-        theme: 'light',
-        responsive: false,
-        shadow: true,
-      },
-    });
-    shell('#ubuntu', ['sudo -i', 'rm -rf /', 'exit'], {
-      user: 'guest',
-      host: 'localhost',
-      typing: {ctor: Typed},
-      style: {
-        engine: 'ubuntu',
+        theme: "light",
+        engine: "macos",
         responsive: true,
-        shadow: false,
-      },
+        shadow: false
+      }
     }).type();
-    shell('#ubuntu-light', ['sudo -i', 'rm -rf /', 'exit'], {
-      user: 'guest',
-      host: 'localhost',
+
+
+    shell("#macos-light", ["sudo -i", "rm -rf /", "exit"], {
+      user: "guest",
+      host: "MacBook-Pro",
       style: {
-        engine: 'ubuntu',
-        theme: 'light',
+        engine: "macos",
+        theme: "light",
         responsive: false,
-        shadow: true,
-      },
-    });
-    shell('#windows', ['sudo -i', 'rm -rf /', 'exit'], {
-      typing: {ctor: Typed},
-      style: {
-        engine: 'windows',
-        responsive: false,
-        shadow: true,
-      },
+        shadow: true
+      }
     }).type();
-    shell('#windows-2', ['sudo -i', 'rm -rf /', 'exit'], {
+
+
+    shell("#ubuntu", ["sudo -i", "rm -rf /", "exit"], {
+      user: "guest",
+      host: "localhost",
+      typing: { ctor: Typed },
       style: {
-        engine: 'windows',
+        engine: "ubuntu",
         responsive: true,
-        shadow: false,
-      },
-    });
+        shadow: false
+      }
+    }).type();
+
+
+    shell("#ubuntu-light", ["sudo -i", "rm -rf /", "exit"], {
+      user: "guest",
+      host: "localhost",
+      style: {
+        engine: "ubuntu",
+        theme: "light",
+        responsive: false,
+        shadow: true
+      }
+    }).type();
+
+
+    shell("#windows", ["sudo -i", "rm -rf /", "exit"], {
+      typing: { ctor: Typed },
+      style: {
+        engine: "windows",
+        responsive: false,
+        shadow: true
+      }
+    }).type();
+
+
+    shell("#windows-2", ["sudo -i", "rm -rf /", "exit"], {
+      style: {
+        engine: "windows",
+        responsive: true,
+        shadow: false
+      }
+    }).type();
   });
 </script>
 </body>

@@ -1,7 +1,7 @@
 import { cursorClass, lineClass, lineCommandClass, linePrefixClass, shellContentClass } from './Classes'
 import { Command, exec, idle, input, IO, isExecutable, isInput, isOutput, login, output } from './Command'
 import type { Config } from './Config'
-import { isRoot, isTyped, isWindows } from './Config'
+import { isRoot, isWindows } from './Config'
 
 const prefix = ({ context }: Pick<IO, 'context'>): string =>
     `<span class="${linePrefixClass}">` +
@@ -16,11 +16,7 @@ const prefix = ({ context }: Pick<IO, 'context'>): string =>
     '</span>'
 
 const line = (io: IO): string =>
-    `<div class="${[
-        lineClass,
-        isRoot(io.context) ? `${lineClass}--root` : '',
-        !isTyped(io.context) ? `${lineClass}--active` : '',
-    ].join(' ')}">` +
+    `<div class="${[lineClass, isRoot(io.context) ? `${lineClass}--root` : ''].join(' ')}">` +
     (isInput(io)
         ? `${prefix(io)}<span class="${lineCommandClass}">${io.value}</span>`
         : isOutput(io)

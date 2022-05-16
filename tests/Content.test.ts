@@ -10,10 +10,10 @@ describe('Content', () => {
                 it('should generate correct content', () => {
                     expect(buildContent(defaultConfig)(['foo', 'bar', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -22,7 +22,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -31,7 +31,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -40,7 +40,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -61,10 +61,10 @@ describe('Content', () => {
                         buildContent({ ...defaultConfig, style: { engine: 'ubuntu' } })(['foo', 'bar', 'baz'])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -73,7 +73,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -82,7 +82,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -91,7 +91,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -112,31 +112,31 @@ describe('Content', () => {
                         buildContent({ ...defaultConfig, style: { engine: 'windows' } })(['foo', 'bar', 'baz'])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span>' +
                             '</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span>' +
                             '</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span>' +
                             '</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span>' +
@@ -154,12 +154,12 @@ describe('Content', () => {
                     const config: Config = { ...defaultConfig, style: { engine: 'macos' } }
                     expect(buildContent(config)(['foo', 'bar', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">' +
                             login(config)(new Date()).value +
                             '</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -168,7 +168,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -177,7 +177,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -186,7 +186,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -208,10 +208,10 @@ describe('Content', () => {
                 it('should generate correct content', () => {
                     expect(buildContent(defaultConfig)(['foo', 'sudo', 'bar', 'exit', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -220,7 +220,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -229,10 +229,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">sudo</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__command line__command--output">[sudo] password for user:</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -241,7 +241,7 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -250,10 +250,10 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">exit</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">logout</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -262,7 +262,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -289,10 +289,10 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -301,7 +301,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -310,10 +310,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">sudo</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__command line__command--output">[sudo] password for user:</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -322,7 +322,7 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -331,10 +331,10 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">exit</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">logout</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -343,7 +343,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -370,46 +370,46 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">sudo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">bash: sudo: command not found</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">exit</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">bash: exit: command not found</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
@@ -426,12 +426,12 @@ describe('Content', () => {
                     const config: Config = { ...defaultConfig, style: { engine: 'macos' } }
                     expect(buildContent(config)(['foo', 'sudo', 'bar', 'exit', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">' +
                             login(config)(new Date()).value +
                             '</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -440,7 +440,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -449,10 +449,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">sudo</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__command line__command--output">Password: <span class="icon-key"></span></span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -461,7 +461,7 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line line--root line--active">' +
+                            '<div class="line line--root">' +
                             '<span class="line__prefix">' +
                             '<span class="user">root@</span>' +
                             '<span class="host">host</span>' +
@@ -470,10 +470,10 @@ describe('Content', () => {
                             '<span class="char">#</span>&nbsp;</span>' +
                             '<span class="line__command">exit</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">logout</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -482,7 +482,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -512,10 +512,10 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -524,7 +524,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -533,10 +533,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -562,10 +562,10 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -574,7 +574,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -583,10 +583,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -612,25 +612,25 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="path">~</span>' +
                             '<span class="char">&gt;</span></span>' +
@@ -654,12 +654,12 @@ describe('Content', () => {
                         ])
                     ).to.be.equal(
                         '<div class="shell__content">' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">' +
                             login(config)(new Date()).value +
                             '</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -668,7 +668,7 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">foo</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +
@@ -677,10 +677,10 @@ describe('Content', () => {
                             '<span class="char">$</span>&nbsp;</span>' +
                             '<span class="line__command">bar</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__command line__command--output">baz</span>' +
                             '</div>' +
-                            '<div class="line  line--active">' +
+                            '<div class="line ">' +
                             '<span class="line__prefix">' +
                             '<span class="user">user@</span>' +
                             '<span class="host">host</span>' +

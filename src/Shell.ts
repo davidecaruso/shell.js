@@ -10,10 +10,15 @@ const type =
     (index: number = 0): void => {
         const self = type([el, { typing }])
         const lines = el.querySelectorAll(`.${lineClass}`)
+        if (!isTyped({ typing })) {
+            return lines.forEach(line => (line.className = `${lineClass}--active ${line.className}`))
+        }
+
         const line = lines[index]
-        if (!isTyped({ typing }) || !line) {
+        if (!line) {
             return
         }
+
         const command = line.querySelectorAll(`.${lineCommandClass}`)[0] ?? null
         const commandContent = command.innerHTML
         line.className = `${lineClass}--active ${line.className}`
