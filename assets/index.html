@@ -25,7 +25,14 @@
 </div>
 <script type="application/javascript">
   document.addEventListener('DOMContentLoaded', function () {
-    shell(document.querySelectorAll('#default')[0], {
+    shell('#default', ['sudo -i', 'rm -rf /', 'exit',
+      {
+        'input': 'ls',
+        'output': () => ({
+          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+        }),
+      },
+    ], {
       user: 'foo',
       host: 'bar',
       typing: {ctor: Typed},
@@ -33,40 +40,31 @@
         responsive: true,
         shadow: false,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit',
-        {
-          'input': 'ls',
-          'output': () => ({
-            value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-          }),
-        },
-      ],
     }).type();
-    shell(document.querySelectorAll('#default-light')[0], {
+    shell('#default-light', ['sudo -i', 'rm -rf /', 'exit', {
+      'input': 'ls',
+      'output': () => ({
+        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+      }),
+    }, 'sudo -i', 'rm -rf /', 'exit', {
+      'input': 'ls',
+      'output': () => ({
+        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+      }),
+    }, 'sudo -i', 'rm -rf /', 'exit', {
+      'input': 'ls',
+      'output': () => ({
+        value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
+      }),
+    }], {
       user: 'bar',
       style: {
         theme: 'light',
         responsive: false,
         shadow: true,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit', {
-        'input': 'ls',
-        'output': () => ({
-          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-        }),
-      },'sudo -i', 'rm -rf /', 'exit', {
-        'input': 'ls',
-        'output': () => ({
-          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-        }),
-      },'sudo -i', 'rm -rf /', 'exit', {
-        'input': 'ls',
-        'output': () => ({
-          value: 'Applications  Desktop  Downloads  Movies  Pictures<br />Documents  Library  Music  Public',
-        }),
-      }],
     });
-    shell(document.querySelectorAll('#macos')[0], {
+    shell('#macos', ['sudo -i', 'rm -rf /', 'exit'], {
       user: 'guest',
       host: 'MacBook-Pro',
       typing: {ctor: Typed},
@@ -76,9 +74,8 @@
         responsive: true,
         shadow: false,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     }).type();
-    shell(document.querySelectorAll('#macos-light')[0], {
+    shell('#macos-light', ['sudo -i', 'rm -rf /', 'exit'], {
       user: 'guest',
       host: 'MacBook-Pro',
       style: {
@@ -87,9 +84,8 @@
         responsive: false,
         shadow: true,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     });
-    shell(document.querySelectorAll('#ubuntu')[0], {
+    shell('#ubuntu', ['sudo -i', 'rm -rf /', 'exit'], {
       user: 'guest',
       host: 'localhost',
       typing: {ctor: Typed},
@@ -98,9 +94,8 @@
         responsive: true,
         shadow: false,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     }).type();
-    shell(document.querySelectorAll('#ubuntu-light')[0], {
+    shell('#ubuntu-light', ['sudo -i', 'rm -rf /', 'exit'], {
       user: 'guest',
       host: 'localhost',
       style: {
@@ -109,24 +104,21 @@
         responsive: false,
         shadow: true,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     });
-    shell(document.querySelectorAll('#windows')[0], {
+    shell('#windows', ['sudo -i', 'rm -rf /', 'exit'], {
       typing: {ctor: Typed},
       style: {
         engine: 'windows',
         responsive: false,
         shadow: true,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     }).type();
-    shell(document.querySelectorAll('#windows-2')[0], {
+    shell('#windows-2', ['sudo -i', 'rm -rf /', 'exit'], {
       style: {
         engine: 'windows',
         responsive: true,
         shadow: false,
       },
-      commands: ['sudo -i', 'rm -rf /', 'exit'],
     });
   });
 </script>

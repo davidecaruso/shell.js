@@ -1,14 +1,14 @@
-import { buildClasses, lineCommandClass, cursorClass, lineClass } from './Classes'
+import { buildClasses, cursorClass, lineClass, lineCommandClass } from './Classes'
+import type { Command } from './Command'
 import type { Config } from './Config'
-import { buildConfig, isTyped } from './Config'
+import { buildConfig, defaultConfig, isTyped } from './Config'
 import { buildContent } from './Content'
 import { buildStatusBar } from './StatusBar'
 
 const type =
-    ({ typing }: Pick<Config, 'typing'>) =>
-    (el: Element) =>
+    ([el, { typing }]: [Element, Pick<Config, 'typing'>]) =>
     (index: number = 0): void => {
-        const self = type({ typing })(el)
+        const self = type([el, { typing }])
         const lines = el.querySelectorAll(`.${lineClass}`)
         const line = lines[index]
         if (!isTyped({ typing }) || !line) {
@@ -36,15 +36,21 @@ const type =
         }
     }
 
-const build =
-    (config: Config) =>
-    (el: Element): void => {
-        el.className = buildClasses(config)(el.className.split(' '))
-        el.innerHTML = buildStatusBar(config) + buildContent(config)
+const init =
+    (selector: string) =>
+    (commands: ReadonlyArray<Command>) =>
+    (config: Config): [Element, Config] => {
+        const el = document.querySelectorAll(selector)[0] ?? null
+        if (!el) {
+            throw new Error(`Not found: invalid selector given "${selector}"`)
+        }
+
+        el.className = buildClasses(config)(el.className.split(' ')).join(' ')
+        el.innerHTML = buildStatusBar(config) + buildContent(config)(commands)
+
+        return [el, config]
     }
 
-export default (el: Element, config: Partial<Config>) => {
-    const cfg = buildConfig(config)
-    build(cfg)(el)
-    return { type: type(cfg)(el) }
-}
+export default (selector: string, commands: ReadonlyArray<Command>, config: Partial<Config> = defaultConfig) => ({
+    type: type(init(selector)(commands)(buildConfig(config))),
+})

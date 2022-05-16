@@ -19,8 +19,8 @@
     "build:dev": "webpack --env=development",
     "build:prod": "webpack --env=production",
     "prettier": "prettier --write ./src ./tests ./webpack ./webpack.config.js",
-    "test": "mocha -r tests/helpers/* -r ts-node/register --globals window tests/*.test.ts",
-    "test:watch": "mocha -r tests/helpers/* -r ts-node/register tests/*.test.ts --watch",
+    "test": "mocha -r tests/mocha.module.js -r ts-node/register --globals window tests/*.test.ts",
+    "test:watch": "npm run test -- --watch",
     "test:coverage": "nyc npm run test",
     "test:report": "npm run test:coverage & nyc report --reporter=html"
   },
@@ -36,6 +36,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/jest": "^27.4.1",
+    "@types/jsdom": "^16.2.14",
     "@types/mocha": "^9.1.0",
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",

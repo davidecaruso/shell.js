@@ -1,12 +1,8 @@
-assets/images/
-assets/fonts/selection.json
-assets/os/
-src/
+assets/
 tests/
 webpack/
 .*
 bower.json
-index.html
 tsconfig.json
 typings.json
 webpack.config.js

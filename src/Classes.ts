@@ -1,5 +1,5 @@
-import { hasShadow, isResponsive, isTyped } from './Config'
 import type { Config } from './Config'
+import { defaultConfig, hasShadow, isResponsive, isTyped } from './Config'
 
 const shellClass = 'shell'
 const statusBarClass = 'status-bar'
@@ -29,15 +29,15 @@ export {
 }
 
 export const buildClasses =
-    (config: Config) =>
-    (elClassName: ReadonlyArray<string>): string => {
+    (config: Partial<Config>) =>
+    (elClassName: ReadonlyArray<string> = []): ReadonlyArray<string> => {
         const classNames = [
             shellClass,
-            `${shellClass}--${config.style.engine}`,
-            `${shellClass}--${config.style.theme}`,
+            `${shellClass}--${config.style?.engine ?? defaultConfig.style?.engine}`,
+            `${shellClass}--${config.style?.theme ?? defaultConfig.style?.theme}`,
             isResponsive(config) ? `${shellClass}--responsive` : '',
             hasShadow(config) ? `${shellClass}--shadow` : '',
             isTyped(config) ? `${shellClass}--typed` : '',
-        ]
-        return `${elClassName.filter(c => !classNames.includes(c)).join(' ')} ${classNames.join(' ')}`
+        ].filter(Boolean)
+        return [...elClassName.filter(c => !classNames.includes(c)), ...classNames]
     }
