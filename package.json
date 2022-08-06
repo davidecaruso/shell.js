@@ -10,9 +10,6 @@
   "bugs": {
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
-  "engines": {
-    "node": ">=16"
-  },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --config webpack.dev.js",
