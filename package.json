@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "3.3.1",
+  "version": "4.0.0-rc.1",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "https://shelljs.io",
@@ -11,17 +11,18 @@
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
-    "dev": "webpack --env=development --watch",
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "webpack --env=development",
-    "build:prod": "webpack --env=production",
-    "test": "mocha -r tests/helpers/* -r ts-node/register --globals window tests/*.test.ts",
-    "test:watch": "mocha -r tests/helpers/* -r ts-node/register tests/*.test.ts --watch",
-    "test:coverage": "nyc npm run test",
-    "test:report": "npm run test:coverage & nyc report --reporter=html"
+    "build:dev": "webpack --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "prettier": "prettier --write ./src ./webpack.*.js",
+    "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "nyc -x \"**/{index,*.test}.ts\" npm run test",
+    "test:report": "npm run test:coverage & nyc report --reporter=html",
+    "watch": "npm run build:dev -- --watch"
   },
   "keywords": [
     "shell",
@@ -33,23 +34,33 @@
     "javascript-plugin"
   ],
   "devDependencies": {
+    "@types/chai": "^4.3.1",
+    "@types/jest": "^27.4.1",
+    "@types/jsdom": "^16.2.14",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^7.0.7",
     "@types/webpack-env": "^1.13.6",
-    "array-subtract": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
     "autoprefixer": "^7.1.4",
     "chai": "^4.1.2",
-    "clean": "^4.0.2",
     "coveralls": "^3.0.0",
     "css-loader": "^3.4.2",
     "css-modules-require-hook": "^4.2.2",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "expect": "^25.0.0",
     "istanbul": "^0.4.5",
     "jsdom": "^11.3.0",
     "jshint-stylish": "^2.2.1",
     "mocha": "^7.1.2",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "nyc": "^15.0.0",
     "postcss-loader": "^2.0.6",
+    "prettier": "^2.6.2",
     "sass-loader": "^12.1.0",
     "should": "^13.1.2",
     "style-loader": "^0.18.2",

@@ -3,13 +3,13 @@
         ".ts"
     ],
     "include": [
-        "src/js/*.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
-        "src/**/index.ts",
+        "src/index.ts",
         "**/*.d.ts",
         "node_modules/*",
-        "test/*"
+        "tests/*"
     ],
     "require": [
         "ts-node/register"

@@ -1,13 +1,7 @@
-assets/images/
-assets/fonts/selection.json
-assets/style/
+assets/
 src/
-tests/
-typings/
-webpack/
 .*
-bower.json
-index.html
+mocha.module.js
+README.md
 tsconfig.json
-typings.json
-webpack.config.js
+webpack.*.js

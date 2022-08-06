@@ -1,19 +1,24 @@
 {
   "compilerOptions": {
+    "strict": true,
     "baseUrl": "./",
-    "outDir": "lib/",
-    "module": "commonjs",
+    "outDir": "./lib/",
     "removeComments": true,
-    "target": "es5",
-    "skipLibCheck": true,
-    "types": [
-      "node"
-    ]
+    "module": "CommonJS",
+    "target": "ES6",
+    "moduleResolution": "Node",
+//    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "pretty": true,
+    "sourceMap": false,
+    "importsNotUsedAsValues": "error",
+    "importHelpers": true
   },
-  "include": [
-    "src/**/*.ts",
-    "typings/**/*.ts"
-  ],
   "exclude": [
     "coverage",
     "node_modules",

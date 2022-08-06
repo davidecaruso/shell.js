@@ -1,17 +1,26 @@
-.#{$shell}__#{$content} {
+.#{$shell-content} {
     @extend %monospace;
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    flex-direction: column;
-    border: 1px solid transparent;
+    border: .1em solid transparent;
+    border-top: 0;
     padding: 2px;
     @include adjust-font(16px, 18px);
     background: #292929;
     box-sizing: border-box;
+    overflow-y: auto;
+    position: absolute;
+    top: 21px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-    .line {
-        .line__prefix {
+    .lines {
+        overflow-y: auto;
+    }
+
+    .#{$line} {
+        display: none;
+
+        .#{$line-prefix} {
             .user { color: #8AD733; }
 
             .host { color: #8AD733; }
@@ -19,8 +28,8 @@
             .path { color: #729FCF; }
         }
 
-        &.line--root {
-            .line__prefix {
+        &.#{$line}--root {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
@@ -29,7 +38,7 @@
             }
         }
 
-        &.line--active {
+        &.#{$line}--active {
             display: block;
         }
     }

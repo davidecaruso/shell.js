@@ -3,22 +3,22 @@
     border-radius: 0;
     box-shadow: 0 5px 20px 0 rgba(#000000, 0.5);
 
-    .#{$shell}__status-bar {
+    .#{$shell-status-bar} {
         height: 30px;
         background-color: $main-windows-color;
 
-        .#{$statusBar}__title {
+        .#{$status-bar-title} {
             @include adjust-font(16px, 40px);
             color: #292929;
         }
 
-        .#{$statusBar}__buttons {
+        .#{$status-bar-buttons} {
             align-items: stretch;
             justify-content: flex-end;
             order: 1;
             padding: 0;
 
-            .button {
+            .#{$button} {
                 margin: 0;
                 border-radius: 0;
                 @include size(25px, 20px);
@@ -33,7 +33,7 @@
                     }
                 }
 
-                &.button--close {
+                &.#{$button}--close {
                     width: 50px;
                     background: #C75050;
                     color: #FFFFFF;
@@ -44,7 +44,7 @@
                     }
                 }
 
-                &.button--minimize {
+                &.#{$button}--minimize {
                     background: transparent;
                     color: #292929;
 
@@ -54,7 +54,7 @@
                     }
                 }
 
-                &.button--enlarge {
+                &.#{$button}--enlarge {
                     background: transparent;
                     color: #292929;
 
@@ -66,7 +66,7 @@
             }
         }
 
-        .#{$statusBar}__icon {
+        .#{$status-bar-icon} {
             background: #000000;
             color: #FFFFFF;
             @include size(20px);
@@ -77,19 +77,20 @@
         }
     }
 
-    .#{$shell}__#{$content} {
+    .#{$shell-content} {
         border-color: $main-windows-color;
         background: #000000;
+        top: 30px;
 
-        .line {
-            .line__prefix {
+        .#{$line} {
+            .#{$line-prefix} {
                 .user { color: #FFFFFF; }
 
                 .host { color: #FFFFFF; }
 
                 .path { color: #FFFFFF; }
 
-                .line--root {
+                .#{$line}--root {
                     .user { color: #FFFFFF; }
 
                     .host { color: #FFFFFF; }
