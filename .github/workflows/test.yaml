@@ -16,10 +16,10 @@ jobs:
                   node-version: 16.x
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Run ESLint
-              run: npm run eslint
+              run: yarn eslint
 
     test:
         name: Node ${{ matrix.node }} on ${{ matrix.os }}
@@ -41,10 +41,10 @@ jobs:
                   node-version: ${{ matrix.node }}
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Run test coverage
-              run: npm run test:coverage
+              run: yarn test:coverage
 
             - name: Coveralls GitHub Action
               uses: coverallsapp/github-action@1.1.3
@@ -64,10 +64,10 @@ jobs:
                   node-version: 16.x
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Run Prettier
-              run: npm run prettier
+              run: yarn prettier
 
     typescript:
         name: Node ${{ matrix.node }} on ${{ matrix.os }}
@@ -89,7 +89,7 @@ jobs:
                   node-version: ${{ matrix.node }}
 
             - name: Install dependencies
-              run: npm install
+              run: yarn install
 
             - name: Build
-              run: npm run build
+              run: yarn build
