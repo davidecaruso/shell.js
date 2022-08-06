@@ -65,7 +65,7 @@
     "prettier": "^2.6.2",
     "sass-loader": "^12.1.0",
     "should": "^13.1.2",
-    "style-loader": "^0.18.2",
+    "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^2.3.8",
     "ts-loader": "^9.2.5",
     "ts-node": "^6.1.0",
