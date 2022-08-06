@@ -56,7 +56,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "expect": "^25.0.0",
     "istanbul": "^0.4.5",
-    "jsdom": "^11.3.0",
+    "jsdom": "^16.5.0",
     "jshint-stylish": "^2.2.1",
     "mocha": "^7.1.2",
     "node-sass": "^7.0.0",
