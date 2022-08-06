@@ -1,6 +1,6 @@
 {
   "name": "shell.js",
-  "version": "3.3.1",
+  "version": "4.0.0-rc.1",
   "description": "A JavaScript library to create HTML terminals in web pages.",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "https://shelljs.io",
@@ -11,7 +11,7 @@
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",

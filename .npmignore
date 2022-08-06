@@ -1,6 +1,7 @@
-.*
 assets/
-tests/
-bower.json
+src/
+.*
+mocha.module.js
+README.md
 tsconfig.json
 webpack.*.js
