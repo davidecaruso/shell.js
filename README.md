@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dm/shell.js.svg)](https://www.npmjs.com/package/shell.js)
 [![snyk](https://snyk.io/test/github/davidecaruso/shell.js/badge.svg)](https://snyk.io/test/github/davidecaruso/shell.js)
 [![travis](https://travis-ci.org/davidecaruso/shell.js.svg?branch=master)](https://travis-ci.org/davidecaruso/shell.js)
-[![coveralls](https://coveralls.io/repos/github/davidecaruso/shell.js/badge.svg?branch=master)](https://coveralls.io/github/davidecaruso/shell.js?branch=master)
+[![coveralls](https://coveralls.io/repos/github/davidecaruso/shell.js/badge.svg?branch=main)](https://coveralls.io/github/davidecaruso/shell.js?branch=main)
 ![license](https://img.shields.io/github/license/davidecaruso/shell.js.svg)
 
 </p>
