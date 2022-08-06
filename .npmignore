@@ -1,8 +1,6 @@
+.*
 assets/
 tests/
-webpack/
-.*
 bower.json
 tsconfig.json
-typings.json
-webpack.config.js
+webpack.*.js
