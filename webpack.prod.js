@@ -1,4 +1,4 @@
-module.exports = require('webpack-merge')(require('./common'), {
+module.exports = require('webpack-merge')(require('./webpack.common'), {
     mode: 'production',
     output: { filename: '[name].min.js' },
     optimization: {

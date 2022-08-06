@@ -14,15 +14,15 @@
     "node": ">=12"
   },
   "scripts": {
-    "dev": "webpack --env=development --watch",
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "webpack --env=development",
-    "build:prod": "webpack --env=production",
-    "prettier": "prettier --write ./src ./tests ./webpack ./webpack.config.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "prettier": "prettier --write ./src ./tests ./webpack.*.js",
     "test": "mocha -r tests/mocha.module.js -r ts-node/register --globals window tests/*.test.ts",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "nyc npm run test",
-    "test:report": "npm run test:coverage & nyc report --reporter=html"
+    "test:report": "npm run test:coverage & nyc report --reporter=html",
+    "watch": "npm run build:dev -- --watch"
   },
   "keywords": [
     "shell",

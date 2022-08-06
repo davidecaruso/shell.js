@@ -1,19 +1,20 @@
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 const path = require('path')
-const assets = '../assets'
-const source = '../src'
-const destination = '../lib'
+const pkg = require('./package.json')
+
+const assets = path.join(__dirname, 'assets')
+const src = path.join(__dirname, 'src')
+const lib = path.join(__dirname, 'lib')
 const library = 'shell'
 
-// Export Webpack config
 module.exports = {
     devtool: 'nosources-source-map',
     entry: {
-        [library]: [`${path.join(__dirname, assets)}/style/main.scss`, `${path.join(__dirname, source)}/index.ts`],
+        [library]: [`${assets}/style/main.scss`, `${src}/index.ts`],
     },
     output: {
-        path: path.join(__dirname, destination),
+        path: lib,
         filename: `[name].js`,
         library,
         libraryTarget: 'umd',
@@ -53,7 +54,7 @@ module.exports = {
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
-                        name: 'assets/fonts/[name].[ext]',
+                        name: `${assets}/fonts/[name].[ext]`,
                     },
                 },
             },
@@ -65,6 +66,11 @@ module.exports = {
                 postcss: [autoprefixer()],
             },
         }),
+        new (require('webpack').BannerPlugin)(`${pkg.name} - ${pkg.description}
+Author: ${pkg.author}
+Version: v${pkg.version}
+License: ${pkg.license}
+Homepage: ${pkg.homepage}`),
     ],
     resolve: {
         extensions: ['.ts', '.js'],
