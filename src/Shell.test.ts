@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { JSDOM } from 'jsdom'
-import Shell from '../src/Shell'
+import Shell from './Shell'
 
 const GLOBAL: any = global
 GLOBAL.window = new JSDOM(`<!doctype html><html><body></body></html>`).window

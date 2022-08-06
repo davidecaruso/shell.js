@@ -9,7 +9,7 @@ import {
     isTyped,
     isUbuntu,
     isWindows,
-} from '../src/Config'
+} from './Config'
 
 describe('Config', () => {
     describe('defaultConfig', () => {

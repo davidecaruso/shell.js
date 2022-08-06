@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { Config, defaultConfig } from '../src/Config'
-import { buildStatusBar } from '../src/StatusBar'
+import { Config, defaultConfig } from './Config'
+import { buildStatusBar } from './StatusBar'
 
 describe('StatusBar', () => {
     describe('buildStatusBar', () => {

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import { login } from '../src/Command'
-import { Config, defaultConfig } from '../src/Config'
-import { buildContent } from '../src/Content'
+import { login } from './Command'
+import { Config, defaultConfig } from './Config'
+import { buildContent } from './Content'
 
 describe('Content', () => {
     describe('buildContent', () => {

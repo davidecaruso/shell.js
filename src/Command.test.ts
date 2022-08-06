@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { exec, idle, input, isExecutable, isIdle, isInput, isOutput, login, output } from '../src/Command'
-import { Config, defaultConfig } from '../src/Config'
+import { exec, idle, input, isExecutable, isIdle, isInput, isOutput, login, output } from './Command'
+import { Config, defaultConfig } from './Config'
 
 describe('Command', () => {
     describe('isExecutable', () => {

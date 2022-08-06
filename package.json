@@ -17,10 +17,10 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
-    "prettier": "prettier --write ./src ./tests ./webpack.*.js",
-    "test": "mocha -r tests/mocha.module.js -r ts-node/register --globals window tests/*.test.ts",
+    "prettier": "prettier --write ./src ./webpack.*.js",
+    "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "nyc npm run test",
+    "test:coverage": "nyc -x \"**/{index,*.test}.ts\" npm run test",
     "test:report": "npm run test:coverage & nyc report --reporter=html",
     "watch": "npm run build:dev -- --watch"
   },

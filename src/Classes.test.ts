@@ -12,7 +12,7 @@ import {
     statusBarButtonsClass,
     statusBarIconClass,
     statusBarTitleClass,
-} from '../src/Classes'
+} from './Classes'
 
 describe('Classes', () => {
     describe('class names', () => {
