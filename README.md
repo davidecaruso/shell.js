@@ -14,48 +14,41 @@
 
 ## Install
 ```bash
-$ yarn add shell.js # recommended
+$ yarn add shell.js
 $ npm i shell.js
-$ bower install shell.js --save
 ```
 
 ## Config
 For each **Shell** instance you can set the following options:
 
-| Config | Allowed values | Description | Defaut value |
-| ------- | -------------- | ----------- | ------------ |
-| user | *string* | The user | **"user"** |
-| host | *string* | The host | **"host"** |
-| path | *string* | The working directory | **"~"** &#124; **"C:\Windows\system32\"** |
-| engine | **"default"**&#124;**"ubuntu"**&#124;**"macos"**&#124;**"windows"** | The Engine engine | **"default"** |
-| theme | **"dark"**&#124;**"light"** | The theme | **"dark"** |
-| responsive | *boolean* | Responsiveness  | *true* |
-| typed | *Typed* callable | **[Typed.js](https://github.com/mattboldt/typed.js/)** integration to make shell alive | *null* |
-| commands | array | The commands list | *[]* |
+| Config           | Value type                                                          | Description                                                                       | Defaut                                    |
+|------------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------|-------------------------------------------|
+| user             | *string*                                                            | The user                                                                          | **"user"**                                |
+| host             | *string*                                                            | The host                                                                          | **"host"**                                |
+| path             | *string*                                                            | The working directory                                                             | **"~"** &#124; **"C:\Windows\system32\"** |
+| root             | *boolean*                                                           | If the current user is `root` or not                                              | *false*                                   |
+| style.engine     | **"default"**&#124;**"ubuntu"**&#124;**"macos"**&#124;**"windows"** | The engine                                                                        | **"default"**                             |
+| style.theme      | **"dark"**&#124;**"light"**                                         | The theme                                                                         | **"dark"**                                |
+| style.responsive | *boolean*                                                           | Responsiveness                                                                    | *true*                                    |
+| style.shadow     | *boolean*                                                           | Shadowness                                                                        | *true*                                    |
+| typing.ctor      | *Typed.js* instance                                                 | **[Typed.js](https://github.com/mattboldt/typed.js/)**                        | *null*                                    |
+| typing.otps      | *Typed.js* options                                                  | **[Typed.js options](https://github.com/mattboldt/typed.js/#customization)**| *undefined*                               |
 
 
 ## Usage
-Create a HTML element with a specified ID... 
 ```html
 <div id="awesome-shell"></div>
 ```
-...and pass the CSS selector to the **Shell.js** constructor:
-
 ```javascript
 document.addEventListener('DOMContentLoaded', function () {
-  let shell = new shell('#awesome-shell', {
-    user: 'foobar',
-    host: 'MacMini',
-    path: '/etc/',
-    engine: 'macos',
-    theme: 'dark',
-    responsive: false,
-    commands: ['First command', 'Second command', '...']
-  });
+  const awesomeShell = shell('#awesome-shell', ['echo "Hello, world!"', 'ls -al']);
+  awesomeShell.type()
 });
 ```
 
-> Visit the documentation [page](https://shelljs.io)
+
+## Documentation
+Visit [shelljs.io](https://shelljs.io).
 
 ## Author
 [Davide Caruso](https://about.me/davidecaruso)

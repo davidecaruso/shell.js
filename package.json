@@ -11,7 +11,7 @@
     "url": "https://github.com/davidecaruso/shell.js/issues"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "scripts": {
     "build": "npm run build:dev && npm run build:prod",
@@ -20,7 +20,7 @@
     "prettier": "prettier --write ./src ./webpack.*.js",
     "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "nyc -x \"**/{index,*.test}.ts\" npm run test",
+    "test:coverage": "nyc npm run test",
     "test:report": "npm run test:coverage & nyc report --reporter=html",
     "watch": "npm run build:dev -- --watch"
   },

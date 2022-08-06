@@ -1,19 +1,13 @@
 {
-    "extension": [
-        ".ts"
-    ],
-    "include": [
-        "src/**/*.ts"
-    ],
+    "extension": [".ts"],
+    "include": ["src/**/*.ts"],
     "exclude": [
         "src/index.ts",
+        "src/*.test.ts",
         "**/*.d.ts",
-        "node_modules/*",
-        "tests/*"
+        "node_modules/*"
     ],
-    "require": [
-        "ts-node/register"
-    ],
+    "require": ["ts-node/register"],
     "reporter": [
         "lcov",
         "html",
