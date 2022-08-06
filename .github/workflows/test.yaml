@@ -1,8 +1,26 @@
 name: test
 on:
+    pull_request:
     push:
         branches: [main]
 jobs:
+    eslint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Clone repository
+              uses: actions/checkout@v3
+
+            - name: Set Node.js version
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run ESLint
+              run: npm run eslint
+
     test:
         name: Node ${{ matrix.node }} on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
@@ -25,7 +43,6 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-
             - name: Run test coverage
               run: npm run test:coverage
 
@@ -34,3 +51,45 @@ jobs:
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   flag-name: ${{matrix.os}}-node-${{ matrix.node }}
+
+    prettier:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Clone repository
+              uses: actions/checkout@v3
+
+            - name: Set Node.js version
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 16.x
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run Prettier
+              run: npm run prettier
+
+    typescript:
+        name: Node ${{ matrix.node }} on ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                node: [12, 14, 16]
+                os: [ubuntu-latest]
+
+        steps:
+            - name: Clone repository
+              uses: actions/checkout@v3
+
+            - name: Set Node.js version
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node }}
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build
+              run: npm run build

@@ -17,7 +17,7 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "webpack --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
-    "eslint:check": "eslint --fix-dry-run ./",
+    "eslint": "eslint --fix-dry-run ./",
     "eslint:fix": "eslint --fix ./",
     "prettier": "prettier --write ./src ./webpack.*.js",
     "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
