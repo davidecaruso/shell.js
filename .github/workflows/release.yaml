@@ -19,6 +19,6 @@ jobs:
               run: yarn install
 
             - name: Publish to registry
-              run: yarn release
+              run: npm publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
