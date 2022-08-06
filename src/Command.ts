@@ -101,5 +101,5 @@ const commands: Record<string, (input: Input) => Output | null> = {
 
 export const exec = (command: Input): Output | null =>
     Object.keys(commands)
-        .map(cmd => (Boolean(new RegExp(cmd).test(command.value)) ? commands[cmd](command) : null))
+        .map(cmd => (new RegExp(cmd).test(command.value) ? commands[cmd](command) : null))
         .filter(Boolean)[0]

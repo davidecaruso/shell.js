@@ -34,7 +34,8 @@ describe('Config', () => {
         it('should return correct value', () => {
             expect(isTyped({})).to.be.false
             expect(isTyped({ typing: undefined })).to.be.false
-            expect(isTyped({ typing: { ctor: (() => {}) as any } })).to.be.true
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            expect(isTyped({ typing: { ctor: (() => {}) as never } })).to.be.true
         })
     })
 
@@ -92,9 +93,5 @@ describe('Config', () => {
             expect(hasShadow({ style: { shadow: false } })).to.be.false
             expect(hasShadow({ style: { shadow: true } })).to.be.true
         })
-    })
-
-    describe('isExecutable', () => {
-        it('should return correct value', () => {})
     })
 })

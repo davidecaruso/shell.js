@@ -2,6 +2,7 @@ import { expect } from 'chai'
 import { JSDOM } from 'jsdom'
 import Shell from './Shell'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const GLOBAL: any = global
 GLOBAL.window = new JSDOM(`<!doctype html><html><body></body></html>`).window
 GLOBAL.document = window.document
@@ -15,7 +16,7 @@ describe('Shell', () => {
     })
 
     describe('with a valid element selector', () => {
-        let div: any
+        let div: Element
         const id = 'shell'
         const selector = `#${id}`
 

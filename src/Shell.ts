@@ -7,7 +7,7 @@ import { buildStatusBar } from './StatusBar'
 
 const type =
     ([el, { typing }]: [Element, Pick<Config, 'typing'>]) =>
-    (index: number = 0): void => {
+    (index = 0): void => {
         const self = type([el, { typing }])
         const lines = el.querySelectorAll(`.${lineClass}`)
         if (!isTyped({ typing })) {
@@ -23,15 +23,15 @@ const type =
         const commandContent = command.innerHTML
         line.className = `${lineClass}--active ${line.className}`
 
-        if (!command.className.includes(`${lineCommandClass}--output`) && index < lines.length - 1) {
+        if (!command.className.includes(`${lineCommandClass}--output`) && index < lines.length - 1 && typing) {
             command.innerHTML = ''
-            new (typing as any).ctor(command, {
+            new typing.ctor(command, {
                 typeSpeed: 90,
                 cursorChar: '&nbsp;',
                 showCursor: true,
-                ...(typing as any).opts,
+                ...typing.opts,
                 loop: false,
-                strings: [`${commandContent}^${(typing as any).opts?.delay ?? 600}`],
+                strings: [`${commandContent}^${typing.opts?.delay ?? 600}`],
                 contentType: 'html',
                 onStringTyped: () => line.removeChild(line.querySelectorAll(`.${cursorClass}`)[0]),
                 onComplete: () => self(++index),
