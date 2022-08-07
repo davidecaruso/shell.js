@@ -7,22 +7,22 @@ jobs:
     eslint:
         runs-on: ubuntu-latest
         steps:
-            - name: Clone repository
+            - name: clone repository
               uses: actions/checkout@v3
 
-            - name: Set Node.js version
+            - name: set Node.js version
               uses: actions/setup-node@v3
               with:
                   node-version: 16.x
 
-            - name: Install dependencies
+            - name: install dependencies
               run: yarn install
 
             - name: Run ESLint
               run: yarn eslint
 
     test:
-        name: Node ${{ matrix.node }} on ${{ matrix.os }}
+        name: node ${{ matrix.node }} on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
 
         strategy:
@@ -32,21 +32,21 @@ jobs:
                 os: [ubuntu-latest]
 
         steps:
-            - name: Clone repository
+            - name: clone repository
               uses: actions/checkout@v3
 
-            - name: Set Node.js version
+            - name: set node.js version
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node }}
 
-            - name: Install dependencies
+            - name: install dependencies
               run: yarn install
 
-            - name: Run test coverage
+            - name: run test coverage
               run: yarn test:coverage
 
-            - name: Coveralls GitHub Action
+            - name: coveralls github action
               uses: coverallsapp/github-action@1.1.3
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -55,22 +55,22 @@ jobs:
     prettier:
         runs-on: ubuntu-latest
         steps:
-            - name: Clone repository
+            - name: clone repository
               uses: actions/checkout@v3
 
-            - name: Set Node.js version
+            - name: set node.js version
               uses: actions/setup-node@v3
               with:
                   node-version: 16.x
 
-            - name: Install dependencies
+            - name: install dependencies
               run: yarn install
 
-            - name: Run Prettier
+            - name: run prettier
               run: yarn prettier
 
     typescript:
-        name: Node ${{ matrix.node }} on ${{ matrix.os }}
+        name: node ${{ matrix.node }} on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
 
         strategy:
@@ -80,16 +80,16 @@ jobs:
                 os: [ubuntu-latest]
 
         steps:
-            - name: Clone repository
+            - name: clone repository
               uses: actions/checkout@v3
 
-            - name: Set Node.js version
+            - name: set node.js version
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node }}
 
-            - name: Install dependencies
+            - name: install dependencies
               run: yarn install
 
-            - name: Build
+            - name: build
               run: yarn build
