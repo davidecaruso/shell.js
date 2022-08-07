@@ -9,7 +9,6 @@ const lib = path.join(__dirname, 'lib')
 const library = 'shell'
 
 module.exports = {
-    devtool: 'nosources-source-map',
     entry: {
         [library]: [`${assets}/style/main.scss`, `${src}/index.ts`],
     },
