@@ -1,5 +1,9 @@
 type Engine = 'default' | 'macos' | 'ubuntu' | 'windows'
 type Theme = 'dark' | 'light'
+type Typing = {
+    ctor: new (...args: unknown[]) => unknown
+    opts?: Record<string, unknown>
+}
 
 export type Config = {
     user: string
@@ -12,10 +16,7 @@ export type Config = {
         responsive: boolean
         shadow: boolean
     }>
-    typing?: {
-        ctor: new (...args: unknown[]) => unknown
-        opts?: Record<string, unknown>
-    }
+    typing?: Typing
 }
 
 export const defaultConfig: Config = {
@@ -32,15 +33,29 @@ export const defaultConfig: Config = {
     typing: undefined,
 }
 
-export const isTyped = ({ typing }: Pick<Partial<Config>, 'typing'>): boolean =>
-    Boolean(typing && typeof typing.ctor === 'function')
-export const isRoot = ({ root }: Pick<Partial<Config>, 'root'>): boolean => Boolean(root)
-export const isResponsive = ({ style }: Pick<Partial<Config>, 'style'>): boolean => Boolean(style?.responsive)
-export const isWindows = ({ style }: Pick<Partial<Config>, 'style'>): boolean => style?.engine === 'windows'
-export const isMacOs = ({ style }: Pick<Partial<Config>, 'style'>): boolean => style?.engine === 'macos'
-export const isUbuntu = ({ style }: Pick<Partial<Config>, 'style'>): boolean => style?.engine === 'ubuntu'
-export const isDefault = ({ style }: Pick<Partial<Config>, 'style'>): boolean => style?.engine === 'default'
-export const hasShadow = ({ style }: Pick<Partial<Config>, 'style'>): boolean => Boolean(style?.shadow)
+export const isTyped = <C extends Pick<Partial<Config>, 'typing'>>(c: C): c is C & { typing: Typing } =>
+    Boolean(c.typing && typeof c.typing.ctor === 'function')
+
+export const isRoot = <C extends Pick<Partial<Config>, 'root'>>(c: C): c is C & { root: true } => Boolean(c.root)
+
+export const isResponsive = <C extends Pick<Partial<Config>, 'style'>>(
+    c: C
+): c is C & { style: { responsive: true } } => Boolean(c.style?.responsive)
+
+export const isWindows = <C extends Pick<Partial<Config>, 'style'>>(c: C): c is C & { style: { engine: 'windows' } } =>
+    c.style?.engine === 'windows'
+
+export const isMacOs = <C extends Pick<Partial<Config>, 'style'>>(c: C): c is C & { style: { engine: 'macos' } } =>
+    c.style?.engine === 'macos'
+
+export const isUbuntu = <C extends Pick<Partial<Config>, 'style'>>(c: C): c is C & { style: { engine: 'ubuntu' } } =>
+    c.style?.engine === 'ubuntu'
+
+export const isDefault = <C extends Pick<Partial<Config>, 'style'>>(c: C): c is C & { style: { engine: 'default' } } =>
+    c.style?.engine === 'default'
+
+export const hasShadow = <C extends Pick<Partial<Config>, 'style'>>(c: C): c is C & { style: { shadow: true } } =>
+    Boolean(c.style?.shadow)
 
 export const buildConfig = (config: Partial<Config>): Config => {
     const cfg: Config = { ...defaultConfig, ...config }
