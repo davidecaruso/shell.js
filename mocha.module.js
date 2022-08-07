@@ -1,6 +1,6 @@
-let hook = require('css-modules-require-hook')
-let sass = require('node-sass')
-let path = require('path')
+const hook = require('css-modules-require-hook')
+const sass = require('node-sass')
+const path = require('path')
 
 hook({
     extensions: ['.scss'],
