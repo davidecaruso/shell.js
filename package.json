@@ -17,7 +17,6 @@
     "eslint": "eslint --fix-dry-run ./",
     "eslint:fix": "eslint --fix ./",
     "prettier": "prettier --write ./src ./webpack.*.js",
-    "publish": "npm publish",
     "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "nyc npm run test",
