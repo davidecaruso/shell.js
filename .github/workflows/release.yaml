@@ -18,7 +18,10 @@ jobs:
             - name: install dependencies
               run: yarn install
 
+            - name: build package
+              run: yarn build
+
             - name: publish to registry
-              run: npm publish
+              run: yarn publish
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
