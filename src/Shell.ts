@@ -6,11 +6,11 @@ import { buildContent } from './Content'
 import { buildStatusBar } from './StatusBar'
 
 const type =
-    ([el, { typing }]: [Element, Pick<Config, 'typing'>]) =>
+    ([el, config]: [Element, Pick<Config, 'typing'>]) =>
     (index = 0): void => {
-        const self = type([el, { typing }])
+        const self = type([el, config])
         const lines = el.querySelectorAll(`.${lineClass}`)
-        if (!isTyped({ typing })) {
+        if (!isTyped(config)) {
             return lines.forEach(line => (line.className = `${lineClass}--active ${line.className}`))
         }
 
@@ -23,15 +23,15 @@ const type =
         const commandContent = command.innerHTML
         line.className = `${lineClass}--active ${line.className}`
 
-        if (!command.className.includes(`${lineCommandClass}--output`) && index < lines.length - 1 && typing) {
+        if (!command.className.includes(`${lineCommandClass}--output`) && index < lines.length - 1) {
             command.innerHTML = ''
-            new typing.ctor(command, {
+            new config.typing.ctor(command, {
                 typeSpeed: 90,
                 cursorChar: '&nbsp;',
                 showCursor: true,
-                ...typing.opts,
+                ...config.typing.opts,
                 loop: false,
-                strings: [`${commandContent}^${typing.opts?.delay ?? 600}`],
+                strings: [`${commandContent}^${config.typing.opts?.delay ?? 600}`],
                 contentType: 'html',
                 onStringTyped: () => line.removeChild(line.querySelectorAll(`.${cursorClass}`)[0]),
                 onComplete: () => self(++index),
