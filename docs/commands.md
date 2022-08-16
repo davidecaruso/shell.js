@@ -15,7 +15,7 @@ Shell("#shell", ["Hello, world!"]).type();
 There are some commands that introduce special behaviours:
 
 * `sudo` _(exec commands as super user)_
-* `exit` _(exit from suer user session)_
+* `exit` _(exit from super user session)_
 * (more soon)
 
 ```javascript
