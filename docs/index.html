@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
@@ -66,10 +66,23 @@
           text-shadow: 6px 6px 10px #3D3D3D !important;
       }
 
+      @media screen and (max-width: 767px) {
+          #cover-page h1 a span {
+              font-size: 2em;
+          }
+      }
+
       #cover-page .shell {
           max-width: 50vw;
           height: 35vh;
           margin: 0 auto;
+      }
+      @media screen and (max-width: 767px) {
+          #cover-page .shell {
+              max-width: 80vw;
+              height: 30vh;
+              margin: 0 auto;
+          }
       }
 
       #notfound-page .shell {
@@ -82,6 +95,7 @@
 <body>
 <div id="app"></div>
 <script>
+  var delay = 200;
   window.$docsify = {
     name: "Shell.js",
     repo: "davidecaruso/shell.js",
@@ -93,40 +107,15 @@
         hook.afterEach(function(html, next) {
           if (vm.route.path === "/") {
             next(html);
-            Shell("#cover-shell", [
-              "sudo -i",
-              {
-                input: "shell.js -h", output: function() {
-                  return { value: "A <strong>JavaScript</strong> library to create HTML <strong>terminals</strong> in web pages." };
-                }
-              },
-              "exit"
-            ], {
-              user: "guest",
-              host: "shelljs.io",
-              typing: { ctor: Typed },
-              style: {
-                engine: "macos",
-                responsive: true,
-                shadow: true
-              }
-            }).type();
-          } else {
-            next(html);
-            if (document.getElementById("notfound-shell")) {
-              Shell("#notfound-shell", [
+            setTimeout(function() {
+              Shell("#cover-shell", [
+                "sudo -i",
                 {
-                  input: "curl -I '" + window.location.href + "'", output: function() {
-                    return {
-                      value: "<br />HTTP/1.1 404 Not Found<br />" +
-                        "<strong style='color: white;'>Content-Type</strong>: text/html; charset=utf-8<br />" +
-                        "<strong style='color: white;'>Content-Length</strong>: 143<br />" +
-                        "<strong style='color: white;'>Date</strong>: " + new Date() + "<br />" +
-                        "<strong style='color: white;'>Connection</strong>: keep-alive<br />" +
-                        "<strong style='color: white;'>Keep-Alive</strong>: timeout=5<br /><br />"
-                    };
+                  input: "shell.js -h", output: function() {
+                    return { value: "A <strong>JavaScript</strong> library to create HTML <strong>terminals</strong> in web pages." };
                   }
-                }
+                },
+                "exit"
               ], {
                 user: "guest",
                 host: "shelljs.io",
@@ -137,6 +126,35 @@
                   shadow: true
                 }
               }).type();
+            }, delay);
+          } else {
+            next(html);
+            if (document.getElementById("notfound-shell")) {
+              setTimeout(function() {
+                Shell("#notfound-shell", [
+                  {
+                    input: "curl -I '" + window.location.href + "'", output: function() {
+                      return {
+                        value: "<br />HTTP/1.1 404 Not Found<br />" +
+                          "<strong style='color: white;'>Content-Type</strong>: text/html; charset=utf-8<br />" +
+                          "<strong style='color: white;'>Content-Length</strong>: 143<br />" +
+                          "<strong style='color: white;'>Date</strong>: " + new Date() + "<br />" +
+                          "<strong style='color: white;'>Connection</strong>: keep-alive<br />" +
+                          "<strong style='color: white;'>Keep-Alive</strong>: timeout=5<br /><br />"
+                      };
+                    }
+                  }
+                ], {
+                  user: "guest",
+                  host: "shelljs.io",
+                  typing: { ctor: Typed },
+                  style: {
+                    engine: "macos",
+                    responsive: true,
+                    shadow: true
+                  }
+                }).type();
+              }, delay);
             }
           }
         });
