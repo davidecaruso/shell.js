@@ -56,6 +56,8 @@ const init =
         return [el, config]
     }
 
-export default (selector: string, commands: ReadonlyArray<Command>, config: Partial<Config> = defaultConfig) => ({
+const Shell = (selector: string, commands: ReadonlyArray<Command>, config: Partial<Config> = defaultConfig) => ({
     type: type(init(selector)(commands)(buildConfig(config))),
 })
+
+export default Shell

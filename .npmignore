@@ -1,9 +1,9 @@
 assets/
 coverage/
+docs/
 src/
 .*
 mocha.module.js
-README.md
 tsconfig.json
 webpack.*.js
 yarn*
