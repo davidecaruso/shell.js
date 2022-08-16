@@ -1,4 +1,4 @@
 import '../assets/style/main.scss'
-import shell from './Shell'
+import Shell from './Shell'
 
-module.exports = shell
+module.exports = Shell

@@ -6,16 +6,15 @@ const pkg = require('./package.json')
 const assets = path.join(__dirname, 'assets')
 const src = path.join(__dirname, 'src')
 const lib = path.join(__dirname, 'lib')
-const library = 'shell'
 
 module.exports = {
     entry: {
-        [library]: [`${assets}/style/main.scss`, `${src}/index.ts`],
+        shell: [`${assets}/style/main.scss`, `${src}/index.ts`],
     },
     output: {
         path: lib,
         filename: `[name].js`,
-        library,
+        library: 'Shell',
         libraryTarget: 'umd',
         umdNamedDefine: true,
     },

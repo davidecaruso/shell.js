@@ -1,17 +1,8 @@
-# Folders
 .idea/
 .nyc_output/
-.sass-cache/
-.tmp/
-bower_components/
 coverage/
 node_modules/
-source/
-tmp/
 lib/
-
-# Files
 *.orig
 .DS_Store
-sass/*.css
 yarn-error.log
