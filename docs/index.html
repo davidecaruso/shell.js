@@ -66,29 +66,34 @@
           text-shadow: 6px 6px 10px #3D3D3D !important;
       }
 
-      @media screen and (max-width: 767px) {
-          #cover-page h1 a span {
-              font-size: 2em;
-          }
-      }
-
       #cover-page .shell {
           max-width: 50vw;
           height: 35vh;
           margin: 0 auto;
       }
+
+      #notfound-page .shell {
+          max-width: 50vw;
+          height: 50vh;
+          margin: auto;
+      }
+
       @media screen and (max-width: 767px) {
+          #cover-page h1 a span {
+              font-size: 2em;
+          }
+
           #cover-page .shell {
               max-width: 80vw;
               height: 30vh;
               margin: 0 auto;
           }
-      }
 
-      #notfound-page .shell {
-          width: 50vw;
-          height: 50vh;
-          margin: auto;
+          #notfound-page .shell {
+              max-width: 100%;
+              height: 40vh;
+              margin: 0 auto;
+          }
       }
   </style>
 </head>
@@ -96,6 +101,11 @@
 <div id="app"></div>
 <script>
   var delay = 200;
+  var randomEngine = function(x = []) {
+    var e = ["ubuntu", "macos", "windows", "default"].filter(i => !x.includes(i));
+    return e[Math.floor(Math.random() * e.length)];
+  };
+
   window.$docsify = {
     name: "Shell.js",
     repo: "davidecaruso/shell.js",
@@ -121,7 +131,7 @@
                 host: "shelljs.io",
                 typing: { ctor: Typed },
                 style: {
-                  engine: "macos",
+                  engine: randomEngine(),
                   responsive: true,
                   shadow: true
                 }
@@ -138,7 +148,7 @@
                         value: "<br />HTTP/1.1 404 Not Found<br />" +
                           "<strong style='color: white;'>Content-Type</strong>: text/html; charset=utf-8<br />" +
                           "<strong style='color: white;'>Content-Length</strong>: 143<br />" +
-                          "<strong style='color: white;'>Date</strong>: " + new Date() + "<br />" +
+                          "<strong style='color: white;'>Date</strong>: " + (new Date()).toUTCString() + "<br />" +
                           "<strong style='color: white;'>Connection</strong>: keep-alive<br />" +
                           "<strong style='color: white;'>Keep-Alive</strong>: timeout=5<br /><br />"
                       };
@@ -149,7 +159,7 @@
                   host: "shelljs.io",
                   typing: { ctor: Typed },
                   style: {
-                    engine: "macos",
+                    engine: randomEngine(),
                     responsive: true,
                     shadow: true
                   }

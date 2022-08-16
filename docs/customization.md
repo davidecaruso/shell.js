@@ -26,10 +26,10 @@ Shell("#shell", [ ... ], { "style": { "theme": "dark" } });
 **Shell.js** has some _boolean_ attributes:
 
 * `responsive` _(default: false)_
-* `shadow` _(default: true)_
+* `shadow` _(default: false)_
 
 ```javascript
-Shell("#shell", [ ... ], { "style": { "responsive": true, "shadow": false } });
+Shell("#shell", [ ... ], { "style": { "responsive": true, "shadow": true } });
 ```
 
 Let's create some [commands](commands.md)!
