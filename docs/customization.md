@@ -2,7 +2,7 @@
 
 ### Engine
 
-Choose your favorite operating system to set the style of your **Shell.js** instance between one of the available options:
+Choose your favorite operating system to style your **Shell.js** instance from the available options:
 
 * `macos`
 * `ubuntu`

@@ -35,22 +35,8 @@
   <meta property="fb:admins" content="1123486489">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,shrink-to-fit=no">
   <meta name="google-site-verification" content="oFtQZDKqrWFiJd3T9f4lye6gX_aUXDO4GTtkSfrRqgg">
-  <!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />-->
-  <!--  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css" />-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/buble.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/pure.css" />
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108263871-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag("js", new Date());
-    gtag("config", "UA-108263871-1");
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="//fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -112,6 +98,11 @@
     loadSidebar: true,
     coverpage: "coverpage.html",
     notFoundPage: "_404.html",
+    ga: "UA-108263871-1",
+    copyCode: {
+      buttonText : 'Copy',
+      successText: 'Copied!'
+    },
     plugins: [
       function(hook, vm) {
         hook.afterEach(function(html, next) {
@@ -173,5 +164,11 @@
   };
 </script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+<script>
+  if (/shelljs/.test(location.host)) {
+    document.write("<script src=\"//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js\"><\/script>");
+  }
+</script>
 </body>
 </html>

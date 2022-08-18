@@ -1,10 +1,10 @@
 ## Commands
 
-Remember that to print commands you must invoke the `.type()` method of your instance.
+> Remember that to print commands you must invoke the `.type()` method of your instance.
 
 ### Simple commands
 
-Pass an array of _string_.
+Pass an array of strings.
 
 ```javascript
 Shell("#shell", ["Hello, world!"]).type();

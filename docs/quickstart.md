@@ -10,7 +10,7 @@ npm install shell.js
 yarn add shell.js
 ```
 
-You can also import it as external script:
+You can also import it from CDN:
 
 ```html
 <script src="//cdn.jsdelivr.net/npm/shell.js/lib/shell.min.js"></script>
@@ -18,14 +18,13 @@ You can also import it as external script:
 
 ### Initialize
 
-Create an HTML element, give its CSS selector to `Shell.js` and make magic happens!
+Create an HTML element, give its CSS selector to `Shell.js` and make magic happen!
 
 ```html
 <div id="shell"></div>
 
 <script type="application/javascript">
-  var shell = Shell("#shell", ["echo Hello, world!", "Hello, world!"]);
-  shell.type();
+  Shell("#shell", ["Hello, world!"]).type();
 </script>
 ```
 
