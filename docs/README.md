@@ -2,7 +2,7 @@
 
 **Shell.js** magically creates terminals in web pages. Use it to make awesome websites!
 
-See the [Quick start](quickstart.md) guide for more details.
+See the [quick start](quickstart.md) guide.
 
 ## Features
 
