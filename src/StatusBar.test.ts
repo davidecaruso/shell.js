@@ -5,7 +5,7 @@ import { buildStatusBar } from './StatusBar'
 describe('StatusBar', () => {
     describe('buildStatusBar', () => {
         describe('with "ubuntu" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'ubuntu' } }
+            const config: Config = { ...defaultConfig, engine: 'ubuntu' }
             it('should generate correct status bar', () => {
                 expect(buildStatusBar(config)).to.be.equal(
                     '<div class="shell__status-bar">' +
@@ -21,7 +21,7 @@ describe('StatusBar', () => {
             })
         })
         describe('with "macos" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'macos' } }
+            const config: Config = { ...defaultConfig, engine: 'macos' }
             it('should generate correct status bar', () => {
                 expect(buildStatusBar(config)).to.be.equal(
                     '<div class="shell__status-bar">' +
@@ -37,7 +37,7 @@ describe('StatusBar', () => {
             })
         })
         describe('with "default" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'default' } }
+            const config: Config = { ...defaultConfig, engine: 'default' }
             it('should generate correct status bar', () => {
                 expect(buildStatusBar(config)).to.be.equal(
                     '<div class="shell__status-bar">' +
@@ -53,7 +53,7 @@ describe('StatusBar', () => {
             })
         })
         describe('with "windows" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'windows' } }
+            const config: Config = { ...defaultConfig, engine: 'windows' }
             it('should generate correct status bar', () => {
                 expect(buildStatusBar(config)).to.be.equal(
                     '<div class="shell__status-bar">' +

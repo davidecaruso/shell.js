@@ -5,10 +5,10 @@ import {
     statusBarIconClass,
     statusBarTitleClass,
 } from './Classes'
-import { isMacOs, isRoot, isWindows } from './Config'
 import type { Config } from './Config'
+import { isMacOs, isRoot, isWindows } from './Config'
 
-const statusBarButtons = (config: Pick<Config, 'style'>): string =>
+const statusBarButtons = (config: Pick<Config, 'engine'>): string =>
     isWindows(config)
         ? `<button class="${buttonClass} ${buttonClass}--minimize"><i class="icon-minimize"></i></button>` +
           `<button class="${buttonClass} ${buttonClass}--enlarge"><i class="icon-enlarge"></i></button>` +
@@ -21,9 +21,9 @@ const statusBarButtons = (config: Pick<Config, 'style'>): string =>
           `<button class="${buttonClass} ${buttonClass}--minimize"><i class="icon-minimize"></i></button>` +
           `<button class="${buttonClass} ${buttonClass}--enlarge"><i class="icon-enlarge"></i></button>`
 
-const statusBarIcon = (config: Pick<Config, 'style'>) => (isWindows(config) ? '<i class="icon-command"></i>' : '')
+const statusBarIcon = (config: Pick<Config, 'engine'>) => (isWindows(config) ? '<i class="icon-command"></i>' : '')
 
-const statusBarTitle = (config: Pick<Config, 'style' | 'path' | 'host' | 'user' | 'root'>): string =>
+const statusBarTitle = (config: Pick<Config, 'engine' | 'path' | 'host' | 'user' | 'root'>): string =>
     isWindows(config)
         ? 'Command Prompts'
         : isMacOs(config)

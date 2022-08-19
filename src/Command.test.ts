@@ -122,25 +122,25 @@ describe('Command', () => {
     describe('login', () => {
         const date = new Date()
         describe('with "ubuntu" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'ubuntu' } }
+            const config: Config = { ...defaultConfig, engine: 'ubuntu' }
             it('should return empty string', () => {
                 expect(login(config)(date)).to.be.deep.equal(output(config)(''))
             })
         })
         describe('with "windows" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'windows' } }
+            const config: Config = { ...defaultConfig, engine: 'windows' }
             it('should return empty string', () => {
                 expect(login(config)(date)).to.be.deep.equal(output(config)(''))
             })
         })
         describe('with "default" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'default' } }
+            const config: Config = { ...defaultConfig, engine: 'default' }
             it('should return empty string', () => {
                 expect(login(config)(date)).to.be.deep.equal(output(config)(''))
             })
         })
         describe('with "macos" engine', () => {
-            const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'macos' } }
+            const config: Config = { ...defaultConfig, engine: 'macos' }
             it('should return login string', () => {
                 const result = login(config)(date)
                 expect(result).to.not.be.empty
@@ -152,7 +152,7 @@ describe('Command', () => {
     describe('exec', () => {
         describe('sudo', () => {
             describe('with "ubuntu" engine', () => {
-                const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'ubuntu' } }
+                const config: Config = { ...defaultConfig, engine: 'ubuntu' }
                 it('should have root privileges', () => {
                     expect(exec(input(config)('sudo -i'))).to.be.deep.equal(
                         output({ ...config, root: true })(`[sudo] password for ${config.user}:`)
@@ -160,7 +160,7 @@ describe('Command', () => {
                 })
             })
             describe('with "windows" engine', () => {
-                const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'windows' } }
+                const config: Config = { ...defaultConfig, engine: 'windows' }
                 it('should not know "sudo" command', () => {
                     expect(exec(input(config)('sudo -i'))).to.be.deep.equal(
                         output({ ...config, root: false })(`bash: sudo: command not found`)
@@ -168,7 +168,7 @@ describe('Command', () => {
                 })
             })
             describe('with "default" engine', () => {
-                const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'default' } }
+                const config: Config = { ...defaultConfig, engine: 'default' }
                 it('should have root privileges', () => {
                     expect(exec(input(config)('sudo -i'))).to.be.deep.equal(
                         output({ ...config, root: true })(`[sudo] password for ${config.user}:`)
@@ -176,7 +176,7 @@ describe('Command', () => {
                 })
             })
             describe('with "macos" engine', () => {
-                const config: Config = { ...defaultConfig, style: { ...defaultConfig.style, engine: 'macos' } }
+                const config: Config = { ...defaultConfig, engine: 'macos' }
                 it('should have root privileges', () => {
                     expect(exec(input(config)('sudo -i'))).to.be.deep.equal(
                         output({ ...config, root: true })(`Password: <span class="icon-key"></span>`)
@@ -190,7 +190,7 @@ describe('Command', () => {
                 const config: Config = {
                     ...defaultConfig,
                     root: true,
-                    style: { ...defaultConfig.style, engine: 'ubuntu' },
+                    engine: 'ubuntu',
                 }
                 it('should exit from root session', () => {
                     expect(exec(input(config)('exit'))).to.be.deep.equal(output({ ...config, root: false })(`logout`))
@@ -200,7 +200,7 @@ describe('Command', () => {
                 const config: Config = {
                     ...defaultConfig,
                     root: true,
-                    style: { ...defaultConfig.style, engine: 'windows' },
+                    engine: 'windows',
                 }
                 it('should not know "exit" command', () => {
                     expect(exec(input(config)('exit'))).to.be.deep.equal(
@@ -212,7 +212,7 @@ describe('Command', () => {
                 const config: Config = {
                     ...defaultConfig,
                     root: true,
-                    style: { ...defaultConfig.style, engine: 'default' },
+                    engine: 'default',
                 }
                 it('should exit from root session', () => {
                     expect(exec(input(config)('exit'))).to.be.deep.equal(output({ ...config, root: false })(`logout`))
@@ -222,7 +222,7 @@ describe('Command', () => {
                 const config: Config = {
                     ...defaultConfig,
                     root: true,
-                    style: { ...defaultConfig.style, engine: 'macos' },
+                    engine: 'macos',
                 }
                 it('should exit from root session', () => {
                     expect(exec(input(config)('exit'))).to.be.deep.equal(output({ ...config, root: false })(`logout`))

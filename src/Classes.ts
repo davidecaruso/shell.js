@@ -33,8 +33,8 @@ export const buildClasses =
     (elClassName: ReadonlyArray<string> = []): ReadonlyArray<string> => {
         const classNames = [
             shellClass,
-            `${shellClass}--${config.style?.engine ?? defaultConfig.style?.engine}`,
-            `${shellClass}--${config.style?.theme ?? defaultConfig.style?.theme}`,
+            `${shellClass}--${config?.engine ?? defaultConfig?.engine}`,
+            `${shellClass}--${config?.theme ?? defaultConfig?.theme}`,
             isResponsive(config) ? `${shellClass}--responsive` : '',
             hasShadow(config) ? `${shellClass}--shadow` : '',
             isTyped(config) ? `${shellClass}--typed` : '',
