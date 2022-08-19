@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="//fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/shell.js@4.1.0/lib/shell.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/shell.js@4.2.0/lib/shell.min.js"></script>
   <style>
       #cover-page h1 a span {
           text-transform: lowercase !important;
@@ -100,8 +100,8 @@
     notFoundPage: "_404.html",
     ga: "UA-108263871-1",
     copyCode: {
-      buttonText : 'Copy',
-      successText: 'Copied!'
+      buttonText: "Copy",
+      successText: "Copied!"
     },
     plugins: [
       function(hook, vm) {
@@ -121,11 +121,9 @@
                 user: "guest",
                 host: "shelljs.io",
                 typing: { ctor: Typed },
-                style: {
-                  engine: randomEngine(),
-                  responsive: true,
-                  shadow: true
-                }
+                engine: randomEngine(),
+                responsive: true,
+                shadow: true
               }).type();
             }, delay);
           } else {
@@ -149,11 +147,9 @@
                   user: "guest",
                   host: "shelljs.io",
                   typing: { ctor: Typed },
-                  style: {
-                    engine: randomEngine(),
-                    responsive: true,
-                    shadow: true
-                  }
+                  engine: randomEngine(),
+                  responsive: true,
+                  shadow: true
                 }).type();
               }, delay);
             }

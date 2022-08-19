@@ -57,9 +57,7 @@ describe('Content', () => {
             })
             describe('with "ubuntu" engine', () => {
                 it('should generate correct content', () => {
-                    expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'ubuntu' } })(['foo', 'bar', 'baz'])
-                    ).to.be.equal(
+                    expect(buildContent({ ...defaultConfig, engine: 'ubuntu' })(['foo', 'bar', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
@@ -108,9 +106,7 @@ describe('Content', () => {
             })
             describe('with "windows" engine', () => {
                 it('should generate correct content', () => {
-                    expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'windows' } })(['foo', 'bar', 'baz'])
-                    ).to.be.equal(
+                    expect(buildContent({ ...defaultConfig, engine: 'windows' })(['foo', 'bar', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
                             '<span class="line__command line__command--output"></span>' +
@@ -151,7 +147,7 @@ describe('Content', () => {
             })
             describe('with "macos" engine', () => {
                 it('should generate correct content', () => {
-                    const config: Config = { ...defaultConfig, style: { engine: 'macos' } }
+                    const config: Config = { ...defaultConfig, engine: 'macos' }
                     expect(buildContent(config)(['foo', 'bar', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
@@ -280,13 +276,7 @@ describe('Content', () => {
             describe('with "ubuntu" engine', () => {
                 it('should generate correct content', () => {
                     expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'ubuntu' } })([
-                            'foo',
-                            'sudo',
-                            'bar',
-                            'exit',
-                            'baz',
-                        ])
+                        buildContent({ ...defaultConfig, engine: 'ubuntu' })(['foo', 'sudo', 'bar', 'exit', 'baz'])
                     ).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
@@ -361,13 +351,7 @@ describe('Content', () => {
             describe('with "windows" engine', () => {
                 it('should generate correct content', () => {
                     expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'windows' } })([
-                            'foo',
-                            'sudo',
-                            'bar',
-                            'exit',
-                            'baz',
-                        ])
+                        buildContent({ ...defaultConfig, engine: 'windows' })(['foo', 'sudo', 'bar', 'exit', 'baz'])
                     ).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
@@ -423,7 +407,7 @@ describe('Content', () => {
             })
             describe('with "macos" engine', () => {
                 it('should generate correct content', () => {
-                    const config: Config = { ...defaultConfig, style: { engine: 'macos' } }
+                    const config: Config = { ...defaultConfig, engine: 'macos' }
                     expect(buildContent(config)(['foo', 'sudo', 'bar', 'exit', 'baz'])).to.be.equal(
                         '<div class="shell__content">' +
                             '<div class="line ">' +
@@ -553,7 +537,7 @@ describe('Content', () => {
             describe('with "ubuntu" engine', () => {
                 it('should generate correct content', () => {
                     expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'ubuntu' } })([
+                        buildContent({ ...defaultConfig, engine: 'ubuntu' })([
                             'foo',
                             {
                                 input: 'bar',
@@ -603,7 +587,7 @@ describe('Content', () => {
             describe('with "windows" engine', () => {
                 it('should generate correct content', () => {
                     expect(
-                        buildContent({ ...defaultConfig, style: { engine: 'windows' } })([
+                        buildContent({ ...defaultConfig, engine: 'windows' })([
                             'foo',
                             {
                                 input: 'bar',
@@ -643,7 +627,7 @@ describe('Content', () => {
             })
             describe('with "macos" engine', () => {
                 it('should generate correct content', () => {
-                    const config: Config = { ...defaultConfig, style: { engine: 'macos' } }
+                    const config: Config = { ...defaultConfig, engine: 'macos' }
                     expect(
                         buildContent(config)([
                             'foo',

@@ -36,16 +36,16 @@ describe('Classes', () => {
             it('should return correct classes', () => {
                 expect(buildClasses({})()).to.be.deep.equal(['shell', 'shell--default', 'shell--dark'])
                 expect(
-                    buildClasses({ style: { engine: 'macos', theme: 'light', shadow: true, responsive: false } })()
+                    buildClasses({ engine: 'macos', theme: 'light', shadow: true, responsive: false })()
                 ).to.be.deep.equal(['shell', 'shell--macos', 'shell--light', 'shell--shadow'])
                 expect(
-                    buildClasses({ style: { engine: 'windows', theme: 'dark', shadow: false, responsive: true } })()
+                    buildClasses({ engine: 'windows', theme: 'dark', shadow: false, responsive: true })()
                 ).to.be.deep.equal(['shell', 'shell--windows', 'shell--dark', 'shell--responsive'])
                 expect(
-                    buildClasses({ style: { engine: 'ubuntu', theme: 'light', shadow: true, responsive: false } })()
+                    buildClasses({ engine: 'ubuntu', theme: 'light', shadow: true, responsive: false })()
                 ).to.be.deep.equal(['shell', 'shell--ubuntu', 'shell--light', 'shell--shadow'])
                 expect(
-                    buildClasses({ style: { engine: 'ubuntu', theme: 'light', shadow: false, responsive: true } })()
+                    buildClasses({ engine: 'ubuntu', theme: 'light', shadow: false, responsive: true })()
                 ).to.be.deep.equal(['shell', 'shell--ubuntu', 'shell--light', 'shell--responsive'])
             })
         })
@@ -60,28 +60,28 @@ describe('Classes', () => {
                     'shell--dark',
                 ])
                 expect(
-                    buildClasses({ style: { engine: 'macos', theme: 'light', shadow: true, responsive: false } })([
+                    buildClasses({ engine: 'macos', theme: 'light', shadow: true, responsive: false })([
                         'foo',
                         'bar',
                         'baz',
                     ])
                 ).to.be.deep.equal(['foo', 'bar', 'baz', 'shell', 'shell--macos', 'shell--light', 'shell--shadow'])
                 expect(
-                    buildClasses({ style: { engine: 'windows', theme: 'dark', shadow: false, responsive: true } })([
+                    buildClasses({ engine: 'windows', theme: 'dark', shadow: false, responsive: true })([
                         'foo',
                         'bar',
                         'baz',
                     ])
                 ).to.be.deep.equal(['foo', 'bar', 'baz', 'shell', 'shell--windows', 'shell--dark', 'shell--responsive'])
                 expect(
-                    buildClasses({ style: { engine: 'ubuntu', theme: 'light', shadow: true, responsive: false } })([
+                    buildClasses({ engine: 'ubuntu', theme: 'light', shadow: true, responsive: false })([
                         'foo',
                         'bar',
                         'baz',
                     ])
                 ).to.be.deep.equal(['foo', 'bar', 'baz', 'shell', 'shell--ubuntu', 'shell--light', 'shell--shadow'])
                 expect(
-                    buildClasses({ style: { engine: 'ubuntu', theme: 'light', shadow: false, responsive: true } })([
+                    buildClasses({ engine: 'ubuntu', theme: 'light', shadow: false, responsive: true })([
                         'foo',
                         'bar',
                         'baz',

@@ -1,4 +1,6 @@
-## What it is
+# Shell.js
+
+> A <strong>JavaScript</strong> library to create HTML <strong>terminals</strong> in web pages.
 
 **Shell.js** magically creates terminals in web pages. Use it to make awesome websites!
 
