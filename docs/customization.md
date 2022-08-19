@@ -1,5 +1,29 @@
 ## Customization
 
+### User
+
+Set the user of the terminal session. _(default: "user")_
+
+```javascript
+Shell("#shell", [ ... ], { "user": "johndoe" });
+```
+
+### Host
+
+Set the host of the terminal session. _(default: "host")_
+
+```javascript
+Shell("#shell", [ ... ], { "host": "example.org" });
+```
+
+### Path
+
+Set the path location of the terminal session. _(default: "~" or "C:\Windows\system32\")_
+
+```javascript
+Shell("#shell", [ ... ], { "path": "/tmp" });
+```
+
 ### Engine
 
 Choose your favorite operating system to style your **Shell.js** instance from the available options:
@@ -10,26 +34,38 @@ Choose your favorite operating system to style your **Shell.js** instance from t
 * `default` _(default)_
 
 ```javascript
-Shell("#shell", [ ... ], { "style": { "engine": "macos" } });
+Shell("#shell", [ ... ], { "engine": "macos" });
 ```
 
 ### Theme
 
-Choose between the `light` and the `dark` side of the Force:
+Choose between the `light` and the `dark` side of the Force.  _(default: "dark")_
 
 ```javascript
-Shell("#shell", [ ... ], { "style": { "theme": "dark" } });
+Shell("#shell", [ ... ], { "theme": "light" });
 ```
 
-### Attributes
+### Responsiveness
 
-**Shell.js** has some _boolean_ attributes:
-
-* `responsive` _(default: false)_
-* `shadow` _(default: false)_
+Decide if the terminal should be responsive or not. _(default: false)_
 
 ```javascript
-Shell("#shell", [ ... ], { "style": { "responsive": true, "shadow": true } });
+Shell("#shell", [ ... ], { "responsive": true });
+```
+
+### Shadiness
+Decide if the terminal should have shadow or not. _(default: false)_
+
+```javascript
+Shell("#shell", [ ... ], { "shadow": true });
+```
+
+### Root
+
+Decide if the logged user of the terminal session is `root` or not. _(default: false)_
+
+```javascript
+Shell("#shell", [ ... ], { "root": true });
 ```
 
 Let's create some [commands](commands.md)!
