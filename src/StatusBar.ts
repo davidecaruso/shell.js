@@ -1,5 +1,12 @@
 import {
     buttonClass,
+    closeButtonClass,
+    closeButtonIconClass,
+    dotButtonIconClass,
+    enlargeButtonClass,
+    enlargeButtonIconClass,
+    minimizeButtonClass,
+    minimizeButtonIconClass,
     shellStatusBarClass,
     statusBarButtonsClass,
     statusBarIconClass,
@@ -10,16 +17,16 @@ import { isMacOs, isRoot, isWindows } from './Config'
 
 const statusBarButtons = (config: Pick<Config, 'engine'>): string =>
     isWindows(config)
-        ? `<button class="${buttonClass} ${buttonClass}--minimize"><i class="icon-minimize"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--enlarge"><i class="icon-enlarge"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--close"><i class="icon-close"></i></button>`
+        ? `<button class="${buttonClass} ${minimizeButtonClass}"><i class="${minimizeButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${enlargeButtonClass}"><i class="${enlargeButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${closeButtonClass}"><i class="${closeButtonIconClass}"></i></button>`
         : isMacOs(config)
-        ? `<button class="${buttonClass} ${buttonClass}--close"><i class="icon-dot"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--minimize"><i class="icon-minimize"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--enlarge"><i class="icon-enlarge"></i></button>`
-        : `<button class="${buttonClass} ${buttonClass}--close"><i class="icon-close"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--minimize"><i class="icon-minimize"></i></button>` +
-          `<button class="${buttonClass} ${buttonClass}--enlarge"><i class="icon-enlarge"></i></button>`
+        ? `<button class="${buttonClass} ${closeButtonClass}"><i class="${dotButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${minimizeButtonClass}"><i class="${minimizeButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${enlargeButtonClass}"><i class="${enlargeButtonIconClass}"></i></button>`
+        : `<button class="${buttonClass} ${closeButtonClass}"><i class="${closeButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${minimizeButtonClass}"><i class="${minimizeButtonIconClass}"></i></button>` +
+          `<button class="${buttonClass} ${enlargeButtonClass}"><i class="${enlargeButtonIconClass}"></i></button>`
 
 const statusBarIcon = (config: Pick<Config, 'engine'>) => (isWindows(config) ? '<i class="icon-command"></i>' : '')
 

@@ -1,43 +1,52 @@
 import type { Config } from './Config'
 import { defaultConfig, hasShadow, isResponsive, isTyped } from './Config'
 
-const shellClass = 'shell'
-const statusBarClass = 'status-bar'
-const shellStatusBarClass = `${shellClass}__${statusBarClass}`
-const statusBarButtonsClass = `${statusBarClass}__buttons`
-const statusBarIconClass = `${statusBarClass}__icon`
-const statusBarTitleClass = `${statusBarClass}__title`
-const shellContentClass = `${shellClass}__content`
-const buttonClass = 'button'
-const lineClass = 'line'
-const linePrefixClass = `${lineClass}__prefix`
-const lineCommandClass = `${lineClass}__command`
-const cursorClass = 'typed-cursor'
-
-export {
-    shellClass,
-    shellStatusBarClass,
-    statusBarButtonsClass,
-    statusBarIconClass,
-    statusBarTitleClass,
-    shellContentClass,
-    lineClass,
-    lineCommandClass,
-    linePrefixClass,
-    buttonClass,
-    cursorClass,
-}
+export const shellClass = 'shell'
+export const responsiveShellClass = `${shellClass}--responsive`
+export const shadowedShellClass = `${shellClass}--shadow`
+export const typedShellClass = `${shellClass}--typed`
+export const statusBarClass = 'status-bar'
+export const shellStatusBarClass = `${shellClass}__${statusBarClass}`
+export const statusBarButtonsClass = `${statusBarClass}__buttons`
+export const statusBarIconClass = `${statusBarClass}__icon`
+export const statusBarTitleClass = `${statusBarClass}__title`
+export const shellContentClass = `${shellClass}__content`
+export const buttonClass = 'button'
+export const minimizeButtonClass = `${buttonClass}--minimize`
+export const enlargeButtonClass = `${buttonClass}--enlarge`
+export const closeButtonClass = `${buttonClass}--close`
+export const minimizeButtonIconClass = `icon-minimize`
+export const enlargeButtonIconClass = `icon-enlarge`
+export const closeButtonIconClass = `icon-close`
+export const dotButtonIconClass = `icon-dot`
+export const lineClass = 'line'
+export const activeLineClass = `${lineClass}--active`
+export const rootLineClass = `${lineClass}--root`
+export const linePrefixClass = `${lineClass}__prefix`
+export const lineCommandClass = `${lineClass}__command`
+export const lineInputCommandClass = `${lineCommandClass}--input`
+export const lineOutputCommandClass = `${lineCommandClass}--output`
+export const lineIdleCommandClass = `${lineCommandClass}--idle`
+export const cursorClass = 'typed-cursor'
 
 export const buildClasses =
     (config: Partial<Config>) =>
-    (elClassName: ReadonlyArray<string> = []): ReadonlyArray<string> => {
+    (elClassName: string): string => {
         const classNames = [
             shellClass,
             `${shellClass}--${config?.engine ?? defaultConfig?.engine}`,
             `${shellClass}--${config?.theme ?? defaultConfig?.theme}`,
-            isResponsive(config) ? `${shellClass}--responsive` : '',
-            hasShadow(config) ? `${shellClass}--shadow` : '',
-            isTyped(config) ? `${shellClass}--typed` : '',
+            isResponsive(config) ? responsiveShellClass : '',
+            hasShadow(config) ? shadowedShellClass : '',
+            isTyped(config) ? typedShellClass : '',
         ].filter(Boolean)
-        return [...elClassName.filter(c => !classNames.includes(c)), ...classNames]
+        return [
+            ...elClassName
+                .split(' ')
+                .map(c => c.trim())
+                .filter(c => !classNames.includes(c)),
+            ...classNames,
+        ]
+            .join(' ')
+            .trim()
     }

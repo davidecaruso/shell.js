@@ -10,7 +10,7 @@ GLOBAL.document = window.document
 describe('Shell', () => {
     describe('with a wrong element selector ', () => {
         it('should throw error', () => {
-            expect(() => Shell('wrong-selector', [])).to.throw(`Not found: invalid selector given "wrong-selector"`)
+            expect(() => Shell('wrong-selector')).to.throw(`Invalid selector given "wrong-selector"`)
             expect(document.body.innerHTML).to.be.equal('')
         })
     })
@@ -28,7 +28,7 @@ describe('Shell', () => {
 
         describe('with default configuration', () => {
             it('should apply default configuration', () => {
-                expect(Shell(selector, [])).to.not.be.undefined
+                expect(Shell(selector)).to.not.be.undefined
                 expect(div.classList.contains('shell')).to.be.true
                 expect(div.classList.contains('shell--default')).to.be.true
                 expect(div.classList.contains('shell--dark')).to.be.true

@@ -1,63 +1,97 @@
-import { buildClasses, cursorClass, lineClass, lineCommandClass } from './Classes'
+import {
+    activeLineClass,
+    buildClasses,
+    cursorClass,
+    lineClass,
+    lineCommandClass,
+    lineIdleCommandClass,
+    lineInputCommandClass,
+    shellContentClass,
+} from './Classes'
 import type { Command } from './Command'
-import type { Config } from './Config'
+import type { Config, Typing } from './Config'
 import { buildConfig, defaultConfig, isTyped } from './Config'
-import { buildContent } from './Content'
+import { buildContent, buildEmptyLine, buildLines } from './Content'
 import { buildStatusBar } from './StatusBar'
 
-const type =
-    ([el, config]: [Element, Pick<Config, 'typing'>]) =>
-    (index = 0): void => {
-        const self = type([el, config])
-        const lines = el.querySelectorAll(`.${lineClass}`)
-        if (!isTyped(config)) {
-            return lines.forEach(line => (line.className = `${lineClass}--active ${line.className}`))
-        }
+const exec =
+    (el: Element, typing: Typing) =>
+    (index: number): void => {
+        const self = exec(el, typing)
 
-        const line = lines[index]
+        const line = el.querySelectorAll(`.${lineClass}:nth-child(${index})`)[0] ?? null
         if (!line) {
             return
         }
 
         const command = line.querySelectorAll(`.${lineCommandClass}`)[0] ?? null
-        const commandContent = command.innerHTML
-        line.className = `${lineClass}--active ${line.className}`
+        if (!command) {
+            return
+        }
 
-        if (!command.className.includes(`${lineCommandClass}--output`) && index < lines.length - 1) {
+        const commandContent = command.innerHTML
+        line.className = `${line.className} ${activeLineClass}`
+        if (command.className.includes(lineInputCommandClass)) {
             command.innerHTML = ''
-            new config.typing.ctor(command, {
+            new typing.ctor(command, {
                 typeSpeed: 90,
                 cursorChar: '&nbsp;',
                 showCursor: true,
-                ...config.typing.opts,
+                ...typing.opts,
                 loop: false,
-                strings: [`${commandContent}^${config.typing.opts?.delay ?? 600}`],
                 contentType: 'html',
-                onStringTyped: () => line.removeChild(line.querySelectorAll(`.${cursorClass}`)[0]),
+                strings: [`${commandContent}^${typing.opts?.delay ?? 600}`],
                 onComplete: () => self(++index),
+                onStringTyped: (): void => {
+                    if (line.querySelectorAll(`.${cursorClass}`)[0]) {
+                        line.removeChild(line.querySelectorAll(`.${cursorClass}`)[0])
+                    }
+                },
             })
         } else {
             self(++index)
         }
     }
 
-const init =
-    (selector: string) =>
-    (commands: ReadonlyArray<Command>) =>
-    (config: Config): [Element, Config] => {
-        const el = document.querySelectorAll(selector)[0] ?? null
-        if (!el) {
-            throw new Error(`Not found: invalid selector given "${selector}"`)
-        }
+const Shell = (selector: string, opts: Partial<Config> = defaultConfig) => {
+    const config = buildConfig(opts)
 
-        el.className = buildClasses(config)(el.className.split(' ')).join(' ')
-        el.innerHTML = buildStatusBar(config) + buildContent(config)(commands)
-
-        return [el, config]
+    const el = document.querySelectorAll(selector)[0] ?? null
+    if (!el) {
+        throw new Error(`Invalid selector given "${selector}"`)
     }
 
-const Shell = (selector: string, commands: ReadonlyArray<Command>, config: Partial<Config> = defaultConfig) => ({
-    type: type(init(selector)(commands)(buildConfig(config))),
-})
+    el.className = buildClasses(config)(el.className)
+    el.innerHTML = buildStatusBar(config) + buildContent(config)
+
+    const type = (commands: ReadonlyArray<Command>): void => {
+        const content = el.querySelectorAll(`.${shellContentClass}`)[0]
+        const currentLinesCount = content.querySelectorAll(`.${lineClass}`).length
+
+        content.querySelectorAll(`.${lineIdleCommandClass}`).forEach(e => {
+            if (e.parentNode) {
+                content.removeChild(e.parentNode)
+            }
+        })
+
+        content.innerHTML = content.innerHTML + buildLines(config)(commands) + buildEmptyLine(config)
+
+        if (isTyped(config)) {
+            return exec(content, config.typing)(currentLinesCount)
+        }
+
+        el.querySelectorAll(`.${lineClass}`).forEach(line => (line.className = `${line.className} ${activeLineClass}`))
+    }
+
+    const clear = (): void => {
+        const content = el.querySelectorAll(`.${shellContentClass}`)[0]
+        content.innerHTML = buildEmptyLine(config)
+        content
+            .querySelectorAll(`.${lineClass}`)
+            .forEach(line => (line.className = `${line.className} ${activeLineClass}`))
+    }
+
+    return { type, clear }
+}
 
 export default Shell

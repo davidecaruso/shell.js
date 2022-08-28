@@ -1,6 +1,7 @@
 type Engine = 'default' | 'macos' | 'ubuntu' | 'windows'
 type Theme = 'dark' | 'light'
-type Typing = {
+
+export type Typing = {
     ctor: new (...args: unknown[]) => unknown
     opts?: Record<string, unknown>
 }
