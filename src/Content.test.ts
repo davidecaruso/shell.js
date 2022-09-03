@@ -1,40 +1,49 @@
 import { expect } from 'chai'
-import { login } from './Command'
 import { Config, defaultConfig } from './Config'
-import { buildContent, buildEmptyLine, buildLines } from './Content'
+import { buildContent, buildEmptyLine, buildLines, login } from './Content'
 
 describe('Content', () => {
+    describe('login', () => {
+        const date = new Date()
+        describe('with "ubuntu" engine', () => {
+            it('should return empty string', () => {
+                expect(login({ ...defaultConfig, engine: 'ubuntu' })(date)).to.be.deep.equal('')
+            })
+        })
+        describe('with "windows" engine', () => {
+            it('should return empty string', () => {
+                expect(login({ ...defaultConfig, engine: 'windows' })(date)).to.be.deep.equal('')
+            })
+        })
+        describe('with "default" engine', () => {
+            it('should return empty string', () => {
+                expect(login({ ...defaultConfig, engine: 'default' })(date)).to.be.deep.equal('')
+            })
+        })
+        describe('with "macos" engine', () => {
+            it('should return login string', () => {
+                expect(login({ ...defaultConfig, engine: 'macos' })(date)).to.be.not.equal('')
+            })
+        })
+    })
+
     describe('buildContent', () => {
         describe('with "default" engine', () => {
             it('should generate correct content', () => {
-                expect(buildContent(defaultConfig)).to.be.equal(
-                    '<div class="shell__content">' +
-                        '<div class="line">' +
-                        '<span class="line__command line__command--output"></span>' +
-                        '</div>' +
-                        '</div>'
-                )
+                expect(buildContent(defaultConfig)).to.be.equal('<div class="shell__content"></div>')
             })
         })
         describe('with "ubuntu" engine', () => {
             it('should generate correct content', () => {
                 expect(buildContent({ ...defaultConfig, engine: 'ubuntu' })).to.be.equal(
-                    '<div class="shell__content">' +
-                        '<div class="line">' +
-                        '<span class="line__command line__command--output"></span>' +
-                        '</div>' +
-                        '</div>'
+                    '<div class="shell__content"></div>'
                 )
             })
         })
         describe('with "windows" engine', () => {
             it('should generate correct content', () => {
                 expect(buildContent({ ...defaultConfig, engine: 'windows' })).to.be.equal(
-                    '<div class="shell__content">' +
-                        '<div class="line">' +
-                        '<span class="line__command line__command--output"></span>' +
-                        '</div>' +
-                        '</div>'
+                    '<div class="shell__content"></div>'
                 )
             })
         })
@@ -42,13 +51,7 @@ describe('Content', () => {
             it('should generate correct content', () => {
                 const config: Config = { ...defaultConfig, engine: 'macos' }
                 expect(buildContent(config)).to.be.equal(
-                    '<div class="shell__content">' +
-                        '<div class="line">' +
-                        '<span class="line__command line__command--output">' +
-                        login(config)(new Date()).value +
-                        '</span>' +
-                        '</div>' +
-                        '</div>'
+                    '<div class="shell__content">' + login(config)(new Date()) + '</div>'
                 )
             })
         })

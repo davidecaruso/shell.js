@@ -21,7 +21,8 @@ const exec =
 
         const line = el.querySelectorAll(`.${lineClass}:nth-child(${index})`)[0] ?? null
         if (!line) {
-            return
+            const linesCount = el.querySelectorAll(`.${lineClass}`).length
+            return linesCount && index + 1 <= linesCount ? self(++index) : undefined
         }
 
         const command = line.querySelectorAll(`.${lineCommandClass}`)[0] ?? null
