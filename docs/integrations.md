@@ -9,11 +9,11 @@ To give life to your **Shell.js** instance, integrate it with [Typed.js](https:/
 
 <script src="//cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js"></script>
 <script type="application/javascript">
-  Shell("#shell", ["Hello, world!"], {
+  Shell("#shell", {
     typing: {
       ctor: Typed, // Typed.js constructor
       opts: { ... } // Typed.js options
     }
-  }).type();
+  }).type(["Hello, world!"]);
 </script>
 ```

@@ -24,7 +24,7 @@ Create an HTML element, give its CSS selector to `Shell.js` and make magic happe
 <div id="shell"></div>
 
 <script type="application/javascript">
-  Shell("#shell", ["Hello, world!"]).type();
+  Shell("#shell").type(["Hello, world!"]);
 </script>
 ```
 

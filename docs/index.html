@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="//fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/shell.js@4.2.0/lib/shell.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/shell.js@4.3.0/lib/shell.min.js"></script>
   <style>
       #cover-page h1 a span {
           text-transform: lowercase !important;
@@ -108,49 +108,58 @@
         hook.afterEach(function(html, next) {
           if (vm.route.path === "/") {
             next(html);
-            setTimeout(function() {
-              Shell("#cover-shell", [
-                "sudo -i",
-                {
-                  input: "shell.js -h", output: function() {
-                    return { value: "A <strong>JavaScript</strong> library to create HTML <strong>terminals</strong> in web pages." };
-                  }
-                },
-                "exit"
-              ], {
+
+            function initCoverShell() {
+              document.getElementById("cover-shell").className = "";
+              let shell = Shell("#cover-shell", {
                 user: "guest",
                 host: "shelljs.io",
                 typing: { ctor: Typed },
                 engine: randomEngine(),
                 responsive: true,
                 shadow: true
-              }).type();
+              });
+
+              shell.type([
+                "sudo -i",
+                {
+                  input: "shell.js -h", output: function() {
+                    return { value: "<br />&gt; A <strong>JavaScript</strong> library to create HTML <strong>terminals</strong> in web pages.<br /><br />" };
+                  }
+                },
+                "exit"
+              ]);
+            }
+
+            setTimeout(function() {
+              initCoverShell();
+              setInterval(initCoverShell, 10000);
             }, delay);
           } else {
             next(html);
             if (document.getElementById("notfound-shell")) {
               setTimeout(function() {
-                Shell("#notfound-shell", [
-                  {
-                    input: "curl -I '" + window.location.href + "'", output: function() {
-                      return {
-                        value: "<br />HTTP/1.1 404 Not Found<br />" +
-                          "<strong style='color: white;'>Content-Type</strong>: text/html; charset=utf-8<br />" +
-                          "<strong style='color: white;'>Content-Length</strong>: 143<br />" +
-                          "<strong style='color: white;'>Date</strong>: " + (new Date()).toUTCString() + "<br />" +
-                          "<strong style='color: white;'>Connection</strong>: keep-alive<br />" +
-                          "<strong style='color: white;'>Keep-Alive</strong>: timeout=5<br /><br />"
-                      };
-                    }
-                  }
-                ], {
+                Shell("#notfound-shell", {
                   user: "guest",
                   host: "shelljs.io",
                   typing: { ctor: Typed },
                   engine: randomEngine(),
                   responsive: true,
                   shadow: true
-                }).type();
+                }).type([
+                  {
+                    input: "curl -I '" + window.location.href + "'", output: function() {
+                      return {
+                        value: "<br /><strong style='color: #FFFFFF;'>HTTP/1.1 404 Not Found</strong><br />" +
+                          "<strong style='color: #FFFFFF;'>Content-Type</strong>: text/html; charset=utf-8<br />" +
+                          "<strong style='color: #FFFFFF;'>Content-Length</strong>: 143<br />" +
+                          "<strong style='color: #FFFFFF;'>Date</strong>: " + (new Date()).toUTCString() + "<br />" +
+                          "<strong style='color: #FFFFFF;'>Connection</strong>: keep-alive<br />" +
+                          "<strong style='color: #FFFFFF;'>Keep-Alive</strong>: timeout=5<br /><br />"
+                      };
+                    }
+                  }
+                ]);
               }, delay);
             }
           }
@@ -160,6 +169,7 @@
   };
 </script>
 <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 <script>
   if (/shelljs/.test(location.host)) {
