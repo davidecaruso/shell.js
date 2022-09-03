@@ -20,7 +20,7 @@
     "test": "mocha -r mocha.module.js -r ts-node/register --globals window **/*.test.ts",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "nyc npm run test",
-    "test:report": "npm run test:coverage & nyc report --reporter=html",
+    "test:report": "npm run test:coverage && nyc report --reporter=html",
     "watch": "npm run build:dev -- --watch"
   },
   "keywords": [

@@ -1,7 +1,16 @@
-import { cursorClass, lineClass, lineCommandClass, linePrefixClass, shellContentClass } from './Classes'
-import { Command, exec, idle, input, IO, isExecutable, isInput, isOutput, login, output } from './Command'
-import type { Config } from './Config'
-import { isRoot, isWindows } from './Config'
+import {
+    cursorClass,
+    lineClass,
+    lineCommandClass,
+    lineIdleCommandClass,
+    lineInputCommandClass,
+    lineOutputCommandClass,
+    linePrefixClass,
+    rootLineClass,
+    shellContentClass,
+} from './Classes'
+import { Command, exec, idle, input, IO, isExecutable, isInput, isOutput, output } from './Command'
+import { Config, isMacOs, isRoot, isWindows } from './Config'
 
 const prefix = ({ context }: Pick<IO, 'context'>): string =>
     `<span class="${linePrefixClass}">` +
@@ -16,18 +25,19 @@ const prefix = ({ context }: Pick<IO, 'context'>): string =>
     '</span>'
 
 const line = (io: IO): string =>
-    `<div class="${[lineClass, isRoot(io.context) ? `${lineClass}--root` : ''].join(' ')}">` +
+    `<div class="${[lineClass, isRoot(io.context) ? rootLineClass : ''].join(' ').trim()}">` +
     (isInput(io)
-        ? `${prefix(io)}<span class="${lineCommandClass}">${io.value}</span>`
+        ? `${prefix(io)}<span class="${lineCommandClass} ${lineInputCommandClass}">${io.value}</span>`
         : isOutput(io)
-        ? `<span class="${lineCommandClass} ${lineCommandClass}--output">${io.value}</span>`
-        : `${prefix(io)}<span class="${lineCommandClass}"><span class="${cursorClass}">&nbsp;</span></span>`) +
+        ? `<span class="${lineCommandClass} ${lineOutputCommandClass}">${io.value}</span>`
+        : `${prefix(
+              io
+          )}<span class="${lineCommandClass} ${lineIdleCommandClass}"><span class="${cursorClass}">&nbsp;</span></span>`) +
     '</div>'
 
-const lines =
+export const buildLines =
     (config: Config) =>
     (commands: ReadonlyArray<Command>): string =>
-        line(login(config)(new Date())) +
         commands
             .map(value => {
                 if (isExecutable(value)) {
@@ -42,10 +52,34 @@ const lines =
                     return line(command) + (result ? line(result) : '')
                 }
             })
-            .join('') +
-        line(idle(config)())
+            .join('')
 
-export const buildContent =
-    (config: Config) =>
-    (commands: ReadonlyArray<Command>): string =>
-        `<div class="${shellContentClass}">${lines(config)(commands)}</div>`
+export const login =
+    (context: Config) =>
+    (d: Date = new Date()): string => {
+        const [month, date, day, hours, minutes, seconds] = [
+            d.getMonth(),
+            d.getDate(),
+            d.getDay(),
+            d.getHours().toString(),
+            d.getMinutes().toString(),
+            d.getSeconds().toString(),
+        ]
+
+        return isMacOs(context)
+            ? line(
+                  output(context)(
+                      `Last login: ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day]} ${
+                          ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month]
+                      } ${date} ${hours.length === 2 ? hours : '0' + hours}:${
+                          minutes.length === 2 ? minutes : '0' + minutes
+                      }:${seconds.length === 2 ? seconds : '0' + seconds} on ttys000`
+                  )
+              )
+            : ''
+    }
+
+export const buildEmptyLine = (config: Config) => line(idle(config)())
+
+export const buildContent = (config: Config): string =>
+    `<div class="${shellContentClass}">${login(config)(new Date())}</div>`

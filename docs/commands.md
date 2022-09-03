@@ -1,13 +1,13 @@
 ## Commands
 
-> Remember that to print commands you must invoke the `.type()` method of your instance.
+To print commands with **Shell.js** just invoke the `.type([ ... ])` method. Moreover, to empty the content of **Shell.js**, invoke the `.clear()` method.
 
 ### Simple commands
 
 Pass an array of strings.
 
 ```javascript
-Shell("#shell", ["Hello, world!"]).type();
+Shell("#shell").type(["Hello, world!"]);
 ```
 
 ### Special commands
@@ -19,7 +19,7 @@ There are some commands that introduce special behaviours:
 * (more soon)
 
 ```javascript
-Shell("#shell", ["sudo rm -rf /", "exit"]).type();
+Shell("#shell").type(["sudo rm -rf /", "exit"]);
 ```
 
 ### Custom commands
@@ -44,7 +44,7 @@ var cd = function(path) {
   }
 }
 
-Shell("#shell", [ls, cd("/tmp")]).type();
+Shell("#shell").type([ls, cd("/tmp")]);
 ```
 
 Make **Shell.js** [alive](integrations.md)!

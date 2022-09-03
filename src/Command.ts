@@ -59,28 +59,6 @@ export const isInput = is<Input>('Input')
 export const isOutput = is<Output>('Output')
 export const isIdle = is<Idle>('Idle')
 
-export const login =
-    (context: Config) =>
-    (d: Date): Output => {
-        const [month, date, day, hours, minutes, seconds] = [
-            d.getMonth(),
-            d.getDate(),
-            d.getDay(),
-            d.getHours().toString(),
-            d.getMinutes().toString(),
-            d.getSeconds().toString(),
-        ]
-        return output(context)(
-            isMacOs(context)
-                ? `Last login: ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day]} ${
-                      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month]
-                  } ${date} ${hours.length === 2 ? hours : '0' + hours}:${
-                      minutes.length === 2 ? minutes : '0' + minutes
-                  }:${seconds.length === 2 ? seconds : '0' + seconds} on ttys000`
-                : ''
-        )
-    }
-
 const commands: Record<string, (input: Input) => Output | null> = {
     sudo: ({ context }: Input) =>
         context.root

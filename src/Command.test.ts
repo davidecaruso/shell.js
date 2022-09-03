@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { exec, idle, input, isExecutable, isIdle, isInput, isOutput, login, output } from './Command'
+import { exec, idle, input, isExecutable, isIdle, isInput, isOutput, output } from './Command'
 import { Config, defaultConfig } from './Config'
 
 describe('Command', () => {
@@ -116,36 +116,6 @@ describe('Command', () => {
                     value: 'foo',
                 })
             ).to.be.false
-        })
-    })
-
-    describe('login', () => {
-        const date = new Date()
-        describe('with "ubuntu" engine', () => {
-            const config: Config = { ...defaultConfig, engine: 'ubuntu' }
-            it('should return empty string', () => {
-                expect(login(config)(date)).to.be.deep.equal(output(config)(''))
-            })
-        })
-        describe('with "windows" engine', () => {
-            const config: Config = { ...defaultConfig, engine: 'windows' }
-            it('should return empty string', () => {
-                expect(login(config)(date)).to.be.deep.equal(output(config)(''))
-            })
-        })
-        describe('with "default" engine', () => {
-            const config: Config = { ...defaultConfig, engine: 'default' }
-            it('should return empty string', () => {
-                expect(login(config)(date)).to.be.deep.equal(output(config)(''))
-            })
-        })
-        describe('with "macos" engine', () => {
-            const config: Config = { ...defaultConfig, engine: 'macos' }
-            it('should return login string', () => {
-                const result = login(config)(date)
-                expect(result).to.not.be.empty
-                expect(result.value.slice(result.value.length - 11)).to.be.equal(' on ttys000')
-            })
         })
     })
 
