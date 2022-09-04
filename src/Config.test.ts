@@ -34,13 +34,7 @@ describe('Config', () => {
             expect(isTyped({})).to.be.false
             expect(isTyped({ typing: undefined })).to.be.false
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            expect(
-                isTyped({
-                    typing: {
-                        ctor: (() => {}) as never,
-                    },
-                })
-            ).to.be.true
+            expect(isTyped({ typing: { ctor: (() => {}) as never } })).to.be.true
         })
     })
 
