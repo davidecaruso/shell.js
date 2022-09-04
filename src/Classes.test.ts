@@ -47,6 +47,15 @@ describe('Classes', () => {
                 expect(
                     buildClasses({ engine: 'ubuntu', theme: 'light', shadow: false, responsive: true })('')
                 ).to.be.deep.equal('shell shell--ubuntu shell--light shell--responsive')
+                expect(
+                    buildClasses({
+                        typing: { ctor: Object },
+                        engine: 'ubuntu',
+                        theme: 'light',
+                        shadow: false,
+                        responsive: true,
+                    })('')
+                ).to.be.deep.equal('shell shell--ubuntu shell--light shell--responsive shell--typed')
             })
         })
         describe('with current classes', () => {
@@ -66,6 +75,15 @@ describe('Classes', () => {
                 expect(
                     buildClasses({ engine: 'ubuntu', theme: 'light', shadow: false, responsive: true })('foo bar baz')
                 ).to.be.deep.equal('foo bar baz shell shell--ubuntu shell--light shell--responsive')
+                expect(
+                    buildClasses({
+                        typing: { ctor: Object },
+                        engine: 'ubuntu',
+                        theme: 'light',
+                        shadow: false,
+                        responsive: true,
+                    })('foo bar baz')
+                ).to.be.deep.equal('foo bar baz shell shell--ubuntu shell--light shell--responsive shell--typed')
             })
         })
     })

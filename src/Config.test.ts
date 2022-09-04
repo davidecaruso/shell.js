@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import {
+    buildConfig,
     defaultConfig,
     hasShadow,
     isDefault,
@@ -33,7 +34,13 @@ describe('Config', () => {
             expect(isTyped({})).to.be.false
             expect(isTyped({ typing: undefined })).to.be.false
             // eslint-disable-next-line @typescript-eslint/no-empty-function
-            expect(isTyped({ typing: { ctor: (() => {}) as never } })).to.be.true
+            expect(
+                isTyped({
+                    typing: {
+                        ctor: (() => {}) as never,
+                    },
+                })
+            ).to.be.true
         })
     })
 
@@ -90,6 +97,28 @@ describe('Config', () => {
             expect(hasShadow({})).to.be.false
             expect(hasShadow({ shadow: false })).to.be.false
             expect(hasShadow({ shadow: true })).to.be.true
+        })
+    })
+
+    describe('buildConfig', () => {
+        it('should return built config', () => {
+            expect(buildConfig({})).to.be.deep.equal(defaultConfig)
+            expect(buildConfig({ engine: 'macos' })).to.be.deep.equal({ ...defaultConfig, engine: 'macos', path: '~' })
+            expect(buildConfig({ engine: 'ubuntu' })).to.be.deep.equal({
+                ...defaultConfig,
+                engine: 'ubuntu',
+                path: '~',
+            })
+            expect(buildConfig({ engine: 'default' })).to.be.deep.equal({
+                ...defaultConfig,
+                engine: 'default',
+                path: '~',
+            })
+            expect(buildConfig({ engine: 'windows' })).to.be.deep.equal({
+                ...defaultConfig,
+                engine: 'windows',
+                path: 'C:\\Windows\\system32\\',
+            })
         })
     })
 })
