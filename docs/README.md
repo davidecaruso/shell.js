@@ -9,7 +9,7 @@ See the [quick start](quickstart.md) guide.
 ## Features
 
 - Create Unix/Windows-like terminals
-- Print commands inside terminals (many time :new:)
+- Print commands inside terminals (many times :new:)
 - Clear previous terminal commands :new:
 - Interact with custom commands
 - Auto-type commands (with [Typed.js](https://github.com/mattboldt/typed.js/))
