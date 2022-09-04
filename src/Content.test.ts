@@ -8,21 +8,25 @@ describe('Content', () => {
         describe('with "ubuntu" engine', () => {
             it('should return empty string', () => {
                 expect(login({ ...defaultConfig, engine: 'ubuntu' })(date)).to.be.deep.equal('')
+                expect(login({ ...defaultConfig, engine: 'ubuntu' })()).to.be.deep.equal('')
             })
         })
         describe('with "windows" engine', () => {
             it('should return empty string', () => {
                 expect(login({ ...defaultConfig, engine: 'windows' })(date)).to.be.deep.equal('')
+                expect(login({ ...defaultConfig, engine: 'windows' })()).to.be.deep.equal('')
             })
         })
         describe('with "default" engine', () => {
             it('should return empty string', () => {
                 expect(login({ ...defaultConfig, engine: 'default' })(date)).to.be.deep.equal('')
+                expect(login({ ...defaultConfig, engine: 'default' })()).to.be.deep.equal('')
             })
         })
         describe('with "macos" engine', () => {
             it('should return login string', () => {
                 expect(login({ ...defaultConfig, engine: 'macos' })(date)).to.be.not.equal('')
+                expect(login({ ...defaultConfig, engine: 'macos' })()).to.be.not.equal('')
             })
         })
     })

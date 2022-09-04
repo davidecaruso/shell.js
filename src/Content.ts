@@ -15,7 +15,7 @@ import { Config, isMacOs, isRoot, isWindows } from './Config'
 const prefix = ({ context }: Pick<IO, 'context'>): string =>
     `<span class="${linePrefixClass}">` +
     (isWindows(context)
-        ? `<span class="path">${context.path}</span>` + `<span class="char">${isRoot(context) ? '#' : '&gt;'}</span>`
+        ? `<span class="path">${context.path}</span><span class="char">&gt;</span>`
         : `<span class="user">${isRoot(context) ? 'root' : context.user}@</span>` +
           `<span class="host">${context.host}</span>` +
           `<span class="colon">:</span>` +

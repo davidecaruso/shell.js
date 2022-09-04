@@ -153,6 +153,12 @@ describe('Command', () => {
                     )
                 })
             })
+            describe('with root user', () => {
+                const config: Config = { ...defaultConfig, root: true }
+                it('should not print anything', () => {
+                    expect(exec(input(config)('sudo -i'))).to.be.deep.equal(undefined)
+                })
+            })
         })
 
         describe('exit', () => {
