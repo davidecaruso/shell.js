@@ -34,17 +34,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: () => [require('autoprefixer')],
-                        },
-                    },
-                    'sass-loader',
-                ],
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
