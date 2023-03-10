@@ -4,6 +4,7 @@ docs/
 src/
 .*
 mocha.module.js
+postcss.config.js
 tsconfig.json
 webpack.*.js
 yarn*
