@@ -98,7 +98,6 @@
     loadSidebar: true,
     coverpage: "coverpage.html",
     notFoundPage: "_404.html",
-    ga: "UA-108263871-1",
     copyCode: {
       buttonText: "Copy",
       successText: "Copied!"
@@ -173,7 +172,15 @@
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 <script>
   if (/shelljs/.test(location.host)) {
-    document.write("<script src=\"//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js\"><\/script>");
+    var id = "G-5LLF114JSB"
+
+    // Google tag (gtag.js)
+    document.write("<script async src=\"https://www.googletagmanager.com/gtag/js?id="+id+"\"><\/script>");
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', id);
   }
 </script>
 </body>
