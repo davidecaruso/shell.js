@@ -19,7 +19,7 @@ $ npm i shell.js
 ```
 
 ## Documentation
-Visit [shelljs.io](https://shelljs.io).
+Read the [documentation](https://davidecaruso.github.io/shell.js).
 
 ## Author
 [Davide Caruso](https://about.me/davidecaruso)
