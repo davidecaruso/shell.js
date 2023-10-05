@@ -105,19 +105,21 @@
     plugins: [
       function(hook, vm) {
         hook.afterEach(function(html, next) {
+          var config = {
+            user: "guest",
+            host: "localhost",
+            typing: { ctor: Typed },
+            engine: randomEngine(),
+            responsive: true,
+            shadow: true
+          };
+
           if (vm.route.path === "/") {
             next(html);
 
             function initCoverShell() {
               document.getElementById("cover-shell").className = "";
-              let shell = Shell("#cover-shell", {
-                user: "guest",
-                host: "shelljs.io",
-                typing: { ctor: Typed },
-                engine: randomEngine(),
-                responsive: true,
-                shadow: true
-              });
+              var shell = Shell("#cover-shell", config);
 
               shell.type([
                 "sudo -i",
@@ -138,14 +140,7 @@
             next(html);
             if (document.getElementById("notfound-shell")) {
               setTimeout(function() {
-                Shell("#notfound-shell", {
-                  user: "guest",
-                  host: "shelljs.io",
-                  typing: { ctor: Typed },
-                  engine: randomEngine(),
-                  responsive: true,
-                  shadow: true
-                }).type([
+                Shell("#notfound-shell", config).type([
                   {
                     input: "curl -I '" + window.location.href + "'", output: function() {
                       return {
@@ -171,7 +166,7 @@
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 <script>
-  if (/shelljs/.test(location.host)) {
+  if (/davidecaruso\.github\.io/.test(location.host)) {
     var id = "G-5LLF114JSB"
 
     // Google tag (gtag.js)
